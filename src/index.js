@@ -11,10 +11,10 @@ import {createUser} from './db';
 
 const config = {
   apiKey:
-  process.env.FIRESTORE_API_KEY,
+  process.env.FIRESTORE_API_KEY || process.env.REACT_APP_FIRESTORE_API_KEY,
   //  || process.env.REACT_APP_FIREBASE_API_KEY,
   messagingSenderId:
-  process.env.FIREBASE_MESSAGING_SENDER_ID,
+  process.env.FIREBASE_MESSAGING_SENDER_ID || process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   //  ||
   // process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   projectId: "game-of-hoods-fsa-1801",
@@ -24,8 +24,6 @@ const config = {
 }
 firebase.initializeApp(config)
 export const db = firebase.firestore();
-
-
 
 createUser()
 // .then(function() {
