@@ -5,6 +5,7 @@
   "dependencies": {
     "firebase": "^4.11.0",
     "firestore": "^1.1.6",
+    "google-map-react": "^0.34.0",
     "mapbox-gl": "^0.44.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
