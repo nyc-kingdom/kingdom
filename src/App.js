@@ -3,8 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 //components
-import Map from './components/Map'
-import Dash from './components/Dash'
+import  { Map, Dash } from './components'
 
 class App extends Component {
   render() {
