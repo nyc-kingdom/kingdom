@@ -10,6 +10,9 @@
 /build
 
 # misc
+secrets.js
+/secrets.js
+TEST.js
 .DS_Store
 .env.local
 .env.development.local
