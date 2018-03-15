@@ -1,48 +1,80 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import mapboxgl from 'mapbox-gl'
 import GoogleMapReact from 'google-map-react'
-
-// import { createMarker } from '../store'
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
-
-// mapboxgl.accessToken = TBD;
-const key = process.env.REACT_APP_GOOGLE_MAPS_KEY || process.env.GOOGLE_MAPS_KEY
+import { googleMapKey } from '../secrets'
+import { Markers } from './'
 
 export class Map extends Component {
-    // componentDidMount() {
-    //     this.initMap = 
-    // }
-    static defaultProps = {
-      center: {lat: 59.95, lng: 30.33},
-      zoom: 11
-    };
-  
-    render() {
-        const style = {
-                        top: 0,
-                        bottom: 0,
-                        height: '100vh',
-                        width: '100vw'
-        }
-      return (
-          <div id="map" style={style}>
-        <GoogleMapReact
-          bootstrapURLKeys={ key }
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text={'Kreyser Avrora'}
-          />
-        </GoogleMapReact>
-        </div>
-      );
+  constructor(props) {
+    super(props)
+    this.state = {
+      center: {lat: 40.70, lng: -74.00},
+      zoom: 14,
+      bootstrapURLKeys: { key: googleMapKey }
+      // options: {options},
+    //   heatmapLibrary: true,
+    //   // heatmap: {
+    //   //   positions: [],
+    //   //   options: {
+    //   //     radius: 20,
+    //   //     opacity: 0.7,
+    //   //     gradient: [
+    //   //       'rgba(0, 255, 255, 0)',
+    //   //       'rgba(0, 255, 255, 1)',
+    //   //       'rgba(0, 191, 255, 1)',
+    //   //       'rgba(0, 127, 255, 1)',
+    //   //       'rgba(0, 63, 255, 1)',
+    //   //       'rgba(0, 0, 255, 1)',
+    //   //       'rgba(0, 0, 223, 1)',
+    //   //       'rgba(0, 0, 191, 1)',
+    //   //       'rgba(0, 0, 159, 1)',
+    //   //       'rgba(0, 0, 127, 1)',
+    //   //       'rgba(63, 0, 91, 1)',
+    //   //       'rgba(127, 0, 63, 1)',
+    //   //       'rgba(191, 0, 31, 1)',
+    //   //       'rgba(255, 0, 0, 1)'
+    //   //     ]
+    //   //   },
+    //   // }
     }
   }
+  
+  render() {
+    const style = {
+      top: 0,
+      bottom: 0,
+      height: '100vh',
+      width: '100vw'
+    }
+    return (
+      <div id="map" style={style}>
+        <GoogleMapReact
+          bootstrapURLKeys={this.state.bootstrapURLKeys}
+          defaultCenter={this.state.center}
+          defaultZoom={this.state.zoom}
+          // heatmapLibrary={this.state.heatmapLibrary}
+          // heatmap={this.state.heatmap}
+          // options={this.state.options}
+
+        >
+        {
+
+        }
+          <Markers
+            lat={40.705413}
+            lng={-74.007844}
+            name={'restaurant'}
+          />
+          <Markers
+            lat={40.706413}
+            lng={-74.008844}
+            name={'castle'}
+          />
+        </GoogleMapReact>
+      </div>
+    );
+  }
+}
 
 // export class Map extends Component {
 //     componentDidMount() {
