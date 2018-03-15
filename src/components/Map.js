@@ -4,7 +4,7 @@ import mapboxgl from 'mapbox-gl'
 
 // import { createMarker } from '../store'
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiaG9yc2VleWVwaGlsIiwiYSI6ImNqZDF3ZHptaTI0OHkyeG4ydTM2cWdhNmIifQ.vvmBOCZBWKb3rKghrQwVlw';
+mapboxgl.accessToken = TBD;
 
 export class Map extends Component {
     componentDidMount() {
