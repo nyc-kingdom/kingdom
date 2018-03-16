@@ -57,19 +57,29 @@ export class Map extends Component {
           // options={this.state.options}
 
         >
-        {
 
-        }
+        {   this.props.markers.length>0 && this.props.markers.map(eachMarker=>(
+                   <Markers
+                   lat={eachMarker.location.lat}
+                   lng={eachMarker.location.lng}
+                   establishmentName = {eachMarker.name}
+                   name={'restaurant'}
+                    />
+            )
+        )}
+
           <Markers
             lat={40.705413}
             lng={-74.007844}
             name={'restaurant'}
           />
+
           <Markers
             lat={40.706413}
             lng={-74.008844}
             name={'castle'}
           />
+
         </GoogleMapReact>
       </div>
     );
@@ -109,6 +119,6 @@ export class Map extends Component {
 //     }
 // }
 
-const mapState = null
+const mapState = state => ({ markers: state.markers })
 
 export default connect(mapState)(Map)
