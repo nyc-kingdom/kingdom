@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { googleMapKey } from '../secrets'
-import { Markers } from './'
+import { Markers } from './Markers'
 
 export class Map extends Component {
   constructor(props) {
