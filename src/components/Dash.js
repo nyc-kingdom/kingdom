@@ -12,9 +12,10 @@ request({
   url: 'https://api.foursquare.com/v2/venues/explore',
   method: 'GET',
   qs: {
-    client_id: 'DDR5GDT5I0EF0WKOAEI2ULAYUI3CDGI3DIAQGWQX1T3RQRCI',
-    client_secret: 'IJFDSONXWEC2SV2AEOQ0FAHOPUSH01TOMT0BK2K4AXDCPK4P',
-    ll: '40.7243,-74.0018',
+    client_id: '',
+    client_secret: '',
+    //ll: '40.7243,-74.0018',
+    near: 'New York City, NY',
     query: 'Cafe Grumpy Wall Street',
     v: '20170801',
     limit: 10

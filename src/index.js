@@ -25,7 +25,7 @@ const config = {
 firebase.initializeApp(config)
 export const db = firebase.firestore();
 
-//createUser()
+// createUser()
 // .then(function() {
 //   console.log("Document successfully written!");
 // })
@@ -33,8 +33,18 @@ export const db = firebase.firestore();
 //   console.error("Error writing document: ", error);
 // });
 
-// 
-
+// db.collection("users").add({
+//   first: "Alan",
+//   middle: "Mathison",
+//   last: "Turing",
+//   born: 1912
+// })
+//   .then(function (docRef) {
+//     console.log("Document written with ID: ", docRef.id);
+//   })
+//   .catch(function (error) {
+//     console.error("Error adding document: ", error);
+//   });
 
 ReactDOM.render(
   <Provider store={store}>
