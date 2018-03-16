@@ -2,7 +2,7 @@ import { db } from '../index';
 
 export const createUser = async () => {
   await db.collection("cities").doc("LA").set({
-   name: "Sanata Monica",
+   name: "i love fullstack",
    state: "CA",
    country: "USA"
  })
