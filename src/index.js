@@ -8,6 +8,8 @@ import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase';
 import 'firebase/firestore';
 import {createUser} from './db';
+import {Router} from 'react-router-dom'
+import history from './history'
 
 const config = {
   apiKey:
@@ -48,7 +50,9 @@ export const db = firebase.firestore();
 
 ReactDOM.render(
   <Provider store={store}>
-  <App />
+    <Router history={history}>
+     <App />
+    </Router>
   </Provider>,
   document.getElementById('root'),
 );

@@ -15,8 +15,8 @@ export class Markers extends Component {
             width: '2.5vw'
         }
         return (
-            <div>
-            <div>{this.props.establishmentName}</div>
+            <div >
+            <div style= {{border: '2px solid black', width: '30px' }} className='rec'>{this.props.establishmentName}</div>
             <img src={image[this.props.name]} style={style}/>
             </div>
         )
