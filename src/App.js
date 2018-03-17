@@ -7,7 +7,7 @@ import './App.css';
 import { me } from './store';
 
 //components
-import  { Map, Dash } from './components'
+import  { Routes } from './components'
 
 class App extends Component {
   componentDidMount() {
@@ -16,12 +16,9 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div id='a'>
-          <Map/>
-          <Dash/>
-        </div>
-      </div>
+      // <div className="App">
+       <Routes/>
+      // </div>
     );
   }
 }
