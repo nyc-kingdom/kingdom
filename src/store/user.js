@@ -23,7 +23,7 @@ const removeUser = () => ({type: REMOVE_USER})
  */
 export const me = () =>
   dispatch =>
-    axios.get('/auth/me')
+    axios.get('http://localhost:8080/auth/me')
       .then(res =>
         dispatch(getUser(res.data || defaultUser)))
       .catch(err => console.log(err))
