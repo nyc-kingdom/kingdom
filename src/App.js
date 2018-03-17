@@ -5,12 +5,14 @@ import PropTypes from 'prop-types'
 import logo from './logo.svg';
 import './App.css';
 import { me } from './store';
+import axios from 'axios';
 
 //components
 import  { Routes } from './components'
 
 class App extends Component {
   componentDidMount() {
+    axios.get('http://localhost:8080/api/users')
     this.props.loadInitialData();
   }
 
