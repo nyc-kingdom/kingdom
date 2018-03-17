@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createMarker } from '../store';
 const FOURSQUAREID = require('../secrets').clientID
@@ -6,6 +7,9 @@ const FOURSQUARESECRET = require('../secrets').clientSecret
 const request = require('request');
 // import mapboxgl from 'mapbox-gl'
 // import { Map } from './index';
+
+
+//THESE ARE FULLSTACK COORDS '40.7243,-74.0018'
 
 const invoke = function () {
 
@@ -37,7 +41,8 @@ export class Dash extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            queriedMarkers: []
+            queriedMarkers: [],
+            userInput: ''
         }
 
     }
@@ -45,6 +50,7 @@ export class Dash extends React.Component {
     render() {
         return (
             <div id="Dash">
+                <input id='userInput' value={this.state.userInput} onChange={evt=>{this.setState({userInput: evt.target.value})}}></input>
                 <button onClick={() => {
                     navigator.geolocation.getCurrentPosition(position => {
 
@@ -54,9 +60,9 @@ export class Dash extends React.Component {
                             qs: {
                                 client_id: FOURSQUAREID,
                                 client_secret: FOURSQUARESECRET,
-                                //ll: '40.7243,-74.0018',
-                                near: 'New York City, NY',
-                                query: 'BAGELS',
+                                ll: position.coords.latitude+','+position.coords.longitude,
+                                //near: 'New York City, NY',
+                                query: this.state.userInput,
                                 v: '20170801',
                                 limit: 10
                             }
@@ -64,14 +70,14 @@ export class Dash extends React.Component {
                             if (err) console.error.bind(console)
                             const payLoad = JSON.parse(body)
                             console.log(payLoad)
-                            //this.setState({ queriedMarkers: payLoad.response.venues })
+                            this.setState({ queriedMarkers: payLoad.response.venues })
                             this.props.createMarker(payLoad.response.venues)
                         })
                     })
                 }}>Hello</button>
 
                 {this.state.queriedMarkers.length>0 && this.state.queriedMarkers.map(eachMarker => (
-                    <div>{eachMarker.location.lat}</div>
+                    <Link to={`/singleEstablishment/${eachMarker.id}`}>{eachMarker.name}</Link>
                 ))}
                 <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
              <a href='http://localhost:8080/auth/foursquare'><button>Signup</button></a>

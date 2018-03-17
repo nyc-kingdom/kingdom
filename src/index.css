@@ -10,8 +10,19 @@ body {
 }
 
 #Dash {
-  flex: 4;
-  background-color: goldenrod
+  flex: 10;
+  background-color: gold;
+  border: 1px solid white;
+  opacity: 0.5;
+  height: 100vh;
+  width: 20vw;
+  position: fixed;
+  right: 0;
+  z-index: 100;
+}
+
+#Dash:hover {
+  opacity: 0.8;
 }
 
 #a {
@@ -26,4 +37,43 @@ body {
   height: 10px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.rec {
+  background-color: deepskyblue;
+  border: 2px, solid, black
+}
+
+#profile {
+  height: 100px; 
+  width: 100px;
+  border-radius: 100px;
+  background-color: gold;
+  opacity: 0.5;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+}
+
+#profile:hover {
+  opacity: 0.8;
+  border: 1px solid white
+}
+
+#kingdoms {
+  height: 100px; 
+  width: 100px;
+  border-radius: 100px;
+  background-color: grey;
+  opacity: 0.5;
+  position: fixed;
+  top: 140px;
+  left: 20px;
+  z-index: 100;
+}
+
+#kingdoms:hover {
+  opacity: 0.8;
+  border: 1px solid white
 }
