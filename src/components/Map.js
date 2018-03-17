@@ -38,7 +38,7 @@ export class Map extends Component {
     //   // }
     }
   }
-  
+
   render() {
     const style = {
       top: 0,
@@ -67,7 +67,7 @@ export class Map extends Component {
                     />
             )
         )}
-        
+
           <Markers
             lat={40.705413}
             lng={-74.007844}
