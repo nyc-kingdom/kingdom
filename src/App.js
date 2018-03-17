@@ -12,7 +12,6 @@ class App extends Component {
         <div id='a'>
           <Map/>
           <Dash/>
-          <Login />
         </div>
       </div>
     );

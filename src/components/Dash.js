@@ -61,6 +61,7 @@ export class Dash extends React.Component {
                                 limit: 10
                             }
                         }, (err, res, body) => {
+                            if (err) console.error.bind(console)
                             const payLoad = JSON.parse(body)
                             console.log(payLoad)
                             //this.setState({ queriedMarkers: payLoad.response.venues })
@@ -72,13 +73,17 @@ export class Dash extends React.Component {
                 {this.state.queriedMarkers.length>0 && this.state.queriedMarkers.map(eachMarker => (
                     <div>{eachMarker.location.lat}</div>
                 ))}
-
+                <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
+             <a href='http://localhost:8080/auth/foursquare'><button>Signup</button></a>
             </div>
         )
     }
 }
 
 const mapProps = null
-const mapDispatch = dispatch => ({ createMarker: marker => dispatch(createMarker(marker)) })
+const mapDispatch = dispatch => ({
+    createMarker: marker => dispatch(createMarker(marker))
+
+})
 
 export default connect(mapProps, mapDispatch)(Dash)
