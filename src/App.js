@@ -4,7 +4,7 @@ import {withRouter, Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import logo from './logo.svg';
 import './App.css';
-import { me } from './store';
+import { me, fetchEstablishments } from './store';
 import axios from 'axios';
 import history from './history'
 
@@ -13,7 +13,6 @@ import  { Routes } from './components'
 
 class App extends Component {
   componentDidMount() {
-    axios.get('http://localhost:8080/api/users')
     this.props.loadInitialData();
   }
 
@@ -40,6 +39,7 @@ const mapDispatch = dispatch => {
   return {
     loadInitialData () {
       dispatch(me())
+      dispatch(fetchEstablishments())
     }
   }
 }
