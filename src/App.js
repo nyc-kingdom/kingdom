@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-//import {withRouter, Route, Switch} from 'react-router-dom'
+import {withRouter, Route, Switch, Router} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import logo from './logo.svg';
 import './App.css';
 import { me } from './store';
 import axios from 'axios';
+import history from './history'
 
 //components
 import  { Routes } from './components'
@@ -19,7 +20,9 @@ class App extends Component {
   render() {
     return (
       // <div className="App">
+      <Router history={history}>
        <Routes/>
+      </Router>
       // </div>
     );
   }
