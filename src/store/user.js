@@ -15,18 +15,24 @@ const defaultUser = {}
 /**
  * ACTION CREATORS
  */
-const getUser = user => ({type: GET_USER, user})
-const removeUser = () => ({type: REMOVE_USER})
+const getUser = user => ({ type: GET_USER, user })
+const removeUser = () => ({ type: REMOVE_USER })
 
 /**
  * THUNK CREATORS
  */
 export const me = () =>
   dispatch =>
-    axios.get('http://localhost:8080/auth/me')
+    axios.get('http://localhost:8080/api/users/loggedIn')
       .then(res =>
         dispatch(getUser(res.data || defaultUser)))
       .catch(err => console.log(err))
+
+export const login = () => dispatch =>
+  axios.get('http://localhost:8080/auth/foursquare')
+    .then(res =>
+      dispatch(getUser(res.data || defaultUser)))
+    .catch(err => console.log(err))
 
 export const auth = (email, password, method) =>
   dispatch =>
@@ -35,7 +41,7 @@ export const auth = (email, password, method) =>
         dispatch(getUser(res.data))
         history.push('/home')
       }, authError => { // rare example: a good use case for parallel (non-catch) error handler
-        dispatch(getUser({error: authError}))
+        dispatch(getUser({ error: authError }))
       })
       .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 
