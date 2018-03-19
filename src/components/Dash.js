@@ -30,8 +30,10 @@ export class Dash extends React.Component {
                 <button onClick={() => { locationQuery(this) }}>Hello</button>
 
                 {this.state.queriedMarkers.length>0 && this.state.queriedMarkers.map(eachMarker => (
-                    <div onClick={()=>{checkIn(this, eachMarker)}}>{eachMarker.name}</div>
-                    //<Link to={`/singleEstablishment/${eachMarker.id}`}>{eachMarker.name}</Link>
+                    <div>
+                        <Link to={`/singleEstablishment/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
+                        <button onClick={()=>{checkIn(this, eachMarker)}}>Check In!</button> 
+                    </div>
                 ))}
                 <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
              <a href='http://localhost:8080/auth/foursquare'><button>Signup</button></a>
