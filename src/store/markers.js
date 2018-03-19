@@ -11,7 +11,7 @@ const reducer = (markers=[], action) => {
   switch (action.type) {
     case ADD_MARKER:
       console.log(action.marker)
-      return [...markers, ...action.marker]
+      return action.marker
     default:
     return markers
   }

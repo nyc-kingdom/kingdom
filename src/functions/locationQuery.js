@@ -4,6 +4,9 @@ const request = require('request');
 const FOURSQUAREID = require('../secrets').clientID
 const FOURSQUARESECRET = require('../secrets').clientSecret
 
+
+    //THESE ARE FULLSTACK COORDS '40.7243,-74.0018'
+
 const locationQuery = (context) => {
         // navigator.geolocation.getCurrentPosition(position => {
 
@@ -64,9 +67,37 @@ export const checkIn = (context, marker) => {
     })
 }
 
+export const getUserCheckIns = context => {
+
+    console.log('USER', context.props.user)
+
+    request({
+        url: 'https://api.foursquare.com/v2/users/self/checkins',
+        method: 'GET',
+        qs: {
+            v: '20170801',
+            oauth_token: context.props.user.token
+        }
+    }, (err, res, body) => {
+        if (err) console.error.bind(console)
+        const payLoad = JSON.parse(body)
+        console.log('You visited ', payLoad)
+        context.props.createMarker(payLoad.response.checkins.items)
+    })
+}
 
 
-    //THESE ARE FULLSTACK COORDS '40.7243,-74.0018'
+
+
+
+
+
+
+
+
+
+
+
 
 const invoke = function () {
 
