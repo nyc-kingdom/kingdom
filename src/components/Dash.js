@@ -5,11 +5,6 @@ import { createMarker } from '../store';
 
 import locationQuery, { checkIn, getUserCheckIns } from '../functions/locationQuery'
 
-
-
-
-
-
 export class Dash extends React.Component {
 
     constructor(props) {
@@ -22,7 +17,6 @@ export class Dash extends React.Component {
     }
 
     render() {
-
         return (
             <div id="Dash">
                 <button onClick={()=>{getUserCheckIns(this)}}>FETCH MY CHECK-INS</button>
