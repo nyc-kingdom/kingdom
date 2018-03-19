@@ -52,7 +52,7 @@ export class Map extends Component {
           bootstrapURLKeys={this.state.bootstrapURLKeys}
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
-          // heatmapLibrary={this.state.heatmapLibrary}
+          heatmapLibrary={true}
           // heatmap={this.state.heatmap}
           // options={this.state.options}
 
@@ -60,9 +60,9 @@ export class Map extends Component {
 
         {   this.props.markers.length>0 && this.props.markers.map(eachMarker=>(
                    <Markers
-                   lat={eachMarker.location.lat}
-                   lng={eachMarker.location.lng}
-                   establishmentName = {eachMarker.name}
+                   lat={eachMarker.venue.location.lat}
+                   lng={eachMarker.venue.location.lng}
+                   establishmentName = {eachMarker.venue.name}
                    name={'restaurant'}
                     />
             )
