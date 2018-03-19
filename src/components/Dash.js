@@ -5,11 +5,6 @@ import { createMarker } from '../store';
 
 import locationQuery, { checkIn } from '../functions/locationQuery'
 
-
-
-
-
-
 export class Dash extends React.Component {
 
     constructor(props) {
@@ -22,7 +17,6 @@ export class Dash extends React.Component {
     }
 
     render() {
-
         return (
             <div id="Dash">
                 <div>{'HEY BOY ' + JSON.stringify(this.props.user)}</div>
@@ -32,7 +26,7 @@ export class Dash extends React.Component {
                 {this.state.queriedMarkers.length>0 && this.state.queriedMarkers.map(eachMarker => (
                     <div>
                         <Link to={`/singleEstablishment/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
-                        <button onClick={()=>{checkIn(this, eachMarker)}}>Check In!</button> 
+                        <button onClick={()=>{checkIn(this, eachMarker)}}>Check In!</button>
                     </div>
                 ))}
                 <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
