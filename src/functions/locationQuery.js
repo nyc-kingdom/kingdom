@@ -3,7 +3,7 @@ const FOURSQUAREID = require('../secrets').clientID
 const FOURSQUARESECRET = require('../secrets').clientSecret
 
 const locationQuery = (context) => {
-
+        console.log('We are querying')
         navigator.geolocation.getCurrentPosition(position => {
 
             request({
