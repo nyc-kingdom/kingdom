@@ -52,7 +52,7 @@ export class Map extends Component {
           bootstrapURLKeys={this.state.bootstrapURLKeys}
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
-          // heatmapLibrary={this.state.heatmapLibrary}
+          heatmapLibrary={true}
           // heatmap={this.state.heatmap}
           // options={this.state.options}
 
