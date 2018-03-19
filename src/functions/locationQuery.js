@@ -1,10 +1,13 @@
+import { closeSync } from 'fs';
+
 const request = require('request');
 const FOURSQUAREID = require('../secrets').clientID
 const FOURSQUARESECRET = require('../secrets').clientSecret
 
 const locationQuery = (context) => {
+    console.log('inside')
 
-        navigator.geolocation.getCurrentPosition(position => {
+        // navigator.geolocation.getCurrentPosition(position => {
 
             request({
                 url: 'https://api.foursquare.com/v2/venues/explore',
@@ -12,7 +15,7 @@ const locationQuery = (context) => {
                 qs: {
                     client_id: FOURSQUAREID,
                     client_secret: FOURSQUARESECRET,
-                    ll: position.coords.latitude+','+position.coords.longitude,
+                    ll: '40.741895, -73.989308',
                     //near: 'New York City, NY',
                     query: context.state.userInput,
                     sortByDistance: 1,
@@ -26,7 +29,7 @@ const locationQuery = (context) => {
                 console.log('YOYOYOYO', payLoad)
                 context.setState({ queriedMarkers: payLoad.response.groups[0].items })
                 context.props.createMarker(payLoad.response.groups[0].items)
-            })
+            // })
         })
 
     }
@@ -35,9 +38,17 @@ const locationQuery = (context) => {
 
 
 export const checkIn = (context, marker) => {
+    const lat = marker.venue.location.lat;
+    const long = marker.venue.location.lng;
 
-
-
+    request({
+        url: `https://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=d86308194ea517acd62ad69af14025ac&lat=${lat}&lon=${long}&format=json&nojsoncallback=1`,
+        method: 'GET'
+    }, (err, res, body) => {
+        if (err) console.error.bind(console)
+        const payLoad = JSON.parse(body)
+        console.log(payLoad.places.place[0].woe_name)
+    })
 
 
 
