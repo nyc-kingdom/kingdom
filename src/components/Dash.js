@@ -5,11 +5,6 @@ import { createMarker } from '../store';
 
 import locationQuery, { checkIn } from '../functions/locationQuery'
 
-
-
-
-
-
 export class Dash extends React.Component {
 
     constructor(props) {
@@ -22,8 +17,6 @@ export class Dash extends React.Component {
     }
 
     render() {
-console.log('bruce')
-console.log(this.state)
         return (
             <div id="Dash">
                 <div>{'HEY BOY ' + JSON.stringify(this.props.user)}</div>

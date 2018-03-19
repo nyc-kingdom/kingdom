@@ -24,7 +24,6 @@ const locationQuery = (context) => {
             }, (err, res, body) => {
                 if (err) console.error.bind(console)
                 const payLoad = JSON.parse(body)
-                console.log('YOYOYOYO', payLoad)
                 context.setState({ queriedMarkers: payLoad.response.groups[0].items })
                 context.props.createMarker(payLoad.response.groups[0].items)
             // })
@@ -45,7 +44,7 @@ export const checkIn = (context, marker) => {
     }, (err, res, body) => {
         if (err) console.error.bind(console)
         const payLoad = JSON.parse(body)
-        console.log(payLoad.places.place[0].woe_name)
+        const neighborhood = payLoad.places.place[0].woe_name;
     })
 
 
