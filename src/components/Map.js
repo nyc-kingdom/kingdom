@@ -58,15 +58,13 @@ export class Map extends Component {
 
         >
 
-        {
-          this.props.markers.length>0 && this.props.markers.map(eachMarker=>(
-              <Markers
-                key={eachMarker.id}
-                lat={eachMarker.location.lat}
-                lng={eachMarker.location.lng}
-                establishmentName = {eachMarker.name}
-                name={'restaurant'}
-              />
+        {   this.props.markers.length>0 && this.props.markers.map(eachMarker=>(
+                   <Markers
+                   lat={eachMarker.venue.location.lat}
+                   lng={eachMarker.venue.location.lng}
+                   establishmentName = {eachMarker.venue.name}
+                   name={'restaurant'}
+                    />
             )
         )}
 
