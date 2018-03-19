@@ -21,7 +21,6 @@ const locationQuery = (context) => {
             }, (err, res, body) => {
                 if (err) console.error.bind(console)
                 const payLoad = JSON.parse(body)
-                console.log(body)
                 context.setState({ queriedMarkers: payLoad.response.venues })
                 context.props.createMarker(payLoad.response.venues)
             })
