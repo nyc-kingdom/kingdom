@@ -4,6 +4,9 @@ body {
   font-family: sans-serif;
 }
 
+.home {
+  text-align: center;
+}
 
 #Map {
   flex: 10
@@ -45,7 +48,7 @@ body {
 }
 
 #profile {
-  height: 100px; 
+  height: 100px;
   width: 100px;
   border-radius: 100px;
   background-color: gold;
@@ -62,7 +65,7 @@ body {
 }
 
 #kingdoms {
-  height: 100px; 
+  height: 100px;
   width: 100px;
   border-radius: 100px;
   background-color: grey;

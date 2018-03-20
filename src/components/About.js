@@ -5,7 +5,7 @@ import { createMarker } from '../store';
 
 import locationQuery, { checkIn, getUserCheckIns } from '../functions/locationQuery'
 
-export class Home extends React.Component {
+export class About extends React.Component {
 
   constructor(props) {
     super(props)
@@ -13,15 +13,12 @@ export class Home extends React.Component {
 
   render() {
     return (
-      <div className='home'>
+      <div>
         <h1>Kingdom</h1>
-        <br />
-        <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
-        <br />
-        <a href='http://localhost:8080/auth/foursquare'><button>Signup</button></a>
-        <br />
-        <Link to='/about'>
-          About
+        <img src='https://kottke.org/plus/misc/images/8-bit-nyc.jpg' />
+        <h2>Kingdom is an awesome game you need in your life!</h2>
+        <Link to='/'>
+          Explore Now!
         </Link>
       </div>
     )
@@ -37,4 +34,4 @@ const mapDispatch = dispatch => ({
   createMarker: marker => dispatch(createMarker(marker))
 })
 
-export default connect(mapProps, mapDispatch)(Home)
+export default connect(mapProps, mapDispatch)(About)
