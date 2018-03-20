@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {withRouter, Route, Switch, Router} from 'react-router-dom'
+import { connect } from 'react-redux';
+import { withRouter, Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import logo from './logo.svg';
 import './App.css';
