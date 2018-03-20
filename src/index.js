@@ -7,8 +7,8 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import firebase from 'firebase';
 import 'firebase/firestore';
-import {createUser} from './db';
-import {Router} from 'react-router-dom'
+import { createUser } from './db';
+import { Router } from 'react-router-dom'
 import history from './history'
 
 const config = {

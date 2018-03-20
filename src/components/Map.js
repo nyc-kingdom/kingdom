@@ -55,69 +55,34 @@ export class Map extends Component {
           heatmapLibrary={true}
           // heatmap={this.state.heatmap}
           // options={this.state.options}
-
         >
-
-        {   this.props.markers.length>0 && this.props.markers.map(eachMarker=>(
-                   <Markers
-                   lat={eachMarker.venue.location.lat}
-                   lng={eachMarker.venue.location.lng}
-                   establishmentName = {eachMarker.venue.name}
-                   name={'restaurant'}
-                    />
+        {
+          this.props.markers.length > 0 && this.props.markers.map(eachMarker=>(
+              <Markers
+                key={eachMarker.venue.id}
+                lat={eachMarker.venue.location.lat}
+                lng={eachMarker.venue.location.lng}
+                establishmentName = {eachMarker.venue.name}
+                name={'restaurant'}
+              />
             )
-        )}
-
+          )
+        }
           <Markers
             lat={40.705413}
             lng={-74.007844}
             name={'restaurant'}
           />
-
           <Markers
             lat={40.706413}
             lng={-74.008844}
-            name={'castle'}
+            name={'knight'}
           />
-
         </GoogleMapReact>
       </div>
     );
   }
 }
-
-// export class Map extends Component {
-//     componentDidMount() {
-//         this.map = new mapboxgl.Map({
-//             container: this.mapContainer,
-//             center: [-74.009, 40.705],
-//             zoom: 11,
-//             style: 'mapbox://styles/mapbox/streets-v9'
-//         })
-//     }
-
-//     componentWillUnmount() {
-//         this.map.remove()
-//     }
-
-
-//     render() {
-//         const marker = this.props.markers && this.props.markers.length ?
-//         this.props.markers.forEach(eachMarker => { new mapboxgl.Marker().setLngLat([-74.009, 40.705]).addTo(this.map) })
-
-//         : null
-//         const style = {
-//             top: 0,
-//             bottom: 0,
-//             height: '100vh',
-//             width: '100vw'
-//         };
-
-//         return (
-//             <div id='Map' style={style} ref={el => this.mapContainer = el} />
-//         )
-//     }
-// }
 
 const mapState = state => ({ markers: state.markers })
 

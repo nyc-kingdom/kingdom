@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "axios-mock-adapter": "^1.14.1",
+    "chai": "^4.1.2",
     "firebase": "^4.11.0",
     "firestore": "^1.1.6",
     "google-map-react": "^0.34.0",
@@ -18,7 +20,9 @@
     "redux": "^3.7.2",
     "redux-devtools-extension": "^2.13.2",
     "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.2.0"
+    "redux-mock-store": "^1.5.1",
+    "redux-thunk": "^2.2.0",
+    "watchman": "^1.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

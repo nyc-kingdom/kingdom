@@ -1,7 +1,6 @@
 'use strict'
 
 import axios from 'axios'
-import history from '../history'
 
 const post = 8080
 const serverUrl = `http://localhost:${post}`
@@ -19,7 +18,7 @@ const DELETE_CHECKIN = 'DELETE_CHECKIN'
 const getCheckins = checkins => ({type: GET_CHECKINS, checkins})
 const createCheckin = checkin => ({type: CREATE_CHECKIN, checkin})
 const updateCheckin = checkin => ({type: UPDATE_CHECKIN, checkin})
-const deleteCheckin = id => ({type: DELETE_CHECKIN, id})
+const deleteCheckin = establishmentId => ({type: DELETE_CHECKIN, establishmentId})
 
 /**
  * THUNK CREATORS
@@ -33,10 +32,7 @@ export const fetchCheckins = () => dispatch =>
 export const addCheckin = checkin => dispatch =>
     axios.post(`${serverUrl}/api/checkins`, checkin)
         .then(res => res.data)
-        .then(newCheckin => {
-          dispatch(createCheckin(newCheckin))
-          history.push(`/checkins/${newCheckin.id}`)
-        })
+        .then(newCheckin => dispatch(createCheckin(newCheckin)))
         .catch(err => console.error(`Creating Checkin ${checkin} unsuccesful.`, err))
 
 export const editCheckin = (userId, establishmentId) => dispatch =>
@@ -45,10 +41,10 @@ export const editCheckin = (userId, establishmentId) => dispatch =>
         .then(editedCheckin => dispatch(updateCheckin(editedCheckin)))
         .catch(err => console.error(`Updating Checkin ${userId} & ${establishmentId} unsuccesful.`, err))
 
-export const removeCheckin = id => dispatch =>
-    axios.delete(`${serverUrl}/api/checkins/${id}`)
-        .then(() => dispatch(deleteCheckin(id)))
-        .catch(err => console.error(`Deleting Checkin (id: ${id}) unsuccesful.`, err))
+export const removeCheckin = establishmentId => dispatch =>
+    axios.delete(`${serverUrl}/api/checkins?establishment=${establishmentId}`)
+        .then(() => dispatch(deleteCheckin(establishmentId)))
+        .catch(err => console.error(`Deleting Checkin (id: ${establishmentId}) unsuccesful.`, err))
 /**
  * Reducer
  */
