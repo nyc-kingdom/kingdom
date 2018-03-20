@@ -39,12 +39,13 @@ export const checkIn = (context, marker) => {
     const long = marker.venue.location.lng;
 
     request({
-        url: `https://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=d86308194ea517acd62ad69af14025ac&lat=${lat}&lon=${long}&format=json&nojsoncallback=1`,
+        url: `https://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=d51c3445ff4a06e9924634ba7a106c48&lat=${lat}=${long}&format=json&nojsoncallback=1&auth_token=72157666917274988-cf8b53ee82e395be&api_sig=3b6eddf841b9a1f7c06b3f4fd29b5b56`,
         method: 'GET'
     }, (err, res, body) => {
         if (err) console.error.bind(console)
         const payLoad = JSON.parse(body)
-        const neighborhood = payLoad.places.place[0].woe_name;
+        console.log("payLoad: ", payLoad)
+        // const neighborhood = payLoad.places.place[0].woe_name;
     })
 
     request({
