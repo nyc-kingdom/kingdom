@@ -19,11 +19,11 @@ export class Dash extends React.Component {
         return (
             <div id="Dash">
                 <button onClick={()=>{getUserCheckIns(this)}}>FETCH MY CHECK-INS</button>
-                <div>{'HEY BOY ' + JSON.stringify(this.props.user)}</div>
+                <div>{'Hello ' + JSON.stringify(this.props.user)}</div>
                 <input
                     id='userInput'
                     value={this.state.userInput}
-                    onChange={evt=>{this.setState({userInput: evt.target.value})}}
+                    onChange={evt => {this.setState({userInput: evt.target.value})}}
                 />
                 <button onClick={() => { locationQuery(this) }}>Hello</button>
                 {
@@ -32,7 +32,7 @@ export class Dash extends React.Component {
                                 <Link to={`/singleEstablishment/${eachMarker.venue.id}`}>
                                     {eachMarker.venue.name}
                                 </Link>
-                                <button onClick={()=>{checkIn(this, eachMarker)}}>Check In!</button> 
+                                <button onClick={()=>{checkIn(this, eachMarker)}}>Check In!</button>
                             </div>
                         )
                     )
