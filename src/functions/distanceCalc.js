@@ -26,3 +26,4 @@ navigator.geolocation.getCurrentPosition(position=>{
     console.log('ME', distanceCalc(fullstack.lat,fullstack.lng,position.coords.latitude , position.coords.longitude))
 })
 
+export default distanceCalc
