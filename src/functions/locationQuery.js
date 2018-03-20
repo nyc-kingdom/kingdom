@@ -82,26 +82,8 @@ export const getUserCheckIns = context => {
     })
 }
 
-const invoke = function () {
 
-    request({
-        url: 'https://api.foursquare.com/v2/venues/explore',
-        method: 'GET',
-        qs: {
-            client_id: '',
-            client_secret: '',
-            //ll: '40.7243,-74.0018',
-            near: 'New York City, NY',
-            query: 'Cafe Grumpy Wall Street',
-            v: '20170801',
-            limit: 10
-        }
-    }, function (err, res, body) {
-        if (err) {
-            console.error(err);
-        } else {
-            console.log(body);
-        }
-    });
 
-}
+
+
+
