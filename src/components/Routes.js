@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {Router, Switch, Route, withRouter} from 'react-router-dom'
+import { Router, Switch, Route, withRouter } from 'react-router-dom'
 
-
-import  { HomeDash, YourProfile, TopKingdoms, SingleEstablishmentView } from './index'
+import { HomeDash, YourProfile, TopKingdoms, SingleEstablishmentView } from './index'
 
 const Pipeline = () => (
     <Switch>

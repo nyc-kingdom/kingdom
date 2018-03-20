@@ -6,7 +6,6 @@ export const createMarker = marker => {
   return ({ type: ADD_MARKER, marker })
 }
 
-
 const reducer = (markers=[], action) => {
   switch (action.type) {
     case ADD_MARKER:
