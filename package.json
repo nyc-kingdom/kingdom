@@ -28,6 +28,8 @@
     "start-secret": "node secrets.js"
   },
   "devDependencies": {
-    "babel-polyfill": "^6.26.0"
+    "babel-polyfill": "^6.26.0",
+    "chai": "^4.1.2",
+    "watchman": "^1.0.0"
   }
 }

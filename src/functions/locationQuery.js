@@ -56,7 +56,7 @@ export const checkIn = (context, marker) => {
         url: 'https://api.foursquare.com/v2/checkins/add',
         method: 'POST',
         qs: {
-            venueId: marker.id,
+            venueId: marker.venue.id,
             v: '20170801',
             oauth_token: context.props.user.token
         }
