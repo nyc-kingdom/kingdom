@@ -4,38 +4,35 @@ const request = require('request');
 const FOURSQUAREID = require('../secrets').clientID
 const FOURSQUARESECRET = require('../secrets').clientSecret
 
-
     //THESE ARE FULLSTACK COORDS '40.7243,-74.0018'
 
 const locationQuery = (context) => {
         // navigator.geolocation.getCurrentPosition(position => {
 
-            request({
-                url: 'https://api.foursquare.com/v2/venues/explore',
-                method: 'GET',
-                qs: {
-                    client_id: FOURSQUAREID,
-                    client_secret: FOURSQUARESECRET,
-                    ll: '40.741895, -73.989308',
-                    //near: 'New York City, NY',
-                    query: context.state.userInput,
-                    sortByDistance: 1,
-                    oauth_token: context.props.user.token,
-                    v: '20170801',
-                    limit: 10
-                }
-            }, (err, res, body) => {
-                if (err) console.error.bind(console)
-                const payLoad = JSON.parse(body)
-                context.setState({ queriedMarkers: payLoad.response.groups[0].items })
-                context.props.createMarker(payLoad.response.groups[0].items)
-            // })
-        })
+    request({
+        url: 'https://api.foursquare.com/v2/venues/explore',
+        method: 'GET',
+        qs: {
+            client_id: FOURSQUAREID,
+            client_secret: FOURSQUARESECRET,
+            ll: '40.741895, -73.989308',
+            //near: 'New York City, NY',
+            query: context.state.userInput,
+            sortByDistance: 1,
+            oauth_token: context.props.user.token,
+            v: '20170801',
+            limit: 10
+        }
+    }, (err, res, body) => {
+        if (err) console.error.bind(console)
+        const payLoad = JSON.parse(body)
+        context.setState({ queriedMarkers: payLoad.response.groups[0].items })
+        context.props.createMarker(payLoad.response.groups[0].items)
+    // })
+    })
+}
 
-    }
-
-    export default locationQuery
-
+export default locationQuery
 
 export const checkIn = (context, marker) => {
     const lat = marker.venue.location.lat;
@@ -50,13 +47,11 @@ export const checkIn = (context, marker) => {
         const neighborhood = payLoad.places.place[0].woe_name;
     })
 
-
-
     request({
         url: 'https://api.foursquare.com/v2/checkins/add',
         method: 'POST',
         qs: {
-            venueId: marker.id,
+            venueId: marker.venue.id,
             v: '20170801',
             oauth_token: context.props.user.token
         }
@@ -86,21 +81,7 @@ export const getUserCheckIns = context => {
     })
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 const invoke = function () {
-
 
     request({
         url: 'https://api.foursquare.com/v2/venues/explore',

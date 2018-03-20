@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 const SinglePage = props => (
     <div>
@@ -8,4 +8,5 @@ const SinglePage = props => (
 )
 
 const mapProps = state => ({markers: state.markers})
+
 export default connect(mapProps)(SinglePage)
