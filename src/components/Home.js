@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createMarker } from '../store';
+import { Navigation } from './index'
 
 import locationQuery, { checkIn, getUserCheckIns } from '../functions/locationQuery'
 
@@ -14,6 +15,7 @@ export class Home extends React.Component {
   render() {
     return (
       <div className='home'>
+      <Navigation />
         <h1>Kingdom</h1>
         <br />
         <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>

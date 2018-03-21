@@ -38,15 +38,6 @@ const Navigation = () => {
         iconElementLeft={<Left />}
         iconElementRight={<Menu />}
       />
-      <form>
-        <label>Search: </label>
-        <textarea
-          name="description"
-          cols="35"
-          rows="1"
-        />
-        <button>Discover</button>
-      </form>
     </div>
   );
 }
