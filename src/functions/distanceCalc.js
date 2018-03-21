@@ -20,3 +20,5 @@ console.log('moma', distanceCalc(fullstack.lat,fullstack.lng,moma.lat,moma.lng))
 navigator.geolocation.getCurrentPosition(position=>{
     console.log('ME', distanceCalc(fullstack.lat,fullstack.lng,position.coords.latitude , position.coords.longitude))
 })
+
+export default distanceCalc
