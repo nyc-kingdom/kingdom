@@ -6,8 +6,9 @@ import markers from './markers'
 import user from './user';
 import establishments from './establishments';
 import checkins from './checkins'
+import kingdoms from './kingdoms'
 
-const reducer = combineReducers({ user, markers, checkins, establishments })
+const reducer = combineReducers({ user, markers, checkins, establishments, kingdoms })
 
 const middleware = composeWithDevTools(applyMiddleware(
     thunkMiddleware,
@@ -16,9 +17,10 @@ const middleware = composeWithDevTools(applyMiddleware(
 
 const store = createStore(reducer, middleware)
 
-export default store;
+export default store
 
-export * from './markers';
-export * from './user';
-export * from './establishments';
+export * from './markers'
+export * from './user'
+export * from './establishments'
 export * from './checkins'
+export * from './kingdoms'

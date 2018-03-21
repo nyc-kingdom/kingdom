@@ -4,7 +4,7 @@ import { withRouter, Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import logo from './logo.svg';
 import './App.css';
-import { me, fetchEstablishments } from './store';
+import { me, fetchEstablishments, fetchCheckins, fetchKingdoms } from './store';
 import axios from 'axios';
 import history from './history'
 
@@ -40,6 +40,8 @@ const mapDispatch = dispatch => {
     loadInitialData () {
       dispatch(me())
       dispatch(fetchEstablishments())
+      dispatch(fetchCheckins())
+      dispatch(fetchKingdoms())
     }
   }
 }
