@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React from 'react';
-import { connect } from 'react-redux';
-=======
 import React from 'react'
 import { connect } from 'react-redux'
->>>>>>> master
 
 export class Profile extends React.Component {
     constructor(props) {

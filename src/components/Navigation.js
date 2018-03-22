@@ -34,7 +34,7 @@ const Navigation = () => {
     <div>
       <AppBar
         title="Kingdom"
-        titleStyle={{ fontFamily: 'cursive' }}
+        titleStyle={{ fontFamily: 'cursive'}}
         iconElementLeft={<Left />}
         iconElementRight={<Menu />}
       />
