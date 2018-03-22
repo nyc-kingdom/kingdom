@@ -8,30 +8,47 @@ body {
   text-align: center;
 }
 
+#HomeDash {
+  display: flex;
+  align-items: stretch;
+  height: 80vh;
+}
+
 #Map {
   flex: 10
 }
 
+#Strip {
+  flex: 1 1 5vw;
+  
+}
+
 #Dash {
+  flex-direction: row;
   flex: 10;
   background-color: gold;
   border: 1px solid white;
   opacity: 0.5;
-  height: 100vh;
-  width: 20vw;
-  position: fixed;
+  position: absolute;
+  height: 80vh;
   right: 0;
   z-index: 100;
+  overflow: scroll;
+}
+
+#Dash.closed {
+  width: 5vw;
+  transition: width 2s;
+}
+#Dash.active {
+  width: 80vw;
+  transition: width 2s;
 }
 
 #Dash:hover {
   opacity: 0.8;
 }
 
-#a {
-  display: flex;
-  flex-direction: row;
-}
 
 .marker {
   background-image: url('https://cdn3.iconfinder.com/data/icons/glypho-travel/64/history-castle-tower-512.png');
@@ -43,7 +60,7 @@ body {
 }
 
 .rec {
-  background-color: deepskyblue;
+  background-color: pink;
   border: 2px, solid, black
 }
 

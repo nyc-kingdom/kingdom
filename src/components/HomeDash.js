@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { Navigation, BottomNav } from './index';
+import { Link, Route } from 'react-router-dom'
+
 
 //components
 import  { Map, Dash } from './'
+import { Navigation, BottomNav } from './index';
+import Spotlight from './Spotlight'
 
 class Home extends Component {
   render() {
     return (
-      <div className='HomeDash'>
+      <div>
       <Navigation />
-      <div id='a' >
-      <Dash/>
-      <Map/>
+
+      <div id='HomeDash'>
+        <Dash/>
+        <Map/>
+        <Route path='/dashboard/selectedView/:id' component={Spotlight}/>
       </div>
       <BottomNav />
-      </div>
+    </div>  
     );
   }
 }

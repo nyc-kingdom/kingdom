@@ -43,8 +43,8 @@ export class Map extends Component {
     const style = {
       top: 0,
       bottom: 0,
-      height: '70vh',
-      width: '100vh'
+      height: '80vh',
+      width: '100vw'
     }
     return (
       <div id="map" style={style}>
@@ -63,6 +63,7 @@ export class Map extends Component {
                 lat={eachMarker.venue.location.lat}
                 lng={eachMarker.venue.location.lng}
                 establishmentName = {eachMarker.venue.name}
+                establishmentId = {eachMarker.venue.id}
                 name={'restaurant'}
               />
             )
