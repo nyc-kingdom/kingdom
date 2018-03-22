@@ -7,17 +7,17 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { connect } from 'react-redux'
 
-const Left = () => {
-  return (
-    <div>
-    </div>
-  )
-}
+// const Left = () => {
+//   return (
+//     <div>
+//     </div>
+//   )
+// }
 
-const Menu = (props) => (
+const Navigation = (props) => (
   <IconMenu
     iconButtonElement={
-      <IconButton><img src={sword} /></IconButton>
+      <IconButton><img src={sword} style={{ width: '150%', height: '150%' }} /></IconButton>
     }
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -30,19 +30,19 @@ const Menu = (props) => (
   </IconMenu>
 );
 
-const Navigation = (props) => {
-  console.log(props)
-  return (
-    <div>
-      <AppBar
-        title="Kingdom"
-        titleStyle={{ fontFamily: 'cursive'}}
-        iconElementLeft={<Left />}
-        iconElementRight={<Menu props={props}/>}
-      />
-    </div>
-  );
-}
+// const Navigation = (props) => {
+//   console.log(props)
+//   return (
+//     <div>
+//       <AppBar
+//         title="Kingdom"
+//         titleStyle={{ fontFamily: 'cursive'}}
+//         iconElementLeft={<Left />}
+//         iconElementRight={<Menu props={props}/>}
+//       />
+//     </div>
+//   );
+// }
 
 const mapProps = state => {
   console.log(state)

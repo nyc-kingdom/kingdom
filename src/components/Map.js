@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { googleMapKey } from '../secrets'
 import { Markers } from './Markers'
+import { IconMenu } from './index';
 
 export class Map extends Component {
   constructor(props) {
@@ -18,12 +19,12 @@ export class Map extends Component {
     const style = {
       top: 0,
       bottom: 0,
-      height: '70vh',
-      width: '100vh'
+      height: '100vh',
+      width: '100vw'
     }
     return (
       <div id="map" style={style}>
-        <GoogleMapReact
+      <GoogleMapReact
           bootstrapURLKeys={this.state.bootstrapURLKeys}
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}

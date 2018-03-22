@@ -31,12 +31,12 @@ const hardCoding = {
         points: 20,
         totalVisit: 210,
         totalAttect: 100,
-        keeper: 
+        keeper:
         // null,
         {
             id: 1,
             name: "Dongwoo Kang",
-            imgUrl: "https://elwiki.net/wiki/images/thumb/e/ef/Lord_Knight.png/500px-Lord_Knight.png",    
+            imgUrl: "https://elwiki.net/wiki/images/thumb/e/ef/Lord_Knight.png/500px-Lord_Knight.png",
         },
         kingdom: {
             id: 1,
@@ -163,7 +163,7 @@ export class Profile extends React.Component {
     //                 }
     //             </h3>
     //             <h3>
-    //                 Traveller-Diversity: 
+    //                 Traveller-Diversity:
     //             </h3>
     //             <h3>
 
@@ -177,7 +177,7 @@ const mapProps = ({ users, checkins, establishments, kingdoms }, ownProps) => {
     console.log('what is that? ', Object.keys(ownProps.match.params))
     const one = Object.keys(ownProps.match.params)[0]
     const paramId = ownProps.match.params[one]
-    // const 
+    // const
     console.log('look at it: ', one, paramId)
     return {
         one
