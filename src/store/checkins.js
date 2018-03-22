@@ -63,12 +63,12 @@ export const addCheckIn = (user, place) => dispatch => {
         
 
         const checkInBundle = {
-          userId: user.id,
-          establishment: place.id,
-          kingdom: kingdom
+          user,
+          place,
+          kingdom
         }
 
-        axios.put(`${serverUrl}/api/checkins`, checkInBundle)
+        axios.put(`${serverUrl}/api/establishments`, checkInBundle)
           .then(res => res.data)
           .then(newCheckin => dispatch(createCheckin(newCheckin)))
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
