@@ -43,8 +43,8 @@ export class Map extends Component {
     const style = {
       top: 0,
       bottom: 0,
-      height: '100vh',
-      width: '100vw'
+      height: '70vh',
+      width: '100vh'
     }
     return (
       <div id="map" style={style}>

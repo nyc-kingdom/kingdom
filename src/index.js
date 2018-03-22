@@ -10,6 +10,9 @@ import 'firebase/firestore';
 import { createUser } from './db';
 import { Router } from 'react-router-dom'
 import history from './history'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 
 const config = {
   apiKey: process.env.REACT_APP_FIRESTORE_API_KEY,
@@ -44,12 +47,30 @@ export const db = firebase.firestore();
 //     console.error("Error adding document: ", error);
 //   });
 
+const muiTheme = getMuiTheme(
+  {
+    "appBar": {
+        "padding": 40,
+        "color": "#9e9e9e",
+        "textColor": "#673ab7",
+        "titleFontWeight": 600,
+        "height": 60
+    },
+    "bottomNavigation": {
+        "selectedColor": "#673ab7",
+        "unselectedColor": "#7c4dff",
+        "backgroundColor": "#9e9e9e"
+    }
+});
+
 ReactDOM.render(
+  <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
   <Provider store={store}>
     {/* <Router history={history}> */}
      <App />
     {/* </Router> */}
-  </Provider>,
+  </Provider>
+  </MuiThemeProvider>,
   document.getElementById('root'),
 );
 registerServiceWorker();
