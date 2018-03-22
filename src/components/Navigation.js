@@ -5,6 +5,7 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import { connect } from 'react-redux'
 
 const Left = () => {
   return (
@@ -13,7 +14,7 @@ const Left = () => {
   )
 }
 
-const Menu = () => (
+const Menu = (props) => (
   <IconMenu
     iconButtonElement={
       <IconButton><img src={sword} /></IconButton>
@@ -22,25 +23,33 @@ const Menu = () => (
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
   >
     <MenuItem value="1" containerElement={<Link to="/dashboard" />} primaryText="Your Dashboard" />
-    <MenuItem value="2" containerElement={<Link to="/YourProfile" />} primaryText="Your Profile" />
+    <MenuItem value="2" containerElement={<Link to={`/profile/users/${!props.user ? null : props.user.id}`} />} primaryText="Your Profile" />
     <MenuItem value="3" containerElement={<Link to="/topKingdoms" />} primaryText="Top Kingdoms" />
     <MenuItem value="4" containerElement={<Link to="/About" />} primaryText="About" />
     <MenuItem value="5" primaryText="Sign out" />
   </IconMenu>
 );
 
-const Navigation = () => {
+const Navigation = (props) => {
+  console.log(props)
   return (
     <div>
       <AppBar
         title="Kingdom"
         titleStyle={{ fontFamily: 'cursive'}}
         iconElementLeft={<Left />}
-        iconElementRight={<Menu />}
+        iconElementRight={<Menu props={props}/>}
       />
     </div>
   );
 }
 
+const mapProps = state => {
+  console.log(state)
+  return {
+    user: state.user
+  }
+}
+// ({ user })
 
-export default Navigation;
+export default connect(mapProps)(Navigation)
