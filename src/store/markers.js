@@ -9,7 +9,6 @@ export const createMarker = marker => {
 const reducer = (markers=[], action) => {
   switch (action.type) {
     case ADD_MARKER:
-      console.log('These are going to store ', action.marker)
       return action.marker
     default:
     return markers

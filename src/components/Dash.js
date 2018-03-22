@@ -33,7 +33,7 @@ export class Dash extends React.Component {
                     <div>
                         <Link to={`/singleEstablishment/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
                         <button onClick={()=>{
-                            checkIn(this.props.user, eachMarker.venue)}
+                            this.props.checkIn(this.props.user, eachMarker.venue)}
                         }>Check In!</button> 
                     </div>
                 ))}

@@ -5,7 +5,7 @@ import axios from 'axios'
 
 //FUNCTIONALITY
 import checkIn from '../functions/checkIn'
-import distanceCalc from '../functions/locationQuery'
+import distanceCalc from '../functions/distanceCalc'
 const flickr = require('../secrets').flickrAPIKey
 
 const post = 8080
@@ -39,14 +39,16 @@ export const fetchCheckins = () => dispatch =>
 
 export const addCheckIn = (user, place) => dispatch => {
 
+  console.log('BEGIN')
+
   const lat = place.location.lat;
   const long = place.location.lng;
 
   navigator.geolocation.getCurrentPosition((position) => {
     //console.log('ME', distanceCalc(fullstack.lat,fullstack.lng,position.coords.latitude , position.coords.longitude)) //0.0001226713495550171
     console.log(distanceCalc(lat, long, position.coords.latitude, position.coords.longitude))
-    if (distanceCalc(lat, long, position.coords.latitude, position.coords.longitude) > 0.0005) console.log('YOU ARE NOT HERE')
-    else {
+    //if (distanceCalc(lat, long, position.coords.latitude, position.coords.longitude) > 0.0005) console.log('YOU ARE NOT HERE')
+    //else {
 
       console.log('Congratulations, it is true that you are at ', place.name)
 
@@ -57,21 +59,21 @@ export const addCheckIn = (user, place) => dispatch => {
       Promise.all([flckr, fsq]).then(resArr => {
         const kingdom = resArr[0].places.place[0].woe_name
         console.log('THIS IS OUR KINGDOM ', kingdom)
-        console.log('Does the check-in return us something?', resArr[1].response.checkIn)
+        
 
         const checkInBundle = {
           userId: user.id,
-          establishment: place.name,
+          establishment: place.id,
           kingdom: kingdom
         }
 
-        axios.post(`${serverUrl}/api/checkins`, checkInBundle)
+        axios.put(`${serverUrl}/api/checkins`, checkInBundle)
           .then(res => res.data)
           .then(newCheckin => dispatch(createCheckin(newCheckin)))
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
 
       })
-    }
+    //}
   })
 }
 
