@@ -2,7 +2,6 @@
 
 import axios from 'axios'
 
-<<<<<<< HEAD
 
 //FUNCTIONALITY
 import checkIn from '../functions/checkIn'
@@ -11,10 +10,6 @@ const flickr = require('../secrets').flickrAPIKey
 
 const post = 8080
 const serverUrl = `http://localhost:${post}`
-=======
-const port = 8080
-const serverUrl = `http://localhost:${port}`
->>>>>>> master
 /**
  * ACTION TYPES
  */
@@ -85,7 +80,6 @@ export const addCheckIn = (user, place) => dispatch => {
 
 
 
-<<<<<<< HEAD
 export const editCheckin = (userId, establishmentId) => dispatch =>
   axios.put(`${serverUrl}/api/checkins?user=${userId}&establishment=${establishmentId}`)
     .then(res => res.data)
@@ -96,18 +90,6 @@ export const removeCheckin = establishmentId => dispatch =>
   axios.delete(`${serverUrl}/api/checkins?establishment=${establishmentId}`)
     .then(() => dispatch(deleteCheckin(establishmentId)))
     .catch(err => console.error(`Deleting Checkin (id: ${establishmentId}) unsuccesful.`, err))
-=======
-// export const editCheckin = (userId, establishmentId) => dispatch =>
-//     axios.put(`${serverUrl}/api/checkins?user=${userId}&establishment=${establishmentId}`)
-//         .then(res => res.data)
-//         .then(editedCheckin => dispatch(updateCheckin(editedCheckin)))
-//         .catch(err => console.error(`Updating Checkin ${userId} & ${establishmentId} unsuccesful.`, err))
-
-// export const removeCheckin = establishmentId => dispatch =>
-//     axios.delete(`${serverUrl}/api/checkins?establishment=${establishmentId}`)
-//         .then(() => dispatch(deleteCheckin(establishmentId)))
-//         .catch(err => console.error(`Deleting Checkin (id: ${establishmentId}) unsuccesful.`, err))
->>>>>>> master
 /**
  * Reducer
  */
