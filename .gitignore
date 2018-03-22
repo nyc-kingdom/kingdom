@@ -10,6 +10,7 @@
 /build
 
 # misc
+/assets
 secrets.js
 .DS_Store
 .env.local

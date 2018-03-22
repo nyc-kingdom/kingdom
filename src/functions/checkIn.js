@@ -7,6 +7,9 @@ const FOURSQUARESECRET = require('../secrets').clientSecret
 
 const flickr = require('../secrets').flickrAPIKey
 
+const post = 8080
+const serverUrl = `http://localhost:${post}`
+
 
 
 const fullstack = { lat: 40.705076, lng: -74.00916000000001}
@@ -30,8 +33,17 @@ const checkIn = (user, place) => {
             const fsq = axios.post(`https://api.foursquare.com/v2/checkins/add?venueId=${place.id}&v=20170801&oauth_token=${user.token}`).then(res=>res.data)
                     
             Promise.all([flckr,fsq]).then(resArr => {
-                console.log('THIS IS OUR KINGDOM ', resArr[0].places.place[0].woe_name)
+                const kingdom = resArr[0].places.place[0].woe_name
+                console.log('THIS IS OUR KINGDOM ', kingdom)
                 console.log('Does the check-in return us something?', resArr[1].response.checkIn)
+
+                const checkInBundle = {
+                    user: user,
+                    establishment: place.name,
+                    kingdom: kingdom
+                }
+                
+                return axios.post(`${serverUrl}/api/checkins`, checkInBundle)
             })
         }
     })

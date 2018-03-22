@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import {Link} from 'react-router-dom'
 
 const image = {
     castle: "https://cdn3.iconfinder.com/data/icons/glypho-travel/64/history-castle-tower-512.png",
@@ -12,16 +13,16 @@ const image = {
 export class Markers extends Component {
     render(){
         const style = {
-            height: '2.5vh',
-            width: '2.5vw'
+            height: '3.5vh',
+            width: '3.5vw'
         }
         return (
-            <div >
+            <Link to={`/dashboard/selectedView/${this.props.establishmentId}`}>
                 <div style= {{border: '2px solid black', width: '30px' }} className='rec'>
                     {this.props.establishmentName}
                 </div>
-                <img src={image[this.props.name]} style={style}/>
-            </div>
+                <img src={image['knight']} style={style}/>
+            </Link>
         )
     }
 }
