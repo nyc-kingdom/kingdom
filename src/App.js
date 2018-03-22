@@ -6,7 +6,7 @@ import logo from './logo.svg';
 import './App.css';
 import { me, fetchEstablishments, fetchCheckins, fetchKingdoms } from './store';
 import axios from 'axios';
-import history from './history'
+
 
 //components
 import  { Routes } from './components'
@@ -18,11 +18,9 @@ class App extends Component {
 
   render() {
     return (
-      // <div className="App">
-      <Router history={history}>
+      
        <Routes/>
-      </Router>
-      // </div>
+      
     );
   }
 }

@@ -39,6 +39,7 @@ export class Map extends Component {
                 lat={eachMarker.venue.location.lat}
                 lng={eachMarker.venue.location.lng}
                 establishmentName = {eachMarker.venue.name}
+                establishmentId = {eachMarker.venue.id}
                 name={'restaurant'}
               />
             )

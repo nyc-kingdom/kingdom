@@ -6,7 +6,7 @@ const FOURSQUARESECRET = require('../secrets').clientSecret
 
     //THESE ARE FULLSTACK COORDS '40.7243,-74.0018'
 
-const locationQuery = (context) => {
+const locationQuery = dispatch => (userInput, user) => {
         // navigator.geolocation.getCurrentPosition(position => {
 
     request({
@@ -17,17 +17,17 @@ const locationQuery = (context) => {
             client_secret: FOURSQUARESECRET,
             ll: '40.741895, -73.989308',
             //near: 'New York City, NY',
-            query: context.state.userInput,
+            query: userInput,
             sortByDistance: 1,
-            oauth_token: context.props.user.token,
+            oauth_token: user.token,
             v: '20170801',
             limit: 10
         }
     }, (err, res, body) => {
         if (err) console.error.bind(console)
         const payLoad = JSON.parse(body)
-        context.setState({ queriedMarkers: payLoad.response.groups[0].items })
-        context.props.createMarker(payLoad.response.groups[0].items)
+        // context.setState({ queriedMarkers: payLoad.response.groups[0].items })
+        // context.props.createMarker(payLoad.response.groups[0].items)
     // })
     })
 }
@@ -63,24 +63,24 @@ export const checkIn = (context, marker) => {
     })
 }
 
-export const getUserCheckIns = context => {
+// export const getUserCheckIns = dispatch => user => {
 
-    console.log('USER', context.props.user)
+//     console.log('USER', user)
 
-    request({
-        url: 'https://api.foursquare.com/v2/users/self/checkins',
-        method: 'GET',
-        qs: {
-            v: '20170801',
-            oauth_token: context.props.user.token
-        }
-    }, (err, res, body) => {
-        if (err) console.error.bind(console)
-        const payLoad = JSON.parse(body)
-        console.log('You visited ', payLoad)
-        context.props.createMarker(payLoad.response.checkins.items)
-    })
-}
+//     request({
+//         url: 'https://api.foursquare.com/v2/users/self/checkins',
+//         method: 'GET',
+//         qs: {
+//             v: '20170801',
+//             oauth_token: user.token
+//         }
+//     }, (err, res, body) => {
+//         if (err) console.error.bind(console)
+//         const payLoad = JSON.parse(body)
+//         console.log('You visited ', payLoad)
+//         dispatch(createMarker(payLoad.response.checkins.items))
+//     })
+// }
 
 
 
