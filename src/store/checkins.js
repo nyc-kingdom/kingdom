@@ -59,7 +59,7 @@ export const addCheckIn = (user, place) => dispatch => {
       Promise.all([flckr, fsq]).then(resArr => {
         const kingdom = resArr[0].places.place[0].woe_name
         console.log('THIS IS OUR KINGDOM ', kingdom)
-        console.log(resArr[1])
+        console.log('CHECKIN BUNDLE ', resArr[1])
         
 
         const checkInBundle = {
