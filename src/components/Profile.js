@@ -57,7 +57,6 @@ const hardCoding = {
             id: 1,
             name: "Dongwoo Kang"
         }
-
     }
 }
 
@@ -70,7 +69,7 @@ export class Profile extends React.Component {
 
     render(){
         // please pass main={'user', 'establishment', or 'kingdom'}
-        const example = 'establishment'
+        const example = this.props.one
         const main = !this.props.main ? hardCoding[example] : this.props.main
         const levelUpPoints = 3000
         return (
@@ -83,7 +82,7 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{width:'25vw', left: 0}}
                             />
-                            <Link to={`/yourProfile?kingdom=${main.kingdom.id}`}>
+                            <Link to={`/profile/kingdoms/${!main.kingdom ? main.id : main.kingdom.id}`}>
                                 <img
                                     src={!main.kingdom ? main.imgUrl : main.kingdom.imgUrl}
                                     style={{width: '13vw', position: 'absolute', left: '4.5vw', top: '10vh'}}
@@ -101,10 +100,12 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{width:'25vw', right: 0}}
                             />
-                            <img
-                                src={hardCoding.flagKingFaceImgurl}
-                                style={{width: '13vw', position: 'absolute', right: '7.5vw', top : '8vh'}}
-                            />
+                            <Link to={`/profile/users/${!main.kingdom ? main.king.id : main.kingdom.king.id}`}>
+                                <img
+                                    src={hardCoding.flagKingFaceImgurl}
+                                    style={{width: '13vw', position: 'absolute', right: '7.5vw', top : '8vh'}}
+                                />
+                            </Link>
                         </div>
                         {/* <span>{main.kingdom.king.name}</span> */}
                     </div>
@@ -122,8 +123,10 @@ export class Profile extends React.Component {
                             ) :
                             (
                             <div style={{position: 'absolute', top: '47vh'}}>
-                                <img src={main.keeper.imgUrl} style={{width: '45vw'}}/>
-                                {/* <h5>{main.keeper.name}</h5> */}
+                                <Link to={`/profile/users/${main.keeper.id}`}>
+                                    <img src={main.keeper.imgUrl} style={{width: '45vw'}}/>
+                                    {/* <h5>{main.keeper.name}</h5> */}
+                                </Link>
                             </div>
                             )
                         }
@@ -140,7 +143,7 @@ export class Profile extends React.Component {
                     }
                 </div>
                 <div style={{textAlign: 'center'}}>
-                    <Link to='/main'>
+                    <Link to='/dashboard'>
                         <img src={hardCoding.xButton} style={{width: '12vw', height: '12vh'}}/>
                     </Link>
                 </div>
@@ -170,9 +173,15 @@ export class Profile extends React.Component {
     // }
 }
 
-const mapProps = ({ user, checkins }, ownProps) => {
-    console.log('what is this? ',ownProps.location.search)
-    // const main = 
+const mapProps = ({ users, checkins, establishments, kingdoms }, ownProps) => {
+    console.log('what is that? ', Object.keys(ownProps.match.params))
+    const one = Object.keys(ownProps.match.params)[0]
+    const paramId = ownProps.match.params[one]
+    // const 
+    console.log('look at it: ', one, paramId)
+    return {
+        one
+    }
 }
 
 const mapDispatch = null
