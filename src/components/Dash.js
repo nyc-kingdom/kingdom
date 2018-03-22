@@ -1,10 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createMarker } from '../store';
+import { createMarker, addCheckIn } from '../store';
 
 import locationQuery, { getUserCheckIns } from '../functions/locationQuery'
+
 import checkIn from '../functions/checkIn'
+
 
 export class Dash extends React.Component {
 
@@ -31,7 +33,7 @@ export class Dash extends React.Component {
                     <div>
                         <Link to={`/singleEstablishment/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
                         <button onClick={()=>{
-                            checkIn(this.props.user, eachMarker.venue)}
+                            this.props.checkIn(this.props.user, eachMarker.venue)}
                         }>Check In!</button> 
                     </div>
                 ))}
@@ -48,7 +50,8 @@ const mapProps = state => ({
 })
 
 const mapDispatch = dispatch => ({
-    createMarker: marker => dispatch(createMarker(marker))
+    createMarker: marker => dispatch(createMarker(marker)),
+    checkIn: (user, place) => dispatch(addCheckIn(user,place))
 })
 
 export default connect(mapProps, mapDispatch)(Dash)
