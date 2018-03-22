@@ -20,7 +20,6 @@ class Home extends Component {
           <Dash />
           <Map />
         </div>
-        <BottomNav />
       </div>
     );
   }
