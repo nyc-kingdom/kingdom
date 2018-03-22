@@ -5,16 +5,13 @@ import Paper from 'material-ui/Paper';
 import IconLocationOn from 'material-ui/svg-icons/communication/location-on';
 import AutoComplete from 'material-ui/AutoComplete';
 import crest from '../Assets/crest.png'
+import { connect } from 'react-redux';
+import { createMarker } from '../store';
 
 const favoritesIcon = <FontIcon className="material-icons">Connor</FontIcon>;
 const nearbyIcon = <IconLocationOn />;
 
 
-/**
- * A simple example of `BottomNavigation`, with three labels and icons
- * provided. The selected `BottomNavigationItem` is determined by application
- * state (for instance, by the URL).
- */
 class BottomNav extends Component {
   state = {
     selectedIndex: 0,
@@ -67,4 +64,13 @@ class BottomNav extends Component {
   }
 }
 
-export default BottomNav;
+const mapProps = state => ({
+  markers: state.markers,
+  user: state.user
+})
+
+const mapDispatch = dispatch => ({
+  createMarker: marker => dispatch(createMarker(marker))
+})
+
+export default connect(mapProps, mapDispatch)(BottomNav);

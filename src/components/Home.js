@@ -15,7 +15,6 @@ export class Home extends React.Component {
   render() {
     return (
       <div className='home'>
-      <Navigation />
         <h1>Kingdom</h1>
         <br />
         <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>

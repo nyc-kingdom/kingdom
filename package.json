@@ -12,6 +12,7 @@
     "history": "^4.7.2",
     "mapbox-gl": "^0.44.1",
     "material-ui": "^0.20.0",
+    "nuka-carousel": "^4.0.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",

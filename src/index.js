@@ -52,6 +52,7 @@ const muiTheme = getMuiTheme(
     "appBar": {
         "padding": 40,
         "color": "#9e9e9e",
+        "transparent": "true",
         "textColor": "#673ab7",
         "titleFontWeight": 600,
         "height": 60

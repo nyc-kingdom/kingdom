@@ -38,12 +38,12 @@ const hardCoding = {
         points: 20,
         totalVisit: 210,
         totalAttect: 100,
-        keeper: 
+        keeper:
         // null,
         {
             id: 1,
             name: "Dongwoo Kang",
-            imgUrl: "https://elwiki.net/wiki/images/thumb/e/ef/Lord_Knight.png/500px-Lord_Knight.png",    
+            imgUrl: "https://elwiki.net/wiki/images/thumb/e/ef/Lord_Knight.png/500px-Lord_Knight.png",
         },
         kingdom: {
             id: 1,
@@ -168,7 +168,7 @@ export class Profile extends React.Component {
     //                 }
     //             </h3>
     //             <h3>
-    //                 Traveller-Diversity: 
+    //                 Traveller-Diversity:
     //             </h3>
     //             <h3>
 
@@ -182,7 +182,7 @@ const mapProps = (state, ownProps) => {
     const one = Object.keys(ownProps.match.params)[0]
     const paramId = +ownProps.match.params[one]
     const main = null
-    
+
     console.log(state)
     // state[`${one}s`].find(each => each.id === paramId) // <<<====for now until database has all infor.
     return { one, main, checkIns: state.checkIns }
