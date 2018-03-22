@@ -59,15 +59,16 @@ export const addCheckIn = (user, place) => dispatch => {
       Promise.all([flckr, fsq]).then(resArr => {
         const kingdom = resArr[0].places.place[0].woe_name
         console.log('THIS IS OUR KINGDOM ', kingdom)
+        console.log(resArr[1])
         
 
         const checkInBundle = {
-          userId: user.id,
-          establishment: place.id,
-          kingdom: kingdom
+          user,
+          place,
+          kingdom
         }
 
-        axios.put(`${serverUrl}/api/checkins`, checkInBundle)
+        axios.put(`${serverUrl}/api/establishments`, checkInBundle)
           .then(res => res.data)
           .then(newCheckin => dispatch(createCheckin(newCheckin)))
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
