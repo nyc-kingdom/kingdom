@@ -11,6 +11,7 @@
     "google-map-react": "^0.34.0",
     "history": "^4.7.2",
     "mapbox-gl": "^0.44.1",
+    "material-ui": "^0.20.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -22,6 +23,7 @@
     "redux-logger": "^3.0.6",
     "redux-mock-store": "^1.5.1",
     "redux-thunk": "^2.2.0",
+    "sw-precache-webpack-plugin": "^0.11.5",
     "watchman": "^1.0.0"
   },
   "scripts": {
