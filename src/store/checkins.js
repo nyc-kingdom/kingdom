@@ -2,8 +2,8 @@
 
 import axios from 'axios'
 
-const post = 8080
-const serverUrl = `http://localhost:${post}`
+const port = 8080
+const serverUrl = `http://localhost:${port}`
 /**
  * ACTION TYPES
  */
@@ -35,16 +35,16 @@ export const addCheckin = checkin => dispatch =>
         .then(newCheckin => dispatch(createCheckin(newCheckin)))
         .catch(err => console.error(`Creating Checkin ${checkin} unsuccesful.`, err))
 
-export const editCheckin = (userId, establishmentId) => dispatch =>
-    axios.put(`${serverUrl}/api/checkins?user=${userId}&establishment=${establishmentId}`)
-        .then(res => res.data)
-        .then(editedCheckin => dispatch(updateCheckin(editedCheckin)))
-        .catch(err => console.error(`Updating Checkin ${userId} & ${establishmentId} unsuccesful.`, err))
+// export const editCheckin = (userId, establishmentId) => dispatch =>
+//     axios.put(`${serverUrl}/api/checkins?user=${userId}&establishment=${establishmentId}`)
+//         .then(res => res.data)
+//         .then(editedCheckin => dispatch(updateCheckin(editedCheckin)))
+//         .catch(err => console.error(`Updating Checkin ${userId} & ${establishmentId} unsuccesful.`, err))
 
-export const removeCheckin = establishmentId => dispatch =>
-    axios.delete(`${serverUrl}/api/checkins?establishment=${establishmentId}`)
-        .then(() => dispatch(deleteCheckin(establishmentId)))
-        .catch(err => console.error(`Deleting Checkin (id: ${establishmentId}) unsuccesful.`, err))
+// export const removeCheckin = establishmentId => dispatch =>
+//     axios.delete(`${serverUrl}/api/checkins?establishment=${establishmentId}`)
+//         .then(() => dispatch(deleteCheckin(establishmentId)))
+//         .catch(err => console.error(`Deleting Checkin (id: ${establishmentId}) unsuccesful.`, err))
 /**
  * Reducer
  */
