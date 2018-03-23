@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { googleMapKey } from '../secrets'
 import { Markers } from './Markers'
-import { IconMenu } from './index';
+import { IconMenu } from './index'
+import { blueWater, unsaturatedBrowns } from '../Assets/mapTheme'
 
 export class Map extends Component {
   constructor(props) {
@@ -11,11 +12,27 @@ export class Map extends Component {
     this.state = {
       center: {lat: 40.70, lng: -74.00},
       zoom: 14,
-      bootstrapURLKeys: { key: googleMapKey }
+      bootstrapURLKeys: { key: googleMapKey },
+      options: blueWater,
+      date: new Date(),
+      check: false
+    }
+  }
+  
+  componentWillUpdate(newProps, oldProps){
+    if(this.state.check){
+      if(oldProps.date.getHours() <=18 && oldProps.date.getHours() >= 6){
+        this.setState({ options: blueWater, check: !this.state.check })
+      }
+    } else {
+      if(oldProps.date.getHours() > 18 || oldProps.date.getHours() < 6){
+        this.setState({ options: unsaturatedBrowns, check: !this.state.check })
+      }
     }
   }
 
   render() {
+    console.log(this.state.date)
     const style = {
       top: 0,
       bottom: 0,
@@ -30,7 +47,7 @@ export class Map extends Component {
           defaultZoom={this.state.zoom}
           heatmapLibrary={true}
           // heatmap={this.state.heatmap}
-          // options={this.state.options}
+          options={this.state.options}
         >
         {
           this.props.markers.length > 0 && this.props.markers.map(eachMarker=>(
@@ -61,6 +78,11 @@ export class Map extends Component {
   }
 }
 
-const mapState = state => ({ markers: state.markers })
+const mapState = state => {
+  return { 
+    markers: state.markers,
+    date: new Date()
+  }
+}
 
 export default connect(mapState)(Map)
