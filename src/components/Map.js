@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { googleMapKey } from '../secrets'
-import { Markers } from './Markers'
-import { IconMenu } from './index'
 import { blueWater, unsaturatedBrowns } from '../Assets/mapTheme'
+
 
 export class Map extends Component {
   constructor(props) {
@@ -39,6 +38,7 @@ export class Map extends Component {
       height: '100vh',
       width: '100vw'
     }
+
     return (
       <div id="map" style={style}>
       <GoogleMapReact

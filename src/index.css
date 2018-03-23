@@ -10,15 +10,17 @@ body {
   -o-background-size: cover;
   background-size:100% 100vh;
 }
+h1, h2, h3 {
+  text-align: center;
+}
 
 .home {
   text-align: center;
 }
 
 #HomeDash {
-  display: flex;
-  align-items: stretch;
   height: 80vh;
+  position: static;
 }
 
 #Map {
@@ -27,7 +29,7 @@ body {
 
 #Strip {
   flex: 1 1 5vw;
-  
+
 }
 
 #Dash {
@@ -109,18 +111,32 @@ body {
 #nav {
   position: fixed;
   top: 1vh;
-  right: 100px;
+  right: 80px;
   z-index: 100;
 }
 
 #logo {
   position: fixed;
-  top: 2vh;
-  left: 10px;
+  left: 40px;
+  top: -4vh;
   z-index: 100;
+  font-size: 150%;
 }
 
 #kingdoms:hover {
   opacity: 0.8;
   border: 1px solid white
+}
+
+#Spotlight {
+  position: absolute;
+  height: 30vh;
+  width: 80vw;
+  text-align: center;
+  bottom: 75px;
+  opacity: 0.75;
+  z-index: 200;
+  background-color: whitesmoke;
+  border:  5px, solid, orangered;
+  border-radius: 2vh;
 }

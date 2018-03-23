@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createMarker, addCheckIn, queryMarkers, getUserCheckIns } from '../store';
 
-//import { getUserCheckIns } from '../functions/locationQuery'
-
-import checkIn from '../functions/checkIn'
-
 
 export class Dash extends React.Component {
 
@@ -33,10 +29,10 @@ export class Dash extends React.Component {
                     <button onClick={() => { this.props.queryMarkers(this.state.userInput, this.props.user) }}>Hello</button>
                     {this.props.markers.length>0 && this.props.markers.map(eachMarker => (
                         <div>
-                            <Link to={`/singleEstablishment/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
-                            <button onClick={()=>{
+                            <Link to={`/dashboard/selectedView/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
+                            {/* <button onClick={()=>{
                                 this.props.checkIn(this.props.user, eachMarker.venue)}
-                            }>Check In!</button> 
+                            }>Check In!</button>  */}
                         </div>
                     ))}
                     <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
