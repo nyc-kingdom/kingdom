@@ -1,0 +1,68 @@
+'use strict'
+
+import axios from 'axios'
+
+const post = 8080
+const serverUrl = `http://localhost:${post}`
+/**
+ * ACTION TYPES
+ */
+const GET_USERS = 'GET_USERS'
+const CREATE_USER = 'CREATE_USER'
+const UPDATE_USER = 'UPDATE_USER'
+const DELETE_USER = 'DELETE_USER'
+
+/**
+ * ACTION CREATORS
+ */
+const getUsers = users => ({ type: GET_USERS, users })
+const createUser = user => ({ type: CREATE_USER, user })
+const updateUser = user => ({ type: UPDATE_USER, user })
+const deleteUser = userId => ({ type: DELETE_USER, userId })
+
+
+
+/**
+ * THUNK CREATORS
+ */
+export const fetchUsers = () => dispatch =>
+  axios.get(`${serverUrl}/api/users`)
+    .then(res => res.data)
+    .then(users => dispatch(getUsers(users)))
+    .catch(err => console.error('Fetching Users unsuccesful.', err))
+
+export const addUser = user => dispatch =>
+    axios.post(`${serverUrl}/api/users`, user)
+    .then(res => res.data)
+    .then(newUser => dispatch(createUser(newUser)))
+    .catch(err => console.error(`Creating User ${user} unsuccesful.`, err))
+
+export const editUser = (user, userId) => dispatch =>
+  axios.put(`${serverUrl}/api/users/${userId}`, user)
+    .then(res => res.data)
+    .then(editedUser => dispatch(updateUser(editedUser)))
+    .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
+
+export const removeUser = userId => dispatch =>
+  axios.delete(`${serverUrl}/api/users/${userId}`)
+    .then(() => dispatch(deleteUser(userId)))
+    .catch(err => console.error(`Deleting User (id: ${userId}) unsuccesful.`, err))
+/**
+ * Reducer
+ */
+export default function reducer(users = [], action) {
+  switch (action.type) {
+    case GET_USERS:
+      return action.users;
+    case CREATE_USER:
+      return [...users, action.user];
+    case UPDATE_USER:
+      return users.map(user => {
+        return user.id === action.user.id ? action.user : user
+      });
+    case DELETE_USER:
+      return users.filter(user => user.id !== action.user.id);
+    default:
+      return users;
+  }
+}
