@@ -28,7 +28,7 @@ export class Dash extends React.Component {
                     />
                     <button onClick={() => { this.props.queryMarkers(this.state.userInput, this.props.user) }}>Hello</button>
                     {this.props.markers.length>0 && this.props.markers.map(eachMarker => (
-                        <div>
+                        <div key={eachMarker.venue.id}>
                             <Link to={`/dashboard/selectedView/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
                             {/* <button onClick={()=>{
                                 this.props.checkIn(this.props.user, eachMarker.venue)}
