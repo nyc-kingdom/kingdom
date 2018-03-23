@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { googleMapKey } from '../secrets'
 import { blueWater, unsaturatedBrowns, greenTheme } from '../Assets/mapTheme'
-import { Markers } from './index'
+import { Markers } from './'
 
 
 export class Map extends Component {
@@ -11,36 +11,35 @@ export class Map extends Component {
     super(props)
     this.state = {
       center: { lat: 40.70, lng: -74.00 },
-      zoom: 14,
+      zoom: 13,
       bootstrapURLKeys: { key: googleMapKey },
       options: greenTheme,
       date: new Date(),
       check: false
     }
+    this.updateMapTheme = this.updateMapTheme.bind(this)
   }
 
-  //commented out due to error - will revise
-  // componentWillUpdate(newProps, oldProps) {
-  //   if (this.state.check) {
-  //     if (oldProps.date.getHours() <= 18 && oldProps.date.getHours() >= 6) {
-  //       this.setState({ options: blueWater, check: !this.state.check })
-  //     }
-  //   } else {
-  //     if (oldProps.date.getHours() > 18 || oldProps.date.getHours() < 6) {
-  //       this.setState({ options: unsaturatedBrowns, check: !this.state.check })
-  //     }
-  //   }
-  // }
+  updateMapTheme(){
+    if (this.state.check) {
+      if (this.state.date.getHours() <= 18 && this.state.date.getHours() >= 6) {
+        this.setState({ options: greenTheme, check: !this.state.check })
+      }
+    } else {
+      if (this.state.date.getHours() > 18 || this.state.date.getHours() < 6) {
+        this.setState({ options: unsaturatedBrowns, check: !this.state.check })
+      }
+    }
+  }
 
   render() {
-    console.log(this.state.date)
+    this.updateMapTheme()
     const style = {
       top: 0,
       bottom: 0,
       height: '100vh',
       width: '100vw'
     }
-
     return (
       <div id="map" style={style}>
         <GoogleMapReact
@@ -82,8 +81,7 @@ export class Map extends Component {
 
 const mapState = state => {
   return {
-    markers: state.markers,
-    date: new Date()
+    markers: state.markers
   }
 }
 
