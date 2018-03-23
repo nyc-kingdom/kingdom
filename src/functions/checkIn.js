@@ -12,7 +12,7 @@ const serverUrl = `http://localhost:${post}`
 
 
 
-const fullstack = { lat: 40.705076, lng: -74.00916000000001}
+const fullstack = { lat: 40.705076, lng: -74.00916000000001 }
 
 
 
@@ -22,17 +22,17 @@ const checkIn = (user, place) => {
 
     navigator.geolocation.getCurrentPosition((position) => {
         //console.log('ME', distanceCalc(fullstack.lat,fullstack.lng,position.coords.latitude , position.coords.longitude)) //0.0001226713495550171
-        console.log(distanceCalc(lat, long, position.coords.latitude , position.coords.longitude))
-        if(distanceCalc(lat, long, position.coords.latitude , position.coords.longitude) > 0.0005) console.log('YOU ARE NOT HERE')
-        else{
-        
+        console.log(distanceCalc(lat, long, position.coords.latitude, position.coords.longitude))
+        if (distanceCalc(lat, long, position.coords.latitude, position.coords.longitude) > 0.0005) console.log('YOU ARE NOT HERE')
+        else {
+
             console.log('Congratulations, it is true that you are at ', place.name)
 
-            const flckr = axios.get(`https://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=${flickr}&lat=${lat}&lon=${long}&format=json&nojsoncallback=1`).then(res=>res.data)
-            
-            const fsq = axios.post(`https://api.foursquare.com/v2/checkins/add?venueId=${place.id}&v=20170801&oauth_token=${user.token}`).then(res=>res.data)
-                    
-            Promise.all([flckr,fsq]).then(resArr => {
+            const flckr = axios.get(`https://api.flickr.com/services/rest/?method=flickr.places.findByLatLon&api_key=${flickr}&lat=${lat}&lon=${long}&format=json&nojsoncallback=1`).then(res => res.data)
+
+            const fsq = axios.post(`https://api.foursquare.com/v2/checkins/add?venueId=${place.id}&v=20170801&oauth_token=${user.token}`).then(res => res.data)
+
+            Promise.all([flckr, fsq]).then(resArr => {
                 const kingdom = resArr[0].places.place[0].woe_name
                 console.log('THIS IS OUR KINGDOM ', kingdom)
                 console.log('Does the check-in return us something?', resArr[1].response.checkIn)
@@ -42,7 +42,7 @@ const checkIn = (user, place) => {
                     establishment: place.name,
                     kingdom: kingdom
                 }
-                
+
                 return axios.post(`${serverUrl}/api/checkins`, checkInBundle)
             })
         }
