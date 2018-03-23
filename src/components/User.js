@@ -38,6 +38,7 @@ class User extends Component {
     evt.preventDefault();
     const addressStr = `${this.state.address}${this.state.city}${this.state.state}${this.state.zip}`.split(' ').join('');
     this.props.editUser({address: addressStr}, this.props.user.id)
+    this.props.history.push('/dashboard')
   }
   handleChange(evt) {
     this.setState({
@@ -162,9 +163,10 @@ class User extends Component {
   }
 }
 
-const mapProps = state => {
+const mapProps = (state) => {
+  const { user } = state
   return {
-    user: state.user
+    user
   }
 };
 
