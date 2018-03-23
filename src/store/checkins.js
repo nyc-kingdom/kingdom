@@ -13,16 +13,14 @@ const serverUrl = `http://localhost:${post}`
  */
 const GET_CHECKINS = 'GET_CHECKINS'
 const CREATE_CHECKIN = 'CREATE_CHECKIN'
-const UPDATE_CHECKIN = 'UPDATE_CHECKIN'
-const DELETE_CHECKIN = 'DELETE_CHECKIN'
+const CREATE_FOURSQUARE_CHECKINS = 'CREATE_FOURSQUARE_CHECKINS'
 
 /**
  * ACTION CREATORS
  */
 const getCheckins = checkins => ({ type: GET_CHECKINS, checkins })
+const createFoursquareCheckins = checkins => ({ type: CREATE_FOURSQUARE_CHECKINS, checkins })
 const createCheckin = checkin => ({ type: CREATE_CHECKIN, checkin })
-// const updateCheckin = checkin => ({ type: UPDATE_CHECKIN, checkin })
-// const deleteCheckin = establishmentId => ({ type: DELETE_CHECKIN, establishmentId })
 
 
 
@@ -35,20 +33,19 @@ export const fetchCheckins = () => dispatch =>
     .then(checkins => dispatch(getCheckins(checkins)))
     .catch(err => console.error('Fetching Checkins unsuccesful.', err))
 
+//export const addFoursquareCheckins = () => dispatch =>
+
 export const addCheckIn = (user, place) => dispatch => {
 
   console.log('BEGIN')
 
   navigator.geolocation.getCurrentPosition((position) => {
-        const checkInBundle = {
-          user,
-          place
-        }
+    const checkInBundle = {user, place}
 
-        return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
-          .then(res => res.data)
-          .then(newCheckin => dispatch(createCheckin(newCheckin)))
-          .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
+    return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
+      .then(res => res.data)
+      .then(newCheckin => dispatch(createCheckin(newCheckin)))
+      .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
   })
 }
 
