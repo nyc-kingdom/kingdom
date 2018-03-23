@@ -4,7 +4,6 @@ import axios from 'axios'
 
 
 //FUNCTIONALITY
-import checkIn from '../functions/checkIn'
 import distanceCalc from '../functions/distanceCalc'
 const flickr = require('../secrets').flickrAPIKey
 
@@ -47,6 +46,9 @@ export const addCheckIn = (user, place) => dispatch => {
   navigator.geolocation.getCurrentPosition((position) => {
     //console.log('ME', distanceCalc(fullstack.lat,fullstack.lng,position.coords.latitude , position.coords.longitude)) //0.0001226713495550171
     console.log(distanceCalc(lat, long, position.coords.latitude, position.coords.longitude))
+
+    //RIGHT NOW VERIFICATION IS TURNED OFF FOR TESTING PURPOSES
+
     //if (distanceCalc(lat, long, position.coords.latitude, position.coords.longitude) > 0.0005) console.log('YOU ARE NOT HERE')
     //else {
 
