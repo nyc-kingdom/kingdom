@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 const Navigation = (props) => (
   <IconMenu
     iconButtonElement={
-      <IconButton><img src={sword} style={{ width: '150%', height: '150%' }} /></IconButton>
+      <IconButton><img src={sword} /></IconButton>
     }
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
