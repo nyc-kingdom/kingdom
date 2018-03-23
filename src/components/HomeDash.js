@@ -23,22 +23,23 @@ class Home extends Component {
           <h1 style={{ fontFamily: 'Apple Chancery, cursive' , textAlign: 'center'}}>Kingdom</h1>
         </div>
         <div id='profile'>
-        <br />
-          <Navigation />
-          </div>
-          <div id='kingdoms'>
           <br />
-            <img src={gem} />
-            </div>
-            <div id='castle'>
-            <br />
-              <img src={castle} />
-              </div>
-
-              <div id='shield'>
-              <br />
-                <img src={shield2} />
-                </div>
+          <Navigation />
+        </div>
+        <div id='kingdoms'>
+          <br />
+          <img src={gem} />
+        </div>
+        <div id='castle'>
+          <br />
+          <img src={castle} />
+        </div>
+        <div id='shield'>
+          <br />
+          <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
+            <img src={shield2} />
+          </Link>
+        </div>
         <Dash />
         <Map />
         <Route path='/dashboard/selectedView/:id' component={Spotlight} />
