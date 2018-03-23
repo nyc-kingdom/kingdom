@@ -3,10 +3,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createMarker, addCheckIn, queryMarkers, getUserCheckIns } from '../store';
 
-//import { getUserCheckIns } from '../functions/locationQuery'
-
-import checkIn from '../functions/checkIn'
-
 
 export class Dash extends React.Component {
 
