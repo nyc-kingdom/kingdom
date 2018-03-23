@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import logo from './logo.svg';
 import './App.css';
 import { me, fetchEstablishments, fetchCheckins, fetchKingdoms } from './store';
+import { setLocationThunk } from './store/trackLocation'
 import axios from 'axios';
 
 
@@ -14,6 +15,9 @@ import  { Routes } from './components'
 class App extends Component {
   componentDidMount() {
     this.props.loadInitialData();
+    this.props.setLocation()
+    
+
   }
 
   render() {
@@ -29,7 +33,8 @@ const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    location: state.trackLocation
   }
 }
 
@@ -40,6 +45,9 @@ const mapDispatch = dispatch => {
       dispatch(fetchEstablishments())
       dispatch(fetchCheckins())
       dispatch(fetchKingdoms())
+    },
+    setLocation(){
+      dispatch(setLocationThunk())
     }
   }
 }

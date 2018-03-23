@@ -45,6 +45,20 @@ export class Map extends Component {
             )
           )
         }
+
+        {
+          this.props.establishments.length > 0 && this.props.establishments.map(eachMarker=>(
+              <Markers
+                key={eachMarker.id}
+                lat={eachMarker.latitude}
+                lng={eachMarker.longitude}
+                establishmentName = {eachMarker.name}
+                establishmentId = {eachMarker.id}
+                name={'castle'}
+              />
+            )
+          )
+        }
           <Markers
             lat={40.705413}
             lng={-74.007844}
@@ -61,6 +75,6 @@ export class Map extends Component {
   }
 }
 
-const mapState = state => ({ markers: state.markers })
+const mapState = state => ({ markers: state.markers, establishments: state.establishments })
 
 export default connect(mapState)(Map)

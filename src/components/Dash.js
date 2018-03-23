@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createMarker, addCheckIn, queryMarkers, getUserCheckIns } from '../store';
+import trackLocation from '../store/trackLocation'
 
 
 export class Dash extends React.Component {
@@ -26,7 +27,10 @@ export class Dash extends React.Component {
                         value={this.state.userInput}
                         onChange={evt => {this.setState({userInput: evt.target.value})}}
                     />
-                    <button onClick={() => { this.props.queryMarkers(this.state.userInput, this.props.user) }}>Hello</button>
+                    <button onClick={() => { 
+                        if(this.props.location.timeStamp < Date.now()+180000) this.props.queryMarkers(this.state.userInput, this.props.user, this.props.location.coords) 
+                        else console.log('You better refresh your location!')
+                    }}>Hello</button>
                     {this.props.markers.length>0 && this.props.markers.map(eachMarker => (
                         <div>
                             <Link to={`/dashboard/selectedView/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
@@ -45,14 +49,17 @@ export class Dash extends React.Component {
 
 const mapProps = state => ({
     markers: state.markers,
-    user: state.user
+    user: state.user,
+    location: state.location
 })
 
 const mapDispatch = dispatch => ({
     createMarker: marker => dispatch(createMarker(marker)),
     checkIn: (user, place) => dispatch(addCheckIn(user,place)),
     queryMarkers: (userInput, users) => dispatch(queryMarkers(userInput, users)),
-    getUserCheckIns: users => dispatch(getUserCheckIns(users))
+    getUserCheckIns: users => dispatch(getUserCheckIns(users)),
+    trackLocation: () => dispatch(trackLocation())
+
 })
 
 export default connect(mapProps, mapDispatch)(Dash)

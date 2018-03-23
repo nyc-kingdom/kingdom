@@ -8,8 +8,9 @@ import establishments from './establishments';
 import checkins from './checkins'
 import kingdoms from './kingdoms'
 import users from './users'
+import trackLocation from './trackLocation'
 
-const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms })
+const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation })
 
 const middleware = composeWithDevTools(applyMiddleware(
     thunkMiddleware,
@@ -26,3 +27,4 @@ export * from './users'
 export * from './establishments'
 export * from './checkins'
 export * from './kingdoms'
+export * from './trackLocation'

@@ -11,7 +11,7 @@ export const createMarker = marker => {
 }
 
 
-export const queryMarkers = (userInput, user) => dispatch => {
+export const queryMarkers = (userInput, user, location) => dispatch => {
   // navigator.geolocation.getCurrentPosition(position => {
 
 request({
@@ -20,7 +20,7 @@ request({
   qs: {
       client_id: FOURSQUAREID,
       client_secret: FOURSQUARESECRET,
-      ll: '40.741895, -73.989308',
+      ll: `${location[0]}, ${location[1]}`,
       //near: 'New York City, NY',
       query: userInput,
       sortByDistance: 1,

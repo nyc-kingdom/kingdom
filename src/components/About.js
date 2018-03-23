@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createMarker } from '../store';
 
-import locationQuery, { checkIn, getUserCheckIns } from '../functions/locationQuery'
 
 export class About extends React.Component {
 

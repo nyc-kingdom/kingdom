@@ -2,7 +2,6 @@
 
 import axios from 'axios'
 
-
 //FUNCTIONALITY
 import distanceCalc from '../functions/distanceCalc'
 
@@ -24,8 +23,6 @@ const createCheckin = checkin => ({ type: CREATE_CHECKIN, checkin })
 // const updateCheckin = checkin => ({ type: UPDATE_CHECKIN, checkin })
 // const deleteCheckin = establishmentId => ({ type: DELETE_CHECKIN, establishmentId })
 
-
-
 /**
  * THUNK CREATORS
  */
@@ -37,19 +34,11 @@ export const fetchCheckins = () => dispatch =>
 
 export const addCheckIn = (user, place) => dispatch => {
 
-  console.log('BEGIN')
-
-  navigator.geolocation.getCurrentPosition((position) => {
-        const checkInBundle = {
-          user,
-          place
-        }
-
+        const checkInBundle = { user, place }
         return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
           .then(res => res.data)
           .then(newCheckin => dispatch(createCheckin(newCheckin)))
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
-  })
 }
 
 export default function reducer(checkins = [], action) {
