@@ -6,7 +6,14 @@ const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
     keeperChairUrl: "https://cdn4.iconfinder.com/data/icons/knight/512/as416g_7-512.png",
     xButton: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-alphanumeric/075091-ultra-glossy-silver-button-icon-alphanumeric-x-styled.png",
-    flagKingFaceImgurl: "https://cdn.pixabay.com/photo/2016/08/06/14/11/lion-1574448_960_720.png",
+    flagKingFaceImgurl: "https://d1u5p3l4wpay3k.cloudfront.net/rlesports_gamepedia_en/thumb/8/82/Kings_of_Urbanlogo_square.png/300px-Kings_of_Urbanlogo_square.png?version=14a3c8a996adc00855afc2399be68e91",
+    userClass: {
+        "Shepard" : "",
+        "Stone Mason" : "",
+        "Knight" : "https://i.imgur.com/I8rXtBd.png",
+        "Lord" : "",
+        "King" : "../../public/img/king.gif",
+    },
     user: {
         id: 1,
         name: "Dongwoo Kang",
@@ -31,12 +38,12 @@ const hardCoding = {
         points: 20,
         totalVisit: 210,
         totalAttect: 100,
-        keeper: 
+        keeper:
         // null,
         {
             id: 1,
             name: "Dongwoo Kang",
-            imgUrl: "https://elwiki.net/wiki/images/thumb/e/ef/Lord_Knight.png/500px-Lord_Knight.png",    
+            imgUrl: "https://elwiki.net/wiki/images/thumb/e/ef/Lord_Knight.png/500px-Lord_Knight.png",
         },
         kingdom: {
             id: 1,
@@ -64,12 +71,10 @@ export class Profile extends React.Component {
     constructor(props) {
         super(props)
         // this.renderUser = this.renderUser.bind(this)
-
     }
 
     render(){
-        // please pass main={'user', 'establishment', or 'kingdom'}
-        const example = this.props.one
+        const example = this.props.one // fake data
         const main = !this.props.main ? hardCoding[example] : this.props.main
         const levelUpPoints = 3000
         return (
@@ -103,7 +108,7 @@ export class Profile extends React.Component {
                             <Link to={`/profile/users/${!main.kingdom ? main.king.id : main.kingdom.king.id}`}>
                                 <img
                                     src={hardCoding.flagKingFaceImgurl}
-                                    style={{width: '13vw', position: 'absolute', right: '7.5vw', top : '8vh'}}
+                                    style={{width: '18vw', position: 'absolute', right: '5vw', top : '9vh'}}
                                 />
                             </Link>
                         </div>
@@ -163,7 +168,7 @@ export class Profile extends React.Component {
     //                 }
     //             </h3>
     //             <h3>
-    //                 Traveller-Diversity: 
+    //                 Traveller-Diversity:
     //             </h3>
     //             <h3>
 
@@ -173,15 +178,14 @@ export class Profile extends React.Component {
     // }
 }
 
-const mapProps = ({ users, checkins, establishments, kingdoms }, ownProps) => {
-    console.log('what is that? ', Object.keys(ownProps.match.params))
+const mapProps = (state, ownProps) => {
     const one = Object.keys(ownProps.match.params)[0]
-    const paramId = ownProps.match.params[one]
-    // const 
-    console.log('look at it: ', one, paramId)
-    return {
-        one
-    }
+    const paramId = +ownProps.match.params[one]
+    const main = null
+
+    console.log(state)
+    // state[`${one}s`].find(each => each.id === paramId) // <<<====for now until database has all infor.
+    return { one, main, checkIns: state.checkIns }
 }
 
 const mapDispatch = null

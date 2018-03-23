@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { googleMapKey } from '../secrets'
 import { Markers } from './Markers'
+import { IconMenu } from './index';
 
 export class Map extends Component {
   constructor(props) {
@@ -11,31 +12,6 @@ export class Map extends Component {
       center: {lat: 40.70, lng: -74.00},
       zoom: 14,
       bootstrapURLKeys: { key: googleMapKey }
-      // options: {options},
-    //   heatmapLibrary: true,
-    //   // heatmap: {
-    //   //   positions: [],
-    //   //   options: {
-    //   //     radius: 20,
-    //   //     opacity: 0.7,
-    //   //     gradient: [
-    //   //       'rgba(0, 255, 255, 0)',
-    //   //       'rgba(0, 255, 255, 1)',
-    //   //       'rgba(0, 191, 255, 1)',
-    //   //       'rgba(0, 127, 255, 1)',
-    //   //       'rgba(0, 63, 255, 1)',
-    //   //       'rgba(0, 0, 255, 1)',
-    //   //       'rgba(0, 0, 223, 1)',
-    //   //       'rgba(0, 0, 191, 1)',
-    //   //       'rgba(0, 0, 159, 1)',
-    //   //       'rgba(0, 0, 127, 1)',
-    //   //       'rgba(63, 0, 91, 1)',
-    //   //       'rgba(127, 0, 63, 1)',
-    //   //       'rgba(191, 0, 31, 1)',
-    //   //       'rgba(255, 0, 0, 1)'
-    //   //     ]
-    //   //   },
-    //   // }
     }
   }
 
@@ -43,12 +19,12 @@ export class Map extends Component {
     const style = {
       top: 0,
       bottom: 0,
-      height: '80vh',
+      height: '100vh',
       width: '100vw'
     }
     return (
       <div id="map" style={style}>
-        <GoogleMapReact
+      <GoogleMapReact
           bootstrapURLKeys={this.state.bootstrapURLKeys}
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}

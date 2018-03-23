@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
+import logo from '../Assets/kingdom.png'
 
 
 //components
@@ -10,21 +11,21 @@ import Spotlight from './Spotlight'
 class Home extends Component {
   render() {
     return (
-      <div>
-      <Navigation />
-
       <div id='HomeDash'>
+      <div id='logo'>
+          <img src={logo} style={{ width: '150%', height: '150%' }} />
+        </div>
+        <div id='nav'>
+          <Navigation />
+        </div>
         <Dash/>
         <Map/>
         <Route path='/dashboard/selectedView/:id' component={Spotlight}/>
-      </div>
-      <BottomNav />
-    </div>  
+    </div>
     );
   }
 }
 
 export default Home;
 
-// <Link to='/yourProfile'><div id='profile'></div></Link>
 // <Link to='/topKingdoms'><div id='kingdoms'></div></Link>

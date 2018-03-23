@@ -2,6 +2,13 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-image: url("https://thumbs.dreamstime.com/b/papel-antiguo-7550872.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size:100% 100vh;
 }
 
 .home {
@@ -80,15 +87,35 @@ body {
   border: 1px solid white
 }
 
+#newUser {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 #kingdoms {
   height: 100px;
   width: 100px;
   border-radius: 100px;
-  background-color: grey;
+  background-color: rgba(247, 240, 240, 0.144);
   opacity: 0.5;
   position: fixed;
   top: 140px;
   left: 20px;
+  z-index: 100;
+}
+
+#nav {
+  position: fixed;
+  top: 1vh;
+  right: 100px;
+  z-index: 100;
+}
+
+#logo {
+  position: fixed;
+  top: 2vh;
+  left: 10px;
   z-index: 100;
 }
 
