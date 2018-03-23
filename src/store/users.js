@@ -37,11 +37,13 @@ export const addUser = user => dispatch =>
     .then(newUser => dispatch(createUser(newUser)))
     .catch(err => console.error(`Creating User ${user} unsuccesful.`, err))
 
-export const editUser = (user, userId) => dispatch =>
+export const editUser = (user, userId) => dispatch => {
+  console.log(user, 'user within edit thunk', userId)
   axios.put(`${serverUrl}/api/users/${userId}`, user)
     .then(res => res.data)
     .then(editedUser => dispatch(updateUser(editedUser)))
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
+}
 
 export const removeUser = userId => dispatch =>
   axios.delete(`${serverUrl}/api/users/${userId}`)

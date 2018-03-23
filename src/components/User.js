@@ -3,7 +3,11 @@ import Carousel from "nuka-carousel";
 import shepard from '../Assets/Shepard.gif'
 import dino from '../Assets/tRex2Talking.gif'
 import shep from '../Assets/sheperd1.gif'
+import arrowLeft from '../Assets/arrowLeft.png'
+import arrowRight from '../Assets/arrowRight.png'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { editUser } from '../store';
 
 
 const style = {
@@ -15,7 +19,7 @@ const style = {
   flexDirection: "column",
   textAlign: "center",
 }
-export default class NewUser extends Component {
+class User extends Component {
   constructor() {
     super();
     this.state = {
@@ -32,9 +36,9 @@ export default class NewUser extends Component {
 
   handleSubmitForm(evt) {
     evt.preventDefault();
-    console.log(this.state, 'obj from state')
+    const addressStr = `${this.state.address}${this.state.city}${this.state.state}${this.state.zip}`.split(' ').join('');
+    this.props.editUser({address: addressStr}, this.props.user.id)
   }
-
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value
@@ -49,6 +53,7 @@ export default class NewUser extends Component {
 
   render() {
     console.log(this.state, 'current state of new user form')
+    console.log(this.props)
     return (
         <div id="newUser">
           <h1>
@@ -70,10 +75,10 @@ export default class NewUser extends Component {
           >
             <Carousel
               renderCenterLeftControls={({ previousSlide }) => (
-                <button onClick={previousSlide}>&lt;</button>
+                <button onClick={previousSlide}><img src={arrowLeft} /></button>
               )}
               renderCenterRightControls={({ nextSlide }) => (
-                <button onClick={nextSlide}>&gt;</button>
+                <button onClick={nextSlide}><img src={arrowRight} /></button>
               )}
             >
               <div style={style}>
@@ -106,9 +111,7 @@ export default class NewUser extends Component {
           </div>
           </form>
         <div>
-          <form style={
-            {textAlign: "center"}
-          } onSubmit={this.handleSubmitForm}>
+          <form style={{textAlign: 'center'}} onSubmit={this.handleSubmitForm}>
           <label>Character:</label>
           <input
             name="character"
@@ -158,3 +161,15 @@ export default class NewUser extends Component {
     );
   }
 }
+
+const mapProps = state => {
+  return {
+    user: state.user
+  }
+};
+
+const mapDispatch = dispatch => ({
+  editUser: (user, userId) => dispatch(editUser(user, userId))
+});
+
+export default connect(mapProps, mapDispatch)(User)
