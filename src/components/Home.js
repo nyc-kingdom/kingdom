@@ -20,8 +20,7 @@ export class Home extends React.Component {
         <br />
         <img src={king} />
         <br />
-        <a href='http://localhost:8080/auth/foursquare'><h2>Login</h2></a>
-        <a href='http://localhost:8080/auth/foursquare'><h2>Signup</h2></a>
+        <a href='http://localhost:8080/auth/foursquare'><h2>Play Now</h2></a>
         <Link to='/about'>
           <h2>About</h2>
         </Link>
