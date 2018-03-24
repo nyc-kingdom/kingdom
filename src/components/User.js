@@ -1,19 +1,17 @@
 import React, { Component } from "react";
-import Carousel from "nuka-carousel";
-import { arrowLeft, arrowRight, shepard } from '../Assets/index.js'
-import { Link } from 'react-router-dom'
+import { shepard } from '../Assets'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
 import history from '../store/history'
 
 const style = {
-  width: "100vw",
-  height: "40vh",
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  flexDirection: "column",
-  textAlign: "center",
+  width: '100vw',
+  height: '40vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  flexDirection: 'column',
+  textAlign: 'center',
 }
 class User extends Component {
   constructor() {
@@ -32,11 +30,10 @@ class User extends Component {
   }
 
   handleSubmitForm(evt) {
-    // evt.preventDefault();
     const { address, city, state, zip } = this.state
     const { editUser, user } = this.props
     const addressStr = `${address}${city}${state}${zip}`.split(' ').join('');
-    editUser({address: addressStr}, user.id)
+    editUser({address: addressStr, username: this.state.username}, user.id)
     history.push(`/profile/users/${user.id}`)
   }
 
@@ -65,7 +62,6 @@ class User extends Component {
         <br />
         <br />
         <div style={style}>
-          <h3>You're a shepard</h3>
           <img
             src={shepard}
             name="shepard1"
