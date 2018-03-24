@@ -58,10 +58,7 @@ export const editUser = (user, userId) => dispatch => {
   console.log(user, 'user within edit thunk', userId)
   axios.put(`${serverUrl}/api/users/${userId}`, user)
     .then(res => res.data)
-    .then(editedUser => {
-      dispatch(updateUser(editedUser))
-      history.push(`/profile/users/${userId}`)
-    })
+    .then(editedUser => dispatch(updateUser(editedUser)))
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
 }
 export const logout = () =>
