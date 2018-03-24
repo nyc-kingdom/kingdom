@@ -14,9 +14,10 @@ export const createMarker = marker => {
 }
 
 
-export const queryMarkers = (userInput, user) => async(dispatch) => {
-const payLoad = await axios.get(`${serverUrl}/api/markers?userInput=${userInput}&token=${user.token}`)
-dispatch(createMarker(payLoad.data.response.groups[0].items))
+export const queryMarkers = (userInput, user, location) => async(dispatch) => {
+  console.log('Breakpoint ', location)
+  const payLoad = await axios.get(`${serverUrl}/api/markers?userInput=${userInput}&token=${user.token}&ll=${location[0]}, ${location[1]}`)
+  dispatch(createMarker(payLoad.data.response.groups[0].items))
 }
 
 
