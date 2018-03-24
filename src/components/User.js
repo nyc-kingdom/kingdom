@@ -34,7 +34,7 @@ class User extends Component {
   handleSubmitForm(evt) {
     const { address, city, state, zip } = this.state
     const { editUser, user } = this.props
-    const addressStr = `${address}${city}${state}${zip}`.split(' ').join('');
+    const addressStr = `${address},${city},${state},${zip}`;
     editUser({address: addressStr, username: this.state.username}, user.id)
     history.push(`/profile/users/${user.id}`)
   }
