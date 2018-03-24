@@ -4,9 +4,10 @@ import { withRouter, Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import logo from './logo.svg';
 import './App.css';
-import { me, fetchEstablishments, fetchCheckins, fetchKingdoms } from './store';
+import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, createCheckin } from './store';
 import { setLocationThunk } from './store/trackLocation'
 import axios from 'axios';
+import socket from './sockets'
 
 
 //components
@@ -14,8 +15,12 @@ import  { Routes } from './components'
 
 class App extends Component {
   componentDidMount() {
-    this.props.loadInitialData();
     this.props.setLocation()
+    this.props.loadInitialData();
+    socket.on('new-checkIn', checkIn=> {
+      console.log('Somebody checked-in!')
+      //this.props.createCheckin(checkIn)
+    })
     
 
   }
@@ -48,6 +53,9 @@ const mapDispatch = dispatch => {
     },
     setLocation(){
       dispatch(setLocationThunk())
+    },
+    createCheckin(checkIn){
+      dispatch(createCheckin(checkIn))
     }
   }
 }
