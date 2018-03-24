@@ -62,14 +62,15 @@ export const editUser = (user, userId) => dispatch => {
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
 }
 export const logout = () =>
-  dispatch =>
-    axios.post('/auth/logout')
-      .then(_ => {
+  dispatch => {
+    console.log('are you getting in the logout thunk')
+  return  axios.post(`${serverUrl}/auth/logout`)
+      .then( () => {
         dispatch(removeUser())
-        history.push('/login')
+        history.push('/')
       })
       .catch(err => console.log(err))
-
+    }
 /**
  * REDUCER
  */
