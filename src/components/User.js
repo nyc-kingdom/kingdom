@@ -33,13 +33,13 @@ class User extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleCharacterSelector = this.handleCharacterSelector.bind(this);
   }
-
+  
   handleSubmitForm(evt) {
     evt.preventDefault();
     const addressStr = `${this.state.address}${this.state.city}${this.state.state}${this.state.zip}`.split(' ').join('');
     this.props.editUser({address: addressStr}, this.props.user.id)
-    this.props.history.push('/dashboard')
   }
+
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value
@@ -56,16 +56,16 @@ class User extends Component {
     console.log(this.state, 'current state of new user form')
     console.log(this.props)
     return (
-        <div id="newUser">
-          <h1>
-            Welcome Connor
-      </h1>
-          <br />
-          <br />
-          <h2>
-            Pick your character
-      </h2>
-      <form onClick={this.handleCharacterSelector}>
+      <div id="newUser">
+        <h1>
+          Welcome Connor
+        </h1>
+        <br />
+        <br />
+        <h2>
+          Pick your character
+        </h2>
+        <form onClick={this.handleCharacterSelector}>
           <div
             id="carousel-container"
             style={{
@@ -83,44 +83,44 @@ class User extends Component {
               )}
             >
               <div style={style}>
-              <h3>Shepard 1</h3>
-              <img
-                src={shepard}
-                name="shepard1"
-                />
-                <h3>Click me!</h3>
-                <br />
-              </div>
-              <div style={style}>
-              <h3>Shepard2</h3>
-              <img
-                src={shep}
-                name="shepard2"
-                />
-                <h3>Click me!</h3>
-                <br />
-              </div>
-              <div style={style}>
-              <h3>Dinosaur</h3>
+                <h3>Shepard 1</h3>
                 <img
-                src={dino}
-                name="dino"
+                  src={shepard}
+                  name="shepard1"
+                />
+                <h3>Click me!</h3>
+                <br />
+              </div>
+              <div style={style}>
+                <h3>Shepard2</h3>
+                <img
+                  src={shep}
+                  name="shepard2"
+                />
+                <h3>Click me!</h3>
+                <br />
+              </div>
+              <div style={style}>
+                <h3>Dinosaur</h3>
+                <img
+                  src={dino}
+                  name="dino"
                 />
                 <h3>Click me!</h3>
               </div>
             </Carousel>
           </div>
-          </form>
+        </form>
         <div>
           <form style={{textAlign: 'center'}} onSubmit={this.handleSubmitForm}>
-          <label>Character:</label>
-          <input
-            name="character"
-            value={this.state.character}
-            type="text"
-            required
-          />
-          <br />
+            <label>Character:</label>
+            <input
+              name="character"
+              value={this.state.character}
+              type="text"
+              required
+            />
+            <br />
             <label>Address:</label>
             <input
               name="address"
@@ -154,7 +154,7 @@ class User extends Component {
             />
             <br />
             <button>
-            Play Now
+              Play Now
             </button>
           </form>
         </div>
