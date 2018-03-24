@@ -59,16 +59,25 @@ export const editUser = (user, userId) => dispatch =>
     .then(editedUser => dispatch(updateUser(editedUser)))
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
 
-export const logout = () => dispatch => {
-  console.log("where are you?")
-  axios.post(`${serverUrl}/auth/logout`)
-    .then(() => {
-      console.log("are you there yet?")
-      dispatch(removeUser())
-      history.push('/')
+export const logout = () => dispatch => 
+    axios({
+      method: 'post',
+      url: `${serverUrl}/auth/logout`,
+      withCredentials: true
     })
-    .catch(err => console.log(err))
-  }
+      .then(_ => dispatch(removeUser()))
+      .catch(err => console.log(err))
+
+// {
+//   console.log("where are you?")
+//   axios.post(`${serverUrl}/auth/logout`)
+//     .then(_ => {
+//       console.log("are you there yet?")
+//       dispatch(removeUser())
+//       history.push('/')
+//     })
+//     .catch(err => console.log(err))
+//   }
 /**
  * REDUCER
  */

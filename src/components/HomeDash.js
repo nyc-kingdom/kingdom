@@ -11,6 +11,7 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.renderWithKingdom = this.renderWithKingdom.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   render(){
@@ -51,15 +52,20 @@ class Home extends Component {
             <img src={shield2} />
           </Link>
         </div>
-        <div id='logout' onClick={() => this.props.logout()}>
-        <br />
-
-      </div>
+        <div id='logout' onClick={this.handleClick}>
+          <br />
+        </div>
         <Dash />
         <Map />
         <Route path='/dashboard/selectedView/:id' component={Spotlight} />
       </div>
     )
+  }
+
+  handleClick(){
+    const { logout, history } = this.props
+    logout()
+    history.push('/')
   }
 }
 
