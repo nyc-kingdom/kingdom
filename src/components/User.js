@@ -3,7 +3,7 @@ import Carousel from "nuka-carousel";
 import { arrowLeft, arrowRight, shepard } from '../Assets/index.js'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { editUser } from '../store';
+import { editUser } from '../store'
 
 const style = {
   width: "100vw",
@@ -31,9 +31,11 @@ class User extends Component {
   }
 
   handleSubmitForm(evt) {
-    evt.preventDefault();
-    const addressStr = `${this.state.address}${this.state.city}${this.state.state}${this.state.zip}`.split(' ').join('');
-    this.props.editUser({ address: addressStr }, this.props.user.id)
+    // evt.preventDefault();
+    const { address, city, state, zip } = this.state
+    const { editUser, user } = this.props
+    const addressStr = `${address}${city}${state}${zip}`.split(' ').join('');
+    editUser({address: addressStr}, user.id)
   }
 
   handleChange(evt) {
@@ -121,8 +123,7 @@ class User extends Component {
   }
 }
 
-const mapProps = (state) => {
-  const { user } = state
+const mapProps = ({ user }) => {
   return {
     user
   }

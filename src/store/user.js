@@ -60,7 +60,7 @@ export const editUser = (user, userId) => dispatch => {
     .then(res => res.data)
     .then(editedUser => {
       dispatch(updateUser(editedUser))
-      history.push('/dashboard')
+      history.push(`/profile/users/${userId}`)
     })
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
 }
