@@ -8,6 +8,6 @@ export { default as Routes } from './Routes'
 export { default as Profile } from './Profile'
 export { default as TopKingdoms } from './TopKingdoms'
 export { default as SingleEstablishmentView } from './SingleEstablishmentView'
-
+export { default as Spotlight } from './Spotlight'
 export { default as Navigation } from './Navigation'
 export { default as User } from './User';

@@ -1,14 +1,9 @@
 import React, { Component } from "react";
 import Carousel from "nuka-carousel";
-import shepard from '../Assets/Shepard.gif'
-import dino from '../Assets/tRex2Talking.gif'
-import shep from '../Assets/sheperd1.gif'
-import arrowLeft from '../Assets/arrowLeft.png'
-import arrowRight from '../Assets/arrowRight.png'
+import { arrowLeft, arrowRight, shepard } from '../Assets/index.js'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { editUser } from '../store';
-
+import { editUser } from '../store'
 
 const style = {
   width: "100vw",
@@ -23,6 +18,7 @@ class User extends Component {
   constructor() {
     super();
     this.state = {
+      username: '',
       character: 'shepard1',
       address: '',
       city: '',
@@ -35,11 +31,13 @@ class User extends Component {
   }
 
   handleSubmitForm(evt) {
-    evt.preventDefault();
-    const addressStr = `${this.state.address}${this.state.city}${this.state.state}${this.state.zip}`.split(' ').join('');
-    this.props.editUser({address: addressStr}, this.props.user.id)
-    this.props.history.push('/dashboard')
+    // evt.preventDefault();
+    const { address, city, state, zip } = this.state
+    const { editUser, user } = this.props
+    const addressStr = `${address}${city}${state}${zip}`.split(' ').join('');
+    editUser({address: addressStr}, user.id)
   }
+
   handleChange(evt) {
     this.setState({
       [evt.target.name]: evt.target.value
@@ -48,80 +46,42 @@ class User extends Component {
 
   handleCharacterSelector(evt) {
     evt.preventDefault();
-    this.setState({character: evt.target.name})
+    this.setState({ character: evt.target.name })
   }
 
 
   render() {
-    console.log(this.state, 'current state of new user form')
-    console.log(this.props)
     return (
-        <div id="newUser">
-          <h1>
-            Welcome Connor
-      </h1>
-          <br />
-          <br />
-          <h2>
-            Pick your character
-      </h2>
-      <form onClick={this.handleCharacterSelector}>
-          <div
-            id="carousel-container"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Carousel
-              renderCenterLeftControls={({ previousSlide }) => (
-                <button onClick={previousSlide}><img src={arrowLeft} /></button>
-              )}
-              renderCenterRightControls={({ nextSlide }) => (
-                <button onClick={nextSlide}><img src={arrowRight} /></button>
-              )}
-            >
-              <div style={style}>
-              <h3>Shepard 1</h3>
-              <img
-                src={shepard}
-                name="shepard1"
-                />
-                <h3>Click me!</h3>
-                <br />
-              </div>
-              <div style={style}>
-              <h3>Shepard2</h3>
-              <img
-                src={shep}
-                name="shepard2"
-                />
-                <h3>Click me!</h3>
-                <br />
-              </div>
-              <div style={style}>
-              <h3>Dinosaur</h3>
-                <img
-                src={dino}
-                name="dino"
-                />
-                <h3>Click me!</h3>
-              </div>
-            </Carousel>
-          </div>
-          </form>
-        <div>
-          <form style={{textAlign: 'center'}} onSubmit={this.handleSubmitForm}>
-          <label>Character:</label>
-          <input
-            name="character"
-            value={this.state.character}
-            type="text"
-            required
+      <div id="newUser">
+        <h1>
+          Welcome {
+            !this.props.user
+              ? <h2>Please sign in first</h2>
+              : this.props.user.email
+          }
+        </h1>
+        <br />
+        <br />
+        <div style={style}>
+          <h3>You're a shepard</h3>
+          <img
+            src={shepard}
+            name="shepard1"
           />
           <br />
-            <label>Address:</label>
+        </div>
+        <div>
+          <h2>Enter your info to generate your profile</h2>
+          <form style={{ textAlign: 'center' }} onSubmit={this.handleSubmitForm}>
+          <label>Username:</label>
+            <input
+              name="username"
+              onChange={this.handleChange}
+              type="text"
+              required
+            />
+            <br />
+          <label>Address:</label>
             <input
               name="address"
               onChange={this.handleChange}
@@ -154,7 +114,7 @@ class User extends Component {
             />
             <br />
             <button>
-            Play Now
+              Play Now
             </button>
           </form>
         </div>
@@ -163,8 +123,7 @@ class User extends Component {
   }
 }
 
-const mapProps = (state) => {
-  const { user } = state
+const mapProps = ({ user }) => {
   return {
     user
   }
