@@ -31,13 +31,11 @@ class User extends Component {
   }
 
   handleSubmitForm(evt) {
-    // evt.preventDefault();
+    evt.preventDefault();
     const { address, city, state, zip } = this.state
     const { editUser, user } = this.props
     const addressStr = `${address}${city}${state}${zip}`.split(' ').join('');
-    const body = {address: addressStr, username: this.state.username}
-    console.log(body)
-    // editUser({address: addressStr, username: this.state.username}, user.id)
+    editUser({address: addressStr, username: this.state.username}, user.id)
   }
 
   handleChange(evt) {

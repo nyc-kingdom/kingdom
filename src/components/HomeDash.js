@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
-import logo from '../Assets/kingdom.png'
 import gem from '../Assets/gem.png'
 import shield2 from '../Assets/shield2.png'
 import castle from '../Assets/castle.png'
 import { connect } from 'react-redux'
-import { User, Map, Dash, Navigation, BottomNav, Spotlight } from './'
+import { User, Map, Dash, Navigation, Spotlight } from './'
 
 class Home extends Component {
   constructor(props) {
