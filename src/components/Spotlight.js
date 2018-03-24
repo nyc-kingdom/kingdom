@@ -7,10 +7,8 @@ import { verifyCheckIn } from '../store/gameplay'
 import distanceCalc from '../functions/distanceCalc'
 
 const Spotlight = props => {
-
-    const place = props.markers ? props.markers.find(eachMarker => eachMarker.venue.id === props.match.params.id) : null
-    console.log('!!!', props.verify)
-    return place ? (props.verifyCheckIn.status === 'FULFILLED' ? <div id='Spotlight'>
+    const place = props.markers ? props.markers.find(eachMarker=>eachMarker.venue.id===props.match.params.id) : null
+    return place ? ( props.verifyCheckIn.status === 'FULFILLED' ? <div id='Spotlight'>
         <h3>CONGRATULATIONS YOU SUCCESSFULLY CHECKED IN, PLEASE PICK AN ITEM</h3>
         <button onClick={() => { props.addCheckIn(props.user, place.venue) }}>CHECK-IN</button>
     </div>
