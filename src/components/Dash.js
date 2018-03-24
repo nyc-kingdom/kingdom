@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createMarker, addCheckIn, queryMarkers, getUserCheckIns } from '../store';
+import {setLocationThunk, setLocation} from '../store/trackLocation'
 
 
 export class Dash extends React.Component {
@@ -15,8 +16,13 @@ export class Dash extends React.Component {
     }
 
     render() {
+
+        const user = this.props.user
+        const userInput = this.state.userInput
         return (
-            <div id="Dash" className="closed" onClick = {(e)=>{e.target.className=e.target.className==='closed'?'active':'closed'}}>
+            <div id="Dash" className="closed" onClick = {
+                (e)=>{e.target.className=e.target.className==='closed'?'active':'closed'
+            }}>
                 
                 
                     <button onClick={()=>{this.props.getUserCheckIns(this.props.user)}}>FETCH MY CHECK-INS</button>
@@ -26,13 +32,21 @@ export class Dash extends React.Component {
                         value={this.state.userInput}
                         onChange={evt => {this.setState({userInput: evt.target.value})}}
                     />
-                    <button onClick={() => { this.props.queryMarkers(this.state.userInput, this.props.user) }}>Hello</button>
+                    <button onClick={() => { 
+
+                        if(Date.now() - 180000 < this.props.location.timeStamp){
+                            console.log('You logged your location recently enough to check-in, ', this.props.location)
+                            this.props.queryMarkers(this.state.userInput, this.props.user, this.props.location.coords) 
+                        }
+                        else if(Date.now() - 180000 > this.props.location.timeStamp && this.props.location.status==='LOCATIONFOUND'){
+                            this.props.trackLocation()
+                        }
+                        else console.log('You gotta wait for the navigator to be ready')
+                            
+                    }}>{this.props.location.status==='FINDINGLOCATION'? 'LOADING': 'Let\'s Search!' }</button>
                     {this.props.markers.length>0 && this.props.markers.map(eachMarker => (
-                        <div>
+                        <div key={eachMarker.venue.id}>
                             <Link to={`/dashboard/selectedView/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
-                            {/* <button onClick={()=>{
-                                this.props.checkIn(this.props.user, eachMarker.venue)}
-                            }>Check In!</button>  */}
                         </div>
                     ))}
                     <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
@@ -45,14 +59,18 @@ export class Dash extends React.Component {
 
 const mapProps = state => ({
     markers: state.markers,
-    user: state.user
+    user: state.user,
+    location: state.trackLocation
 })
 
 const mapDispatch = dispatch => ({
     createMarker: marker => dispatch(createMarker(marker)),
     checkIn: (user, place) => dispatch(addCheckIn(user,place)),
-    queryMarkers: (userInput, users) => dispatch(queryMarkers(userInput, users)),
-    getUserCheckIns: users => dispatch(getUserCheckIns(users))
+    queryMarkers: (userInput, users, location) => dispatch(queryMarkers(userInput, users, location)),
+    getUserCheckIns: users => dispatch(getUserCheckIns(users)),
+    trackLocation: () => dispatch(setLocationThunk()),
+    setLocation: (location) => dispatch(setLocation(location))
+
 })
 
 export default connect(mapProps, mapDispatch)(Dash)

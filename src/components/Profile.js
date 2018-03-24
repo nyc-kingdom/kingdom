@@ -20,7 +20,7 @@ const hardCoding = {
         name: "Dongwoo Kang",
         imgUrl: "https://i.imgur.com/I8rXtBd.png",
         level: "Knight",
-        points: 200,
+        expreience: 200,
         kingdom: {
             name: "Lynbrook",
             imgUrl: "http://leightronix.com/customers/images/lynbrook/Lynbrook_Logo.png",
@@ -36,7 +36,7 @@ const hardCoding = {
         address: "343 Rockaway Tpke Lawrence, NY 11559",
         imgUrl: "https://d30y9cdsu7xlg0.cloudfront.net/png/8172-200.png",
         level: "Castle",
-        points: 20,
+        strength: 20,
         totalVisit: 210,
         totalAttect: 100,
         keeper:
@@ -60,7 +60,7 @@ const hardCoding = {
         name: "Lynbrook",
         imgUrl: "http://leightronix.com/customers/images/lynbrook/Lynbrook_Logo.png",
         level: "Great Kingdom",
-        points: 2000,
+        royalty: 2000,
         king: {
             id: 1,
             name: "Dongwoo Kang"
@@ -80,6 +80,7 @@ export class Profile extends React.Component {
 
     render(){
         const example = this.props.one // fake data
+        const points = example === "user" ? "experience" : example === "kingdom" ? "royalty" : "strength"
         const main = !this.props.main ? hardCoding[example] : this.props.main
         const levelUpPoints = 3000
         return (
@@ -144,8 +145,8 @@ export class Profile extends React.Component {
                 </div>
                 <div style={{textAlign: 'center'}}>
                     <span>Level : {main.level}</span>
-                    <div>{main.points} / {levelUpPoints}</div>
-                    <span>{main.points} / {levelUpPoints}</span>
+                    <div>{main[points]} / {levelUpPoints}</div>
+                    <span>{main[points]} / {levelUpPoints}</span>
                 </div>
                 <div>
                     {
@@ -187,7 +188,6 @@ const mapProps = (state, ownProps) => {
     const one = Object.keys(ownProps.match.params)[0]
     const paramId = +ownProps.match.params[one]
     const main = null
-
     console.log(state)
     // state[`${one}s`].find(each => each.id === paramId) // <<<====for now until database has all infor.
     return { one, main, checkIns: state.checkIns }

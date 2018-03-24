@@ -70,7 +70,7 @@ h1, h2, h3 {
 
 .rec {
   background-color: pink;
-  border: 2px, solid, black
+  border: 2px, solid, black;
 }
 
 #profile {
@@ -147,10 +147,10 @@ h1, h2, h3 {
 
 #logo {
   position: fixed;
-  left: 20vw;
-  top: -6vh;
+  left: 25vw;
+  top: -4vh;
   z-index: 100;
-  font-size: 200%;
+  font-size: 150%;
 }
 
 #kingdoms:hover {

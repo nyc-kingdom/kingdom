@@ -5,7 +5,6 @@ import { createMarker } from '../store';
 import { Navigation } from './index'
 import king from '../Assets/king.gif'
 
-import locationQuery, { checkIn, getUserCheckIns } from '../functions/locationQuery'
 
 export class Home extends React.Component {
 
