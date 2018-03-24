@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
+import { king, lord, shepard, bridgeShield, wolfShield } from '../Assets'
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
@@ -9,21 +10,21 @@ const hardCoding = {
     xButton: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-alphanumeric/075091-ultra-glossy-silver-button-icon-alphanumeric-x-styled.png",
     flagKingFaceImgurl: "https://d1u5p3l4wpay3k.cloudfront.net/rlesports_gamepedia_en/thumb/8/82/Kings_of_Urbanlogo_square.png/300px-Kings_of_Urbanlogo_square.png?version=14a3c8a996adc00855afc2399be68e91",
     userClass: {
-        "Shepard" : "",
+        "Shepard" : shepard,
         "Stone Mason" : "",
         "Knight" : "https://i.imgur.com/I8rXtBd.png",
         "Lord" : "",
-        "King" : "../../public/img/king.gif",
+        "King" : king,
     },
     user: {
         id: 1,
         name: "Dongwoo Kang",
-        imgUrl: "https://i.imgur.com/I8rXtBd.png",
-        level: "Knight",
+        imgUrl: shepard,
+        level: "King",
         expreience: 200,
         kingdom: {
             name: "Lynbrook",
-            imgUrl: "http://leightronix.com/customers/images/lynbrook/Lynbrook_Logo.png",
+            imgUrl: wolfShield,
             king: {
                 id: 1,
                 name: "Dongwoo Kang"
@@ -58,7 +59,7 @@ const hardCoding = {
     kingdom: {
         id: 1,
         name: "Lynbrook",
-        imgUrl: "http://leightronix.com/customers/images/lynbrook/Lynbrook_Logo.png",
+        imgUrl: wolfShield,
         level: "Great Kingdom",
         royalty: 2000,
         king: {

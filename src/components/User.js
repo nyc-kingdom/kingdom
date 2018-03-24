@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import { shepard } from '../Assets'
+import Carousel from "nuka-carousel";
+import { arrowLeft, arrowRight, shepard } from '../Assets'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
 import history from '../store/history'
