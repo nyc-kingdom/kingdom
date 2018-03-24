@@ -4,6 +4,7 @@ import { arrowLeft, arrowRight, shepard } from '../Assets/index.js'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
+import history from '../store/history'
 
 const style = {
   width: "100vw",
@@ -36,6 +37,7 @@ class User extends Component {
     const { editUser, user } = this.props
     const addressStr = `${address}${city}${state}${zip}`.split(' ').join('');
     editUser({address: addressStr}, user.id)
+    history.push(`/profile/users/${user.id}`)
   }
 
   handleChange(evt) {
