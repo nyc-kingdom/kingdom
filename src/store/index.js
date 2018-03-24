@@ -9,8 +9,9 @@ import checkins from './checkins'
 import kingdoms from './kingdoms'
 import users from './users'
 import trackLocation from './trackLocation'
+import verify from './gameplay'
 
-const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation })
+const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation, verify })
 
 const middleware = composeWithDevTools(applyMiddleware(
     thunkMiddleware,

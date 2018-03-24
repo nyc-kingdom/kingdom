@@ -2,20 +2,38 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { googleMapKey } from '../secrets'
-import { Markers } from './Markers'
-import { IconMenu } from './index';
+import { blueWater, unsaturatedBrowns, greenTheme } from '../Assets/mapTheme'
+import { Markers } from './'
+
 
 export class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      center: {lat: 40.70, lng: -74.00},
-      zoom: 14,
-      bootstrapURLKeys: { key: googleMapKey }
+      center: { lat: 40.70, lng: -74.00 },
+      zoom: 13,
+      bootstrapURLKeys: { key: googleMapKey },
+      options: greenTheme,
+      date: new Date(),
+      check: false
+    }
+    this.updateMapTheme = this.updateMapTheme.bind(this)
+  }
+
+  updateMapTheme(){
+    if (this.state.check) {
+      if (this.state.date.getHours() <= 18 && this.state.date.getHours() >= 6) {
+        this.setState({ options: greenTheme, check: !this.state.check })
+      }
+    } else {
+      if (this.state.date.getHours() > 18 || this.state.date.getHours() < 6) {
+        this.setState({ options: unsaturatedBrowns, check: !this.state.check })
+      }
     }
   }
 
   render() {
+    this.updateMapTheme()
     const style = {
       top: 0,
       bottom: 0,
@@ -24,22 +42,22 @@ export class Map extends Component {
     }
     return (
       <div id="map" style={style}>
-      <GoogleMapReact
+        <GoogleMapReact
           bootstrapURLKeys={this.state.bootstrapURLKeys}
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
           heatmapLibrary={true}
           // heatmap={this.state.heatmap}
-          // options={this.state.options}
+          options={this.state.options}
         >
-        {
-          this.props.markers.length > 0 && this.props.markers.map(eachMarker=>(
+          {
+            this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
               <Markers
                 key={eachMarker.venue.id}
                 lat={eachMarker.venue.location.lat}
                 lng={eachMarker.venue.location.lng}
-                establishmentName = {eachMarker.venue.name}
-                establishmentId = {eachMarker.venue.id}
+                establishmentName={eachMarker.venue.name}
+                establishmentId={eachMarker.venue.id}
                 name={'restaurant'}
               />
             )

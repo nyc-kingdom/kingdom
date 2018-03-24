@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchUsers } from '../store'
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
@@ -71,6 +72,10 @@ export class Profile extends React.Component {
     constructor(props) {
         super(props)
         // this.renderUser = this.renderUser.bind(this)
+    }
+
+    componentDidMount(){
+        this.props.fetchUsers()
     }
 
     render(){
@@ -188,6 +193,8 @@ const mapProps = (state, ownProps) => {
     return { one, main, checkIns: state.checkIns }
 }
 
-const mapDispatch = null
+const mapDispatch = dispatch => ({
+    fetchUsers: () => dispatch(fetchUsers())
+})
 
 export default connect(mapProps, mapDispatch)(Profile)

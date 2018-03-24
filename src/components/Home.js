@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { createMarker } from '../store';
 import { Navigation } from './index'
+import king from '../Assets/king.gif'
 
 
 export class Home extends React.Component {
@@ -14,14 +15,15 @@ export class Home extends React.Component {
   render() {
     return (
       <div className='home'>
+        <br />
         <h1>Kingdom</h1>
         <br />
-        <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
+        <img src={king} />
         <br />
-        <a href='http://localhost:8080/auth/foursquare'><button>Signup</button></a>
-        <br />
+        <a href='http://localhost:8080/auth/foursquare'><h2>Login</h2></a>
+        <a href='http://localhost:8080/auth/foursquare'><h2>Signup</h2></a>
         <Link to='/about'>
-          About
+          <h2>About</h2>
         </Link>
       </div>
     )

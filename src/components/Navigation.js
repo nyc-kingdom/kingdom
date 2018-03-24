@@ -1,23 +1,15 @@
 import sword from '../Assets/sword.png'
 import { Link } from 'react-router-dom';
 import React from 'react';
-import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import { connect } from 'react-redux'
 
-// const Left = () => {
-//   return (
-//     <div>
-//     </div>
-//   )
-// }
-
 const Navigation = (props) => (
   <IconMenu
     iconButtonElement={
-      <IconButton><img src={sword} style={{ width: '150%', height: '150%' }} /></IconButton>
+      <IconButton><img src={sword} /></IconButton>
     }
     targetOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
@@ -30,26 +22,11 @@ const Navigation = (props) => (
   </IconMenu>
 );
 
-// const Navigation = (props) => {
-//   console.log(props)
-//   return (
-//     <div>
-//       <AppBar
-//         title="Kingdom"
-//         titleStyle={{ fontFamily: 'cursive'}}
-//         iconElementLeft={<Left />}
-//         iconElementRight={<Menu props={props}/>}
-//       />
-//     </div>
-//   );
-// }
-
 const mapProps = state => {
   console.log(state)
   return {
     user: state.user
   }
 }
-// ({ user })
 
 export default connect(mapProps)(Navigation)

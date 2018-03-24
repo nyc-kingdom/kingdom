@@ -5,34 +5,19 @@ const ADD_MARKER = 'ADD_MARKER'
 const FOURSQUAREID = require('../secrets').clientID
 const FOURSQUARESECRET = require('../secrets').clientSecret
 
+const post = 8080
+const serverUrl = `http://localhost:${post}`
+
 
 export const createMarker = marker => {
   return ({ type: ADD_MARKER, marker })
 }
 
 
-export const queryMarkers = (userInput, user, location) => dispatch => {
-  // navigator.geolocation.getCurrentPosition(position => {
-
-request({
-  url: 'https://api.foursquare.com/v2/venues/explore',
-  method: 'GET',
-  qs: {
-      client_id: FOURSQUAREID,
-      client_secret: FOURSQUARESECRET,
-      ll: `${location[0]}, ${location[1]}`,
-      //near: 'New York City, NY',
-      query: userInput,
-      sortByDistance: 1,
-      oauth_token: user.token,
-      v: '20170801',
-      limit: 10
-  }
-}, (err, res, body) => {
-  if (err) console.error.bind(console)
-  const payLoad = JSON.parse(body)
-  dispatch(createMarker(payLoad.response.groups[0].items))
-})
+export const queryMarkers = (userInput, user, location) => async(dispatch) => {
+  console.log('Breakpoint ', location)
+  const payLoad = await axios.get(`${serverUrl}/api/markers?userInput=${userInput}&token=${user.token}&ll=${location[0]}, ${location[1]}`)
+  dispatch(createMarker(payLoad.data.response.groups[0].items))
 }
 
 

@@ -10,6 +10,9 @@ body {
   -o-background-size: cover;
   background-size:100% 100vh;
 }
+h1, h2, h3 {
+  text-align: center;
+}
 
 .home {
   text-align: center;
@@ -26,7 +29,7 @@ body {
 
 #Strip {
   flex: 1 1 5vw;
-  
+
 }
 
 #Dash {
@@ -77,20 +80,9 @@ body {
   background-color: gold;
   opacity: 0.5;
   position: fixed;
-  top: 20px;
-  left: 20px;
+  top: 20vh;
+  left: 5vw;
   z-index: 100;
-}
-
-#profile:hover {
-  opacity: 0.8;
-  border: 1px solid white
-}
-
-#newUser {
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 }
 
 #kingdoms {
@@ -100,23 +92,65 @@ body {
   background-color: rgba(247, 240, 240, 0.144);
   opacity: 0.5;
   position: fixed;
-  top: 140px;
-  left: 20px;
+  top: 40vh;
+  left: 5vw;
   z-index: 100;
 }
+
+#castle {
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  background-color: rgba(128, 128, 128, 0.315);
+  opacity: 0.5;
+  position: fixed;
+  top: 60vh;
+  left: 5vw;
+  z-index: 100;
+}
+
+#castle:hover {
+  opacity: 0.8;
+  border: 1px solid rgb(255, 255, 255)
+}
+
+#shield {
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  background-color: rgba(128, 0, 128, 0.479);
+  opacity: 0.5;
+  position: fixed;
+  top: 80vh;
+  left: 5vw;
+  z-index: 100;
+}
+
+#shield:hover {
+  opacity: 0.8;
+  border: 1px solid rgba(51, 48, 48, 0)
+}
+
+#newUser {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 
 #nav {
   position: fixed;
   top: 1vh;
-  right: 100px;
+  right: 80px;
   z-index: 100;
 }
 
 #logo {
   position: fixed;
-  top: 2vh;
-  left: 10px;
+  left: 20vw;
+  top: -6vh;
   z-index: 100;
+  font-size: 200%;
 }
 
 #kingdoms:hover {
