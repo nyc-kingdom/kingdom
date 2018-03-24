@@ -2,9 +2,6 @@ const axios = require('axios')
 const request = require('request');
 const ADD_MARKER = 'ADD_MARKER'
 
-const FOURSQUAREID = require('../secrets').clientID
-const FOURSQUARESECRET = require('../secrets').clientSecret
-
 const post = 8080
 const serverUrl = `http://localhost:${post}`
 
@@ -21,34 +18,21 @@ export const queryMarkers = (userInput, user, location) => async(dispatch) => {
 }
 
 
-export const getUserCheckIns = user => dispatch => {
-
-  console.log('USER', user)
-
-  request({
-      url: 'https://api.foursquare.com/v2/users/self/checkins',
-      method: 'GET',
-      qs: {
-          v: '20170801',
-          oauth_token: user.token
-      }
-  }, (err, res, body) => {
-      if (err) console.error.bind(console)
-      const payLoad = JSON.parse(body)
-      console.log('You visited ', payLoad)
-      dispatch(createMarker(payLoad.response.checkins.items))
-  })
+export const getUserCheckIns = user => async (dispatch) => {
+  const payLoad = await axios.put(`${serverUrl}/api/establishments/foursquare`, {user})
+  console.log(payLoad)
+  //dispatch(createMarker(payLoad.response.checkins.items))
 }
 
 
 
 
-const reducer = (markers=[], action) => {
+const reducer = (markers = [], action) => {
   switch (action.type) {
     case ADD_MARKER:
       return action.marker
     default:
-    return markers
+      return markers
   }
 }
 
