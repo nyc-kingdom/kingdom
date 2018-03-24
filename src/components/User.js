@@ -35,7 +35,9 @@ class User extends Component {
     const { address, city, state, zip } = this.state
     const { editUser, user } = this.props
     const addressStr = `${address}${city}${state}${zip}`.split(' ').join('');
-    editUser({address: addressStr}, user.id)
+    const body = {address: addressStr, username: this.state.username}
+    console.log(body)
+    // editUser({address: addressStr, username: this.state.username}, user.id)
   }
 
   handleChange(evt) {

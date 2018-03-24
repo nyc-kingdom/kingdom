@@ -13,4 +13,4 @@ import anvil from './anvil.png';
 import scroll from './scroll.png';
 import wand from './wand.png';
 
-export {arrowLeft, arrowRight, castle, castleTower, gem, king, lord, shepard, bridgeShield, wolfShield, sword, anvil, scroll, wand};
+export { arrowLeft, arrowRight, castle, castleTower, gem, king, lord, shepard, bridgeShield, wolfShield, sword, anvil, scroll, wand };
