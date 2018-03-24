@@ -10,4 +10,4 @@ export { default as TopKingdoms } from './TopKingdoms'
 export { default as SingleEstablishmentView } from './SingleEstablishmentView'
 
 export { default as Navigation } from './Navigation'
-export { default as NewUser } from './NewUser';
+export { default as User } from './User';

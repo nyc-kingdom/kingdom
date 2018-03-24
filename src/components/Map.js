@@ -47,6 +47,7 @@ export class Map extends Component {
           defaultCenter={this.state.center}
           defaultZoom={this.state.zoom}
           heatmapLibrary={true}
+          defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
           options={this.state.options}
         >

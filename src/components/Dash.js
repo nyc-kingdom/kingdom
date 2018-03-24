@@ -45,7 +45,7 @@ export class Dash extends React.Component {
                             
                     }}>{this.props.location.status==='FINDINGLOCATION'? 'LOADING': 'Let\'s Search!' }</button>
                     {this.props.markers.length>0 && this.props.markers.map(eachMarker => (
-                        <div>
+                        <div key={eachMarker.venue.id}>
                             <Link to={`/dashboard/selectedView/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
                         </div>
                     ))}
