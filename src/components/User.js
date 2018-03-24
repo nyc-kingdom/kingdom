@@ -31,17 +31,11 @@ class User extends Component {
   }
 
   handleSubmitForm(evt) {
-<<<<<<< HEAD
     // evt.preventDefault();
     const { address, city, state, zip } = this.state
     const { editUser, user } = this.props
     const addressStr = `${address}${city}${state}${zip}`.split(' ').join('');
     editUser({address: addressStr}, user.id)
-=======
-    evt.preventDefault();
-    const addressStr = `${this.state.address}${this.state.city}${this.state.state}${this.state.zip}`.split(' ').join('');
-    this.props.editUser({ address: addressStr }, this.props.user.id)
->>>>>>> 03ba353fd3e1125af549890d65f028bf4e734399
   }
 
   handleChange(evt) {
