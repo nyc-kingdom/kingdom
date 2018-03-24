@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store';
 
-
 const style = {
   width: "100vw",
   height: "40vh",
