@@ -20,7 +20,7 @@ export class Map extends Component {
     this.updateMapTheme = this.updateMapTheme.bind(this)
   }
 
-  updateMapTheme(){
+  updateMapTheme() {
     if (this.state.check) {
       if (this.state.date.getHours() <= 18 && this.state.date.getHours() >= 6) {
         this.setState({ options: greenTheme, check: !this.state.check })
@@ -62,22 +62,22 @@ export class Map extends Component {
                 name={'restaurant'}
               />
             )
-          )
-        }
+            )
+          }
 
-        {
-          this.props.establishments.length > 0 && this.props.establishments.map(eachMarker=>(
+          {
+            this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
               <Markers
                 key={eachMarker.id}
                 lat={eachMarker.latitude}
                 lng={eachMarker.longitude}
-                establishmentName = {eachMarker.name}
-                establishmentId = {eachMarker.id}
+                establishmentName={eachMarker.name}
+                establishmentId={eachMarker.id}
                 name={'castle'}
               />
             )
-          )
-        }
+            )
+          }
           <Markers
             lat={40.705413}
             lng={-74.007844}
