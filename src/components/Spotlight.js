@@ -8,9 +8,9 @@ import distanceCalc from '../functions/distanceCalc'
 
 const Spotlight = props => {
 
-    const place = props.markers.find(eachMarker=>eachMarker.venue.id===props.match.params.id)
+    const place = props.markers ? props.markers.find(eachMarker=>eachMarker.venue.id===props.match.params.id) : null
     console.log('!!!', props.verify)
-    return ( props.verifyCheckIn.status === 'FULFILLED' ? <div id='Spotlight'>
+    return place ? ( props.verifyCheckIn.status === 'FULFILLED' ? <div id='Spotlight'>
         <h3>CONGRATULATIONS YOU SUCCESSFULLY CHECKED IN, PLEASE PICK AN ITEM</h3>
         <button onClick={()=>{props.addCheckIn(props.user, place.venue)}}>CHECK-IN</button>
     </div> 
@@ -53,6 +53,7 @@ const Spotlight = props => {
         {place.tips && place.tips.map((eachTip,index)=>(<h4 key={index}>{eachTip.text}</h4>))}
     </div>
     )
+    : <h3>Loading...</h3>
 }
 
 const mapProps = state => ({markers: state.markers, user: state.user, location: state.trackLocation, verifyCheckIn: state.verify})
