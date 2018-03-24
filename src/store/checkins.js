@@ -2,8 +2,12 @@
 
 import axios from 'axios'
 
+//SOCKET
+import socket from '../sockets.js'
+
 //FUNCTIONALITY
 import distanceCalc from '../functions/distanceCalc'
+
 
 const post = 8080
 const serverUrl = `http://localhost:${post}`
@@ -19,7 +23,7 @@ const CREATE_FOURSQUARE_CHECKINS = 'CREATE_FOURSQUARE_CHECKINS'
  */
 const getCheckins = checkins => ({ type: GET_CHECKINS, checkins })
 const createFoursquareCheckins = checkins => ({ type: CREATE_FOURSQUARE_CHECKINS, checkins })
-const createCheckin = checkin => ({ type: CREATE_CHECKIN, checkin })
+export const createCheckin = checkin => ({ type: CREATE_CHECKIN, checkin })
 
 /**
  * THUNK CREATORS
@@ -39,6 +43,7 @@ export const addCheckIn = (user, place) => dispatch => {
           .then(res => res.data)
           .then(newCheckin => {
             dispatch(createCheckin(newCheckin))
+            socket.emit('new-checkIn', newCheckin)
             console.log('THE CHECKIN JUST FINISHED, WE GOT A REPLY FROM OUR SERVER')
           }) 
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
