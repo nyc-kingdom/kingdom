@@ -10,6 +10,7 @@ body {
   -o-background-size: cover;
   background-size:100% 100vh;
 }
+
 h1, h2, h3 {
   text-align: center;
 }
@@ -29,29 +30,29 @@ h1, h2, h3 {
 
 #Strip {
   flex: 1 1 5vw;
-
 }
 
 #Dash {
   flex-direction: row;
   flex: 10;
   background-color: gold;
-  border: 1px solid white;
-  opacity: 0.5;
+  border: 4px solid white;
+  opacity: 0.7;
   position: absolute;
-  height: 80vh;
-  right: 0;
+  /* height: 80vh; */
+  width: 100%;
+  left: 13vh;
   z-index: 100;
   overflow: scroll;
 }
 
 #Dash.closed {
-  width: 5vw;
-  transition: width 2s;
+  height: 0vw;
+  transition: height 0.55s;
 }
 #Dash.active {
-  width: 80vw;
-  transition: width 2s;
+  height: 100%;
+  transition: height 0.55s;
 }
 
 #Dash:hover {
@@ -59,88 +60,87 @@ h1, h2, h3 {
 }
 
 
-.marker {
-  background-image: url('https://cdn3.iconfinder.com/data/icons/glypho-travel/64/history-castle-tower-512.png');
-  background-size: cover;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  cursor: pointer;
+#Spotlight {
+  position: absolute;
+  height: 50vh;
+  width: 100vw;
+  text-align: center;
+  bottom: 1vh;
+  opacity: 0.9;
+  z-index: 200;
+  background-color: whitesmoke;
+  border:  3px solid rgba(255, 68, 0, 0.543);
+  border-radius: 2vh;
 }
 
-.rec {
-  background-color: pink;
-  border: 2px, solid, black;
+#Spotlight:hover {
+  border: 3px solid orangered;
 }
 
-#logout {
-  height: 50px;
-  width: 50px;
-  border-radius: 100px;
-  background-color: black;
-  opacity: 0.5;
+.circle {
+  display: flex;
+  align-content: center;
+  height: 70px;
+  width: 70px;
+  border: 1px solid white;
+  border-radius: 70px;
+  opacity: 0.4;
   position: fixed;
-  top: 94vh;
-  left: 10vw;
   z-index: 100;
+  left: 3vw;
 }
 
-#profile {
-  height: 100px;
-  width: 100px;
-  border-radius: 100px;
+.circle:hover{
+  opacity: 0.8;
+  border: 2px solid rgb(255, 255, 255);
+}
+
+#sword{
+  /* background-color: gold; */
+  top: 10vh;
+  flex: 1 1;
+  display: flex;
+  align-content: center;
+  height: 70px;
+  width: 70px;
+  border: 1px solid white;
+  border-radius: 70px;
+  opacity: 0.4;
+  position: fixed;
+  z-index: 100;
+  left: 3vw;
+}
+
+#sword.off{
+  background-color: whitesmoke;
+  
+}
+
+
+
+#sword.on{
   background-color: gold;
-  opacity: 0.5;
-  position: fixed;
-  top: 35vh;
-  left: 5vw;
-  z-index: 100;
+  border: 1px solid orangered;
+  opacity: 0.6;
+  transition: background-color 5s;
 }
 
-#kingdoms {
-  height: 100px;
-  width: 100px;
-  border-radius: 100px;
-  background-color: rgba(247, 240, 240, 0.144);
-  opacity: 0.5;
-  position: fixed;
-  top: 50vh;
-  left: 5vw;
-  z-index: 100;
+#gem{
+  background-color: rgba(189, 39, 39, 0.4);
+  top: 25vh;
+  flex: 1 1;
 }
 
 #castle {
-  height: 100px;
-  width: 100px;
-  border-radius: 100px;
-  background-color: rgba(128, 128, 128, 0.315);
-  opacity: 0.5;
-  position: fixed;
-  top: 65vh;
-  left: 5vw;
-  z-index: 100;
-}
-
-#castle:hover {
-  opacity: 0.8;
-  border: 1px solid rgb(255, 255, 255)
+  background-color: rgba(205, 134, 63, 0.4);
+  top: 40vh;
+  flex: 1 1;
 }
 
 #shield {
-  height: 100px;
-  width: 100px;
-  border-radius: 100px;
-  background-color: rgba(128, 0, 128, 0.479);
-  opacity: 0.5;
-  position: fixed;
-  top: 80vh;
-  left: 5vw;
-  z-index: 100;
-}
-
-#shield:hover {
-  opacity: 0.8;
-  border: 1px solid rgba(51, 48, 48, 0)
+  background-color: rgba(128, 0, 128, 0.4);
+  top: 55vh;
+  flex: 1 1;
 }
 
 #newUser {
@@ -148,7 +148,6 @@ h1, h2, h3 {
   justify-content: center;
   text-align: center;
 }
-
 
 #nav {
   position: fixed;
@@ -165,20 +164,28 @@ h1, h2, h3 {
   font-size: 150%;
 }
 
-#kingdoms:hover {
-  opacity: 0.8;
-  border: 1px solid white
+.marker {
+  background-image: url('https://cdn3.iconfinder.com/data/icons/glypho-travel/64/history-castle-tower-512.png');
+  background-size: cover;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
-#Spotlight {
-  position: absolute;
-  height: 30vh;
-  width: 80vw;
-  text-align: center;
-  bottom: 75px;
-  opacity: 0.75;
-  z-index: 200;
-  background-color: whitesmoke;
-  border:  5px, solid, orangered;
-  border-radius: 2vh;
+.rec {
+  background-color: pink;
+  border: 2px solid black;
+}
+
+#profile {
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  background-color: gold;
+  opacity: 0.5;
+  position: fixed;
+  top: 20vh;
+  left: 5vw;
+  z-index: 100;
 }
