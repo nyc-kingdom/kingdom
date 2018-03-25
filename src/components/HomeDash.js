@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom'
 import gem from '../Assets/gem.png'
 import shield2 from '../Assets/shield2.png'
 import castle from '../Assets/castle.png'
+import sword from '../Assets/sword.png'
 import { connect } from 'react-redux'
 import { User, Map, Dash, Navigation, Spotlight } from './'
 import { logout } from '../store';
@@ -11,6 +12,10 @@ class Home extends Component {
   constructor(props) {
     super(props)
     this.renderWithKingdom = this.renderWithKingdom.bind(this)
+    this.state = {
+      dashMode: 'closed'
+    }
+
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -34,19 +39,22 @@ class Home extends Component {
             Kingdom
           </h1>
         </div>
-        <div id='profile'>
+        <div id='sword' className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={()=>{
+          if(this.state.dashMode==='closed') this.setState({dashMode: 'active'})
+          else this.setState({dashMode: 'closed'})
+          }}>
           <br />
-          <Navigation />
+          <img src={sword} />
         </div>
-        <div id='kingdoms'>
+        <div id='gem' className='circle'>
           <br />
           <img src={gem} />
         </div>
-        <div id='castle'>
+        <div id='castle' className='circle'>
           <br />
           <img src={castle} />
         </div>
-        <div id='shield'>
+        <div id='shield' className='circle'>
           <br />
           <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
             <img src={shield2} />
@@ -55,7 +63,7 @@ class Home extends Component {
         <div id='logout' onClick={this.handleClick}>
           <br />
         </div>
-        <Dash />
+        <Dash mode={this.state.dashMode} />
         <Map />
         <Route path='/dashboard/selectedView/:id' component={Spotlight} />
       </div>
@@ -70,9 +78,11 @@ class Home extends Component {
 }
 
 const mapProps = state => {
-  const { user } = state
+  
   return {
-    user
+    user: state.user,
+    trackLocation: state.trackLocation
+
   }
 }
 
