@@ -4,7 +4,7 @@ import castle from './castle.png';
 import castleTower from './castleTower.png';
 import gem from './gem.png';
 import king from './king.gif';
-import lord from './lord.gif';
+import lord from './Lord.gif';
 import shepard from './shepard.gif';
 import bridgeShield from './shield2.png';
 import wolfShield from './shield1.png';

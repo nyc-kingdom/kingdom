@@ -43,34 +43,41 @@ export const login = () => dispatch =>
       dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
 
-export const auth = (email, password, method) =>
-  dispatch =>
-    axios.post(`/auth/${method}`, { email, password })
-      .then(res => {
-        dispatch(getUser(res.data))
-        history.push('/home')
-      }, authError => { // rare example: a good use case for parallel (non-catch) error handler
-        dispatch(getUser({ error: authError }))
-      })
-      .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
+export const auth = (email, password, method) => dispatch =>
+  axios.post(`/auth/${method}`, { email, password })
+    .then(res => {
+      dispatch(getUser(res.data))
+      history.push('/home')
+    }, authError => { // rare example: a good use case for parallel (non-catch) error handler
+      dispatch(getUser({ error: authError }))
+    })
+    .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 
-export const editUser = (user, userId) => dispatch => {
-  console.log(user, 'user within edit thunk', userId)
+export const editUser = (user, userId) => dispatch => 
   axios.put(`${serverUrl}/api/users/${userId}`, user)
     .then(res => res.data)
     .then(editedUser => dispatch(updateUser(editedUser)))
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
-}
-export const logout = () =>
-  dispatch => {
-    console.log('are you getting in the logout thunk')
-  return  axios.post(`${serverUrl}/auth/logout`)
-      .then( () => {
-        dispatch(removeUser())
-        history.push('/')
-      })
+
+export const logout = () => dispatch => 
+    axios({
+      method: 'post',
+      url: `${serverUrl}/auth/logout`,
+      withCredentials: true
+    })
+      .then(_ => dispatch(removeUser()))
       .catch(err => console.log(err))
-    }
+
+// {
+//   console.log("where are you?")
+//   axios.post(`${serverUrl}/auth/logout`)
+//     .then(_ => {
+//       console.log("are you there yet?")
+//       dispatch(removeUser())
+//       history.push('/')
+//     })
+//     .catch(err => console.log(err))
+//   }
 /**
  * REDUCER
  */
