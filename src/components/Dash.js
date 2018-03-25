@@ -20,7 +20,7 @@ export class Dash extends React.Component {
         const user = this.props.user
         const userInput = this.state.userInput
         return (
-            <div id="Dash" className="closed" onClick = {
+            <div id="Dash" className={this.props.mode} onClick = {
                 (e)=>{e.target.className=e.target.className==='closed'?'active':'closed'
             }}>
                 

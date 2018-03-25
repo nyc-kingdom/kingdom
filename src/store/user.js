@@ -3,6 +3,7 @@ import history from './history'
 
 const post = 8080
 const serverUrl = `http://localhost:${post}`
+//const serverUrl = '172.16.21.145:8080'
 
 /**
  * ACTION TYPES

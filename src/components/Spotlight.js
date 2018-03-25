@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 import {addCheckIn} from '../store'
 import { setLocation } from '../store/trackLocation'
@@ -50,6 +51,7 @@ const Spotlight = props => {
         
         <h3>{place.venue.stats.checkinsCount + ' people have checked in here.'}</h3>
         {place.tips && place.tips.map((eachTip,index)=>(<h4 key={index}>{eachTip.text}</h4>))}
+        <Link id='clean' to='/dashboard'>X</Link>
     </div>
     )
     : <h3>Loading...</h3>
