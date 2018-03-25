@@ -35,7 +35,7 @@ class Home extends Component {
     return (
       <div id='HomeDash'>
         <div id='logo'>
-          <h1 style={{ fontFamily: 'Apple Chancery, cursive' , textAlign: 'center'}}>
+          <h1 style={{ fontFamily: 'Apple Chancery, cursive', textAlign: 'center'}}>
             Kingdom
           </h1>
         </div>
@@ -60,8 +60,8 @@ class Home extends Component {
             <img src={shield2} />
           </Link>
         </div>
-        <div id='logout' onClick={this.handleClick}>
-          <br />
+        <div id='logout' className='circle' onClick={this.handleClick}>
+          <p>Logout</p>
         </div>
         <Dash mode={this.state.dashMode} />
         <Map />
@@ -78,7 +78,7 @@ class Home extends Component {
 }
 
 const mapProps = state => {
-  
+
   return {
     user: state.user,
     trackLocation: state.trackLocation

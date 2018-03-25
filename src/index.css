@@ -113,7 +113,7 @@ h1, h2, h3 {
 
 #sword.off{
   background-color: whitesmoke;
-  
+
 }
 
 
@@ -141,6 +141,13 @@ h1, h2, h3 {
   background-color: rgba(128, 0, 128, 0.4);
   top: 55vh;
   flex: 1 1;
+}
+
+#logout {
+  background-color: #c52830e1;
+  top: 70vh;
+  flex: 1 1;
+  color: white;
 }
 
 #newUser {
