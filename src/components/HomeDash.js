@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
-import logo from '../Assets/kingdom.png'
 import gem from '../Assets/gem.png'
 import shield2 from '../Assets/shield2.png'
 import castle from '../Assets/castle.png'
 import sword from '../Assets/sword.png'
 import { connect } from 'react-redux'
-import { User, Map, Dash, Navigation, BottomNav, Spotlight } from './'
+import { User, Map, Dash, Navigation, Spotlight } from './'
+import { logout } from '../store';
 
 class Home extends Component {
   constructor(props) {
@@ -16,6 +16,7 @@ class Home extends Component {
       dashMode: 'closed'
     }
 
+    this.handleClick = this.handleClick.bind(this)
   }
 
   render(){
@@ -23,7 +24,7 @@ class Home extends Component {
       <div>
         {
           !this.props.user.kingdomId
-          ? <User/>
+          ? <User />
           : this.renderWithKingdom()
         }
       </div>
@@ -59,11 +60,20 @@ class Home extends Component {
             <img src={shield2} />
           </Link>
         </div>
+        <div id='logout' onClick={this.handleClick}>
+          <br />
+        </div>
         <Dash mode={this.state.dashMode} />
         <Map />
         <Route path='/dashboard/selectedView/:id' component={Spotlight} />
       </div>
     )
+  }
+
+  handleClick(){
+    const { logout, history } = this.props
+    logout()
+    history.push('/')
   }
 }
 
@@ -76,4 +86,8 @@ const mapProps = state => {
   }
 }
 
-export default connect(mapProps)(Home)
+const mapDispatch = dispatch => ({
+  logout: () => dispatch(logout())
+})
+
+export default connect(mapProps, mapDispatch)(Home)
