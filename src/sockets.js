@@ -1,7 +1,9 @@
 const openSocket = require('socket.io-client')
 
 
-const socket = openSocket('http://localhost:8080', {transports: ['websocket']} )
+//const socket = openSocket('http://172.16.21.145:8080', {transports: ['websocket']} )
+
+const socket = openSocket('localhost:8080', {transports: ['websocket']} )
 
 
 
