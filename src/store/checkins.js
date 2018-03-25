@@ -7,10 +7,12 @@ import socket from '../sockets.js'
 
 //FUNCTIONALITY
 import distanceCalc from '../functions/distanceCalc'
+import {verifyCheckIn} from './gameplay'
 
 
 const post = 8080
 const serverUrl = `http://localhost:${post}`
+//const serverUrl = 'http://172.16.21.145:8080'
 /**
  * ACTION TYPES
  */
@@ -45,6 +47,7 @@ export const addCheckIn = (user, place) => dispatch => {
             dispatch(createCheckin(newCheckin))
             socket.emit('new-checkIn', newCheckin)
             console.log('THE CHECKIN JUST FINISHED, WE GOT A REPLY FROM OUR SERVER')
+            dispatch(verifyCheckIn({id:'1000', status:'COMPLETED'}))
           }) 
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
 }
