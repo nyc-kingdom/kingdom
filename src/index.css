@@ -143,6 +143,12 @@ h1, h2, h3 {
   flex: 1 1;
 }
 
+#logout {
+  background-color: #c52830e1;
+  top: 70vh;
+  flex: 1 1;
+}
+
 #newUser {
   align-items: center;
   justify-content: center;
