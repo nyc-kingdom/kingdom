@@ -61,7 +61,7 @@ class Home extends Component {
           </Link>
         </div>
         <div id='logout' className='circle' onClick={this.handleClick}>
-          <br />
+          <p>Logout</p>
         </div>
         <Dash mode={this.state.dashMode} />
         <Map />
