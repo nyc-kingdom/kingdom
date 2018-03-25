@@ -60,8 +60,8 @@ class Home extends Component {
             <img src={shield2} />
           </Link>
         </div>
-        <div id='logout' onClick={this.handleClick}>
-          <br />
+        <div id='logout' className='circle' onClick={this.handleClick}>
+          <p>Logout</p>
         </div>
         <Dash mode={this.state.dashMode} />
         <Map />

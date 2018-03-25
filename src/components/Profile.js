@@ -2,29 +2,30 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { king, lord, shepard, bridgeShield, wolfShield } from '../Assets'
+import { king, lord, knight, shepard, bridgeShield, wolfShield, lynbrookS } from '../Assets'
+
+const userClass = {
+    "Shepard" : shepard,
+    "Stonemason" : "https://vignette.wikia.nocookie.net/runescape2/images/0/0f/Stonemason.png/revision/latest?cb=20170226205346",
+    "Knight" : knight,
+    "Lord" : lord,
+    "King" : king,
+}
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
     keeperChairUrl: "https://cdn4.iconfinder.com/data/icons/knight/512/as416g_7-512.png",
     xButton: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-alphanumeric/075091-ultra-glossy-silver-button-icon-alphanumeric-x-styled.png",
     flagKingFaceImgurl: "https://d1u5p3l4wpay3k.cloudfront.net/rlesports_gamepedia_en/thumb/8/82/Kings_of_Urbanlogo_square.png/300px-Kings_of_Urbanlogo_square.png?version=14a3c8a996adc00855afc2399be68e91",
-    userClass: {
-        "Shepard" : shepard,
-        "Stone Mason" : "",
-        "Knight" : "https://i.imgur.com/I8rXtBd.png",
-        "Lord" : "",
-        "King" : king,
-    },
+    
     user: {
         id: 1,
         name: "Dongwoo Kang",
-        imgUrl: shepard,
-        level: "King",
-        expreience: 200,
+        level: "Knight",
+        experience: 200,
         kingdom: {
             name: "Lynbrook",
-            imgUrl: wolfShield,
+            imgUrl: lynbrookS,
             king: {
                 id: 1,
                 name: "Dongwoo Kang"
@@ -50,7 +51,7 @@ const hardCoding = {
         kingdom: {
             id: 1,
             name: "Lynbrook",
-            imgUrl: "http://leightronix.com/customers/images/lynbrook/Lynbrook_Logo.png",
+            imgUrl: lynbrookS,
             king: {
                 name: "Dongwoo Kang"
             }
@@ -59,7 +60,7 @@ const hardCoding = {
     kingdom: {
         id: 1,
         name: "Lynbrook",
-        imgUrl: wolfShield,
+        imgUrl: lynbrookS,
         level: "Great Kingdom",
         royalty: 2000,
         king: {
@@ -82,6 +83,7 @@ export class Profile extends React.Component {
     render(){
         const example = this.props.one // fake data
         const points = example === "user" ? "experience" : example === "kingdom" ? "royalty" : "strength"
+        console.log(points)
         const main = !this.props.main ? hardCoding[example] : this.props.main
         const levelUpPoints = 3000
         return (
@@ -124,7 +126,7 @@ export class Profile extends React.Component {
                 </div>
                 <div>
                     <div style={{textAlign: 'center'}}>
-                        <img src={main.imgUrl} style={{width: '75vw', height: '80vw'}}/>
+                        <img src={example === "user" ? userClass[main.level] : main.imgUrl} style={{width: '75vw', height: '80vw'}}/>
                         {
                             !main.address ?
                             null : !main.keeper ?
