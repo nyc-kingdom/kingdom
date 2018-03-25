@@ -23,6 +23,8 @@ import knightsword from './knightsword.gif';
 import bridgeShield from './shield2.png';
 import wolfShield from './shield1.png';
 import bushwickC from './bushwickC.png';
+import lynbrookS from './lynbrookS.png';
+import ravenswoodS from './ravenswoodS.png';
 
 
-export { arrowLeft, arrowRight, castle, castleTower, gem, king, lord, shepard, bridgeShield, wolfShield, sword, anvil, scroll, wand, knight, bushwickC, knightsword, blacksmith };
+export { arrowLeft, arrowRight, castle, castleTower, gem, king, lord, shepard, bridgeShield, wolfShield, sword, anvil, scroll, wand, knight, bushwickC, knightsword, blacksmith, lynbrookS, ravenswoodS };
