@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { king, lord, shepard, bridgeShield, wolfShield } from '../Assets'
+import { king, lord, shepard, bridgeShield, wolfShield, lynbrookS } from '../Assets'
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
@@ -21,10 +21,10 @@ const hardCoding = {
         name: "Dongwoo Kang",
         imgUrl: shepard,
         level: "King",
-        expreience: 200,
+        experience: 200,
         kingdom: {
             name: "Lynbrook",
-            imgUrl: wolfShield,
+            imgUrl: lynbrookS,
             king: {
                 id: 1,
                 name: "Dongwoo Kang"
@@ -50,7 +50,7 @@ const hardCoding = {
         kingdom: {
             id: 1,
             name: "Lynbrook",
-            imgUrl: "http://leightronix.com/customers/images/lynbrook/Lynbrook_Logo.png",
+            imgUrl: lynbrookS,
             king: {
                 name: "Dongwoo Kang"
             }
@@ -59,7 +59,7 @@ const hardCoding = {
     kingdom: {
         id: 1,
         name: "Lynbrook",
-        imgUrl: wolfShield,
+        imgUrl: lynbrookS,
         level: "Great Kingdom",
         royalty: 2000,
         king: {
@@ -82,6 +82,7 @@ export class Profile extends React.Component {
     render(){
         const example = this.props.one // fake data
         const points = example === "user" ? "experience" : example === "kingdom" ? "royalty" : "strength"
+        console.log(points)
         const main = !this.props.main ? hardCoding[example] : this.props.main
         const levelUpPoints = 3000
         return (

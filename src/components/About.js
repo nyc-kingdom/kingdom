@@ -16,7 +16,7 @@ export class About extends React.Component {
         <h1>Kingdom</h1>
         <img src='https://kottke.org/plus/misc/images/8-bit-nyc.jpg' />
         <h2>Kingdom is an awesome game you need in your life!</h2>
-        <Link to={!this.props.user ? '/' : '/dashboard'} >
+        <Link to={!this.props.user.id ? '/' : '/dashboard'} >
           <h3>Explore Now!</h3>
         </Link>
       </div>
