@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+//const serverUrl = 'http://localhost:8080'
+const serverUrl = 'https://kingdom-server.herokuapp.com'
+
 const GET_ESTABLISHMENTS = 'GET_ESTABLISHMENTS';
 
 const getEstablishments = establishments => {
@@ -8,7 +11,7 @@ const getEstablishments = establishments => {
 }
 
 export const fetchEstablishments = () => dispatch => {
-  return axios.get('http://localhost:8080/api/establishments')
+  return axios.get(`${serverUrl}/api/establishments`)
   .then(establishments => dispatch(getEstablishments(establishments.data)))
   .catch(console.error.bind(console))
 }

@@ -2,7 +2,9 @@ import axios from 'axios'
 import history from './history'
 
 const post = 8080
-const serverUrl = `http://localhost:${post}`
+//const serverUrl = 'http://localhost:8080'
+const serverUrl = 'https://kingdom-server.herokuapp.com'
+
 //const serverUrl = '172.16.21.145:8080'
 
 /**
@@ -31,7 +33,7 @@ export const me = () =>
   dispatch =>
     axios({
       method: 'get',
-      url: 'http://localhost:8080/auth/me',
+      url: `${serverUrl}/auth/me`,
       withCredentials: true
     })
       .then(res =>
@@ -39,7 +41,7 @@ export const me = () =>
       .catch(err => console.log(err))
 
 export const login = () => dispatch =>
-  axios.get('http://localhost:8080/auth/foursquare')
+  axios.get(`${serverUrl}/auth/foursquare`)
     .then(res =>
       dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))

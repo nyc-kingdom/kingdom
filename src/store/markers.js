@@ -2,8 +2,8 @@ const axios = require('axios')
 const request = require('request');
 const ADD_MARKER = 'ADD_MARKER'
 
-const post = 8080
-const serverUrl = `http://localhost:${post}`
+//const serverUrl = 'http://localhost:8080'
+const serverUrl = 'https://kingdom-server.herokuapp.com'
 
 
 export const createMarker = marker => {
@@ -20,11 +20,8 @@ export const queryMarkers = (userInput, user, location) => async(dispatch) => {
 
 export const getUserCheckIns = user => async (dispatch) => {
   const payLoad = await axios.put(`${serverUrl}/api/establishments/foursquare`, {user})
-  console.log(payLoad)
-  //dispatch(createMarker(payLoad.response.checkins.items))
+  //dispatch(createMarker(payLoad.data))
 }
-
-
 
 
 const reducer = (markers = [], action) => {
