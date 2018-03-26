@@ -14,7 +14,7 @@ export class Home extends React.Component {
   }
 
   render() {
-
+    console.log(process.env.netlify)
     const style = {
       width: "100vw",
       display: "flex",
