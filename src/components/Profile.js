@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { king, lord, knight, blacksmith, shepard, bridgeShield, wolfShield, lynbrookS, castle, castleTower, bushwickC, ravenswoodS } from '../Assets'
+import { king, lord, knight, blacksmith, shepard, bridgeShield, wolfShield, lynbrookS, castle, castleTower, bushwickS, ravenswoodS } from '../Assets'
 
 const userClass = {
     "Shepard" : shepard,
@@ -14,7 +14,7 @@ const userClass = {
 
 const kingdomMark = {
     "Lynbrook" : lynbrookS,
-    "Bushwick" : bushwickC,
+    "Bushwick" : bushwickS,
     "Astoria" : ravenswoodS
 }
 
@@ -160,7 +160,7 @@ export class Profile extends React.Component {
         return (
             <div style={{display: 'flex'}}>
                 <div style={{flex: 1, textAlign: 'center'}}>
-                    <div>                  
+                    <div>
                         <img src={castle} style={{width: '10vw', height: '5vh'}}/>
                     </div>
                     <div>
@@ -191,7 +191,7 @@ export class Profile extends React.Component {
                                         : main.checkins.reduce((accu, curr) => accu + curr.quantity, 0)
                             }
                         </span>
-                    </div>                  
+                    </div>
                 </div>
                 <div style={{flex: 1, textAlign: 'center'}}>
                     <div>
@@ -267,7 +267,7 @@ const mapProps = (state, ownProps) => {
     const paramId = +ownProps.match.params[one]
     const main = state[`${one}s`].find(each => each.id === paramId) // <<<====for now until database has all infor.
     if(!main) return { one }
-    const ownKingdom = 
+    const ownKingdom =
         one === "main"
             ? main
             : state.kingdoms.find(kingdom => {

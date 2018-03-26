@@ -61,8 +61,10 @@ export class Markers extends Component {
                 ? <img src={searchResult} />
                 : ''
             }
+            {
+                this.props.type === ''
+            }
             </div>
-
         )
     }
 }

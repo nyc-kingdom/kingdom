@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
-import {gem, bridgeShield, castle, sword} from '../Assets'
+import { gem, bridgeShield, castle, sword } from '../Assets'
 import { connect } from 'react-redux'
 import { User, Map, Dash, Navigation, Spotlight } from './'
 import { logout } from '../store';
@@ -16,30 +16,32 @@ class Home extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  render(){
+  render() {
     return (
       <div>
         {
           !this.props.user.kingdomId
-          ? <User />
-          : this.renderWithKingdom()
+            ? <User />
+            : this.renderWithKingdom()
         }
       </div>
     )
   }
 
-  renderWithKingdom(){
+  renderWithKingdom() {
+    console.log(this.state, 'state within homedash')
     return (
-      <div id='HomeDash'>
-        <div id='logo'>
-          <h1 style={{ fontFamily: 'Apple Chancery, cursive', textAlign: 'center'}}>
+      <div id="HomeDash">
+        <div id="logo">
+          <h1 style={{ fontFamily: 'Apple Chancery, cursive', textAlign: 'center' }}>
             Kingdom
           </h1>
         </div>
-        <div id='sword' className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={()=>{
-          if(this.state.dashMode==='closed') this.setState({dashMode: 'active'})
-          else this.setState({dashMode: 'closed'})
-          }}>
+        <div
+        id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
+          if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
+          else this.setState({ dashMode: 'closed' })
+        }}>
           <br />
           <img src={sword} />
         </div>
@@ -67,7 +69,7 @@ class Home extends Component {
     )
   }
 
-  handleClick(){
+  handleClick() {
     const { logout, history } = this.props
     logout()
     history.push('/')

@@ -74,7 +74,7 @@ export class Map extends Component {
               lng={eachMarker.venue.location.lng}
               establishmentName={eachMarker.venue.name}
               establishmentId={eachMarker.venue.id}
-              type='searchResult'
+              type="searchResult"
               name={'restaurant'}
             />
           )
