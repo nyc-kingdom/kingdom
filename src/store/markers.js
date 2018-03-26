@@ -20,11 +20,8 @@ export const queryMarkers = (userInput, user, location) => async(dispatch) => {
 
 export const getUserCheckIns = user => async (dispatch) => {
   const payLoad = await axios.put(`${serverUrl}/api/establishments/foursquare`, {user})
-  console.log(payLoad)
-  //dispatch(createMarker(payLoad.response.checkins.items))
+  //dispatch(createMarker(payLoad.data))
 }
-
-
 
 
 const reducer = (markers = [], action) => {
