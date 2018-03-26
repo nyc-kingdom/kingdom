@@ -40,6 +40,7 @@ export class Map extends Component {
       height: '100vh',
       width: '100vw'
     }
+    console.log(this.props.trackLocation)
     return (
       <div id="map" style={style}>
         <GoogleMapReact
@@ -50,8 +51,7 @@ export class Map extends Component {
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
           options={this.state.options}
-        >
-
+          >
           {
             this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
               <Markers
@@ -66,25 +66,35 @@ export class Map extends Component {
             )
             )
           }
-
           {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
             <Markers
-              key={eachMarker.venue.id}
-              lat={eachMarker.venue.location.lat}
-              lng={eachMarker.venue.location.lng}
-              establishmentName={eachMarker.venue.name}
-              establishmentId={eachMarker.venue.id}
-              type="searchResult"
-              name={'restaurant'}
+            key={eachMarker.venue.id}
+            lat={eachMarker.venue.location.lat}
+            lng={eachMarker.venue.location.lng}
+            establishmentName={eachMarker.venue.name}
+            establishmentId={eachMarker.venue.id}
+            type="searchResult"
+            name={'restaurant'}
             />
           )
-          )}
+        )}
         </GoogleMapReact>
-      </div>
-    );
+        </div>
+      );
+    }
   }
-}
 
-const mapState = state => ({ markers: state.markers, establishments: state.establishments })
+  const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation })
 
-export default connect(mapState)(Map)
+  export default connect(mapState)(Map)
+
+  // {
+  //   this.props.trackLocation &&
+  //   <div>
+  //   <Markers
+  //     lat={this.props.trackLocation.coords[0]}
+  //     lng={this.props.trackLocation.coords[1]}
+  //     type="user"
+  //     />
+  //   </div>
+  // }

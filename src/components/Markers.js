@@ -1,9 +1,7 @@
-'use strict'
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { ravenswoodMarker, test, financialDistrictMarker, cityHallMarker, bushwickMarker, searchResult } from '../Assets';
+import { ravenswoodMarker, test, financialDistrictMarker, cityHallMarker, bushwickMarker, searchResult, blacksmith, knight } from '../Assets';
 
 const image = {
     castle: "https://cdn3.iconfinder.com/data/icons/glypho-travel/64/history-castle-tower-512.png",
@@ -45,25 +43,21 @@ export class Markers extends Component {
             width: '5vw'
         }
         let kingdom;
-        console.log(this.props, 'props from marker file')
         if (this.props.kingdom) {
             kingdom = this.props.kingdom
         }
         return (
             <div>
-            {
-                this.props.type === 'establishment'
-                ? <Link to={`/profile/establishments/${this.props.establishmentId}`}> <img src={image[kingdom]} /></Link>
-                : ''
-            }
-            {
-                this.props.type === 'searchResult'
-                ? <img src={searchResult} />
-                : ''
-            }
-            {
-                this.props.type === ''
-            }
+                {
+                    this.props.type === 'establishment'
+                        ? <Link to={`/profile/establishments/${this.props.establishmentId}`}> <img src={image[kingdom]} /></Link>
+                        : ''
+                }
+                {
+                    this.props.type === 'searchResult'
+                        ? <img src={searchResult} />
+                        : ''
+                }
             </div>
         )
     }

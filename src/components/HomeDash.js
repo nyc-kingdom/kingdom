@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
 import { gem, bridgeShield, castle, sword } from '../Assets'
 import { connect } from 'react-redux'
-import { User, Map, Dash, Navigation, Spotlight } from './'
+import { User, Map, Dash, Spotlight } from './'
 import { logout } from '../store';
 
 class Home extends Component {
@@ -29,7 +29,6 @@ class Home extends Component {
   }
 
   renderWithKingdom() {
-    console.log(this.state, 'state within homedash')
     return (
       <div id="HomeDash">
         <div id="logo">
@@ -38,28 +37,28 @@ class Home extends Component {
           </h1>
         </div>
         <div
-        id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
-          if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
-          else this.setState({ dashMode: 'closed' })
-        }}>
+          id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
+            if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
+            else this.setState({ dashMode: 'closed' })
+          }}>
           <br />
           <img src={sword} />
         </div>
-        <div id='gem' className='circle'>
+        <div id="gem" className="circle">
           <br />
           <img src={gem} />
         </div>
-        <div id='castle' className='circle'>
+        <div id="castle" className="circle">
           <br />
           <img src={castle} />
         </div>
-        <div id='shield' className='circle'>
+        <div id="shield" className="circle">
           <br />
           <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
             <img src={bridgeShield} />
           </Link>
         </div>
-        <div id='logout' className='circle' onClick={this.handleClick}>
+        <div id="logout" className="circle" onClick={this.handleClick}>
           <p>Logout</p>
         </div>
         <Dash mode={this.state.dashMode} />
