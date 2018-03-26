@@ -11,7 +11,8 @@ const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
 const post = 8080
-const serverUrl = `http://localhost:${post}`
+//const serverUrl = 'http://localhost:8080'
+const serverUrl = 'https://kingdom-server.herokuapp.com'
 
 console.log("hello there?")
 
