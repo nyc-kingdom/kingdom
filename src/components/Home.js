@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { createMarker } from '../store';
 import Carousel from 'nuka-carousel';
 import { arrowRight, arrowLeft, king, shepard, lord, knight, knightsword, blacksmith } from '../Assets'
+//const serverUrl = 'http://localhost:8080'
+const serverUrl = 'https://kingdom-server.herokuapp.com'
 
 export class Home extends React.Component {
 
@@ -57,7 +59,7 @@ export class Home extends React.Component {
           <br />
           <br />
         </div>
-        <a href='http://localhost:8080/auth/foursquare'><h2>Play Now</h2></a>
+        <a href={`${serverUrl}/auth/foursquare`}><h2>Play Now</h2></a>
         <Link to='/about'>
           <h2>About</h2>
         </Link>
