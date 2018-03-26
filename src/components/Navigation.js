@@ -1,4 +1,4 @@
-import sword from '../Assets/sword.png'
+import { sword } from '../Assets'
 import { Link } from 'react-router-dom';
 import React from 'react';
 import IconButton from 'material-ui/IconButton';

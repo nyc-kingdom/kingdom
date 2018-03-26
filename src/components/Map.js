@@ -40,6 +40,7 @@ export class Map extends Component {
       height: '100vh',
       width: '100vw'
     }
+    console.log(this.props.trackLocation)
     return (
       <div id="map" style={style}>
         <GoogleMapReact
@@ -50,21 +51,7 @@ export class Map extends Component {
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
           options={this.state.options}
-        >
-          {
-            this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
-              <Markers
-                key={eachMarker.venue.id}
-                lat={eachMarker.venue.location.lat}
-                lng={eachMarker.venue.location.lng}
-                establishmentName={eachMarker.venue.name}
-                establishmentId={eachMarker.venue.id}
-                name={'restaurant'}
-              />
-            )
-            )
-          }
-
+          >
           {
             this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
               <Markers
@@ -73,27 +60,41 @@ export class Map extends Component {
                 lng={eachMarker.longitude}
                 establishmentName={eachMarker.name}
                 establishmentId={eachMarker.id}
-                name={'castle'}
+                kingdom={eachMarker.kingdom}
+                type="establishment"
               />
             )
             )
           }
-          <Markers
-            lat={40.705413}
-            lng={-74.007844}
+          {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
+            <Markers
+            key={eachMarker.venue.id}
+            lat={eachMarker.venue.location.lat}
+            lng={eachMarker.venue.location.lng}
+            establishmentName={eachMarker.venue.name}
+            establishmentId={eachMarker.venue.id}
+            type="searchResult"
             name={'restaurant'}
-          />
-          <Markers
-            lat={40.706413}
-            lng={-74.008844}
-            name={'knight'}
-          />
+            />
+          )
+        )}
         </GoogleMapReact>
-      </div>
-    );
+        </div>
+      );
+    }
   }
-}
 
-const mapState = state => ({ markers: state.markers, establishments: state.establishments })
+  const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation })
 
-export default connect(mapState)(Map)
+  export default connect(mapState)(Map)
+
+  // {
+  //   this.props.trackLocation &&
+  //   <div>
+  //   <Markers
+  //     lat={this.props.trackLocation.coords[0]}
+  //     lng={this.props.trackLocation.coords[1]}
+  //     type="user"
+  //     />
+  //   </div>
+  // }

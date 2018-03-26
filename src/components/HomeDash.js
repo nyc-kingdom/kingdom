@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
-import gem from '../Assets/gem.png'
-import shield2 from '../Assets/shield2.png'
-import castle from '../Assets/castle.png'
-import sword from '../Assets/sword.png'
+import { gem, bridgeShield, castle, sword } from '../Assets'
 import { connect } from 'react-redux'
-import { User, Map, Dash, Navigation, Spotlight } from './'
+import { User, Map, Dash, Spotlight } from './'
 import { logout } from '../store';
 
 class Home extends Component {
@@ -19,48 +16,49 @@ class Home extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  render(){
+  render() {
     return (
       <div>
         {
           !this.props.user.kingdomId
-          ? <User />
-          : this.renderWithKingdom()
+            ? <User />
+            : this.renderWithKingdom()
         }
       </div>
     )
   }
 
-  renderWithKingdom(){
+  renderWithKingdom() {
     return (
-      <div id='HomeDash'>
-        <div id='logo'>
-          <h1 style={{ fontFamily: 'Apple Chancery, cursive', textAlign: 'center'}}>
+      <div id="HomeDash">
+        <div id="logo">
+          <h1 style={{ fontFamily: 'Apple Chancery, cursive', textAlign: 'center' }}>
             Kingdom
           </h1>
         </div>
-        <div id='sword' className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={()=>{
-          if(this.state.dashMode==='closed') this.setState({dashMode: 'active'})
-          else this.setState({dashMode: 'closed'})
+        <div
+          id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
+            if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
+            else this.setState({ dashMode: 'closed' })
           }}>
           <br />
           <img src={sword} />
         </div>
-        <div id='gem' className='circle'>
+        <div id="gem" className="circle">
           <br />
           <img src={gem} />
         </div>
-        <div id='castle' className='circle'>
+        <div id="castle" className="circle">
           <br />
           <img src={castle} />
         </div>
-        <div id='shield' className='circle'>
+        <div id="shield" className="circle">
           <br />
           <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
-            <img src={shield2} />
+            <img src={bridgeShield} />
           </Link>
         </div>
-        <div id='logout' className='circle' onClick={this.handleClick}>
+        <div id="logout" className="circle" onClick={this.handleClick}>
           <p>Logout</p>
         </div>
         <Dash mode={this.state.dashMode} />
@@ -70,7 +68,7 @@ class Home extends Component {
     )
   }
 
-  handleClick(){
+  handleClick() {
     const { logout, history } = this.props
     logout()
     history.push('/')
