@@ -20,6 +20,11 @@ const middleware = composeWithDevTools(applyMiddleware(
 
 const store = createStore(reducer, middleware)
 
+const post = 8080
+// const serverUrl = `http://localhost:${post}`
+export const serverUrl = 'https://kingdom-server.herokuapp.com'
+
+
 export default store
 
 export * from './markers'
