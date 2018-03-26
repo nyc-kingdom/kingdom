@@ -20,11 +20,16 @@ const middleware = composeWithDevTools(applyMiddleware(
 
 const store = createStore(reducer, middleware)
 
-const post = 8080
-// const serverUrl = `http://localhost:${post}`
-export const serverUrl = 'https://kingdom-server.herokuapp.com'
+let serverUrl;
 
-
+if(process.env.NODE_ENV === "production"){
+    serverUrl = 'https://kingdom-server.herokuapp.com'
+} else {
+    const post = 8080
+    serverUrl = `http://localhost:${post}`
+}
+console.log("serverUrl: ", serverUrl, "which enviroment", process.env.NODE_ENV)
+export { serverUrl }
 export default store
 
 export * from './markers'

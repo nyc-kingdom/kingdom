@@ -1,9 +1,8 @@
+import { serverUrl } from './'
+
 const axios = require('axios')
 const request = require('request');
 const ADD_MARKER = 'ADD_MARKER'
-
-//const serverUrl = 'http://localhost:8080'
-const serverUrl = 'https://kingdom-server.herokuapp.com'
 
 
 export const createMarker = marker => {

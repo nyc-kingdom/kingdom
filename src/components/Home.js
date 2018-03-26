@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { createMarker } from '../store';
 import Carousel from 'nuka-carousel';
 import { arrowRight, arrowLeft, king, shepard, lord, knight, knightsword, blacksmith } from '../Assets'
-//const serverUrl = 'http://localhost:8080'
-const serverUrl = 'https://kingdom-server.herokuapp.com'
+import { serverUrl } from '../store'
+
 
 export class Home extends React.Component {
 
@@ -14,9 +14,7 @@ export class Home extends React.Component {
   }
 
   render() {
-    console.log(process.env)
-    console.log("for environment variables: ", NODE_ENV)
-    console.log("deployed", deployed)
+    console.log("serverUrl: ", serverUrl, "which enviroment", process.env.NODE_ENV)
     const style = {
       width: "100vw",
       display: "flex",
