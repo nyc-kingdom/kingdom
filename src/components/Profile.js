@@ -30,7 +30,6 @@ export class Profile extends React.Component {
         const main = !this.props.main ? null : this.props.main
         const level = whatProfile === "user" ? this.userLevel(main, kingdomKing) : whatProfile === "establishment" ? "Castle" : "Great Kingdom"
         const levelUpPoints = 3000
-        console.log(kingdomKing, this.props.ownKingdom)
         if(!main) return null
         const keeper = whatProfile === "establishment" ? this.props.users.find(user => user.id === main.keeper) : null
         return (
@@ -255,7 +254,6 @@ export class Profile extends React.Component {
 
 const mapProps = (state, ownProps) => {
     const one = Object.keys(ownProps.match.params)[0]
-    const bundle = `${one}s`
     const paramId = +ownProps.match.params[one]
     const main = state[`${one}s`].find(each => each.id === paramId)
     if(!main) return { one }
@@ -263,7 +261,7 @@ const mapProps = (state, ownProps) => {
         one === "kingdom"
             ? main
             : state.kingdoms.find(kingdom => {
-                const compare = one === "user" ? main.kingdom.name : main.kingdom
+                const compare = !main.kingdom ? null : one === "user" ? main.kingdom.name : main.kingdom
                 return kingdom.name === compare
             })
     return {
