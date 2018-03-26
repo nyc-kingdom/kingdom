@@ -16,7 +16,7 @@ const image = {
     'Financial District': financialDistrictMarker,
     'City Hall Area': cityHallMarker,
     Bushwick: bushwickMarker,
-    Astoria: searchResult
+    Astoria: ravenswoodMarker
 }
 
 const activeMarkerStyle = { border: '2px solid black', width: '30px', transform: 'translateY(130px)' }

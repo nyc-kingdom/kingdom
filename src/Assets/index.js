@@ -36,7 +36,7 @@ import lynbrookMarker from './kingdoms/lynbrookMarker.gif';
 import ravenswoodS from './kingdoms/ravenswoodS.png';
 import ravenswoodMarker from './kingdoms/ravenswoodMarker.gif';
 import test from './kingdoms/test.gif'
-import searchResult from './kingdoms/SearchMarker.png';
+import searchResult from './kingdoms/SearchMarker.gif';
 
 
 export { arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult };
