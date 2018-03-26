@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
-import { googleMapKey } from '../secrets'
 import { blueWater, unsaturatedBrowns, greenTheme } from '../Assets/mapTheme'
 import { Markers } from './'
 
@@ -12,7 +11,7 @@ export class Map extends Component {
     this.state = {
       center: { lat: 40.70, lng: -74.00 },
       zoom: 13,
-      bootstrapURLKeys: { key: googleMapKey },
+      bootstrapURLKeys: { key: "AIzaSyBqFElyKsNAtWKnM4pnj9CqCRc6u5ruxd4" },
       options: greenTheme,
       date: new Date(),
       check: false
