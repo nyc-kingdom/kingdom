@@ -15,6 +15,8 @@ export class Home extends React.Component {
 
   render() {
     console.log(process.env)
+    console.log("for environment variables: ", NODE_ENV)
+    console.log("deployed", deployed)
     const style = {
       width: "100vw",
       display: "flex",
