@@ -147,7 +147,7 @@ h1, h2, h3 {
   background-color: #c52830e1;
   top: 70vh;
   flex: 1 1;
-  color: white;
+  color: black;
 }
 
 #newUser {
@@ -181,8 +181,8 @@ h1, h2, h3 {
 }
 
 .rec {
-  background-color: pink;
-  border: 2px solid black;
+  background-color: white;
+  /* border: 2px solid black; */
 }
 
 #profile {
