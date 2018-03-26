@@ -15,8 +15,8 @@ import wand from './Resources/wand.png';
 //characters
 import king from './characters/king.gif';
 import lord from './characters/Lord.gif';
-import shepard from './characters/shepard.gif';
 import knight from './characters/knight.gif';
+import shepard from './characters/shepard.gif';
 import blacksmith from './characters/blacksmith.gif';
 import knightsword from './characters/knightsword.gif';
 
@@ -39,4 +39,19 @@ import test from './kingdoms/test.gif'
 import searchResult from './kingdoms/SearchMarker.gif';
 
 
-export { arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult };
+const userClass = {
+    "King" : king,
+    "Lord" : lord,
+    "Knight" : knight,
+    "Shepard" : shepard,
+    "Stone Mason" : blacksmith,
+}
+
+const kingdomMark = {
+    "Bushwick" : bushwickS,
+    "Financial District" : financialDistrictS,
+    "Lynbrook" : lynbrookS,
+    "Astoria" : ravenswoodS,
+}
+
+export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult };
