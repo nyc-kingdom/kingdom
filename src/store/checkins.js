@@ -11,8 +11,8 @@ import {verifyCheckIn} from './gameplay'
 
 
 const post = 8080
-const serverUrl = `http://localhost:${post}`
-//const serverUrl = 'http://172.16.21.145:8080'
+// const serverUrl = `http://localhost:${post}`
+const serverUrl = 'https://kingdom-server.herokuapp.com'
 /**
  * ACTION TYPES
  */
