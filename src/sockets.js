@@ -1,9 +1,10 @@
 const openSocket = require('socket.io-client')
-
+//const serverUrl = 'http://localhost:8080'
+const serverUrl = 'https://kingdom-server.herokuapp.com'
 
 //const socket = openSocket('http://172.16.21.145:8080', {transports: ['websocket']} )
 
-const socket = openSocket('localhost:8080', {transports: ['websocket']} )
+const socket = openSocket(serverUrl, {transports: ['websocket']} )
 
 
 
