@@ -1,7 +1,6 @@
 import axios from 'axios';
+import { serverUrl } from './'
 
-//const serverUrl = 'http://localhost:8080'
-const serverUrl = 'https://kingdom-server.herokuapp.com'
 
 const GET_KINGDOMS = 'GET_KINGDOMS';
 

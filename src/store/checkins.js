@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-
+import { serverUrl } from './'
 //SOCKET
 import socket from '../sockets.js'
 
@@ -9,10 +9,6 @@ import socket from '../sockets.js'
 import distanceCalc from '../functions/distanceCalc'
 import {verifyCheckIn} from './gameplay'
 
-
-const post = 8080
-// const serverUrl = `http://localhost:${post}`
-const serverUrl = 'https://kingdom-server.herokuapp.com'
 /**
  * ACTION TYPES
  */

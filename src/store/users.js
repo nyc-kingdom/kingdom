@@ -1,8 +1,6 @@
 import axios from 'axios'
 import history from './history'
-
-//const serverUrl = 'http://localhost:8080'
-const serverUrl = 'https://kingdom-server.herokuapp.com'
+import { serverUrl } from './'
 
 /**
  * ACTION TYPES
