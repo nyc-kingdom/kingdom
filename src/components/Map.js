@@ -51,19 +51,6 @@ export class Map extends Component {
           // heatmap={this.state.heatmap}
           options={this.state.options}
         >
-          {
-            this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
-              <Markers
-                key={eachMarker.venue.id}
-                lat={eachMarker.venue.location.lat}
-                lng={eachMarker.venue.location.lng}
-                establishmentName={eachMarker.venue.name}
-                establishmentId={eachMarker.venue.id}
-                name={'restaurant'}
-              />
-            )
-            )
-          }
 
           {
             this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
@@ -73,11 +60,25 @@ export class Map extends Component {
                 lng={eachMarker.longitude}
                 establishmentName={eachMarker.name}
                 establishmentId={eachMarker.id}
-                name={'castle'}
+                kingdom={eachMarker.kingdom}
+                type="establishment"
               />
             )
             )
           }
+
+          {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
+            <Markers
+              key={eachMarker.venue.id}
+              lat={eachMarker.venue.location.lat}
+              lng={eachMarker.venue.location.lng}
+              establishmentName={eachMarker.venue.name}
+              establishmentId={eachMarker.venue.id}
+              type='searchResult'
+              name={'restaurant'}
+            />
+          )
+          )}
           <Markers
             lat={40.705413}
             lng={-74.007844}
@@ -97,3 +98,16 @@ export class Map extends Component {
 const mapState = state => ({ markers: state.markers, establishments: state.establishments })
 
 export default connect(mapState)(Map)
+
+// {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
+//   <Markers
+//     key={eachMarker.venue.id}
+//     lat={eachMarker.venue.location.lat}
+//     lng={eachMarker.venue.location.lng}
+//     establishmentName={eachMarker.venue.name}
+//     establishmentId={eachMarker.venue.id}
+//     type='searchResult'
+//     name={'restaurant'}
+//   />
+// )
+// )}

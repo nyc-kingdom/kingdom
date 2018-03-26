@@ -11,6 +11,7 @@ const Pipeline = (props) => (
             {/* Routes placed here are available to all visitors */}
             <Route exact path="/" component={Home} />
             <Route path="/about" component={About} />
+            <Route path="/test" component={HomeDash} />
             {
                 props.isLoggedIn &&
                 <Switch>

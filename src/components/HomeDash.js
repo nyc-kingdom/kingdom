@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
-import gem from '../Assets/gem.png'
-import shield2 from '../Assets/shield2.png'
-import castle from '../Assets/castle.png'
-import sword from '../Assets/sword.png'
+import {gem, bridgeShield, castle, sword} from '../Assets'
 import { connect } from 'react-redux'
 import { User, Map, Dash, Navigation, Spotlight } from './'
 import { logout } from '../store';
@@ -57,7 +54,7 @@ class Home extends Component {
         <div id='shield' className='circle'>
           <br />
           <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
-            <img src={shield2} />
+            <img src={bridgeShield} />
           </Link>
         </div>
         <div id='logout' className='circle' onClick={this.handleClick}>
