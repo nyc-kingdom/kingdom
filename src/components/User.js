@@ -32,6 +32,7 @@ class User extends Component {
   }
 
   handleSubmitForm(evt) {
+    evt.preventDefault() // for test
     const { address, city, state, zip } = this.state
     const { editUser, user } = this.props
     const addressStr = `${address},${city},${state},${zip}`;
