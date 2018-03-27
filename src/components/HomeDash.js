@@ -23,7 +23,7 @@ class Home extends Component {
       <div>
         {
           !this.props.user.kingdomId
-            ? <User history={this.props.history}/>
+            ? <User history={this.props.history} />
             : this.renderWithKingdom()
         }
       </div>
@@ -44,7 +44,7 @@ class Home extends Component {
             else this.setState({ dashMode: 'closed' })
           }}>
           <br />
-          <img src={sword} className="blip"/>
+          <img src={sword} className="blip" />
         </div>
         <div id="gem" className="circle">
           <br />
@@ -64,13 +64,19 @@ class Home extends Component {
             <img src={bridgeShield} className="blip"/>
           </Link>
         </div>
+        <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
+          <div id="shield" className="circle">
+            <br />
+            <img src={bridgeShield} className="blip" />
+          </div>
+        </Link>
         <div id="logout" className="circle" onClick={this.handleClick}>
           <p>Logout</p>
         </div>
         <Dash mode={this.state.dashMode} />
         <Map />
         <Route path='/dashboard/selectedView/:id' component={Spotlight} />
-        <Ticker/>
+        <Ticker />
       </div>
     )
   }
