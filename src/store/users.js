@@ -26,7 +26,7 @@ export const fetchUsers = () => dispatch =>
     .catch(err => console.error('Fetching Users unsuccesful.', err))
 
 export const addUser = user => dispatch =>
-    axios.post(`${serverUrl}/api/users`, user)
+  axios.post(`${serverUrl}/api/users`, user)
     .then(res => res.data)
     .then(newUser => dispatch(createUser(newUser)))
     .catch(err => console.error(`Creating User ${user} unsuccesful.`, err))

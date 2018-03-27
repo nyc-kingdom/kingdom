@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
-import { googleMapKey } from '../secrets'
 import { blueWater, unsaturatedBrowns, greenTheme, dark } from '../Assets/mapTheme'
 import { Markers } from './'
 import {setMapStatus} from '../store/mapStatus'
@@ -19,7 +18,13 @@ export class Map extends Component {
       bootstrapURLKeys: { key: "AIzaSyBqFElyKsNAtWKnM4pnj9CqCRc6u5ruxd4" },
       options: greenTheme,
       date: new Date(),
-      check: false
+      check: false,
+      select: '',
+      showEstablishmentView: false
+    }
+    this.changeView = (id) => {
+      if (this.state.select !== id) this.setState({ select: id })
+      else this.setState({select: '' })
     }
     this.updateMapTheme = this.updateMapTheme.bind(this)
   }
@@ -35,9 +40,9 @@ export class Map extends Component {
     //   }
     // }
     if (!this.state.check) {
-      if(this.state.date.getMinutes()>=0 && this.state.date.getMinutes()<20) this.setState({options: unsaturatedBrowns, check: !this.state.check  })
-      if(this.state.date.getMinutes()>20 && this.state.date.getMinutes()<40) this.setState({options: dark, check: !this.state.check })
-      if(this.state.date.getMinutes()>40 && this.state.date.getMinutes()<=59) this.setState({options: greenTheme, check: !this.state.check })
+      if (this.state.date.getMinutes() >= 0 && this.state.date.getMinutes() < 20) this.setState({ options: unsaturatedBrowns, check: !this.state.check })
+      if (this.state.date.getMinutes() > 20 && this.state.date.getMinutes() < 40) this.setState({ options: dark, check: !this.state.check })
+      if (this.state.date.getMinutes() > 40 && this.state.date.getMinutes() <= 59) this.setState({ options: greenTheme, check: !this.state.check })
     }
   }
 
@@ -57,7 +62,6 @@ export class Map extends Component {
       height: '100vh',
       width: '100vw'
     }
-    console.log(this.props.trackLocation)
     return (
       <div id="map" style={style}>
         <GoogleMapReact
@@ -78,30 +82,32 @@ export class Map extends Component {
                 lng={eachMarker.longitude}
                 establishmentName={eachMarker.name}
                 establishmentId={eachMarker.id}
-                kingdom={eachMarker.kingdom}
+                allegiance={eachMarker.allegiance}
                 type="establishment"
+                select={this.state.select}
+                cb={this.changeView.bind(this)}
               />
               
             )
             )
           }
           {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
-            <Markers
-            key={eachMarker.venue.id}
-            lat={eachMarker.venue.location.lat}
-            lng={eachMarker.venue.location.lng}
-            establishmentName={eachMarker.venue.name}
-            establishmentId={eachMarker.venue.id}
-            type="searchResult"
-            name={'restaurant'}
+            <Markers props={this.props}
+              key={eachMarker.venue.id}
+              lat={eachMarker.venue.location.lat}
+              lng={eachMarker.venue.location.lng}
+              establishmentName={eachMarker.venue.name}
+              establishmentId={eachMarker.venue.id}
+              type="searchResult"
+              name={'restaurant'}
             />
           )
-        )}
+          )}
         </GoogleMapReact>
-        </div>
-      );
-    }
+      </div>
+    );
   }
+}
 
   const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation, mapStatus: state.mapStatus })
   const mapDispatch = dispatch => ({setMapStatus: theme=>{dispatch(setMapStatus(theme))}})

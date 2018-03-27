@@ -37,7 +37,6 @@ export const fetchCheckins = () => dispatch =>
 //export const addFoursquareCheckins = () => dispatch =>
 
 export const addCheckIn = (user, place, history) => dispatch => {
-
         const checkInBundle = { user, place }
         console.log('Trying to check-in with ', checkInBundle)
         return axios.put(`${serverUrl}/api/establishments`, checkInBundle)

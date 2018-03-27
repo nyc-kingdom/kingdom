@@ -1,6 +1,6 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { addCheckIn } from '../store'
 import { setLocation, setLocationThunk } from '../store/trackLocation'
@@ -11,24 +11,19 @@ import SuccessMenu from './CheckInComplete'
 
 const Spotlight = props => {
 
-    if(props.markers.length===0){ props.redirect.push('/dashboard') ; return null }
-    else{
+    if (props.markers.length === 0) { props.redirect.push('/dashboard'); return null }
+    else {
 
-    const place = props.markers.find(eachMarker=>eachMarker.venue.id===props.match.params.id)
+        const place = props.markers.find(eachMarker => eachMarker.venue.id === props.match.params.id)
 
-    if(place){
+        if (place) {
 
-    return ( props.verifyCheckIn.id === place.venue.id ? 
+            return (props.verifyCheckIn.id === place.venue.id ?
 
-    <SuccessMenu user={props.user} venue={place.venue}/>
+                <SuccessMenu user={props.user} venue={place.venue} />
 
         :
-
-        <div id='Spotlight'>
-            <div style={{padding: '20px'}}><h2 style={{display: 'inline', margin: '5px'}}>{place.venue.name}</h2> {place.venue.price && <h2 style={{display: 'inline'}}>{'      ' + '$'.repeat(place.venue.price.tier)}</h2>}</div>
-
-            {props.location.status === 'LOCATIONFOUND' ?
-
+    <div>
                 <button className='powerButton' onClick={() => {
                     if (Date.now() - 180000 > props.location.timeStamp) {
                         this.props.setLocation()
