@@ -11,7 +11,7 @@ const Success = props => {
     return (
     <div id='Spotlight'>
         <h3>CONGRATULATIONS YOU SUCCESSFULLY CHECKED IN, PLEASE PICK AN ITEM</h3>
-        <button className='powerButton' onClick={() => { props.addCheckIn(props.user, props.venue) }}>CHECK-IN</button>
+        <button className='powerButton' onClick={() => { props.addCheckIn(props.user, props.venue) }}>CONFIRM</button>
     </div>
     )
     }

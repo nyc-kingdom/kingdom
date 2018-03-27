@@ -4,6 +4,10 @@ import GoogleMapReact from 'google-map-react'
 import { googleMapKey } from '../secrets'
 import { blueWater, unsaturatedBrowns, greenTheme, dark } from '../Assets/mapTheme'
 import { Markers } from './'
+import {setMapStatus} from '../store/mapStatus'
+
+const mapThemes = {blueWater: blueWater, greenTheme: greenTheme, dark: dark}
+
 
 
 export class Map extends Component {
@@ -38,7 +42,15 @@ export class Map extends Component {
   }
 
   render() {
-    this.updateMapTheme()
+
+    //UPDATE MAP LOGIC
+    const turn = Math.floor(this.props.establishments.length/10)%3
+    console.log('What is ', turn)
+    const theme = ['blueWater', 'greenTheme', 'dark'][turn]
+    console.log('TODAYS MAP IS ', theme)
+    if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
+
+    // this.updateMapTheme()
     const style = {
       top: 0,
       bottom: 0,
@@ -55,10 +67,11 @@ export class Map extends Component {
           heatmapLibrary={true}
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
-          options={this.state.options}
+          options={mapThemes[this.props.mapStatus]}
           >
           {
             this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
+              
               <Markers
                 key={eachMarker.id}
                 lat={eachMarker.latitude}
@@ -68,6 +81,7 @@ export class Map extends Component {
                 kingdom={eachMarker.kingdom}
                 type="establishment"
               />
+              
             )
             )
           }
@@ -89,9 +103,10 @@ export class Map extends Component {
     }
   }
 
-  const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation })
+  const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation, mapStatus: state.mapStatus })
+  const mapDispatch = dispatch => ({setMapStatus: theme=>{dispatch(setMapStatus(theme))}})
 
-  export default connect(mapState)(Map)
+  export default connect(mapState, mapDispatch)(Map)
 
   // {
   //   this.props.trackLocation &&
