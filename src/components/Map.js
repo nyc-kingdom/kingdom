@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
-import { googleMapKey } from '../secrets'
 import { blueWater, unsaturatedBrowns, greenTheme, dark } from '../Assets/mapTheme'
 import { Markers } from './'
 
