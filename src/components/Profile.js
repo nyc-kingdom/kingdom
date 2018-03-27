@@ -24,13 +24,14 @@ export class Profile extends React.Component {
 
     render(){
         console.log(this.props)
-        const kingdomKing = !this.props.ownKingdom ? null : this.props.ownKingdom.users.reduce((accu, curr) => curr > accu)
+        const ownKingdom = !this.props.ownKingdom ? null : this.props.ownKingdom
+        const kingdomKing = !ownKingdom ? null : ownKingdom.users.reduce((accu, curr) => accu = curr.experience > accu.experience ? curr : accu)
         const whatProfile = this.props.one
-        const points = whatProfile === "user" ? "experience" : whatProfile === "kingdom" ? "royalty" : "strength"
-        const main = !this.props.main ? null : this.props.main
-        const level = whatProfile === "user" ? this.userLevel(main, kingdomKing) : whatProfile === "establishment" ? "Castle" : "Great Kingdom"
+        const points = whatProfile === "user" ? "experience" : whatProfile === "kingdom" ? "power" : "popularity"
         const levelUpPoints = 3000
+        const main = this.props.main
         if(!main) return null
+        const level = whatProfile === "user" ? this.userLevel(main, kingdomKing) : whatProfile === "establishment" ? "Castle" : "Great Kingdom"
         const keeper = whatProfile === "establishment" ? this.props.users.find(user => user.id === main.keeper) : null
         return (
             <div>
@@ -42,32 +43,20 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{width:'25vw', left: 0}}
                             />
-                            <Link to={`/profile/kingdoms/${!main.kingdom ? main.id : main.kingdom.id}`}>
+                            <Link to={`/profile/kingdoms/${!ownKingdom ? null : ownKingdom.id}`}>
                                 <img
-                                    src={
-                                        !main.kingdom
-                                            ? kingdomMark[main.name]
-                                            : whatProfile === "user"
-                                                ? kingdomMark[main.kingdom.name]
-                                                : kingdomMark[main.kingdom]
-                                    }
+                                    src={kingdomMark[!ownKingdom ? null : ownKingdom.name]}
                                     style={{width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh'}}
                                 />
                             </Link>
                             <span style={{width: '13vw', position: 'absolute', left: '3vw', top: '20vh'}}>
-                                {whatProfile === 'establishment' ? main.kingdom : !main.kingdom ? main.name : main.kingdom.name}
+                                {!ownKingdom ? null : ownKingdom.name}
                             </span>
                         </div>
                     </div>
                     <div style={{flex: 2, textAlign: 'center'}}>
                         <div style={{height: '5vh'}}/>
-                        <h2>
-                            {
-                                whatProfile === "user"
-                                    ? main.username
-                                    : main.name
-                            }
-                        </h2>
+                        <h2>{whatProfile === "user" ? main.username : main.name}</h2>
                     </div>
                     <div style={{flex: 1}}>
                         <div>
@@ -100,7 +89,7 @@ export class Profile extends React.Component {
                             style={{width: '75vw', height: '80vw'}}
                         />
                         {
-                            !main.latitude ?
+                            whatProfile !== "establishment" ?
                             null : !main.keeper ?
                             (
                             <div style={{position: 'absolute', top: '41vh', left: '10vw'}}>
@@ -128,14 +117,10 @@ export class Profile extends React.Component {
                 </div>
                 <div style={{textAlign: 'center'}}>
                     <span>Level : {level}</span>
-                    <div>{!main[points] ? 0 : main[points]} / {levelUpPoints}</div>
-                    <span>{!main[points] ? 0 : main[points]} / {levelUpPoints}</span>
+                    <div>{main[points]} / {levelUpPoints}</div>
+                    <span>{main[points]} / {levelUpPoints}</span>
                 </div>
-                <div>
-                    {
-                        !main.id ? null : this.renderWithItem(main, whatProfile)
-                    }
-                </div>
+                <div>{this.renderWithItem(main, whatProfile)}</div>
                 <div style={{textAlign: 'center'}}>
                     <Link to='/dashboard'>
                         <img src={hardCoding.xButton} style={{width: '11vw', height: '11vh'}}/>
@@ -167,7 +152,7 @@ export class Profile extends React.Component {
                         <span>
                             {
                                 whatProfile === "kingdom"
-                                    ? main.establishments.length
+                                    ? main.domainSize
                                     : whatProfile === "user"
                                         ? main.checkins
                                             .filter(checkin =>
@@ -201,10 +186,10 @@ export class Profile extends React.Component {
                         <span>
                             {
                                 whatProfile === "kingdom"
-                                    ? 0
+                                    ? this.props.establishments.filter(establishment => establishment.allegiance === main.id).length
                                     : whatProfile === "user"
                                         ? main.checkins.length
-                                        : null
+                                        : 0
                             }
                         </span>
                     </div>
@@ -214,11 +199,7 @@ export class Profile extends React.Component {
                         <img src={castle} style={{width: '10vw', height: '5vh'}}/>
                     </div>
                     <div>
-                        <span>
-                            {
-                                whatProfile === "user" ? "Resources" : "Total People"
-                            }
-                        </span>
+                        <span>{ whatProfile === "user" ? "Resources" : "Total People"}</span>
                     </div>
                     <div>
                         <span>
@@ -227,7 +208,7 @@ export class Profile extends React.Component {
                                     ? main.users.length
                                     : whatProfile === "user"
                                         ? main.resources.length
-                                        : main.checkins.length
+                                        : main.popularity
                             }
                         </span>
                     </div>
@@ -238,7 +219,7 @@ export class Profile extends React.Component {
 
     userLevel(main, kingdomKing){
         const points = !main ? 0 : main.experience
-        const howManyEstablishments = !this.props.ownKingdom ? 0 : this.props.ownKingdom.establishments.length
+        const howManyEstablishments = !this.props.ownKingdom ? 0 : this.props.ownKingdom.domainSize
         const amIKing = !main ? false : !kingdomKing ? false : kingdomKing.id === main.id
         if(amIKing) return "King"
         if (points < 100) {
@@ -246,9 +227,8 @@ export class Profile extends React.Component {
             return "Stone Mason"
         } else if (points < 500) {
             return "Knight"
-        } else {
-            return "Lord"
         }
+        return "Lord"
     }
 }
 
@@ -261,7 +241,13 @@ const mapProps = (state, ownProps) => {
         one === "kingdom"
             ? main
             : state.kingdoms.find(kingdom => {
-                const compare = !main.kingdom ? null : one === "user" ? main.kingdom.name : main.kingdom
+                const compare = !main.kingdom
+                    ? null
+                    : one === "user"
+                        ? main.kingdom.name
+                        : !main.allegiance
+                            ? main.kingdom
+                            : main.allegiance
                 return kingdom.name === compare
             })
     return {
