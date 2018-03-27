@@ -1,13 +1,13 @@
 import axios from 'axios'
 import history from './history'
-import { serverUrl } from './'
-
+import { serverUrl, fetchKingdoms, fetchUsers } from './'
 
 /**
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
 const REMOVE_USER = 'REMOVE_USER'
+const UPDATE_USER = 'UPDATE_USER'
 
 /**
  * INITIAL STATE
@@ -19,6 +19,7 @@ const defaultUser = {}
  */
 const getUser = user => ({ type: GET_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
+const updateUser = user => ({ type: UPDATE_USER, user })
 
 /**
  * THUNK CREATORS
@@ -59,6 +60,16 @@ export const logout = () => dispatch =>
       .then(_ => dispatch(removeUser()))
       .catch(err => console.log(err))
 
+export const editUser = (user, userId) => dispatch => 
+  axios.put(`${serverUrl}/api/users/${userId}`, user)
+    .then(res => res.data)
+    .then(editedUser => {
+      dispatch(fetchUsers())
+      dispatch(fetchKingdoms())
+      dispatch(updateUser(editedUser))
+    })
+    .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
+
 /**
  * REDUCER
  */
@@ -68,6 +79,8 @@ export default function (state = defaultUser, action) {
       return action.user
     case REMOVE_USER:
       return defaultUser
+    case UPDATE_USER:
+      return action.user
     default:
       return state
   }
