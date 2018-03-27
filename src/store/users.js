@@ -1,13 +1,12 @@
 import axios from 'axios'
 import history from './history'
-import { serverUrl, fetchKingdoms } from './'
+import { serverUrl } from './'
 
 /**
  * ACTION TYPES
  */
 const GET_USERS = 'GET_USERS'
 const CREATE_USER = 'CREATE_USER'
-const UPDATE_USER = 'UPDATE_USER'
 const DELETE_USER = 'DELETE_USER'
 
 /**
@@ -15,7 +14,6 @@ const DELETE_USER = 'DELETE_USER'
  */
 const getUsers = users => ({ type: GET_USERS, users })
 const createUser = user => ({ type: CREATE_USER, user })
-const updateUser = user => ({ type: UPDATE_USER, user })
 const deleteUser = userId => ({ type: DELETE_USER, userId })
 
 /**
@@ -33,15 +31,6 @@ export const addUser = user => dispatch =>
     .then(newUser => dispatch(createUser(newUser)))
     .catch(err => console.error(`Creating User ${user} unsuccesful.`, err))
 
-export const editUser = (user, userId) => dispatch => 
-  axios.put(`${serverUrl}/api/users/${userId}`, user)
-    .then(res => res.data)
-    .then(editedUser => {
-      dispatch(fetchKingdoms())
-      dispatch(updateUser(editedUser))
-    })
-    .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
-
 export const removeUser = userId => dispatch =>
   axios.delete(`${serverUrl}/api/users/${userId}`)
     .then(() => dispatch(deleteUser(userId)))
@@ -56,10 +45,6 @@ export default function reducer(users = [], action) {
       return action.users;
     case CREATE_USER:
       return [...users, action.user];
-    case UPDATE_USER:
-      return users.map(user => {
-        return user.id === action.user.id ? action.user : user
-      });
     case DELETE_USER:
       return users.filter(user => user.id !== action.user.id);
     default:
