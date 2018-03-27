@@ -17,46 +17,27 @@ const image = {
     Astoria: ravenswoodMarker
 }
 
-const activeMarkerStyle = { border: '2px solid black', width: '30px', transform: 'translateY(130px)' }
-
-
-const regularMarkerStyle = { border: '2px solid black', width: '30px', transition: 'translate 10s' }
-
 export class Markers extends Component {
 
     constructor(props) {
         super(props)
-        this.style = activeMarkerStyle
-    }
-
-    componentDidMount() {
-        this.style = regularMarkerStyle
+        
     }
 
     render() {
-        const style = {
-            height: '4vh',
-            width: '2.5vw'
-        }
-        const searchView = {
-            height: '8vh',
-            width: '5vw'
-        }
-        let kingdom;
-        if (this.props.kingdom) {
-            kingdom = this.props.kingdom
-        }
+        const style = { height: '4vh', width: '2.5vw' }
+        const searchView = { height: '8vh', width: '5vw' }
+
+        let kingdom
+        if(image[this.props.kingdom]!==undefined) kingdom = this.props.kingdom
+        else kingdom = 'Ravenswood'
+        
         return (
             <div>
                 {
                     this.props.type === 'establishment'
-                        ? <Link to={`/profile/establishments/${this.props.establishmentId}`}> <img src={image[kingdom]} /></Link>
-                        : ''
-                }
-                {
-                    this.props.type === 'searchResult'
-                        ? <img src={searchResult} />
-                        : ''
+                        ? <Link to={`/profile/establishments/${this.props.establishmentId}`} > <img src={image[kingdom]} className='checkIn'/></Link>
+                        : <Link to= {`/dashboard/selectedView/${this.props.establishmentId}`}> <img src={searchResult} /> </Link>
                 }
             </div>
         )
