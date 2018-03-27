@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { serverUrl } from './'
+
 
 const GET_ESTABLISHMENTS = 'GET_ESTABLISHMENTS';
 const ADD_ESTABLISHMENT = 'ADD_ESTABLISHMENT'
@@ -11,7 +13,7 @@ const getEstablishments = establishments => {
 export const paintEstablishment = establishment => ({type: ADD_ESTABLISHMENT, establishment})
 
 export const fetchEstablishments = () => dispatch => {
-  return axios.get('http://localhost:8080/api/establishments')
+  return axios.get(`${serverUrl}/api/establishments`)
   .then(establishments => dispatch(getEstablishments(establishments.data)))
   .catch(console.error.bind(console))
 }

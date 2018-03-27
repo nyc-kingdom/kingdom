@@ -1,7 +1,7 @@
 'use strict'
 
 import axios from 'axios'
-
+import { serverUrl } from './'
 //SOCKET
 import socket from '../sockets.js'
 
@@ -11,10 +11,6 @@ import {verifyCheckIn} from './gameplay'
 import {paintEstablishment} from './establishments'
 import {createMarker} from './markers'
 
-
-const post = 8080
-const serverUrl = `http://localhost:${post}`
-//const serverUrl = 'http://172.16.21.145:8080'
 /**
  * ACTION TYPES
  */

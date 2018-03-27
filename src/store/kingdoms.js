@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { serverUrl } from './'
+
 
 const GET_KINGDOMS = 'GET_KINGDOMS';
 
@@ -8,7 +10,7 @@ const getKingdoms = kingdoms => {
 }
 
 export const fetchKingdoms = () => dispatch => {
-  return axios.get('http://localhost:8080/api/kingdoms')
+  return axios.get(`${serverUrl}/api/kingdoms`)
   .then(kingdoms => dispatch(getKingdoms(kingdoms.data)))
   .catch(console.error.bind(console))
 }

@@ -1,9 +1,9 @@
+import { serverUrl } from '../src/store'
 const openSocket = require('socket.io-client')
 
 
-//const socket = openSocket('http://172.16.21.145:8080', {transports: ['websocket']} )
 
-const socket = openSocket('localhost:8080', {transports: ['websocket']} )
+const socket = openSocket(serverUrl, {transports: ['websocket']} )
 
 
 
@@ -12,5 +12,3 @@ socket.on('connection', ()=>{
 })
 
 export default socket
-
-////172.16.21.145

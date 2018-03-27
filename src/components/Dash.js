@@ -1,8 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createMarker, addCheckIn, queryMarkers, getUserCheckIns } from '../store';
-import {setLocationThunk, setLocation} from '../store/trackLocation'
+import { createMarker, addCheckIn, queryMarkers, getUserCheckIns, setLocationThunk, setLocation } from '../store';
 
 
 export class Dash extends React.Component {
@@ -49,8 +48,6 @@ export class Dash extends React.Component {
                             <Link to={`/dashboard/selectedView/${eachMarker.venue.id}`}>{eachMarker.venue.name}</Link>
                         </div>
                     ))}
-                    <a href='http://localhost:8080/auth/foursquare'><button>Login</button></a>
-                    <a href='http://localhost:8080/auth/foursquare'><button>Signup</button></a>
                 </div>
             
         )

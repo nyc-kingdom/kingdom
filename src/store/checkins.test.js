@@ -6,14 +6,12 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'
 import thunkMiddleware from 'redux-thunk'
+import { serverUrl } from './'
+
 
 const middlewares = [thunkMiddleware]
 const mockStore = configureMockStore(middlewares)
 
-const post = 8080
-const serverUrl = `http://localhost:${post}`
-
-console.log("hello there?")
 
 describe('Thunk creators:', () => {
   let store
