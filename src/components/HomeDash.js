@@ -48,11 +48,21 @@ class Home extends Component {
         </div>
         <div id="gem" className="circle">
           <br />
-          <img src={gem} className="blip" />
+          <Link to={`/profile/users/${this.props.user.id}`}>
+            <img src={gem} className="blip"/>
+          </Link>
         </div>
         <div id="castle" className="circle">
           <br />
-          <img src={castle} className="blip" />
+          <Link to={'/leaderboard'}>
+            <img src={castle} className="blip"/>
+          </Link>
+        </div>
+        <div id="shield" className="circle">
+          <br />
+          <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
+            <img src={bridgeShield} className="blip"/>
+          </Link>
         </div>
         <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
           <div id="shield" className="circle">
