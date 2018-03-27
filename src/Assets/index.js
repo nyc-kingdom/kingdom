@@ -52,6 +52,7 @@ const kingdomMark = {
     "Financial District" : financialDistrictS,
     "Lynbrook" : lynbrookS,
     "Astoria" : ravenswoodS,
+    "Ravenswood": ravenswoodS,
 }
 
 export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult };
