@@ -13,10 +13,21 @@ class Home extends Component {
     super(props)
     this.renderWithKingdom = this.renderWithKingdom.bind(this)
     this.state = {
-      dashMode: 'closed'
+      dashMode: 'closed',
+      user: props.user
     }
-
     this.handleClick = this.handleClick.bind(this)
+  }
+
+  componentWillUpdate(newProps, oldProps){
+    console.log(newProps, oldProps)
+    if (newProps.user !== oldProps){
+      console.log("4th what is going on from Update address & username: ", newProps.user, oldProps)
+
+      this.setState({
+          user: newProps.user
+      })
+    }
   }
 
   render() {
@@ -24,7 +35,7 @@ class Home extends Component {
       <div>
         {
           !this.props.user.kingdomId
-            ? <User />
+            ? <User history={this.props.history}/>
             : this.renderWithKingdom()
         }
       </div>
@@ -80,7 +91,6 @@ class Home extends Component {
 }
 
 const mapProps = state => {
-
   return {
     user: state.user,
     trackLocation: state.trackLocation,
