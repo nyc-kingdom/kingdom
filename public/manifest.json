@@ -1,6 +1,5 @@
 {
-  "short_name": "Kingdom",
-  "name": "Kingdom PWA",
+  "name": "Kingdom",
   "icons": [
     {
       "src": "king.gif",
@@ -8,9 +7,10 @@
       "type": "image/x-icon"
     }
   ],
-  "start_url": "/",
-  "orientation": "portrait",
+  "short_name": "Kingdom",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "scope": "https://kingdom.netlify.com/",
+  "start_url": "https://kingdom.netlify.com/"
 }
