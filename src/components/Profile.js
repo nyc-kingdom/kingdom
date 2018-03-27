@@ -25,13 +25,14 @@ export class Profile extends React.Component {
     render(){
         console.log(this.props)
         const ownKingdom = !this.props.ownKingdom ? null : this.props.ownKingdom
-        const kingdomKing = !ownKingdom ? null : ownKingdom.users.reduce((accu, curr) => accu = curr.experience > accu.experience ? curr : accu)
+        const kingdomKing = !ownKingdom ? null : ownKingdom.users.reduce((accu, curr) => accu = curr.experience >= 0 ? curr : accu, {})
         const whatProfile = this.props.one
         const points = whatProfile === "user" ? "experience" : whatProfile === "kingdom" ? "power" : "popularity"
         const levelUpPoints = 3000
         const main = this.props.main
         if(!main) return null
-        const level = whatProfile === "user" ? this.userLevel(main, kingdomKing) : whatProfile === "establishment" ? "Castle" : "Great Kingdom"
+        console.log(ownKingdom, !ownKingdom, kingdomKing, !kingdomKing)
+        const level = whatProfile === "establishment" ? "Castle" : whatProfile === "kingdom" ?  "Great Kingdom" : !kingdomKing ? null : this.userLevel(main, kingdomKing)
         const keeper = whatProfile === "establishment" ? this.props.users.find(user => user.id === main.keeper) : null
         return (
             <div>
@@ -220,7 +221,7 @@ export class Profile extends React.Component {
     userLevel(main, kingdomKing){
         const points = !main ? 0 : main.experience
         const howManyEstablishments = !this.props.ownKingdom ? 0 : this.props.ownKingdom.domainSize
-        const amIKing = !main ? false : !kingdomKing ? false : kingdomKing.id === main.id
+        const amIKing = !main ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === main.id
         if(amIKing) return "King"
         if (points < 100) {
             if (howManyEstablishments < 20) return "Shepard"
