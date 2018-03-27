@@ -8,6 +8,8 @@ import socket from '../sockets.js'
 //FUNCTIONALITY
 import distanceCalc from '../functions/distanceCalc'
 import {verifyCheckIn} from './gameplay'
+import {paintEstablishment} from './establishments'
+import {createMarker} from './markers'
 
 /**
  * ACTION TYPES
@@ -34,7 +36,7 @@ export const fetchCheckins = () => dispatch =>
 
 //export const addFoursquareCheckins = () => dispatch =>
 
-export const addCheckIn = (user, place) => dispatch => {
+export const addCheckIn = (user, place, history) => dispatch => {
 
         const checkInBundle = { user, place }
         return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
@@ -42,8 +44,10 @@ export const addCheckIn = (user, place) => dispatch => {
           .then(newCheckin => {
             dispatch(createCheckin(newCheckin))
             socket.emit('new-checkIn', newCheckin)
+            dispatch(paintEstablishment(newCheckin.establishment))
+            dispatch(createMarker([]))
+            dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
             console.log('THE CHECKIN JUST FINISHED, WE GOT A REPLY FROM OUR SERVER')
-            dispatch(verifyCheckIn({id:'1000', status:'COMPLETED'}))
           }) 
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
 }

@@ -11,4 +11,5 @@ export { default as SingleEstablishmentView } from './SingleEstablishmentView'
 export { default as Spotlight } from './Spotlight'
 export { default as Navigation } from './Navigation'
 export { default as User } from './User';
+export { default as Ticker } from './Ticker'
 export { default as LeaderBoard } from './LeaderBoard'
