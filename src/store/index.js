@@ -22,12 +22,14 @@ const store = createStore(reducer, middleware)
 
 let serverUrl;
 
-if(process.env.NODE_ENV === "production"){
+if (process.env.NODE_ENV === "production") {
     serverUrl = 'https://kingdom-server.herokuapp.com'
 } else {
     const post = 8080
     serverUrl = `http://localhost:${post}`
 }
+
+//grab location + store
 console.log("serverUrl: ", serverUrl, "which enviroment", process.env.NODE_ENV)
 export { serverUrl }
 export default store
