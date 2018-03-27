@@ -39,7 +39,6 @@ class Home extends Component {
             Kingdom
           </h1>
         </div>
-
         <div
           id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
             if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
@@ -48,35 +47,30 @@ class Home extends Component {
           <br />
           <img src={sword} className="blip" />
         </div>
-
         <Link to={`/profile/users/${this.props.user.id}`}>
           <div id="gem" className="circle">
             <br />
             <img src={gem} className="blip" />
           </div>
         </Link>
-
         <Link to={'/leaderboard'}>
-          <div id="castle" className="circle">
+          <div id="castle">
             <br />
             <img src={castle} className="blip" />
           </div>
         </Link>
-
-
         <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
           <div id="shield" className="circle">
             <br />
             <img src={bridgeShield} className="blip" />
           </div>
         </Link>
-
-        <div id="logout" className="circle" onClick={this.handleClick}>
-          <p>Logout</p>
+        <div id="logout" style={{fontFamily: 'Apple Chancery, cursive'}} onClick={this.handleClick}>
+          <h2>Logout</h2>
         </div>
         <Dash mode={this.state.dashMode} />
         <Map />
-        <Route path='/dashboard/selectedView/:id' component={Spotlight} />
+        <Route path="/dashboard/selectedView/:id" component={Spotlight} />
         <Ticker />
       </div>
     )
