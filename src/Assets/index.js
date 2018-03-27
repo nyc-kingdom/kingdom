@@ -3,7 +3,7 @@ import arrowLeft from './iconButtons/arrowLeft.png';
 import arrowRight from './iconButtons/arrowRight.png';
 import castle from './iconButtons/castle.png';
 import castleTower from './iconButtons/castleTower.png';
-import sword from './iconButtons/swordIcon.png';
+import sword from './iconButtons/sword.png';
 import swordSingleButton from './iconButtons/swordSingleButton.png';
 import bridgeShield from './iconButtons/shieldBrooklynUpdate.png';
 
