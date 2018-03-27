@@ -2,14 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { swordSingleButton, userClass, kingdomMark, wolfShield, castle, castleTower } from '../Assets'
+import { swordSingleButton, userClass, kingdomMark, wolfShield, castle, castleTower, markersImages } from '../Assets'
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
     keeperChairUrl: "https://cdn4.iconfinder.com/data/icons/knight/512/as416g_7-512.png",
-    // xButton: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-alphanumeric/075091-ultra-glossy-silver-button-icon-alphanumeric-x-styled.png",
-    xButton:
-    swordSingleButton,
     flagKingFaceImgurl: "https://d1u5p3l4wpay3k.cloudfront.net/rlesports_gamepedia_en/thumb/8/82/Kings_of_Urbanlogo_square.png/300px-Kings_of_Urbanlogo_square.png?version=14a3c8a996adc00855afc2399be68e91",
 }
 
@@ -68,8 +65,8 @@ export class Profile extends React.Component {
                             />
                             <Link to={`/profile/users/${!kingdomKing ? null : kingdomKing.id}`}>
                                 <img
-                                    src={hardCoding.flagKingFaceImgurl}
-                                    style={{width: '18vw', position: 'absolute', right: '5vw', top : '6vh'}}
+                                    src={userClass.King}
+                                    style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
                                 />
                             </Link>
                             <span style={{width: '13vw', position: 'absolute', right: '11vw', top: '20vh'}}>
@@ -84,9 +81,11 @@ export class Profile extends React.Component {
                             src={
                                 whatProfile === "user"
                                     ? userClass[level]
-                                    : whatProfile === "establishment"
-                                        ? castleTower
-                                        : kingdomMark[main.name]
+                                    : whatProfile === "kingdom"
+                                        ? kingdomMark[main.name]
+                                        : !main.allegiance
+                                            ? markersImages.none
+                                            : markersImages[main.allegiance]
                             }
                             style={{width: '75vw', height: '80vw'}}
                         />
@@ -125,7 +124,7 @@ export class Profile extends React.Component {
                 <div>{this.renderWithItem(main, whatProfile)}</div>
                 <div style={{textAlign: 'center'}}>
                     <Link to='/dashboard'>
-                        <img src={hardCoding.xButton}/>
+                        <img src={swordSingleButton}/>
                     </Link>
                 </div>
             </div>
