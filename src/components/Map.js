@@ -64,7 +64,7 @@ export class Map extends Component {
                 lng={eachMarker.longitude}
                 establishmentName={eachMarker.name}
                 establishmentId={eachMarker.id}
-                kingdom={eachMarker.kingdom}
+                allegiance={eachMarker.allegiance}
                 type="establishment"
               />
             )
