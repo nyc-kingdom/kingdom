@@ -8,50 +8,38 @@ const image = {
     restaurant: "http://www.pvhc.net/img179/bcrsijazexxcbdnpicmy.png",
     knight: "https://vignette.wikia.nocookie.net/the-king-of-towers/images/0/01/Hero_Vord_Knight_Icon.png/revision/latest?cb=20140831041856",
     Ravenswood: ravenswoodMarker,
-    'Lefferts Gardens': test,
-    'Garment District': test,
-    'Flatiron District': test,
-    'Financial District': financialDistrictMarker,
-    'City Hall Area': cityHallMarker,
+    default: test,
+    Lynbrook: financialDistrictMarker,
+    'South Slope': cityHallMarker,
     Bushwick: bushwickMarker,
     Astoria: ravenswoodMarker
 }
 
 export class Markers extends Component {
-
     constructor(props) {
         super(props)
-        
     }
 
     render() {
         const style = { height: '4vh', width: '2.5vw' }
         const searchView = { height: '8vh', width: '5vw' }
 
-        let kingdom
-        if(image[this.props.kingdom]!==undefined) kingdom = this.props.kingdom
-        else kingdom = 'Ravenswood'
-        
+        let allegiance;
+        if (image[this.props.allegiance] !== undefined) allegiance = this.props.allegiance
+        else allegiance = 'default'
+
         return (
             <div>
                 {
                     this.props.type === 'establishment'
-                        ? <Link to={`/profile/establishments/${this.props.establishmentId}`} > <img src={image[kingdom]} className='checkIn'/></Link>
-                        : <Link to= {`/dashboard/selectedView/${this.props.establishmentId}`}> <img src={searchResult} /> </Link>
+                        ? <Link to={`/profile/establishments/${this.props.establishmentId}`} > <img src={image[allegiance]} className='checkIn' /></Link>
+                        : <Link to={`/dashboard/selectedView/${this.props.establishmentId}`}> <img src={searchResult} /> </Link>
                 }
             </div>
         )
     }
 }
 
-const mapState = null
+const mapProps = null;
 
-export default connect(mapState)(Markers)
-
-
-// <Link to={`/dashboard/selectedView/${this.props.establishmentId}`}>
-// <div style= {this.style} className='rec'>
-//     {this.props.establishmentName}
-// </div>
-// <img src={image['knight']} style={style}/>
-// </Link>
+export default connect(mapProps)(Markers)
