@@ -4,7 +4,7 @@ import { withRouter, Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import logo from './logo.svg';
 import './App.css';
-import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, createCheckin } from './store';
+import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, createCheckin, paintEstablishment } from './store';
 import { setLocationThunk } from './store/trackLocation'
 import axios from 'axios';
 import socket from './sockets'
@@ -19,7 +19,8 @@ class App extends Component {
     this.props.loadInitialData();
     socket.on('new-checkIn', checkIn=> {
       console.log('Somebody checked-in!')
-      //this.props.createCheckin(checkIn)
+      this.props.createCheckin(checkIn)
+      this.props.paintEstablishment(checkIn.establishment)
     })
     
 
@@ -39,7 +40,8 @@ const mapState = (state) => {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
-    location: state.trackLocation
+    location: state.trackLocation,
+    user: state.user
   }
 }
 
@@ -56,6 +58,9 @@ const mapDispatch = dispatch => {
     },
     createCheckin(checkIn){
       dispatch(createCheckin(checkIn))
+    },
+    paintEstablishment(establishment){
+      dispatch(paintEstablishment(establishment))
     }
   }
 }

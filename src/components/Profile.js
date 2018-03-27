@@ -31,7 +31,6 @@ export class Profile extends React.Component {
         const levelUpPoints = 3000
         const main = this.props.main
         if(!main) return null
-        console.log(ownKingdom, !ownKingdom, kingdomKing, !kingdomKing)
         const level = whatProfile === "establishment" ? "Castle" : whatProfile === "kingdom" ?  "Great Kingdom" : !kingdomKing ? null : this.userLevel(main, kingdomKing)
         const keeper = whatProfile === "establishment" ? this.props.users.find(user => user.id === main.keeper) : null
         return (
@@ -237,7 +236,7 @@ const mapProps = (state, ownProps) => {
     const one = Object.keys(ownProps.match.params)[0]
     const paramId = +ownProps.match.params[one]
     const main = state[`${one}s`].find(each => each.id === paramId)
-    if(!main) return { one }
+    if(!main) return { one, kingdoms: state.kingdoms }
     const ownKingdom =
         one === "kingdom"
             ? main

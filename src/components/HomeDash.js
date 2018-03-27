@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
-import { gem, bridgeShield, castle, sword } from '../Assets'
 import { connect } from 'react-redux'
-import { User, Map, Dash, Spotlight } from './'
+
+import { gem, bridgeShield, castle, sword } from '../Assets'
+
+import { User, Map, Dash, Spotlight, Ticker } from './'
+
 import { logout } from '../store';
 
 class Home extends Component {
@@ -11,20 +14,8 @@ class Home extends Component {
     this.renderWithKingdom = this.renderWithKingdom.bind(this)
     this.state = {
       dashMode: 'closed',
-      user: props.user
     }
     this.handleClick = this.handleClick.bind(this)
-  }
-
-  componentWillUpdate(newProps, oldProps){
-    console.log(newProps, oldProps)
-    if (newProps.user !== oldProps){
-      console.log("4th what is going on from Update address & username: ", newProps.user, oldProps)
-
-      this.setState({
-          user: newProps.user
-      })
-    }
   }
 
   render() {
@@ -53,20 +44,20 @@ class Home extends Component {
             else this.setState({ dashMode: 'closed' })
           }}>
           <br />
-          <img src={sword} />
+          <img src={sword} className="blip"/>
         </div>
         <div id="gem" className="circle">
           <br />
-          <img src={gem} />
+          <img src={gem} className="blip"/>
         </div>
         <div id="castle" className="circle">
           <br />
-          <img src={castle} />
+          <img src={castle} className="blip"/>
         </div>
         <div id="shield" className="circle">
           <br />
           <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
-            <img src={bridgeShield} />
+            <img src={bridgeShield} className="blip"/>
           </Link>
         </div>
         <div id="logout" className="circle" onClick={this.handleClick}>
@@ -75,6 +66,7 @@ class Home extends Component {
         <Dash mode={this.state.dashMode} />
         <Map />
         <Route path='/dashboard/selectedView/:id' component={Spotlight} />
+        <Ticker/>
       </div>
     )
   }
@@ -89,7 +81,8 @@ class Home extends Component {
 const mapProps = state => {
   return {
     user: state.user,
-    trackLocation: state.trackLocation
+    trackLocation: state.trackLocation,
+    checkIns: state.checkins
   }
 }
 
