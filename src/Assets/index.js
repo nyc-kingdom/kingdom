@@ -3,8 +3,9 @@ import arrowLeft from './iconButtons/arrowLeft.png';
 import arrowRight from './iconButtons/arrowRight.png';
 import castle from './iconButtons/castle.png';
 import castleTower from './iconButtons/castleTower.png';
-import sword from './iconButtons/sword.png';
-import bridgeShield from './iconButtons/shield2.png';
+import sword from './iconButtons/swordIcon.png';
+import swordSingleButton from './iconButtons/swordSingleButton.png';
+import bridgeShield from './iconButtons/shieldBrooklynUpdate.png';
 
 //resources
 import gem from './Resources/gem.png';
@@ -40,19 +41,28 @@ import searchResult from './kingdoms/SearchMarker.gif';
 
 
 const userClass = {
-    "King" : king,
-    "Lord" : lord,
-    "Knight" : knight,
-    "Shepard" : shepard,
-    "Stone Mason" : blacksmith,
+    "King": king,
+    "Lord": lord,
+    "Knight": knight,
+    "Shepard": shepard,
+    "Stone Mason": blacksmith,
 }
 
 const kingdomMark = {
-    "Bushwick" : bushwickS,
-    "Financial District" : financialDistrictS,
-    "Lynbrook" : lynbrookS,
-    "Astoria" : ravenswoodS,
+    "Bushwick": bushwickS,
+    "Financial District": financialDistrictS,
+    "Lynbrook": lynbrookS,
+    "Astoria": ravenswoodS,
     "Ravenswood": ravenswoodS,
 }
 
-export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult };
+const markersImages = {
+    Ravenswood: ravenswoodMarker,
+    none: test,
+    Lynbrook: financialDistrictMarker,
+    'South Slope': cityHallMarker,
+    Bushwick: bushwickMarker,
+    Astoria: ravenswoodMarker
+}
+
+export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult, swordSingleButton, markersImages };

@@ -2,12 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { userClass, kingdomMark, wolfShield, castle, castleTower } from '../Assets'
+import { swordSingleButton, userClass, kingdomMark, wolfShield, castle, castleTower } from '../Assets'
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
     keeperChairUrl: "https://cdn4.iconfinder.com/data/icons/knight/512/as416g_7-512.png",
-    xButton: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-alphanumeric/075091-ultra-glossy-silver-button-icon-alphanumeric-x-styled.png",
+    // xButton: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-alphanumeric/075091-ultra-glossy-silver-button-icon-alphanumeric-x-styled.png",
+    xButton:
+    swordSingleButton,
     flagKingFaceImgurl: "https://d1u5p3l4wpay3k.cloudfront.net/rlesports_gamepedia_en/thumb/8/82/Kings_of_Urbanlogo_square.png/300px-Kings_of_Urbanlogo_square.png?version=14a3c8a996adc00855afc2399be68e91",
 }
 
@@ -123,7 +125,7 @@ export class Profile extends React.Component {
                 <div>{this.renderWithItem(main, whatProfile)}</div>
                 <div style={{textAlign: 'center'}}>
                     <Link to='/dashboard'>
-                        <img src={hardCoding.xButton} style={{width: '11vw', height: '11vh'}}/>
+                        <img src={hardCoding.xButton}/>
                     </Link>
                 </div>
             </div>

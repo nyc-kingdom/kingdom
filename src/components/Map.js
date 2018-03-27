@@ -14,7 +14,13 @@ export class Map extends Component {
       bootstrapURLKeys: { key: "AIzaSyBqFElyKsNAtWKnM4pnj9CqCRc6u5ruxd4" },
       options: greenTheme,
       date: new Date(),
-      check: false
+      check: false,
+      select: '',
+      showEstablishmentView: false
+    }
+    this.changeView = (id) => {
+      if (this.state.select !== id) this.setState({ select: id })
+      else this.setState({select: '' })
     }
     this.updateMapTheme = this.updateMapTheme.bind(this)
   }
@@ -30,13 +36,14 @@ export class Map extends Component {
     //   }
     // }
     if (!this.state.check) {
-      if(this.state.date.getMinutes()>=0 && this.state.date.getMinutes()<20) this.setState({options: unsaturatedBrowns, check: !this.state.check  })
-      if(this.state.date.getMinutes()>20 && this.state.date.getMinutes()<40) this.setState({options: dark, check: !this.state.check })
-      if(this.state.date.getMinutes()>40 && this.state.date.getMinutes()<=59) this.setState({options: greenTheme, check: !this.state.check })
+      if (this.state.date.getMinutes() >= 0 && this.state.date.getMinutes() < 20) this.setState({ options: unsaturatedBrowns, check: !this.state.check })
+      if (this.state.date.getMinutes() > 20 && this.state.date.getMinutes() < 40) this.setState({ options: dark, check: !this.state.check })
+      if (this.state.date.getMinutes() > 40 && this.state.date.getMinutes() <= 59) this.setState({ options: greenTheme, check: !this.state.check })
     }
   }
 
   render() {
+
     this.updateMapTheme()
     const style = {
       top: 0,
@@ -44,7 +51,6 @@ export class Map extends Component {
       height: '100vh',
       width: '100vw'
     }
-    console.log(this.props.trackLocation)
     return (
       <div id="map" style={style}>
         <GoogleMapReact
@@ -55,7 +61,7 @@ export class Map extends Component {
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
           options={this.state.options}
-          >
+        >
           {
             this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
               <Markers
@@ -66,31 +72,33 @@ export class Map extends Component {
                 establishmentId={eachMarker.id}
                 allegiance={eachMarker.allegiance}
                 type="establishment"
+                select={this.state.select}
+                cb={this.changeView.bind(this)}
               />
             )
             )
           }
           {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
-            <Markers
-            key={eachMarker.venue.id}
-            lat={eachMarker.venue.location.lat}
-            lng={eachMarker.venue.location.lng}
-            establishmentName={eachMarker.venue.name}
-            establishmentId={eachMarker.venue.id}
-            type="searchResult"
-            name={'restaurant'}
+            <Markers props={this.props}
+              key={eachMarker.venue.id}
+              lat={eachMarker.venue.location.lat}
+              lng={eachMarker.venue.location.lng}
+              establishmentName={eachMarker.venue.name}
+              establishmentId={eachMarker.venue.id}
+              type="searchResult"
+              name={'restaurant'}
             />
           )
-        )}
+          )}
         </GoogleMapReact>
-        </div>
-      );
-    }
+      </div>
+    );
   }
+}
 
-  const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation })
+const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation })
 
-  export default connect(mapState)(Map)
+export default connect(mapState)(Map)
 
   // {
   //   this.props.trackLocation &&
