@@ -37,6 +37,7 @@ const Spotlight = props => {
                         const distance = distanceCalc(props.location.coords[0], props.location.coords[1], place.venue.location.lat, place.venue.location.lng)
                         console.log('WE ARE THIS FAR APART ', distance)
                         //props.addCheckIn(props.user, place.venue)
+                        //uncomment this line to be able to check-in without verification
                         if(distance < 0.0005)
                         {   
                             const bundle = { id: place.venue.id, status: 'FULFILLED' }
