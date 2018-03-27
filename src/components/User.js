@@ -4,7 +4,6 @@ import { arrowLeft, arrowRight, shepard } from '../Assets'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
-import history from '../store/history'
 
 const style = {
   width: '100vw',
@@ -16,15 +15,15 @@ const style = {
   textAlign: 'center',
 }
 class User extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: '',
       character: 'shepard1',
       address: '',
       city: '',
       state: '',
-      zip: 0
+      zip: 0,
     }
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -32,10 +31,11 @@ class User extends Component {
   }
 
   handleSubmitForm(evt) {
-    const { address, city, state, zip } = this.state
-    const { editUser, user } = this.props
+    evt.preventDefault();
+    const { address, city, state, zip, username } = this.state
+    const { editUser, user, history } = this.props
     const addressStr = `${address},${city},${state},${zip}`;
-    editUser({address: addressStr, username: this.state.username}, user.id)
+    editUser({address: addressStr, username: username}, user.id)
     history.push(`/profile/users/${user.id}`)
   }
 
@@ -113,9 +113,9 @@ class User extends Component {
               required
             />
             <br />
-            <button>
-              Play Now
-            </button>
+              <button>
+                Play Now
+              </button>
           </form>
         </div>
       </div>
@@ -123,11 +123,7 @@ class User extends Component {
   }
 }
 
-const mapProps = ({ user }) => {
-  return {
-    user
-  }
-};
+const mapProps = ({ user }) => ({ user })
 
 const mapDispatch = dispatch => ({
   editUser: (user, userId) => dispatch(editUser(user, userId))

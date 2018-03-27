@@ -7,7 +7,6 @@ import { serverUrl } from './'
  * ACTION TYPES
  */
 const GET_USER = 'GET_USER'
-const UPDATE_USER = 'UPDATE_USER'
 const REMOVE_USER = 'REMOVE_USER'
 
 /**
@@ -19,7 +18,6 @@ const defaultUser = {}
  * ACTION CREATORS
  */
 const getUser = user => ({ type: GET_USER, user })
-const updateUser = user => ({ type: UPDATE_USER, user })
 const removeUser = () => ({ type: REMOVE_USER })
 
 /**
@@ -52,12 +50,6 @@ export const auth = (email, password, method) => dispatch =>
     })
     .catch(dispatchOrHistoryErr => console.error(dispatchOrHistoryErr))
 
-export const editUser = (user, userId) => dispatch => 
-  axios.put(`${serverUrl}/api/users/${userId}`, user)
-    .then(res => res.data)
-    .then(editedUser => dispatch(updateUser(editedUser)))
-    .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
-
 export const logout = () => dispatch => 
     axios({
       method: 'post',
@@ -67,24 +59,12 @@ export const logout = () => dispatch =>
       .then(_ => dispatch(removeUser()))
       .catch(err => console.log(err))
 
-// {
-//   console.log("where are you?")
-//   axios.post(`${serverUrl}/auth/logout`)
-//     .then(_ => {
-//       console.log("are you there yet?")
-//       dispatch(removeUser())
-//       history.push('/')
-//     })
-//     .catch(err => console.log(err))
-//   }
 /**
  * REDUCER
  */
 export default function (state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
-    case UPDATE_USER:
       return action.user
     case REMOVE_USER:
       return defaultUser

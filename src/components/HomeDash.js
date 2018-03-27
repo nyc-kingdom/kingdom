@@ -13,9 +13,8 @@ class Home extends Component {
     super(props)
     this.renderWithKingdom = this.renderWithKingdom.bind(this)
     this.state = {
-      dashMode: 'closed'
+      dashMode: 'closed',
     }
-
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -24,7 +23,7 @@ class Home extends Component {
       <div>
         {
           !this.props.user.kingdomId
-            ? <User />
+            ? <User history={this.props.history}/>
             : this.renderWithKingdom()
         }
       </div>
@@ -80,12 +79,10 @@ class Home extends Component {
 }
 
 const mapProps = state => {
-
   return {
     user: state.user,
     trackLocation: state.trackLocation,
     checkIns: state.checkins
-
   }
 }
 
