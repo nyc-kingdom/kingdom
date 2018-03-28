@@ -1,7 +1,6 @@
 import { serverUrl } from './'
 
 const axios = require('axios')
-const request = require('request');
 const ADD_MARKER = 'ADD_MARKER'
 
 

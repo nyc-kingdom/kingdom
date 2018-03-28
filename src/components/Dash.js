@@ -15,9 +15,6 @@ export class Dash extends React.Component {
     }
 
     render() {
-
-        const user = this.props.user
-        const userInput = this.state.userInput
         return (
             <div id="Dash" className={this.props.mode} onClick = {
                 (e)=>{e.target.className=e.target.className==='closed'?'active':'closed'
@@ -35,8 +32,7 @@ export class Dash extends React.Component {
                     <button onClick={() => {
 
                         if(Date.now() - 180000 < this.props.location.timeStamp){
-                            console.log('You logged your location recently enough to check-in, ', this.props.location)
-                            this.props.queryMarkers(this.state.userInput, this.props.user, this.props.location.coords)
+                            this.props.queryMarkers(this.state.userInput, this.props.user, this.props.location.coords) 
                         }
                         else if(Date.now() - 180000 > this.props.location.timeStamp && this.props.location.status==='LOCATIONFOUND'){
                             this.props.trackLocation()
@@ -46,7 +42,7 @@ export class Dash extends React.Component {
                     }}>{this.props.location.status==='FINDINGLOCATION'? 'LOADING': 'Let\'s Search!' }</button>
                     {this.props.markers.length>0 && this.props.markers.map(eachMarker => (
                         <div className = 'listicle'>
-                            <Link  key={eachMarker.venue.id} to={`/dashboard/selectedView/${eachMarker.venue.id}`}>{eachMarker.venue.name}  {eachMarker.venue.rating}</Link>
+                            <Link key={eachMarker.venue.id} to={`/dashboard/selectedView/${eachMarker.venue.id}`}><div className='queryRec'>{eachMarker.venue.name} {eachMarker.venue.rating}</div></Link>
                             <div className='subHeader'>{eachMarker.venue.categories[0].name}</div>
                         </div>
                     ))}

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { addCheckIn } from '../store'
-import { setLocation, setLocationThunk } from '../store/trackLocation'
+import { setLocationThunk } from '../store/trackLocation'
 import { verifyCheckIn } from '../store/gameplay'
 import distanceCalc from '../functions/distanceCalc'
 
@@ -31,12 +31,12 @@ const Spotlight = props => {
                      {props.location.status === 'LOCATIONFOUND' ?
                 <button className='powerButton' onClick={() => {
                     if (Date.now() - 180000 > props.location.timeStamp) {
-                        this.props.setLocation()
+                        props.setLocation()
                     }
                     else {
                         const distance = distanceCalc(props.location.coords[0], props.location.coords[1], place.venue.location.lat, place.venue.location.lng)
                         console.log('WE ARE THIS FAR APART ', distance)
-                        //props.addCheckIn(props.user, place.venue)
+                        props.addCheckIn(props.user, place.venue)
                         //uncomment this line to be able to check-in without verification
                         if(distance < 0.0005)
                         {

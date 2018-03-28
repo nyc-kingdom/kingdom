@@ -319,13 +319,18 @@ h1, h2, h3 {
 
 .listicle{
   display: block;
-  border-bottom: 1px solid whitesmoke;
-  height: 4vh;
+  border-bottom: 2px solid whitesmoke;
+  height: 5vh;
   padding: 1vh;
+}
+
+.queryRec{
+  font-size: 14px;
   text-decoration: none;
-  color: black
+  color: rgb(10, 2, 80)
 }
 
 .subHeader{
   font-size: 12px;
+  color: rgb(75, 74, 74)
 }

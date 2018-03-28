@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 const SET_LOCATION = 'SET_LOCATION';
 const SET_LOADING = 'SET_LOADING';
 

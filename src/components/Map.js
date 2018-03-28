@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
-import { blueWater, unsaturatedBrowns, greenTheme, dark } from '../Assets/mapTheme'
+import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld } from '../Assets/mapTheme'
 import { Markers } from './'
 import {setMapStatus} from '../store/mapStatus'
-
-const mapThemes = {blueWater: blueWater, greenTheme: greenTheme, dark: dark}
 
 
 
@@ -49,10 +47,9 @@ export class Map extends Component {
   render() {
 
     //UPDATE MAP LOGIC
-    const turn = Math.floor(this.props.establishments.length/10)%3
-    console.log('What is ', turn)
-    const theme = ['blueWater', 'greenTheme', 'dark'][turn]
-    console.log('TODAYS MAP IS ', theme)
+    const turn = Math.floor(this.props.establishments.length/10)%6
+    console.log('Today\'s map is ', turn)
+    const theme = [ blueWater, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
 
     // this.updateMapTheme()
@@ -71,7 +68,7 @@ export class Map extends Component {
           heatmapLibrary={true}
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
-          options={mapThemes[this.props.mapStatus]}
+          options={theme}
           >
           {
             this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
