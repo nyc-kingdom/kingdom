@@ -38,6 +38,11 @@ import financialDistrictS from './kingdoms/financialDistrictS.png';
 import financialDistrictMarker from './kingdoms/financialDistrictMarker.gif';
 import financialDistrictEst from './kingdoms/financialDistrictEst.png';
 
+import sample from './kingdoms/sample.png';
+import leffertsGardenMarker from './kingdoms/leffertsGardenMarker.gif';
+import leffertsGardenEst from './kingdoms/leffertsGardenEst.png';
+
+
 import lynbrookS from './kingdoms/lynbrookS.png';
 import lynbrookMarker from './kingdoms/lynbrookMarker.gif';
 import lynbrookEst from './kingdoms/lynbrookEst.png';
@@ -56,7 +61,6 @@ import test from './kingdoms/test.gif';
 import searchResult from './kingdoms/SearchMarker.gif';
 import defaultEst from './kingdoms/castleTower.png';
 
-import sample from './kingdoms/sample.png';
 import sample3 from './kingdoms/sample3.png';
 import sample4 from './kingdoms/sample4.png';
 import sample5 from './kingdoms/sample5.png';
@@ -71,14 +75,15 @@ const userClass = {
 
 //kingdom shields
 const kingdomMark = {
-    undefinedKingdom: {1: defaultS, 2: sample, 3: sample3, 4: sample4, 5: sample5},
+    undefinedKingdom: {1: defaultS, 2: sample3, 3: sample4, 4: sample5},
     Bedford: bedfordS,
     Bushwick: bushwickS,
     'Financial District': financialDistrictS,
+    'Lefferts Gardens': sample,
     Lynbrook: lynbrookS,
     Astoria: ravenswoodS,
     Ravenswood: ravenswoodS,
-    'South Slope': southSlopeS
+    'South Slope': southSlopeS,
 }
 
 const markersImages = {
@@ -86,6 +91,7 @@ const markersImages = {
     Ravenswood: ravenswoodMarker,
     none: test,
     undefinedKingdom: test,
+    'Lefferts Gardens': leffertsGardenMarker,
     Lynbrook: financialDistrictMarker,
     'South Slope': southSlopeMarker,
     Bushwick: bushwickMarker,
@@ -97,6 +103,7 @@ const estCastle = {
     Ravenswood: ravenswoodEst,
     none: defaultEst,
     undefinedKingdom: defaultEst,
+    'Lefferts Gardens': leffertsGardenEst,
     Lynbrook: lynbrookEst,
     'South Slope': southSlopeEst,
     Bushwick: bushwickEst,
