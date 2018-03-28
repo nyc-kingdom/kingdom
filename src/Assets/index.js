@@ -86,6 +86,10 @@ const kingdomMark = {
     'South Slope': southSlopeS,
     'Bath Beach' : sample5,
     'Ocean Hill' : sample3,
+    meeren: sample,
+    arlen: sample,
+    qarth: sample,
+    dragonstone: sample
 }
 
 const markersImages = {
@@ -97,7 +101,11 @@ const markersImages = {
     Lynbrook: lynbrookMarker,
     'South Slope': southSlopeMarker,
     Bushwick: bushwickMarker,
-    Astoria: ravenswoodMarker
+    Astoria: ravenswoodMarker,
+    meeren: test,
+    arlen: test,
+    qarth: test,
+    dragonstone: test
 }
 
 const estCastle = {
@@ -110,7 +118,11 @@ const estCastle = {
     'South Slope': southSlopeEst,
     Bushwick: bushwickEst,
     Astoria: ravenswoodEst,
-    'Financial District': financialDistrictEst
+    'Financial District': financialDistrictEst,
+    meeren: defaultEst,
+    arlen: defaultEst,
+    qarth: defaultEst,
+    dragonstone: defaultEst
 }
 
 export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult, swordSingleButton, markersImages, estCastle };
