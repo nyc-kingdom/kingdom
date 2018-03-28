@@ -75,7 +75,7 @@ const userClass = {
 
 //kingdom shields
 const kingdomMark = {
-    undefinedKingdom: {1: defaultS, 2: sample3, 3: sample4, 4: sample5},
+    undefinedKingdom: {1: defaultS, 2: sample4},
     Bedford: bedfordS,
     Bushwick: bushwickS,
     'Financial District': financialDistrictS,
@@ -84,6 +84,8 @@ const kingdomMark = {
     Astoria: ravenswoodS,
     Ravenswood: ravenswoodS,
     'South Slope': southSlopeS,
+    'Bath Beach' : sample5,
+    'Ocean Hill' : sample3,
 }
 
 const markersImages = {
