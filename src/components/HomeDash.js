@@ -44,24 +44,20 @@ class Home extends Component {
             if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
             else this.setState({ dashMode: 'closed' })
           }}>
-          <br />
           <img src={sword} className="blip" />
         </div>
         <Link to={`/profile/users/${this.props.user.id}`}>
           <div id="gem" className="circle">
-            <br />
             <img src={gem} className="blip" />
           </div>
         </Link>
         <Link to={'/leaderboard'}>
-          <div id="castle">
-            <br />
+          <div id="castle" className="circle">
             <img src={castle} className="blip" />
           </div>
         </Link>
         <Link to={`/profile/kingdoms/${this.props.user.kingdomId}`}>
           <div id="shield" className="circle">
-            <br />
             <img src={bridgeShield} className="blip" />
           </div>
         </Link>

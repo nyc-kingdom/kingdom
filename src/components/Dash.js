@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createMarker, addCheckIn, queryMarkers, getUserCheckIns, setLocationThunk, setLocation } from '../store';
-
+import { addCheckIn, queryMarkers, getUserCheckIns, setLocationThunk, verifyCheckIn } from '../store';
+import ruby from '../Assets/Resources/gem.png'
 
 export class Dash extends React.Component {
 
@@ -10,7 +10,7 @@ export class Dash extends React.Component {
         super(props)
         this.state = {
             queriedMarkers: [],
-            userInput: ''
+            userInput: '',
         }
     }
 
@@ -18,11 +18,15 @@ export class Dash extends React.Component {
         return (
             <div id="Dash" className={this.props.mode} onClick = {
                 (e)=>{e.target.className=e.target.className==='closed'?'active':'closed'
-            }}>
+            }}> 
+                    {this.props.verifyCheckIn.status==='HACKED' && <div className='powerButton'>YOU ARE NOW WORKING IN HACKED MODE - USER MAY NOW CHECK-IN WHEREVER THEY CHOOSE</div>}
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                         <h2 style={{flex:3}}>{'Welcome ' + this.props.user.username + '!'}</h2>
                         <button style={{flex:1}} onClick={()=>{this.props.getUserCheckIns(this.props.user)}}><img src={require('../Assets/iconButtons/sword.png')} />SYNC MY CHECK-INS</button>
                     </div>
+                    <button onClick={()=>{ let bundle = this.props.verifyCheckIn.status==='HACKED'? { id: '1000', status: 'OPEN' } : { id: '1000', status: 'HACKED' }
+                            this.props.verify(bundle)}} 
+                        style={{position: 'absolute', right: 0, top: '35vh', maxWidth: '12vw'}}><img src={ruby}/>TURN OFF CHECK-IN VERIFICATION</button>
                     {this.props.location.status==='FINDINGLOCATION' && <img style={{display:'block', padding: '5vh'}} src={require('../Assets/characters/knightsword.gif')}/>}
                     <input
                         id='userInput'
@@ -55,17 +59,15 @@ export class Dash extends React.Component {
 const mapProps = state => ({
     markers: state.markers,
     user: state.user,
-    location: state.trackLocation
+    location: state.trackLocation,
+    verifyCheckIn: state.verify
 })
 
 const mapDispatch = dispatch => ({
-    createMarker: marker => dispatch(createMarker(marker)),
-    checkIn: (user, place) => dispatch(addCheckIn(user, place)),
     queryMarkers: (userInput, users, location) => dispatch(queryMarkers(userInput, users, location)),
     getUserCheckIns: users => dispatch(getUserCheckIns(users)),
     trackLocation: () => dispatch(setLocationThunk()),
-    setLocation: (location) => dispatch(setLocation(location))
-
+    verify: bundle => { dispatch(verifyCheckIn(bundle)) }
 })
 
 export default connect(mapProps, mapDispatch)(Dash)

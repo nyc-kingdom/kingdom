@@ -29,7 +29,7 @@ export class Markers extends Component {
                         <div>
                             {
                                 this.props.select === this.props.establishmentId &&
-                                <div id="establishment" style={{ fontFamily: 'Apple Chancery, cursive', top: -100, left: -17 }}>
+                                <div className="establishmentCard">
                                     <h3>{this.props.establishmentName}</h3>
                                     <Link to={`/profile/establishments/${this.props.establishmentId}`}>Details</Link>
                                     <br />
@@ -44,7 +44,7 @@ export class Markers extends Component {
                                                 </div>
                                         }
                                     </div>
-                                    <img style={{ width: '5vw', height: 'auto' }} src={markersImages[allegiance]} />
+                                    <img style={{ width: '5vw', height: 'auto', padding: '5px' }} src={markersImages[allegiance]} />
 
                                     <br />
                                     <button
@@ -59,9 +59,9 @@ export class Markers extends Component {
                                                     name: this.props.establishmentName
                                                 }
                                             )
-                                        }} >Check in here</button>
+                                        }} >Check in here!</button>
                                     <br />
-                                    <button onClick={() => { this.props.cb(this.props.establishmentId) }}>Close</button>
+                                    <button className = 'escape' onClick={() => { this.props.cb(this.props.establishmentId) }}>X</button>
                                 </div>
                             }
                             <img onClick={() => { this.props.cb(this.props.establishmentId) }} src={markersImages[allegiance]} className="checkIn" />

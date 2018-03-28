@@ -5,7 +5,7 @@ import socket from '../sockets'
 
 //FUNCTIONALITY
 import {verifyCheckIn} from './gameplay'
-import {paintEstablishment} from './establishments'
+import {paintEstablishment, fetchEstablishments} from './establishments'
 import {createMarker} from './markers'
 
 /**
@@ -41,9 +41,13 @@ export const addCheckIn = (user, place, history) => dispatch => {
           .then(newCheckin => {
             dispatch(createCheckin(newCheckin))
             socket.emit('new-checkIn', newCheckin)
-            dispatch(paintEstablishment(newCheckin.establishment))
-            dispatch(createMarker([]))
-            dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
+            //dispatch(paintEstablishment(newCheckin.establishment))
+            return axios.get(`${serverUrl}/api/establishments/${newCheckin.establishment.id}`)
+            .then(establishment=>establishment.data).then(establishment=>{
+              dispatch(paintEstablishment(establishment))
+              dispatch(createMarker([]))
+              dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
+            })
           })
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
 }
