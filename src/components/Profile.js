@@ -177,7 +177,7 @@ export class Profile extends React.Component {
                         <span>
                             {
                                 whatProfile === "kingdom"
-                                    ? "Total Est"
+                                    ? "Total Colonies"
                                     : whatProfile === "user"
                                         ? "Est. Found"
                                         : "Total Attack"
@@ -188,7 +188,8 @@ export class Profile extends React.Component {
                         <span>
                             {
                                 whatProfile === "kingdom"
-                                    ? this.props.establishments.filter(establishment => establishment.allegiance === main.name).length
+                                    ? this.props.establishments
+                                        .filter(establishment => establishment.kingdom === main.name && establishment.allegiance === main.name)
                                     : whatProfile === "user"
                                         ? main.checkins.length
                                         : 0
@@ -222,7 +223,7 @@ export class Profile extends React.Component {
     levelUpPoints(main, kingdomKing){
         const { one, kingdoms, establishments } = this.props
         return one === 'kingdom' 
-            ? kingdoms.reduce((accu, curr) => curr.power >= accu.power ? curr : accu, 0)
+            ? kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0)
             : one === 'establishment'
                 ? establishments.reduce((accu, curr) => curr.popularity >= accu ? curr.popularity : accu, 0)
                 : kingdomKing.experience
