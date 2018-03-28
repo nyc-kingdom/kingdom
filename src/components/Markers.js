@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { ravenswoodMarker, test, financialDistrictMarker, cityHallMarker, bushwickMarker, searchResult, blacksmith, knight, markersImages } from '../Assets';
+import { searchResult, markersImages } from '../Assets';
 import { addCheckIn } from '../store';
 
 export class Markers extends Component {
@@ -14,7 +14,6 @@ export class Markers extends Component {
     }
 
     render() {
-        console.log(this.props, 'props within marker')
         const style = { height: '4vh', width: '2.5vw' }
         const searchView = { height: '8vh', width: '5vw' }
 
@@ -31,11 +30,37 @@ export class Markers extends Component {
                             {
                                 this.props.select === this.props.establishmentId &&
                                 <div id="establishment" style={{ fontFamily: 'Apple Chancery, cursive', top: -100, left: -17 }}>
-                                    <h1>{this.props.establishmentName}</h1>
-                                    <Link to={`/profile/establishments/${this.props.establishmentId}`} ><h2>Details</h2></Link>
-                                    <h2>Allegiance: {allegiance}</h2>
-                                    <img src={markersImages[allegiance]} />
+                                    <h3>{this.props.establishmentName}</h3>
+                                    <Link to={`/profile/establishments/${this.props.establishmentId}`}>Details</Link>
+                                    <br />
+                                    <div>
+                                        {
+                                            allegiance === 'none'
+                                                ? ''
+                                                :
+                                                <div>
+                                                    {allegiance} <br /> Kingdom
+                                                    <br />
+                                                </div>
+                                        }
+                                    </div>
+                                    <img style={{ width: '5vw', height: 'auto' }} src={markersImages[allegiance]} />
 
+                                    <br />
+                                    <button
+                                        className='powerButtonEst'
+                                        onClick={() => {
+                                            this.props.addCheckIn(
+                                                this.props.user,
+                                                {
+                                                    id: this.props.fourSquareId,
+                                                    location:
+                                                        { latitude: this.props.lat, longitude: this.props.lng },
+                                                    name: this.props.establishmentName
+                                                }
+                                            )
+                                        }} >Check in here</button>
+                                    <br />
                                     <button onClick={() => { this.props.cb(this.props.establishmentId) }}>Close</button>
                                 </div>
                             }
@@ -58,7 +83,3 @@ const mapDispatch = (dispatch, ownProps) => ({
 })
 
 export default connect(mapProps, mapDispatch)(Markers)
-
-// <button onClick={() => {
-//     this.props.addCheckIn(this.props.user.id, this.props.fourSquareId )
-// }} >Check in to {this.props.establishmentName}</button>

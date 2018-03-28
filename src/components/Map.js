@@ -72,7 +72,7 @@ export class Map extends Component {
           >
           {
             this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
-              
+
               <Markers
                 key={eachMarker.id}
                 lat={eachMarker.latitude}
@@ -85,7 +85,7 @@ export class Map extends Component {
                 select={this.state.select}
                 cb={this.changeView.bind(this)}
               />
-              
+
             )
             )
           }
