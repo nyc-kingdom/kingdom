@@ -218,6 +218,16 @@ h1, h2, h3 {
   background-color: rgba(205, 134, 63, 0.4);
   top: 30vh;
   flex: 1 1;
+  display: flex;
+  align-content: center;
+  height: 70px;
+  width: 70px;
+  border: 1px solid white;
+  border-radius: 70px;
+  opacity: 0.4;
+  position: fixed;
+  z-index: 100;
+  left: 2.5vw;
 }
 
 #shield {
@@ -227,10 +237,16 @@ h1, h2, h3 {
 }
 
 #logout {
-  background-color: #c52830e1;
-  top: 54vh;
+  bottom: 5vh;
+  display: flex;
   flex: 1 1;
-  color: black;
+  color: red;
+  text-align: center;
+  align-content: center;
+  opacity: 0.4;
+  position: fixed;
+  z-index: 100;
+  left: 5vw;
 }
 
 #newUser {
@@ -248,8 +264,8 @@ h1, h2, h3 {
 
 #logo {
   position: fixed;
-  left: 25vw;
-  top: -4vh;
+  left: 27vw;
+  top: -1vh;
   z-index: 100;
   font-size: 150%;
 }
