@@ -265,11 +265,15 @@ h1, h2, h3 {
 
 #logo {
   position: fixed;
-  left: 27vw;
+  left: 25vw;
   top: -1vh;
   z-index: 100;
   font-size: 150%;
+  font-family: Apple Chancery, cursive;
+  text-align: center;
+  font-size: 36px;
 }
+
 
 .marker {
   background-image: url('https://cdn3.iconfinder.com/data/icons/glypho-travel/64/history-castle-tower-512.png');
