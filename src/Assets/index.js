@@ -94,7 +94,7 @@ const markersImages = {
     none: test,
     undefinedKingdom: test,
     'Lefferts Gardens': leffertsGardenMarker,
-    Lynbrook: financialDistrictMarker,
+    Lynbrook: lynbrookMarker,
     'South Slope': southSlopeMarker,
     Bushwick: bushwickMarker,
     Astoria: ravenswoodMarker
