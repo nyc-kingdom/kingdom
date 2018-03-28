@@ -28,30 +28,21 @@ const Spotlight = props => {
 
                 <div style={{padding: '20px'}}><h2 style={{display: 'inline', margin: '5px'}}>{place.venue.name}</h2> {place.venue.price && <h2 style={{display: 'inline'}}>{'      ' + '$'.repeat(place.venue.price.tier)}</h2>}</div>
 
-                     {props.location.status === 'LOCATIONFOUND' ?
+        {props.location.status === 'LOCATIONFOUND' ?
                 <button className='powerButton' onClick={() => {
+                    if(props.verifyCheckIn.status==='HACKED') props.addCheckIn(props.user, place.venue)
+                        //uncomment this line to be able to check-in without verification
                     if (Date.now() - 180000 > props.location.timeStamp) {
                         props.setLocation()
                     }
                     else {
                         const distance = distanceCalc(props.location.coords[0], props.location.coords[1], place.venue.location.lat, place.venue.location.lng)
                         console.log('WE ARE THIS FAR APART ', distance)
-                        props.addCheckIn(props.user, place.venue)
-                        //uncomment this line to be able to check-in without verification
-                        if(distance < 0.0005)
-                        {
-                            const bundle = { id: place.venue.id, status: 'FULFILLED' }
-                            props.verify(bundle)
-                        }
-                        else{
-                            const bundle = {id: place.venue.id, status: 'FAILURE'}
-                            props.verify(bundle)
-                        }
-
+                        let bundle
+                            bundle = distance < 0.0005 ? { id: place.venue.id, status: 'FULFILLED' } : {id: place.venue.id, status: 'FAILURE'}
+                        props.verify(bundle)
                     }
-                }}>Check in here </button>
-                :
-                        <button>SWORD IN THE STONE</button>
+                }}>Check in here </button> : <button>SWORD IN THE STONE</button>
         }
 
         <h4 className='spot'>{place.venue.stats.checkinsCount + ' people have checked in here.'}</h4>
