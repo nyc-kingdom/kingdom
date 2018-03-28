@@ -4,10 +4,11 @@ import { arrowLeft, arrowRight, shepard } from '../Assets'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
+import { bridgeShield } from '../Assets'
 
 const style = {
   width: '100vw',
-  height: '40vh',
+  height: '35vh',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
@@ -61,60 +62,62 @@ class User extends Component {
               : this.props.user.email
           }
         </h1>
-        <br />
-        <br />
         <div style={style}>
           <img
             src={shepard}
             name="shepard1"
           />
-          <br />
         </div>
         <div>
           <h2>Enter your info to generate your profile</h2>
           <form style={{ textAlign: 'center' }} onSubmit={this.handleSubmitForm}>
-          <label>Username:</label>
+          {/* <label>Username :</label> */}
             <input
               name="username"
               onChange={this.handleChange}
               type="text"
               required
+              placeholder="username"
             />
-            <br />
-          <label>Address:</label>
+            <div style={{height: '1vh'}} />
+          {/* <label>Address :</label> */}
             <input
               name="address"
               onChange={this.handleChange}
               type="text"
               required
+              placeholder="Street"
             />
-            <br />
-            <label>City:</label>
+            <div style={{height: '1vh'}} />
+            {/* <label>City :</label> */}
             <input
               name="city"
               onChange={this.handleChange}
               type="text"
               required
+              placeholder="City"
             />
-            <br />
-            <label>State:</label>
+            <div style={{height: '1vh'}} />
+            {/* <label>State :</label> */}
             <input
               name="state"
               onChange={this.handleChange}
               type="text"
               required
+              placeholder="State"
             />
-            <br />
-            <label>Zip:</label>
+            <div style={{height: '1vh'}} />
+            {/* <label>Zip :</label> */}
             <input
               name="zip"
               onChange={this.handleChange}
-              type="number"
+              type="text"
               required
+              placeholder="Zip Code"
             />
-            <br />
+            <div style={{height: '2vh'}} />
               <button>
-                Play Now
+                <img src={bridgeShield}/>
               </button>
           </form>
         </div>
