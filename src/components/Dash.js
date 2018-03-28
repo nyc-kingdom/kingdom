@@ -29,7 +29,7 @@ export class Dash extends React.Component {
                         value={this.state.userInput}
                         onChange={evt => {this.setState({userInput: evt.target.value})}}
                     />
-                    <button onClick={() => { 
+                    <button onClick={() => {
 
                         if(Date.now() - 180000 < this.props.location.timeStamp){
                             this.props.queryMarkers(this.state.userInput, this.props.user, this.props.location.coords) 
@@ -38,7 +38,7 @@ export class Dash extends React.Component {
                             this.props.trackLocation()
                         }
                         else console.log('You gotta wait for the navigator to be ready')
-                            
+
                     }}>{this.props.location.status==='FINDINGLOCATION'? 'LOADING': 'Let\'s Search!' }</button>
                     {this.props.markers.length>0 && this.props.markers.map(eachMarker => (
                         <div className = 'listicle'>
@@ -47,7 +47,7 @@ export class Dash extends React.Component {
                         </div>
                     ))}
                 </div>
-            
+
         )
     }
 }
@@ -60,7 +60,7 @@ const mapProps = state => ({
 
 const mapDispatch = dispatch => ({
     createMarker: marker => dispatch(createMarker(marker)),
-    checkIn: (user, place) => dispatch(addCheckIn(user,place)),
+    checkIn: (user, place) => dispatch(addCheckIn(user, place)),
     queryMarkers: (userInput, users, location) => dispatch(queryMarkers(userInput, users, location)),
     getUserCheckIns: users => dispatch(getUserCheckIns(users)),
     trackLocation: () => dispatch(setLocationThunk()),

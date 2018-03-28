@@ -36,13 +36,11 @@ const muiTheme = getMuiTheme(
 });
 
 ReactDOM.render(
-  <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
   <Provider store={store}>
     {/* <Router history={history}> */}
      <App />
     {/* </Router> */}
-  </Provider>
-  </MuiThemeProvider>,
+  </Provider>,
   document.getElementById('root'),
 );
 registerServiceWorker();

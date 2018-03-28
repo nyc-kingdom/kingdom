@@ -54,7 +54,7 @@ class Home extends Component {
           </div>
         </Link>
         <Link to={'/leaderboard'}>
-          <div id="castle" className="circle">
+          <div id="castle">
             <br />
             <img src={castle} className="blip" />
           </div>
@@ -65,13 +65,12 @@ class Home extends Component {
             <img src={bridgeShield} className="blip" />
           </div>
         </Link>
-
-        <div id="logout" className="circle" onClick={this.handleClick}>
-          <p>Logout</p>
+        <div id="logout" style={{fontFamily: 'Apple Chancery, cursive'}} onClick={this.handleClick}>
+          <h2>Logout</h2>
         </div>
         <Dash mode={this.state.dashMode} />
         <Map />
-        <Route path='/dashboard/selectedView/:id' component={Spotlight} />
+        <Route path="/dashboard/selectedView/:id" component={Spotlight} />
         <Ticker />
       </div>
     )
