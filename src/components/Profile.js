@@ -189,7 +189,7 @@ export class Profile extends React.Component {
                             {
                                 whatProfile === "kingdom"
                                     ? this.props.establishments
-                                        .filter(establishment => establishment.kingdom === main.name && establishment.allegiance === main.name)
+                                        .filter(establishment => establishment.kingdom !== establishment.allegiance).length
                                     : whatProfile === "user"
                                         ? main.checkins.length
                                         : 0
