@@ -57,7 +57,9 @@ const Spotlight = props => {
 const mapProps = (state, ownProps) => ({ markers: state.markers, user: state.user, location: state.trackLocation, verifyCheckIn: state.verify, redirect: ownProps.history })
 
 const mapDispatch = (dispatch, ownProps) => ({
-    addCheckIn: (user, place) => { dispatch(addCheckIn(user, place, ownProps.history)) },
+    addCheckIn: (user, place) => {
+        console.log(user, place, 'info from a checkin')
+        dispatch(addCheckIn(user, place, ownProps.history)) },
     setLocation: location => { dispatch(setLocationThunk()) },
     verify: bundle => { dispatch(verifyCheckIn(bundle)) }
 })
