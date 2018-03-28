@@ -26,10 +26,9 @@ export class Profile extends React.Component {
         console.log(this.props)
         const { ownKingdom, main, users } = this.props
         const whatProfile = this.props.one
-        const kingdomKing = !ownKingdom ? null : ownKingdom.users.reduce((accu, curr) => accu = curr.experience >= 0 ? curr : accu, {})
+        const kingdomKing = !ownKingdom ? null : ownKingdom.users.reduce((accu, curr) => curr.experience > accu.experience ? curr : accu)
         const points = whatProfile === "user" ? "experience" : whatProfile === "kingdom" ? "power" : "popularity"
         if(!main) return null
-        console.log(main)
         const levelUpPoints = this.levelUpPoints(main, kingdomKing)
         const level = whatProfile === "establishment" ? "Castle" : whatProfile === "kingdom" ?  "Great Kingdom" : !!kingdomKing ? this.userLevel(main, kingdomKing) : null
         const keeper = whatProfile === "establishment" ? users.find(user => user.id === main.keeper) : null
@@ -189,7 +188,8 @@ export class Profile extends React.Component {
                             {
                                 whatProfile === "kingdom"
                                     ? this.props.establishments
-                                        .filter(establishment => establishment.kingdom !== establishment.allegiance).length
+                                        .filter(establishment => establishment.kingdom !== establishment.allegiance && establishment.allegiance === main.id)
+                                        .length
                                     : whatProfile === "user"
                                         ? main.checkins.length
                                         : 0
