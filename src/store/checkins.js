@@ -35,10 +35,10 @@ export const fetchCheckins = () => dispatch =>
 
 export const addCheckIn = (user, place, history) => dispatch => {
         const checkInBundle = { user, place }
-        console.log(checkInBundle, 'checkin bundle in thunk')
         return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
           .then(res => res.data)
           .then(newCheckin => {
+            console.log(newCheckin)
             dispatch(createCheckin(newCheckin))
             socket.emit('new-checkIn', newCheckin)
             //dispatch(paintEstablishment(newCheckin.establishment))
