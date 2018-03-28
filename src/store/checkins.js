@@ -47,8 +47,7 @@ export const addCheckIn = (user, place, history) => dispatch => {
             dispatch(paintEstablishment(newCheckin.establishment))
             dispatch(createMarker([]))
             dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
-            
-          }) 
+          })
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
 }
 
