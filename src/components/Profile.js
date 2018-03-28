@@ -155,13 +155,8 @@ export class Profile extends React.Component {
                                 whatProfile === "kingdom"
                                     ? main.domainSize
                                     : whatProfile === "user"
-                                        ? main.checkins
-                                            .filter(checkin =>
-                                                this.props.establishments
-                                                    .find(establishment =>
-                                                        establishment.id === checkin.establishmentId
-                                                        && establishment.keeper === main.id)
-                                            )
+                                        ? this.props.establishments
+                                            .filter(establishment => establishment.keeper === main.id)
                                             .length
                                         : main.checkins.reduce((accu, curr) => accu + curr.quantity, 0)
                             }
@@ -188,10 +183,12 @@ export class Profile extends React.Component {
                             {
                                 whatProfile === "kingdom"
                                     ? this.props.establishments
-                                        .filter(establishment => establishment.kingdom !== establishment.allegiance && establishment.allegiance === main.id)
+                                        .filter(establishment => establishment.kingdom !== establishment.allegiance && establishment.allegiance === main.name)
                                         .length
                                     : whatProfile === "user"
-                                        ? main.checkins.length
+                                        ? main.checkins
+                                            .reduce((accu, curr) => accu.includes(curr.establishmentId) ? accu : accu.concat(curr.establishmentId), [])
+                                            .length
                                         : 0
                             }
                         </span>
