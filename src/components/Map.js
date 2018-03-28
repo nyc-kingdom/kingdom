@@ -39,7 +39,7 @@ export class Map extends Component {
     //   }
     // }
     if (!this.state.check) {
-      if (this.state.date.getMinutes() >= 0 && this.state.date.getMinutes() < 20) this.setState({ options: unsaturatedBrowns, check: !this.state.check })
+      if (this.state.date.getMinutes() >= 0 && this.state.date.getMinutes() < 20) this.setState({ options: greenTheme, check: !this.state.check })
       if (this.state.date.getMinutes() > 20 && this.state.date.getMinutes() < 40) this.setState({ options: dark, check: !this.state.check })
       if (this.state.date.getMinutes() > 40 && this.state.date.getMinutes() <= 59) this.setState({ options: greenTheme, check: !this.state.check })
     }
