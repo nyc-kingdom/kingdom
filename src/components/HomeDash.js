@@ -34,11 +34,9 @@ class Home extends Component {
     return (
       <div id="HomeDash">
 
-        <div id="logo">
-          <h1 style={{ fontFamily: 'Apple Chancery, cursive', textAlign: 'center' }}>
+          <h1 id="logo" >
             Kingdom
           </h1>
-        </div>
         <div
           id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
             if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })

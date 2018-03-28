@@ -55,7 +55,7 @@ export class Markers extends Component {
                                                 {
                                                     id: this.props.fourSquareId,
                                                     location:
-                                                        { latitude: this.props.lat, longitude: this.props.lng },
+                                                        { lat: this.props.lat, lng: this.props.lng },
                                                     name: this.props.establishmentName
                                                 }
                                             )
