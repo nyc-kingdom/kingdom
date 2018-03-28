@@ -4,6 +4,7 @@ import GoogleMapReact from 'google-map-react'
 import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld } from '../Assets/mapTheme'
 import { Markers } from './'
 import {setMapStatus} from '../store/mapStatus'
+import knight from '../Assets/characters/knight.gif'
 
 
 
@@ -47,9 +48,9 @@ export class Map extends Component {
   render() {
 
     //UPDATE MAP LOGIC
-    const turn = Math.floor(this.props.establishments.length/10)%6
+    const turn = Math.floor(this.props.establishments.length/10)%7
     console.log('Today\'s map is ', turn)
-    const theme = [ blueWater, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
+    const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
 
     // this.updateMapTheme()
@@ -90,7 +91,8 @@ export class Map extends Component {
             )
           }
           {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
-            <Markers props={this.props}
+            <Markers 
+            // props={this.props}
               key={eachMarker.venue.id}
               lat={eachMarker.venue.location.lat}
               lng={eachMarker.venue.location.lng}
@@ -101,6 +103,7 @@ export class Map extends Component {
             />
           )
           )}
+          <div key={1111} lat={this.props.trackLocation.coords[0]} lng={this.props.trackLocation.coords[1]} ><img style={{maxHeight : '20px'}} src={knight}/></div>
         </GoogleMapReact>
       </div>
     );
