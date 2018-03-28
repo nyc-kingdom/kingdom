@@ -15,6 +15,7 @@ export class Profile extends React.Component {
         super(props)
         this.userLevel = this.userLevel.bind(this)
         this.renderWithItem = this.renderWithItem.bind(this)
+        this.levelUpPoints = this.levelUpPoints.bind(this)
     }
 
     componentDidMount() {
@@ -23,15 +24,15 @@ export class Profile extends React.Component {
 
     render() {
         console.log(this.props)
-        const ownKingdom = !this.props.ownKingdom ? null : this.props.ownKingdom
-        const kingdomKing = !ownKingdom ? null : ownKingdom.users.reduce((accu, curr) => accu = curr.experience >= 0 ? curr : accu, {})
+        const { ownKingdom, main, users } = this.props
         const whatProfile = this.props.one
+        const kingdomKing = !ownKingdom ? null : ownKingdom.users.reduce((accu, curr) => accu = curr.experience >= 0 ? curr : accu, {})
         const points = whatProfile === "user" ? "experience" : whatProfile === "kingdom" ? "power" : "popularity"
-        const levelUpPoints = 3000
-        const main = this.props.main
-        if (!main) return null
-        const level = whatProfile === "establishment" ? "Castle" : whatProfile === "kingdom" ? "Great Kingdom" : !kingdomKing ? null : this.userLevel(main, kingdomKing)
-        const keeper = whatProfile === "establishment" ? this.props.users.find(user => user.id === main.keeper) : null
+        if(!main) return null
+        console.log(main)
+        const levelUpPoints = this.levelUpPoints(main, kingdomKing)
+        const level = whatProfile === "establishment" ? "Castle" : whatProfile === "kingdom" ?  "Great Kingdom" : !!kingdomKing ? this.userLevel(main, kingdomKing) : null
+        const keeper = whatProfile === "establishment" ? users.find(user => user.id === main.keeper) : null
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -65,8 +66,8 @@ export class Profile extends React.Component {
                             />
                             <Link to={`/profile/users/${!kingdomKing ? null : kingdomKing.id}`}>
                                 <img
-                                    src={userClass.King}
-                                    style={{ width: '17vw', position: 'absolute', right: '5vw', top: '7vh' }}
+                                    src={!kingdomKing ? null : userClass.King}
+                                    style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
                                 />
                             </Link>
                             <span style={{ width: '13vw', position: 'absolute', right: '11vw', top: '20vh' }}>
@@ -187,7 +188,7 @@ export class Profile extends React.Component {
                         <span>
                             {
                                 whatProfile === "kingdom"
-                                    ? this.props.establishments.filter(establishment => establishment.allegiance === main.id).length
+                                    ? this.props.establishments.filter(establishment => establishment.allegiance === main.name).length
                                     : whatProfile === "user"
                                         ? main.checkins.length
                                         : 0
@@ -218,7 +219,17 @@ export class Profile extends React.Component {
         )
     }
 
-    userLevel(main, kingdomKing) {
+    levelUpPoints(main, kingdomKing){
+        const { one, kingdoms, establishments } = this.props
+        return one === 'kingdom' 
+            ? kingdoms.reduce((accu, curr) => curr.power >= accu.power ? curr : accu, 0)
+            : one === 'establishment'
+                ? establishments.reduce((accu, curr) => curr.popularity >= accu ? curr.popularity : accu, 0)
+                : kingdomKing.experience
+    }
+
+    userLevel(main, kingdomKing){
+        console.log(main)
         const points = !main ? 0 : main.experience
         const howManyEstablishments = !this.props.ownKingdom ? 0 : this.props.ownKingdom.domainSize
         const amIKing = !main ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === main.id
@@ -258,6 +269,7 @@ const mapProps = (state, ownProps) => {
         checkins: state.checkins,
         users: state.users,
         establishments: state.establishments,
+        kingdoms: state.kingdoms,
     }
 }
 
