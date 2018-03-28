@@ -82,7 +82,7 @@ const blueWater = {
 }
 
 const unsaturatedBrowns = {
-  [
+  styles: [
     {
         "featureType": "all",
         "elementType": "geometry",
