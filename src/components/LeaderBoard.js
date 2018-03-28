@@ -2,19 +2,12 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { userClass, kingdomMark, wolfShield, castle, castleTower } from '../Assets'
-
-const hardCoding = {
-    castle: "https://cdn3.iconfinder.com/data/icons/glypho-travel/64/history-castle-tower-512.png",
-    xButton: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons-256/ultra-glossy-silver-buttons-icons-alphanumeric/075091-ultra-glossy-silver-button-icon-alphanumeric-x-styled.png",
-}
+import { userClass, kingdomMark, wolfShield, castle, castleTower, markersImages, swordSingleButton } from '../Assets'
 
 export class LeaderBoard extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {
-            show: 'kingdoms'
-        }
+        this.state = { show: 'kingdoms' }
         this.handleSubmit = this.handleSubmit.bind(this)
         this.top10 = this.top10.bind(this)
         this.userLevel = this.userLevel.bind(this)
@@ -32,30 +25,37 @@ export class LeaderBoard extends React.Component {
                     <h2>Leader Boards</h2>
                 </div>
                 <form onClick={this.handleSubmit} style={{display: 'flex', textAlign: 'center'}} >
-                    <div style={{flex: 1}} >
+                    <div style={{flex: 1}} name="users" >
                         <button name="users">
-                            Users
+                            <div name="users">
+                                <img name="users" src={castle} style={{width: '10vw', height: '5vh'}}/>
+                            </div>
+                            <span name="users">Users</span>
                         </button>
                     </div>
-                    <div style={{flex: 1}}>
+                    <div style={{flex: 1}} name="kingdoms">
                         <button name="kingdoms">
-                            Kingdoms
+                            <div name="kingdoms">
+                                <img name="kingdoms" src={castle} style={{width: '10vw', height: '5vh'}}/>
+                            </div>
+                            <span name="kingdoms">Kingdoms</span>
                         </button>
                     </div>
-                    <div style={{flex: 1}}>
+                    <div style={{flex: 1}} name="establishments">
                         <button name="establishments">
-                            Establishments
+                            <div name="establishments">
+                            <img name="establishments" src={castle} style={{width: '10vw', height: '5vh'}}/>
+                            </div>
+                            <span name="establishments">Establishments</span>
                         </button>
                     </div>
                 </form>
                 <div>
-                    {
-                        !this.props.users ? null : this.top10()
-                    }
+                    {!this.props.users ? null : this.top10()}
                 </div>
                 <div style={{textAlign: 'center'}}>
                     <Link to='/dashboard'>
-                        <img src={hardCoding.xButton} style={{width: '11vw', height: '11vh'}}/>
+                        <img src={swordSingleButton}/>
                     </Link>
                 </div>
             </div>
@@ -74,13 +74,13 @@ export class LeaderBoard extends React.Component {
                 : chosenGroup.sort((a, b) => b[checkFor].reduce((accu, curr) => accu + curr[points], 0) - a[checkFor].reduce((accu, curr) => accu + curr[points], 0)).slice(0, 10)
         return (
             <div>
-                <div style={{height: '4vh'}}/>
+                <div style={{height: '2vh'}}/>
                 <div style={{display: 'flex', textAlign: 'center'}}>
                     <div style={{flex: 1}} >Rank</div>
                     <div style={{flex: 1}} >{chosen}</div>
                     <div style={{flex: 3}} >Name</div>
                 </div>
-                <div style={{height: '4vh'}}/>
+                <div style={{height: '2vh'}}/>
                 {
                     top10.map((one, index) => (
                         <div key={one.id} style={{display: 'flex', textAlign: 'center'}} >
@@ -93,7 +93,7 @@ export class LeaderBoard extends React.Component {
                                             ? kingdomMark[one.name]
                                             : chosen === "users"
                                                 ? userClass[this.userLevel(one.id)]
-                                                : hardCoding.castle}
+                                                : markersImages[!one.allegiance ? one.kingdom : one.allegiance]}
                                     />
                                 </Link>
                             </div>
@@ -107,7 +107,7 @@ export class LeaderBoard extends React.Component {
 
     handleSubmit(evt){
         evt.preventDefault()
-        this.setState({show: evt.target.name})
+        if(!!evt.target.name) this.setState({show: evt.target.name})
     }
 
     userLevel(userId){

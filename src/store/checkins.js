@@ -38,6 +38,7 @@ export const fetchCheckins = () => dispatch =>
 
 export const addCheckIn = (user, place, history) => dispatch => {
         const checkInBundle = { user, place }
+        console.log('Trying to check-in with ', checkInBundle)
         return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
           .then(res => res.data)
           .then(newCheckin => {
@@ -46,8 +47,8 @@ export const addCheckIn = (user, place, history) => dispatch => {
             dispatch(paintEstablishment(newCheckin.establishment))
             dispatch(createMarker([]))
             dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
-            console.log('THE CHECKIN JUST FINISHED, WE GOT A REPLY FROM OUR SERVER')
-          })
+            
+          }) 
           .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
 }
 

@@ -61,10 +61,10 @@ h1, h2, h3 {
 
 
 #Spotlight {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   position: absolute;
-  height: 25%;
+  min-height: 35vh;
   width: 98%;
   margin: 2px;
   text-align: center;
@@ -311,8 +311,21 @@ h1, h2, h3 {
 }
 
 .powerButton{
-  padding: 5px;
+  padding: 8px;
   border: 2px solid salmon;
   border-radius: 4px;
   font-size: 24px;
+}
+
+.listicle{
+  display: block;
+  border-bottom: 1px solid whitesmoke;
+  height: 4vh;
+  padding: 1vh;
+  text-decoration: none;
+  color: black
+}
+
+.subHeader{
+  font-size: 12px;
 }

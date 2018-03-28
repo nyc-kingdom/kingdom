@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { addCheckIn } from '../store'
-import { setLocation } from '../store/trackLocation'
+import { setLocation, setLocationThunk } from '../store/trackLocation'
 import { verifyCheckIn } from '../store/gameplay'
 import distanceCalc from '../functions/distanceCalc'
 
@@ -54,23 +54,22 @@ const Spotlight = props => {
                         }}>Check in here </button>
                         :
                         <button>SWORD IN THE STONE</button>
+        }
 
-                    }
-
-                    <h3 className='spot'>{place.venue.stats.checkinsCount + ' people have checked in here.'}</h3>
-                    {place.tips && place.tips.map((eachTip, index) => (<h4 key={index}>{eachTip.text}</h4>))}
-                    <Link id='clean' to='/dashboard' className="escape">X</Link>
-                </div>
-            )
-        } else { props.redirect.push('/dashboard'); return null } //EDGE CASE
-    }
+        <h4 className='spot'>{place.venue.stats.checkinsCount + ' people have checked in here.'}</h4>
+        {place.tips && place.tips.map((eachTip,index)=>(<div style={{paddingBottom: '20px'}} key={index}>{eachTip.text}</div>))}
+        <Link id='clean' to='/dashboard' className="escape">X</Link>
+    </div>
+    )
+} else {props.redirect.push('/dashboard') ; return null } //EDGE CASE
+}
 }
 
 const mapProps = (state, ownProps) => ({ markers: state.markers, user: state.user, location: state.trackLocation, verifyCheckIn: state.verify, redirect: ownProps.history })
 
 const mapDispatch = (dispatch, ownProps) => ({
     addCheckIn: (user, place) => { dispatch(addCheckIn(user, place, ownProps.history)) },
-    setLocation: location => { dispatch(setLocation(location)) },
+    setLocation: location => { dispatch(setLocationThunk()) },
     verify: bundle => { dispatch(verifyCheckIn(bundle)) }
 })
 
