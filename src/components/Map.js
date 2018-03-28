@@ -49,7 +49,7 @@ export class Map extends Component {
     //UPDATE MAP LOGIC
     const turn = Math.floor(this.props.establishments.length/10)%6
     console.log('Today\'s map is ', turn)
-    const theme = [ blueWater, greenTheme, autumnWorld, dark, midnight][turn]
+    const theme = [ blueWater, greenTheme, unsaturatedBrowns, autumnWorld, dark, midnight][turn]
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
 
     // this.updateMapTheme()
