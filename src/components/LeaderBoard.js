@@ -59,20 +59,18 @@ export class LeaderBoard extends React.Component {
     top10() {
         const chosen = this.state.show
         const chosenGroup = this.props[chosen]
+        const rankAbout = chosen === "kingdoms" ? "power" : chosen === "users" ? "experience" : "popularity"
         const points = chosen === "kingdoms" ? "experience" : "quantity"
         const checkFor = chosen === "kingdoms" ? "users" : "checkins"
-        const top10 = !chosenGroup
-            ? []
-            : chosen === "users"
-                ? chosenGroup.sort((a, b) => b.experience - a.experience).slice(0, 10)
-                : chosenGroup.sort((a, b) => b[checkFor].reduce((accu, curr) => accu + curr[points], 0) - a[checkFor].reduce((accu, curr) => accu + curr[points], 0)).slice(0, 10)
+        const top10 = !chosenGroup ? [] : chosenGroup.sort((a, b) => b[rankAbout] - a[rankAbout]).slice(0, 10)
         return (
             <div>
                 <div style={{ height: '2vh' }} />
                 <div style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}>
                     <div style={{ flex: 1 }} >Rank</div>
                     <div style={{ flex: 1 }} >{`${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
-                    <div style={{ flex: 3 }} >Name</div>
+                    <div style={{ flex: 4 }} >Name</div>
+                    <div style={{ flex: 1 }} >{rankAbout}</div>
                 </div>
                 <div style={{ height: '2vh' }} />
                 {
@@ -91,7 +89,8 @@ export class LeaderBoard extends React.Component {
                                     />
                                 </Link>
                             </div>
-                            <div style={{ flex: 3 }}>{chosen === "users" ? one.username : one.name}</div>
+                            <div style={{ flex: 4 }}>{chosen === "users" ? one.username : one.name}</div>
+                            <div style={{ flex: 1 }}>{one[rankAbout]}</div>
                         </div>
                     ))
                 }

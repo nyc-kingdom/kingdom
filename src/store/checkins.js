@@ -1,12 +1,9 @@
-'use strict'
-
 import axios from 'axios'
 import { serverUrl } from './'
 //SOCKET
-import socket from '../sockets.js'
+import socket from '../sockets'
 
 //FUNCTIONALITY
-import distanceCalc from '../functions/distanceCalc'
 import {verifyCheckIn} from './gameplay'
 import {paintEstablishment} from './establishments'
 import {createMarker} from './markers'
@@ -22,7 +19,7 @@ const CREATE_FOURSQUARE_CHECKINS = 'CREATE_FOURSQUARE_CHECKINS'
  * ACTION CREATORS
  */
 const getCheckins = checkins => ({ type: GET_CHECKINS, checkins })
-const createFoursquareCheckins = checkins => ({ type: CREATE_FOURSQUARE_CHECKINS, checkins })
+export const createFoursquareCheckins = checkins => ({ type: CREATE_FOURSQUARE_CHECKINS, checkins })
 export const createCheckin = checkin => ({ type: CREATE_CHECKIN, checkin })
 
 /**

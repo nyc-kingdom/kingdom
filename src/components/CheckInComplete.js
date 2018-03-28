@@ -12,6 +12,7 @@ const Success = props => {
     <div id='Spotlight'>
         <h3>CONGRATULATIONS YOU SUCCESSFULLY CHECKED IN, PLEASE PICK AN ITEM</h3>
         <button className='powerButton' onClick={() => { props.addCheckIn(props.user, props.venue) }}>CONFIRM</button>
+        <Link id='clean' to='/dashboard' className="escape">X</Link>
     </div>
     )
     }
@@ -19,6 +20,7 @@ else if(props.verifyCheckIn.status==='FAILURE'){
     return (
     <div id='Spotlight'>
         <h3>NICE TRY, SEEMS LIKE YOU'RE NOT NEAR THIS LOCATION</h3>
+        <Link id='clean' to='/dashboard' className="escape">X</Link>
     </div>
     )
 }

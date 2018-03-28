@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { CSSTransitionGroup } from 'react-transition-group' 
 
