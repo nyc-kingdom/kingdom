@@ -5,10 +5,18 @@ import { Provider } from 'react-redux'
 import store from './store'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import { Router } from 'react-router-dom'
-import history from './history'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
+let serverUrl;
+
+if (process.env.NODE_ENV === "production") {
+    serverUrl = 'https://kingdom-server.herokuapp.com'
+} else {
+    const port = 8080
+    serverUrl = `http://localhost:${port}`
+}
+export {serverUrl}
 
 const muiTheme = getMuiTheme(
   {

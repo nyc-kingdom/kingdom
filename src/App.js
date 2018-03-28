@@ -1,29 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Route, Switch, Router } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import logo from './logo.svg';
 import './App.css';
 import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, createCheckin, paintEstablishment } from './store';
 import { setLocationThunk } from './store/trackLocation'
-import axios from 'axios';
 import socket from './sockets'
-
+import openSocket from 'socket.io-client'
+import {serverUrl} from './'
 
 //components
 import  { Routes } from './components'
 
+//export const socket = openSocket(serverUrl, {transports: ['websocket']} )
+
 class App extends Component {
   componentDidMount() {
-    this.props.setLocation()
-    this.props.loadInitialData();
+    
+    socket.on('connect', ()=>{
+      console.log('I CONNECTED TO SERVER')
+    })
     socket.on('new-checkIn', checkIn=> {
       console.log('Somebody checked-in!')
       this.props.createCheckin(checkIn)
       this.props.paintEstablishment(checkIn.establishment)
     })
-    
-
+    this.props.setLocation()
+    this.props.loadInitialData()
   }
 
   render() {

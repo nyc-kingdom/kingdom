@@ -21,18 +21,18 @@ const middleware = composeWithDevTools(applyMiddleware(
 
 const store = createStore(reducer, middleware)
 
-let serverUrl;
+// let serverUrl;
 
-if (process.env.NODE_ENV === "production") {
-    serverUrl = 'https://kingdom-server.herokuapp.com'
-} else {
-    const post = 8080
-    serverUrl = `http://localhost:${post}`
-}
+// if (process.env.NODE_ENV === "production") {
+//     serverUrl = 'https://kingdom-server.herokuapp.com'
+// } else {
+//     const port = 8080
+//     serverUrl = `http://localhost:${port}`
+// }
 
 //grab location + store
-console.log("serverUrl: ", serverUrl, "which enviroment", process.env.NODE_ENV)
-export { serverUrl }
+//console.log("serverUrl: ", serverUrl, "which enviroment", process.env.NODE_ENV)
+//export { serverUrl }
 export default store
 
 export * from './markers'
@@ -42,3 +42,4 @@ export * from './establishments'
 export * from './checkins'
 export * from './kingdoms'
 export * from './trackLocation'
+export {serverUrl} from '../'
