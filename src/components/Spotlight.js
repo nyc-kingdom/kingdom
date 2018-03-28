@@ -23,7 +23,11 @@ const Spotlight = props => {
                 <SuccessMenu user={props.user} venue={place.venue} />
 
         :
-    <div>
+        <div id='Spotlight'>
+    
+                <div style={{padding: '20px'}}><h2 style={{display: 'inline', margin: '5px'}}>{place.venue.name}</h2> {place.venue.price && <h2 style={{display: 'inline'}}>{'      ' + '$'.repeat(place.venue.price.tier)}</h2>}</div>
+         
+                     {props.location.status === 'LOCATIONFOUND' ?
                 <button className='powerButton' onClick={() => {
                     if (Date.now() - 180000 > props.location.timeStamp) {
                         this.props.setLocation()
