@@ -71,6 +71,7 @@ export class Map extends Component {
                 establishmentName={eachMarker.name}
                 establishmentId={eachMarker.id}
                 allegiance={eachMarker.allegiance}
+                fourSquareId={eachMarker.fourSquareId}
                 type="establishment"
                 select={this.state.select}
                 cb={this.changeView.bind(this)}

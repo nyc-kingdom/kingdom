@@ -46,29 +46,39 @@ import ravenswoodS from './kingdoms/ravenswoodS.png';
 import ravenswoodMarker from './kingdoms/ravenswoodMarker.gif';
 import ravenswoodEst from './kingdoms/ravenswoodEst.png';
 
+import southSlopeS from './kingdoms/southSlopeS.png';
+import southSlopeMarker from './kingdoms/southSlopeMarker.gif';
+import southSlopeEst from './kingdoms/southSlopeEst.png';
+
 //default
-import defaultS from './kingdoms/defaultS.png'
-import test from './kingdoms/test.gif'
+import defaultS from './kingdoms/defaultS.png';
+import test from './kingdoms/test.gif';
 import searchResult from './kingdoms/SearchMarker.gif';
 import defaultEst from './kingdoms/castleTower.png';
 
+import sample from './kingdoms/sample.png';
+import sample3 from './kingdoms/sample3.png';
+import sample4 from './kingdoms/sample4.png';
+import sample5 from './kingdoms/sample5.png';
+
 const userClass = {
-    'King': king,
-    'Lord': lord,
-    'Knight': knight,
-    'Shepard': shepard,
+    King: king,
+    Lord: lord,
+    Knight: knight,
+    Shepard: shepard,
     'Stone Mason': blacksmith,
 }
 
 //kingdom shields
 const kingdomMark = {
-    undefinedKingdom: defaultS,
-    'Bedford': bedfordS,
-    'Bushwick': bushwickS,
+    undefinedKingdom: {1: defaultS, 2: sample, 3: sample3, 4: sample4, 5: sample5},
+    Bedford: bedfordS,
+    Bushwick: bushwickS,
     'Financial District': financialDistrictS,
-    'Lynbrook': lynbrookS,
-    'Astoria': ravenswoodS,
-    'Ravenswood': ravenswoodS,
+    Lynbrook: lynbrookS,
+    Astoria: ravenswoodS,
+    Ravenswood: ravenswoodS,
+    'South Slope': southSlopeS
 }
 
 const markersImages = {
@@ -77,7 +87,7 @@ const markersImages = {
     none: test,
     undefinedKingdom: test,
     Lynbrook: financialDistrictMarker,
-    'South Slope': cityHallMarker,
+    'South Slope': southSlopeMarker,
     Bushwick: bushwickMarker,
     Astoria: ravenswoodMarker
 }
@@ -88,7 +98,7 @@ const estCastle = {
     none: defaultEst,
     undefinedKingdom: defaultEst,
     Lynbrook: lynbrookEst,
-    'South Slope': cityHallEst,
+    'South Slope': southSlopeEst,
     Bushwick: bushwickEst,
     Astoria: ravenswoodEst,
     'Financial District': financialDistrictEst

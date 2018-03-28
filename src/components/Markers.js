@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ravenswoodMarker, test, financialDistrictMarker, cityHallMarker, bushwickMarker, searchResult, blacksmith, knight, markersImages } from '../Assets';
+import { addCheckIn } from '../store';
 
 export class Markers extends Component {
     constructor(props) {
@@ -13,6 +14,7 @@ export class Markers extends Component {
     }
 
     render() {
+        console.log(this.props, 'props within marker')
         const style = { height: '4vh', width: '2.5vw' }
         const searchView = { height: '8vh', width: '5vw' }
 
@@ -44,20 +46,19 @@ export class Markers extends Component {
             </div>
         )
     }
-
-    markerButton() {
-        console.log('helllloooooo')
-        return (
-            <div style={{ position: 'absolute' }}>
-                <h1>HELLOoOOoooo</h1>
-                <img src={blacksmith}> </img>
-            </div>
-        )
-    }
 }
 
-// <Link to={`/profile/establishments/${this.props.establishmentId}`} > <img src={image[allegiance]} className='checkIn' /></Link>
 
-const mapProps = null;
+const mapProps = (state, ownProps) => ({ markers: state.markers, user: state.user, location: state.trackLocation, verifyCheckIn: state.verify, redirect: ownProps.history })
 
-export default connect(mapProps)(Markers)
+const mapDispatch = (dispatch, ownProps) => ({
+    addCheckIn: (user, place) => {
+        dispatch(addCheckIn(user, place, ownProps.history))
+    }
+})
+
+export default connect(mapProps, mapDispatch)(Markers)
+
+// <button onClick={() => {
+//     this.props.addCheckIn(this.props.user.id, this.props.fourSquareId )
+// }} >Check in to {this.props.establishmentName}</button>

@@ -10,6 +10,7 @@ import distanceCalc from '../functions/distanceCalc'
 import SuccessMenu from './CheckInComplete'
 
 const Spotlight = props => {
+    console.log(props, 'props within spotlight')
 
     if (props.markers.length === 0) { props.redirect.push('/dashboard'); return null }
     else {
