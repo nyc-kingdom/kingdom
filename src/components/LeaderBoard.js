@@ -60,8 +60,8 @@ export class LeaderBoard extends React.Component {
         const chosen = this.state.show
         const chosenGroup = this.props[chosen]
         const rankAbout = chosen === "kingdoms" ? "power" : chosen === "users" ? "experience" : "popularity"
-        const points = chosen === "kingdoms" ? "experience" : "quantity"
-        const checkFor = chosen === "kingdoms" ? "users" : "checkins"
+        // const points = chosen === "kingdoms" ? "experience" : "quantity"
+        // const checkFor = chosen === "kingdoms" ? "users" : "checkins"
         const top10 = !chosenGroup ? [] : chosenGroup.sort((a, b) => b[rankAbout] - a[rankAbout]).slice(0, 10)
         return (
             <div>

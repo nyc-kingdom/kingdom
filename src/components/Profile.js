@@ -158,7 +158,7 @@ export class Profile extends React.Component {
                                         ? this.props.establishments
                                             .filter(establishment => establishment.keeper === main.id)
                                             .length
-                                        : main.checkins.reduce((accu, curr) => accu + curr.quantity, 0)
+                                        : main.popularity
                             }
                         </span>
                     </div>
@@ -208,7 +208,9 @@ export class Profile extends React.Component {
                                     ? main.users.length
                                     : whatProfile === "user"
                                         ? main.resources.length
-                                        : main.popularity
+                                        : main.checkins
+                                        .reduce((accu, curr) => accu.includes(curr.userId) ? accu : accu.concat(curr.userId), [])
+                                        .length
                             }
                         </span>
                     </div>
