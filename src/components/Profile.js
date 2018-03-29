@@ -44,7 +44,9 @@ export class Profile extends React.Component {
                             />
                             <Link to={`/profile/kingdoms/${!ownKingdom ? null : ownKingdom.id}`}>
                                 <img
-                                    src={kingdomMark[!ownKingdom ? null : ownKingdom.name]}
+                                    src={!kingdomMark[!ownKingdom ? null : ownKingdom.name]
+                                        ? kingdomMark.undefinedKingdom[2]
+                                        : kingdomMark[!ownKingdom ? null : ownKingdom.name]}
                                     style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
                                 />
                             </Link>
@@ -85,7 +87,9 @@ export class Profile extends React.Component {
                                         ? kingdomMark[main.name]
                                         : !main.allegiance
                                             ? estCastle.none
-                                            : estCastle[main.allegiance]
+                                            : !estCastle[main.allegiance]
+                                                ? estCastle.undefinedKingdom
+                                                : estCastle[main.allegiance]
                             }
                             style={{ width: '75vw', height: '80vw' }}
                         />
