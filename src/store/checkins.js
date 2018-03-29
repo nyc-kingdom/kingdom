@@ -45,6 +45,7 @@ export const addCheckIn = (user, place, history) => dispatch => {
             return axios.get(`${serverUrl}/api/establishments/${newCheckin.establishment.id}`)
             .then(establishment=>establishment.data).then(establishment=>{
               dispatch(paintEstablishment(establishment))
+              socket.emit('paint-new-establishment', establishment)
               dispatch(createMarker([]))
               dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
             })
