@@ -26,7 +26,7 @@ export class Dash extends React.Component {
                     </div>
                     <button onClick={()=>{ let bundle = this.props.verifyCheckIn.status==='HACKED'? { id: '1000', status: 'OPEN' } : { id: '1000', status: 'HACKED' }
                             this.props.verify(bundle)}} 
-                        style={{position: 'absolute', right: 0, top: '35vh', maxWidth: '12vw'}}><img src={ruby}/>TURN OFF CHECK-IN VERIFICATION</button>
+                        style={{position: 'absolute', right: 0, top: '35vh', maxWidth: '24vw'}}><img src={ruby}/>TURN OFF CHECK-IN VERIFICATION</button>
                     {this.props.location.status==='FINDINGLOCATION' && <img style={{display:'block', padding: '5vh'}} src={require('../Assets/characters/knightsword.gif')}/>}
                     <input
                         id='userInput'
