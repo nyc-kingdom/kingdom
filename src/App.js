@@ -22,8 +22,11 @@ class App extends Component {
     socket.on('new-checkIn', checkIn=> {
       console.log('Somebody checked-in!')
       this.props.createCheckin(checkIn)
-      this.props.paintEstablishment(checkIn.establishment)
     })
+    socket.on('paint-new-establishment', establishment => {
+      this.props.paintEstablishment(establishment)
+    })
+    
     this.props.setLocation()
     this.props.loadInitialData()
   }
