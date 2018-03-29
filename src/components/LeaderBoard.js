@@ -60,8 +60,6 @@ export class LeaderBoard extends React.Component {
         const chosen = this.state.show
         const chosenGroup = this.props[chosen]
         const rankAbout = chosen === "kingdoms" ? "power" : chosen === "users" ? "experience" : "popularity"
-        // const points = chosen === "kingdoms" ? "experience" : "quantity"
-        // const checkFor = chosen === "kingdoms" ? "users" : "checkins"
         const top10 = !chosenGroup ? [] : chosenGroup.sort((a, b) => b[rankAbout] - a[rankAbout]).slice(0, 10)
         return (
             <div>
@@ -82,10 +80,12 @@ export class LeaderBoard extends React.Component {
                                     <img
                                         style={{ width: '10vw', height: '5vh' }}
                                         src={chosen === "kingdoms"
-                                            ? kingdomMark[one.name]
+                                            ? !kingdomMark[one.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[one.name]
                                             : chosen === "users"
                                                 ? userClass[this.userLevel(one.id)]
-                                                : estCastle[!one.allegiance ? one.kingdom : one.allegiance]}
+                                                : !estCastle[!one.allegiance ? one.kingdom : one.allegiance]
+                                                    ?estCastle.undefinedKingdom
+                                                    :estCastle[!one.allegiance ? one.kingdom : one.allegiance]}
                                     />
                                 </Link>
                             </div>
