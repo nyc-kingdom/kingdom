@@ -1,4 +1,5 @@
 const blueWater = {
+  gestureHandling: 'greedy',
   styles: [
     {
       "featureType": "administrative",
@@ -91,251 +92,271 @@ const blueWater = {
 }
 
 const unsaturatedBrowns = {
+  gestureHandling: 'greedy',
   styles: [
     {
-      "featureType": "all",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "hue": "#ff4400"
-        },
-        {
-          "saturation": -68
-        },
-        {
-          "lightness": -4
-        },
-        {
-          "gamma": 0.72
-        }
-      ]
+        "featureType": "all",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "hue": "#ff4400"
+            },
+            {
+                "saturation": -68
+            },
+            {
+                "lightness": -4
+            },
+            {
+                "gamma": 0.72
+            }
+        ]
     },
     {
-      "featureType": "administrative",
-      "elementType": "all",
-      "stylers": [
-        {
-          "visibility": "simplified"
-        }
-      ]
+        "featureType": "administrative",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
     },
     {
-      "featureType": "administrative.country",
-      "elementType": "all",
-      "stylers": [
-        {
-          "visibility": "simplified"
-        }
-      ]
+        "featureType": "administrative.country",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
     },
     {
-      "featureType": "administrative.country",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "visibility": "simplified"
-        }
-      ]
+        "featureType": "administrative.country",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "simplified"
+            }
+        ]
     },
     {
-      "featureType": "landscape",
-      "elementType": "geometry.fill",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
+        "featureType": "landscape.man_made",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "gamma": 3.1
+            },
+            {
+                "color": "#eadfea"
+            }
+        ]
     },
     {
-      "featureType": "landscape",
-      "elementType": "geometry.stroke",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
+        "featureType": "poi",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      "featureType": "landscape",
-      "elementType": "labels",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
+        "featureType": "poi.park",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#44ff00"
+            },
+            {
+                "saturation": -23
+            }
+        ]
     },
     {
-      "featureType": "landscape",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "weight": "0.01"
+            }
+        ]
     },
     {
-      "featureType": "landscape",
-      "elementType": "labels.text.stroke",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "on"
+            },
+            {
+                "lightness": "10"
+            }
+        ]
     },
     {
-      "featureType": "landscape",
-      "elementType": "labels.icon",
-      "stylers": [
-        {
-          "visibility": "off"
-        },
-        {
-          "saturation": "-98"
-        },
-        {
-          "lightness": "-100"
-        }
-      ]
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      "featureType": "landscape.man_made",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "hue": "#0077ff"
-        },
-        {
-          "gamma": 3.1
-        }
-      ]
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
     },
     {
-      "featureType": "poi",
-      "elementType": "labels",
-      "stylers": [
-        {
-          "visibility": "on"
-        }
-      ]
+        "featureType": "road.highway",
+        "elementType": "labels.text",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      "featureType": "poi.park",
-      "elementType": "all",
-      "stylers": [
-        {
-          "hue": "#44ff00"
-        },
-        {
-          "saturation": -23
-        }
-      ]
+        "featureType": "road.highway",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      "featureType": "road.highway",
-      "elementType": "labels",
-      "stylers": [
-        {
-          "visibility": "off"
-        }
-      ]
+        "featureType": "road.highway.controlled_access",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      "featureType": "transit",
-      "elementType": "labels.text.stroke",
-      "stylers": [
-        {
-          "saturation": -64
-        },
-        {
-          "hue": "#ff9100"
-        },
-        {
-          "lightness": 16
-        },
-        {
-          "gamma": 0.47
-        },
-        {
-          "weight": 2.7
-        }
-      ]
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      "featureType": "transit.line",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "lightness": -48
-        },
-        {
-          "hue": "#ff5e00"
-        },
-        {
-          "gamma": 1.2
-        },
-        {
-          "saturation": -23
-        }
-      ]
+        "featureType": "transit",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "saturation": -64
+            },
+            {
+                "hue": "#ff9100"
+            },
+            {
+                "lightness": 16
+            },
+            {
+                "gamma": 0.47
+            },
+            {
+                "weight": 2.7
+            }
+        ]
     },
     {
-      "featureType": "water",
-      "elementType": "all",
-      "stylers": [
-        {
-          "hue": "#00ccff"
-        },
-        {
-          "gamma": 0.44
-        },
-        {
-          "saturation": -33
-        }
-      ]
+        "featureType": "transit",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
     },
     {
-      "featureType": "water",
-      "elementType": "labels.text.fill",
-      "stylers": [
-        {
-          "hue": "#007fff"
-        },
-        {
-          "gamma": 0.77
-        },
-        {
-          "saturation": 65
-        },
-        {
-          "lightness": 99
-        }
-      ]
+        "featureType": "transit.line",
+        "elementType": "geometry",
+        "stylers": [
+            {
+                "lightness": -48
+            },
+            {
+                "hue": "#ff5e00"
+            },
+            {
+                "gamma": 1.2
+            },
+            {
+                "saturation": -23
+            }
+        ]
     },
     {
-      "featureType": "water",
-      "elementType": "labels.text.stroke",
-      "stylers": [
-        {
-          "gamma": 0.11
-        },
-        {
-          "weight": 5.6
-        },
-        {
-          "saturation": 99
-        },
-        {
-          "hue": "#0091ff"
-        },
-        {
-          "lightness": -86
-        }
-      ]
+        "featureType": "water",
+        "elementType": "all",
+        "stylers": [
+            {
+                "hue": "#00ccff"
+            },
+            {
+                "gamma": 0.44
+            },
+            {
+                "saturation": -33
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [
+            {
+                "hue": "#007fff"
+            },
+            {
+                "gamma": 0.77
+            },
+            {
+                "saturation": 65
+            },
+            {
+                "lightness": 99
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "labels.text.stroke",
+        "stylers": [
+            {
+                "gamma": 0.11
+            },
+            {
+                "weight": 5.6
+            },
+            {
+                "saturation": 99
+            },
+            {
+                "hue": "#0091ff"
+            },
+            {
+                "lightness": -86
+            }
+        ]
     }
-  ]
+]
 }
 
 const greenTheme = {
+  gestureHandling: 'greedy',
   styles: [
     {
       "elementType": "geometry",
@@ -659,6 +680,7 @@ const greenTheme = {
 }
 
 const dark = {
+  gestureHandling: 'greedy',
   styles: [
     {
       "elementType": "geometry",
@@ -967,6 +989,7 @@ const dark = {
 }
 
 const midnight = {
+  gestureHandling: 'greedy',
   styles: [
     {
       "elementType": "geometry",
@@ -1272,7 +1295,9 @@ const midnight = {
 
 
 
-const autumnWorld = { styles: [
+const autumnWorld = { 
+  gestureHandling: 'greedy',
+  styles: [
   {
     "featureType": "administrative.land_parcel",
     "stylers": [
@@ -1394,7 +1419,9 @@ const autumnWorld = { styles: [
   }
 ]}
 
-const fallWorld = { styles:[
+const fallWorld = { 
+  gestureHandling: 'greedy',
+  styles:[
   {
     "featureType": "administrative.land_parcel",
     "stylers": [
