@@ -84,7 +84,7 @@ export class Profile extends React.Component {
                                 whatProfile === "user"
                                     ? userClass[level]
                                     : whatProfile === "kingdom"
-                                        ? kingdomMark[main.name]
+                                        ? !kingdomMark[main.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[main.name]
                                         : !main.allegiance
                                             ? estCastle.none
                                             : !estCastle[main.allegiance]
