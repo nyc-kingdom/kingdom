@@ -34,15 +34,9 @@ export class Markers extends Component {
                                     <Link to={`/profile/establishments/${this.props.establishmentId}`}>Details</Link>
                                     <br />
                                     <div>
-                                        {
-                                            allegiance === 'none'
-                                                ? ''
-                                                :
-                                                <div>
-                                                    {allegiance} <br /> Kingdom
+                                                    {this.props.allegiance} <br /> Kingdom
                                                     <br />
-                                                </div>
-                                        }
+                                                
                                     </div>
                                     <img style={{ width: '5vw', height: 'auto', padding: '5px' }} src={markersImages[allegiance]} />
 

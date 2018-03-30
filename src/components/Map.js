@@ -54,6 +54,14 @@ export class Map extends Component {
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
 
+
+    //EXPERIMENTAL - MAP PANNING
+    // if(this.map) console.log('MAP ', this.map)
+    // if(this.map && this.map.map_) {
+    //   console.log('HEY ', this.map.map_)
+    //   this.map.map_.panTo({lat:40.7794366, lng:-73.96324400000003})
+    // }
+
     // this.updateMapTheme()
     const style = {
       top: 0,
@@ -71,6 +79,7 @@ export class Map extends Component {
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
           options={theme}
+          ref = {map => {this.map=map}}
           >
           {
             this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
