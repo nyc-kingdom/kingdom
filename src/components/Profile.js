@@ -44,7 +44,7 @@ export class Profile extends React.Component {
                             />
                             <Link to={`/profile/kingdoms/${!ownKingdom ? null : ownKingdom.id}`}>
                                 <img
-                                    src={!kingdomMark[!ownKingdom ? null : ownKingdom.name]
+                                    src={!ownKingdom ? null : !kingdomMark[!ownKingdom ? null : ownKingdom.name]
                                         ? kingdomMark.undefinedKingdom[2]
                                         : kingdomMark[!ownKingdom ? null : ownKingdom.name]}
                                     style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
@@ -272,6 +272,7 @@ const mapProps = (state, ownProps) => {
         one,
         main,
         ownKingdom,
+        user: state.user,
         checkins: state.checkins,
         users: state.users,
         establishments: state.establishments,
