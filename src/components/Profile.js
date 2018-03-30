@@ -44,7 +44,9 @@ export class Profile extends React.Component {
                             />
                             <Link to={`/profile/kingdoms/${!ownKingdom ? null : ownKingdom.id}`}>
                                 <img
-                                    src={kingdomMark[!ownKingdom ? null : ownKingdom.name]}
+                                    src={!ownKingdom ? null : !kingdomMark[!ownKingdom ? null : ownKingdom.name]
+                                        ? kingdomMark.undefinedKingdom[2]
+                                        : kingdomMark[!ownKingdom ? null : ownKingdom.name]}
                                     style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
                                 />
                             </Link>
@@ -82,10 +84,12 @@ export class Profile extends React.Component {
                                 whatProfile === "user"
                                     ? userClass[level]
                                     : whatProfile === "kingdom"
-                                        ? kingdomMark[main.name]
+                                        ? !kingdomMark[main.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[main.name]
                                         : !main.allegiance
                                             ? estCastle.none
-                                            : estCastle[main.allegiance]
+                                            : !estCastle[main.allegiance]
+                                                ? estCastle.undefinedKingdom
+                                                : estCastle[main.allegiance]
                             }
                             style={{ width: '75vw', height: '80vw' }}
                         />
@@ -268,6 +272,7 @@ const mapProps = (state, ownProps) => {
         one,
         main,
         ownKingdom,
+        user: state.user,
         checkins: state.checkins,
         users: state.users,
         establishments: state.establishments,
