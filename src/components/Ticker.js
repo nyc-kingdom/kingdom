@@ -18,7 +18,7 @@ class Ticker extends Component{
         {
             this.props.checkIns.length > 0 &&
             this.props.checkIns.slice(this.props.checkIns.length - 12, this.props.checkIns.length).reverse()
-                .map(check => <div className="tickerTape" key={check.fourSquareId}>{`${check.user.username} just checked into ${check.establishment.name}!`}</div>)
+                .map(check => <div className="tickerTape" key={check.id}>{`${check.user.username} just checked into ${check.establishment.name}!`}</div>)
         }
         </CSSTransitionGroup>
         }
