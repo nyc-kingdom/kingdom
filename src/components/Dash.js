@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { addCheckIn, queryMarkers, getUserCheckIns, setLocationThunk, verifyCheckIn } from '../store';
-import { gem, knightsword } from '../Assets/'
+import { gem, knightsword, sword } from '../Assets/'
 
 export class Dash extends React.Component {
     constructor(props) {
@@ -34,7 +34,7 @@ export class Dash extends React.Component {
                         style={{flex:1}}
                         onClick={() => {this.props.getUserCheckIns(this.props.user)}}
                     >
-                        <img src={require('../Assets/iconButtons/sword.png')} />
+                        <img src={sword} />
                         SYNC MY CHECK-INS
                     </button>
                 </div>
@@ -68,13 +68,13 @@ export class Dash extends React.Component {
                         if (Date.now() - 180000 < location.timeStamp){
                             this.props.queryMarkers(this.state.userInput, user, location.coords) 
                         }
-                        else if (Date.now() - 180000 > location.timeStamp && location.status==='LOCATIONFOUND'){
+                        else if (Date.now() - 180000 > location.timeStamp && location.status === 'LOCATIONFOUND'){
                             this.props.trackLocation()
                         }
                         else console.log('You gotta wait for the navigator to be ready')
                     }}
                 >
-                    {this.props.location.status==='FINDINGLOCATION'? 'LOADING': 'Let\'s Search!' }
+                    {this.props.location.status === 'FINDINGLOCATION'? 'LOADING': 'Let\'s Search!' }
                 </button>
                 {
                     this.props.markers.length > 0 &&
