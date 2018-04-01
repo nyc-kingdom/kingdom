@@ -1,12 +1,6 @@
 import axios from 'axios'
-import { serverUrl } from './'
-//SOCKET
 import socket from '../sockets'
-
-//FUNCTIONALITY
-import {verifyCheckIn} from './gameplay'
-import {paintEstablishment, fetchEstablishments} from './establishments'
-import {createMarker} from './markers'
+import { serverUrl, paintEstablishment, fetchEstablishments, createMarker, verifyCheckIn } from './'
 
 /**
  * ACTION TYPES
@@ -34,23 +28,25 @@ export const fetchCheckins = () => dispatch =>
 //export const addFoursquareCheckins = () => dispatch =>
 
 export const addCheckIn = (user, place, history) => dispatch => {
-        const checkInBundle = { user, place }
-        return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
-          .then(res => res.data)
-          .then(newCheckin => {
-            console.log(newCheckin)
-            dispatch(createCheckin(newCheckin))
-            socket.emit('new-checkIn', newCheckin)
-            //dispatch(paintEstablishment(newCheckin.establishment))
-            return axios.get(`${serverUrl}/api/establishments/${newCheckin.establishment.id}`)
-            .then(establishment=>establishment.data).then(establishment=>{
-              dispatch(paintEstablishment(establishment))
-              socket.emit('paint-new-establishment', establishment)
-              dispatch(createMarker([]))
-              dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
-            })
-          })
-          .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
+  const checkInBundle = { user, place }
+  return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
+    .then(res => res.data)
+    .then(newCheckin => {
+      console.log(newCheckin)
+      dispatch(createCheckin(newCheckin))
+      socket.emit('new-checkIn', newCheckin)
+      //dispatch(paintEstablishment(newCheckin.establishment))
+      return axios.get(`${serverUrl}/api/establishments/${newCheckin.establishment.id}`)
+        .then(establishment=>establishment.data)
+        .then(establishment=>{
+          dispatch(paintEstablishment(establishment))
+          socket.emit('paint-new-establishment', establishment)
+          dispatch(fetchEstablishments())
+          dispatch(createMarker([]))
+          dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
+        })
+    })
+    .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
 }
 
 export default function reducer(checkins = [], action) {
