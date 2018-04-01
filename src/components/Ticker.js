@@ -31,7 +31,7 @@ class Ticker extends Component{
                         .reverse()
                         .map(check => 
                             <div className="tickerTape" key={check.id}>
-                                {`${!check.user ? null : check.user.username} just checked into ${check.establishment.name}!`}
+                                {`${check.user.username} just checked into ${check.establishment.name}!`}
                             </div>
                         )
                 }
