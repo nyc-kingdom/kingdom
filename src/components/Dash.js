@@ -30,14 +30,17 @@ export class Dash extends React.Component {
                     <h2 style={{flex:3}}>
                         {'Welcome ' + this.props.user.username + '!'}
                     </h2>
-                    <button style={{flex:1}} onClick={()=>{this.props.getUserCheckIns(this.props.user)}}>
+                    <button
+                        style={{flex:1}}
+                        onClick={() => {this.props.getUserCheckIns(this.props.user)}}
+                    >
                         <img src={require('../Assets/iconButtons/sword.png')} />
                         SYNC MY CHECK-INS
                     </button>
                 </div>
                 <button
                     onClick={() => {
-                        let bundle = this.props.verifyCheckIn.status==='HACKED'
+                        let bundle = this.props.verifyCheckIn.status === 'HACKED'
                             ? { id: '1000', status: 'OPEN' }
                             : { id: '1000', status: 'HACKED' }
                         this.props.verify(bundle)
@@ -61,15 +64,15 @@ export class Dash extends React.Component {
                 />
                 <button
                     onClick={() => {
-                            if (Date.now() - 180000 < this.props.location.timeStamp){
-                                this.props.queryMarkers(this.state.userInput, this.props.user, this.props.location.coords) 
-                            }
-                            else if (Date.now() - 180000 > this.props.location.timeStamp && this.props.location.status==='LOCATIONFOUND'){
-                                this.props.trackLocation()
-                            }
-                            else console.log('You gotta wait for the navigator to be ready')
+                        const { location, user } = this.props
+                        if (Date.now() - 180000 < location.timeStamp){
+                            this.props.queryMarkers(this.state.userInput, user, location.coords) 
                         }
-                    }
+                        else if (Date.now() - 180000 > location.timeStamp && location.status==='LOCATIONFOUND'){
+                            this.props.trackLocation()
+                        }
+                        else console.log('You gotta wait for the navigator to be ready')
+                    }}
                 >
                     {this.props.location.status==='FINDINGLOCATION'? 'LOADING': 'Let\'s Search!' }
                 </button>
