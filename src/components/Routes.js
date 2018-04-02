@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Router, Route, Switch } from 'react-router-dom'
 import history from '../history'
-import { About, Home, HomeDash, Profile, TopKingdoms, SingleEstablishmentView, LeaderBoard } from './index'
+import { About, Home, HomeDash, Profile, SingleEstablishmentView, LeaderBoard, ItemList } from './index'
 
 const Pipeline = (props) => (
 
@@ -16,10 +16,12 @@ const Pipeline = (props) => (
                 <Switch>
                     {/* Routes placed here are only available after logging in */}
                     <Route path="/dashboard" component={HomeDash} />
-                    <Route path="/topKingdoms" component={TopKingdoms} />
                     <Route path="/profile/users/:user" component={Profile} />
                     <Route path="/profile/kingdoms/:kingdom" component={Profile} />
                     <Route path="/profile/establishments/:establishment" component={Profile} />
+                    <Route path="/items/users/:user/:item" component={ItemList} />
+                    <Route path="/items/kingdoms/:kingdom/:item" component={ItemList} />
+                    <Route path="/items/establishments/:establishment/:item" component={ItemList} />
                     <Route path="/singleEstablishment/:id" component={SingleEstablishmentView} />
                     <Route path="/leaderboard" component={LeaderBoard} />
                 </Switch>
