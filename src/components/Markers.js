@@ -31,21 +31,18 @@ export class Markers extends Component {
                                 this.props.select === this.props.establishmentId &&
                                 <div className="establishmentCard">
                                     <h3>{this.props.establishmentName}</h3>
-                                    <Link to={`/profile/establishments/${this.props.establishmentId}`}>Details</Link>
+                                    <Link to={`/profile/establishments/${this.props.establishmentId}`}>
+                                        Details
+                                    </Link>
                                     <br />
                                     <div>
-                                        {
-                                            allegiance === 'none'
-                                                ? ''
-                                                :
-                                                <div>
-                                                    {allegiance} <br /> Kingdom
-                                                    <br />
-                                                </div>
-                                        }
+                                        {this.props.allegiance} <br /> Kingdom
+                                        <br />
                                     </div>
-                                    <img style={{ width: '5vw', height: 'auto', padding: '5px' }} src={markersImages[allegiance]} />
-
+                                    <img
+                                        style={{ width: '5vw', height: 'auto', padding: '5px' }}
+                                        src={markersImages[allegiance]}
+                                    />
                                     <br />
                                     <button
                                         className='powerButtonEst'
@@ -59,27 +56,45 @@ export class Markers extends Component {
                                                     name: this.props.establishmentName
                                                 }
                                             )
-                                        }} >Check in here!</button>
+                                        }}
+                                    >
+                                        Check in here!
+                                    </button>
                                     <br />
-                                    <button className = 'escape' onClick={() => { this.props.cb(this.props.establishmentId) }}>X</button>
+                                    <button
+                                        className='escape'
+                                        onClick={() => { this.props.cb(this.props.establishmentId) }}
+                                    >
+                                        X
+                                    </button>
                                 </div>
                             }
-                            <img onClick={() => { this.props.cb(this.props.establishmentId) }} src={markersImages[allegiance]} className="checkIn" />
+                            <img
+                                onClick={() => { this.props.cb(this.props.establishmentId) }}
+                                src={markersImages[allegiance]}
+                                className="checkIn"
+                            />
                         </div>
-                        : <Link to={`/dashboard/selectedView/${this.props.establishmentId}`}> <img src={searchResult} /> </Link>
+                        :
+                        <Link to={`/dashboard/selectedView/${this.props.establishmentId}`}>
+                            <img src={searchResult} />
+                        </Link>
                 }
             </div>
         )
     }
 }
 
-
-const mapProps = (state, ownProps) => ({ markers: state.markers, user: state.user, location: state.trackLocation, verifyCheckIn: state.verify, redirect: ownProps.history })
+const mapProps = (state, ownProps) => ({
+    markers: state.markers,
+    user: state.user,
+    location: state.trackLocation,
+    verifyCheckIn: state.verify,
+    redirect: ownProps.history
+})
 
 const mapDispatch = (dispatch, ownProps) => ({
-    addCheckIn: (user, place) => {
-        dispatch(addCheckIn(user, place, ownProps.history))
-    }
+    addCheckIn: (user, place) => dispatch(addCheckIn(user, place, ownProps.history))
 })
 
 export default connect(mapProps, mapDispatch)(Markers)

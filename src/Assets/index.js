@@ -84,9 +84,9 @@ const kingdomMark = {
     Astoria: ravenswoodS,
     Ravenswood: ravenswoodS,
     'South Slope': southSlopeS,
-    'Bath Beach' : sample5,
-    'Ocean Hill' : sample3,
-    Meeren: sample,
+    'Bath Beach': sample5,
+    'Ocean Hill': sample3,
+    'Southern Tip': sample,
     Arlen: sample,
     Qarth: sample,
     Dragonstone: sample
@@ -102,7 +102,7 @@ const markersImages = {
     'South Slope': southSlopeMarker,
     Bushwick: bushwickMarker,
     Astoria: ravenswoodMarker,
-    Meeren: test,
+    'Southern Tip': leffertsGardenMarker,
     Arlen: test,
     Qarth: test,
     Dragonstone: test
@@ -119,7 +119,7 @@ const estCastle = {
     Bushwick: bushwickEst,
     Astoria: ravenswoodEst,
     'Financial District': financialDistrictEst,
-    Meeren: defaultEst,
+    'Southern Tip': leffertsGardenEst,
     Arlen: defaultEst,
     Qarth: defaultEst,
     Dragonstone: defaultEst
