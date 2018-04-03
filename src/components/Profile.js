@@ -30,6 +30,7 @@ export class Profile extends React.Component {
         this.userLevel = this.userLevel.bind(this)
         this.renderWithItem = this.renderWithItem.bind(this)
         this.levelUpPoints = this.levelUpPoints.bind(this)
+        this.eachTypeForItem = this.eachTypeForItem.bind(this)
     }
 
     componentDidMount() {
@@ -150,7 +151,60 @@ export class Profile extends React.Component {
     }
 
     renderWithItem(main, type) {
-        const itemOf = {
+        const itemOf = this.eachTypeForItem(main, type)
+        return (
+            <div style={{ display: 'flex' }}>
+                {
+                    ["item1", "item2", "item3"].map(item => (
+                        <div key={item} style={{ flex: 1, textAlign: 'center'}}>
+                            <div>
+                                <Link to={`/items/${type}s/${main.id}/${item}`}>
+                                    <img src={itemOf[type][item].image} style={itemOf[type][item].style}/>
+                                </Link>
+                            </div>
+                            <div>
+                                <span>{itemOf[type][item].title}</span>
+                            </div>
+                            <div>
+                                <span>{itemOf[type][item].result}</span>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        )
+    }
+
+    levelUpPoints(main, kingdomKing){
+        const { type, kingdoms, establishments } = this.props
+        return type === 'kingdom' 
+            ? kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0)
+            : type === 'establishment'
+                ? establishments.reduce((accu, curr) => curr.popularity >= accu ? curr.popularity : accu, 0)
+                : !kingdomKing
+                    ? 0
+                    : kingdomKing.experience
+    }
+
+    userLevel(main, kingdomKing){
+        console.log(main, this.props.ownKingdom)
+        const points = main.experience
+        const howManyEstablishments = this.props.establishments
+            .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === main.name)
+            .length
+        const amIKing = !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === main.id
+        if (amIKing) return "King"
+        if (points < 100) {
+            if (howManyEstablishments < 20) return "Shepard"
+            return "Stone Mason"
+        } else if (points < 500) {
+            return "Knight"
+        }
+        return "Lord"
+    }
+
+    eachTypeForItem(main, type){
+        return {
             user: type !== "user" ? null : {
                 item1: {
                     image: castle,
@@ -222,53 +276,6 @@ export class Profile extends React.Component {
                 }
             }
         }
-        return (
-            <div style={{ display: 'flex' }}>
-                {
-                    ["item1", "item2", "item3"].map(item => (
-                        <div key={item} style={{ flex: 1, textAlign: 'center'}}>
-                            <div>
-                                <Link to={`/items/${type}s/${main.id}/${item}`}>
-                                    <img src={itemOf[type][item].image} style={itemOf[type][item].style}/>
-                                </Link>
-                            </div>
-                            <div>
-                                <span>{itemOf[type][item].title}</span>
-                            </div>
-                            <div>
-                                <span>{itemOf[type][item].result}</span>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
-        )
-    }
-
-    levelUpPoints(main, kingdomKing){
-        const { type, kingdoms, establishments } = this.props
-        return type === 'kingdom' 
-            ? kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0)
-            : type === 'establishment'
-                ? establishments.reduce((accu, curr) => curr.popularity >= accu ? curr.popularity : accu, 0)
-                : !kingdomKing
-                    ? 0
-                    : kingdomKing.experience
-    }
-
-    userLevel(main, kingdomKing){
-        console.log(main)
-        const points = !main ? 0 : main.experience
-        const howManyEstablishments = !this.props.ownKingdom ? 0 : this.props.ownKingdom.domainSize
-        const amIKing = !main ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === main.id
-        if (amIKing) return "King"
-        if (points < 100) {
-            if (howManyEstablishments < 20) return "Shepard"
-            return "Stone Mason"
-        } else if (points < 500) {
-            return "Knight"
-        }
-        return "Lord"
     }
 }
 

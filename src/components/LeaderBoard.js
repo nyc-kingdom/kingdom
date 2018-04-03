@@ -104,12 +104,15 @@ export class LeaderBoard extends React.Component {
     }
 
     userLevel(userId) {
-        const user = this.props.users.find(user => user.id === userId)
-        const points = !user ? 0 : user.experience
-        const ownKingdom = !user.kingdom ? 0 : this.props.kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
-        const howManyEstablishments = user.kingdom.domainSize
-        const kingdomKing = !ownKingdom ? null : this.props.users.find(user => user.id === ownKingdom.king)
-        const amIKing = !user ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === user.id
+        const { users, kingdoms } = this.props
+        const user = users.find(user => user.id === userId)
+        const points = user.experience
+        const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
+        const howManyEstablishments = this.props.establishments
+            .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === ownKingdom.name)
+            .length
+        const kingdomKing = users.find(user => user.id === ownKingdom.king)
+        const amIKing = kingdomKing.id === user.id
         if (amIKing) return "King"
         if (points < 100) {
             if (howManyEstablishments < 20) return "Shepard"
