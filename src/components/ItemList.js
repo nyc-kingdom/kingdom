@@ -17,31 +17,37 @@ export class ItemList extends React.Component {
     }
 
     render() {
-        const { type, main, item } = this.props
+        const { type, main, item, users, establishments } = this.props
         if(!main) return null
+        console.log(main, type)
+
         const itemOf = {
             user: type !== "user" ? null : {
                 item1: {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
                     title: "Own Establishments",
-                    result: this.props.establishments
+                    pointOf: "popularity",
+                    name: "name",
+                    result: establishments
                         .filter(establishment => establishment.keeper === main.id)
-                        .length
                 },
                 item2: {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
                     title: "Establishments Found",
+                    pointOf: "popularity",
+                    name: "name",                    
                     result: main.checkins
                         .reduce((accu, curr) => accu.includes(curr.establishmentId) ? accu : accu.concat(curr.establishmentId), [])
-                        .length
+                        .map(establishmentId => establishments.find(establishment => establishment.id === establishmentId))
                 },
                 item3: {
                     image: gem,
                     style: { width: '10vw' },
                     title: "Resources",
-                    result: main.resources.length
+                    name: "name",
+                    result: main.resources
                 }
             },
             kingdom: type !== "kingdom" ? null : {
@@ -49,48 +55,61 @@ export class ItemList extends React.Component {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
                     title: "Own Establishments",
-                    result: this.props.establishments
+                    pointOf: "popularity",
+                    name: "name",
+                    result: establishments
                         .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === main.name)
-                        .length
                 },
                 item2: {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
                     title: "Total Colonies",
-                    result: this.props.establishments
+                    pointOf: "popularity",
+                    name: "name",
+                    result: establishments
                         .filter(establishment => establishment.kingdom !== establishment.allegiance && establishment.allegiance === main.name)
-                        .length
                 },
                 item3: {
                     image: knight,
                     style: { width: '10vw' },
                     title: "Total Citizen",
-                    result: main.users.length
+                    pointOf: "experience",
+                    name: "username",
+                    result: main.users
                 }
             },
             establishment: type !== "establishment" ? null : {
-                item1: {
-                    image: castle,
-                    style: { width: '10vw', height: '5vh' },
+                item1: item !== "item1" ? null : {
+                    image: knight,
+                    style: { width: '10vw' },
                     title: "Total Visit",
-                    result: main.popularity
+                    pointOf: "experience",
+                    name: "username",
+                    result: main.checkins
+                        .reduce((accu, curr) => accu.includes(curr.userId) ? accu : accu.concat(curr.userId), [])
+                        .map(userId => users.find(user => user.id === userId))
                 },
                 item2: {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
                     title: "Total Attack",
-                    result: 0
+                    pointOf: "popularity",
+                    name: "name",
+                    result: []
                 },
                 item3: {
                     image: knight,
                     style: { width: '10vw' },
                     title: "Total Visitors",
+                    pointOf: "experience",
+                    name: "username",
                     result: main.checkins
                         .reduce((accu, curr) => accu.includes(curr.userId) ? accu : accu.concat(curr.userId), [])
+                        .map(userId => users.find(user => user.id === userId))
                 }
             }
         }
-        console.log(main)
+        console.log(itemOf[type][item].result)
         return (
             <div>
                 <div style={{ height: '5vh' }} />
@@ -98,7 +117,20 @@ export class ItemList extends React.Component {
                     <h2>{itemOf[type][item].title}</h2>
                 </div>
                 <div>
-                    {}
+                    {
+                        itemOf[type][item].result
+                            .sort((front, back) => back[itemOf[type][item].pointOf] - front[itemOf[type][item].pointOf])
+                            .map((one, index) => !one ? null : (
+                                <div key={one.id} style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}>
+                                    <div style={{ flex: 1 }}>{index+1}</div>
+                                    <div style={{ flex: 1 }}>
+                                        <img style={itemOf[type][item].style} src={itemOf[type][item].image}/>
+                                    </div>
+                                    <div style={{ flex: 3 }}>{one[itemOf[type][item].name]}</div>
+                                    <div style={{ flex: 1 }}>{one[itemOf[type][item].pointOf]}</div>
+                                </div>
+                            ))
+                    }
                 </div>
                 <div style={{ textAlign: 'center' }}>
                     <Link to='/dashboard'>
