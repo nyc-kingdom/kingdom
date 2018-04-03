@@ -18,15 +18,15 @@ export class Dash extends React.Component {
         return (
             <div id="Dash" className={this.props.mode} onClick = {
                 (e)=>{e.target.className=e.target.className==='closed'?'active':'closed'
-            }}> 
+            }}>
                     {this.props.verifyCheckIn.status==='HACKED' && <div className='powerButton'>YOU ARE NOW WORKING IN HACKED MODE - USER MAY NOW CHECK-IN WHEREVER THEY CHOOSE</div>}
                     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
                         <h2 style={{flex:3}}>{'Welcome ' + this.props.user.username + '!'}</h2>
                         <button style={{flex:1}} onClick={()=>{this.props.getUserCheckIns(this.props.user)}}><img src={require('../Assets/iconButtons/sword.png')} />SYNC MY CHECK-INS</button>
                     </div>
                     <button onClick={()=>{ let bundle = this.props.verifyCheckIn.status==='HACKED'? { id: '1000', status: 'OPEN' } : { id: '1000', status: 'HACKED' }
-                            this.props.verify(bundle)}} 
-                        style={{position: 'absolute', right: 0, top: '35vh', maxWidth: '24vw'}}><img src={ruby}/>TURN OFF CHECK-IN VERIFICATION</button>
+                            this.props.verify(bundle)}}
+                        style={{position: 'absolute', right: 0, top: '35vh', maxWidth: '2vw'}}>x</button>
                     {this.props.location.status==='FINDINGLOCATION' && <img style={{display:'block', padding: '5vh'}} src={require('../Assets/characters/knightsword.gif')}/>}
                     <input
                         id='userInput'
@@ -36,7 +36,7 @@ export class Dash extends React.Component {
                     <button onClick={() => {
 
                         if(Date.now() - 180000 < this.props.location.timeStamp){
-                            this.props.queryMarkers(this.state.userInput, this.props.user, this.props.location.coords) 
+                            this.props.queryMarkers(this.state.userInput, this.props.user, this.props.location.coords)
                         }
                         else if(Date.now() - 180000 > this.props.location.timeStamp && this.props.location.status==='LOCATIONFOUND'){
                             this.props.trackLocation()
@@ -71,3 +71,5 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapProps, mapDispatch)(Dash)
+
+// <img src={ruby}/>
