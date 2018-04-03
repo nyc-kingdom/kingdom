@@ -19,7 +19,7 @@ export class Dash extends React.Component {
                 id="Dash"
                 className={this.props.mode}
                 onClick={e => { e.target.className = e.target.className === 'closed' ? 'active' : 'closed' }}
-            > 
+            >
                 {
                     this.props.verifyCheckIn.status==='HACKED' &&
                     <div className='powerButton'>
@@ -66,7 +66,7 @@ export class Dash extends React.Component {
                     onClick={() => {
                         const { location, user } = this.props
                         if (Date.now() - 180000 < location.timeStamp){
-                            this.props.queryMarkers(this.state.userInput, user, location.coords) 
+                            this.props.queryMarkers(this.state.userInput, user, location.coords)
                         }
                         else if (Date.now() - 180000 > location.timeStamp && location.status === 'LOCATIONFOUND'){
                             this.props.trackLocation()
@@ -114,3 +114,5 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapProps, mapDispatch)(Dash)
+
+// <img src={ruby}/>
