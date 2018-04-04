@@ -7,8 +7,6 @@ import { userClass, knight, kingdomMark, wolfShield, castle, castleTower, marker
 export class ItemList extends React.Component {
     constructor(props) {
         super(props)
-        // this.handleSubmit = this.handleSubmit.bind(this)
-        // this.top10 = this.top10.bind(this)
         this.eachItemFor = this.eachItemFor.bind(this)
         this.userLevel = this.userLevel.bind(this)
     }
