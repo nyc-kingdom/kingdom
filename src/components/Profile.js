@@ -2,26 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { gem, swordSingleButton, userClass, kingdomMark, wolfShield, castle, castleTower, markersImages, knight, estCastle } from '../Assets'
+import { gem, swordSingleButton, userClass, kingdomMark, castle, knight, estCastle } from '../Assets'
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
     keeperChairUrl: "https://cdn4.iconfinder.com/data/icons/knight/512/as416g_7-512.png",
-    flagKingFaceImgurl: "https://d1u5p3l4wpay3k.cloudfront.net/rlesports_gamepedia_en/thumb/8/82/Kings_of_Urbanlogo_square.png/300px-Kings_of_Urbanlogo_square.png?version=14a3c8a996adc00855afc2399be68e91",
-}
-
-const profileOf = {
-    user: {
-        pointFor: "experience",
-    },
-    kingdom: {
-        pointFor: "power",
-        level: "Great Kingdom",
-    },
-    establishment: {
-        pointFor: "popularity",
-        level: "Castle"
-    }
 }
 
 export class Profile extends React.Component {
@@ -29,8 +14,8 @@ export class Profile extends React.Component {
         super(props)
         this.userLevel = this.userLevel.bind(this)
         this.renderWithItem = this.renderWithItem.bind(this)
-        this.levelUpPoints = this.levelUpPoints.bind(this)
         this.eachTypeForItem = this.eachTypeForItem.bind(this)
+        this.keeperView = this.keeperView.bind(this)
     }
 
     componentDidMount() {
@@ -38,14 +23,10 @@ export class Profile extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         const { ownKingdom, main, users, type } = this.props
-        const points = profileOf[type].pointFor
-        if(!main) return null
-        const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
-        const levelUpPoints = this.levelUpPoints(main, kingdomKing)
-        const level = type !== "user" ? profileOf[type].level : !!kingdomKing ? this.userLevel(main, kingdomKing) : null
-        const keeper = type === "establishment" ? users.find(user => user.id === main.keeper) : null
+        if(!main || !ownKingdom || !users[0]) return null
+        const kingdomKing = users.find(user => user.id === ownKingdom.king)
+        const profileOf = this.eachTypeFor(main, type, kingdomKing)
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -56,22 +37,22 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{ width: '25vw', left: 0 }}
                             />
-                            <Link to={`/profile/kingdoms/${!ownKingdom ? null : ownKingdom.id}`}>
+                            <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
                                 <img
-                                    src={!ownKingdom ? null : !kingdomMark[!ownKingdom ? null : ownKingdom.name]
+                                    src={!kingdomMark[ownKingdom.name]
                                         ? kingdomMark.undefinedKingdom[2]
-                                        : kingdomMark[!ownKingdom ? null : ownKingdom.name]}
+                                        : kingdomMark[ownKingdom.name]}
                                     style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
                                 />
                             </Link>
                             <span style={{ width: '13vw', position: 'absolute', left: '3vw', top: '20vh' }}>
-                                {!ownKingdom ? null : ownKingdom.name}
+                                {ownKingdom.name}
                             </span>
                         </div>
                     </div>
                     <div style={{ flex: 2, textAlign: 'center' }}>
-                        <div style={{ height: '5vh' }} />
-                        <h2>{type === "user" ? main.username : main.name}</h2>
+                        <div style={{ height: '3vh' }} />
+                        <h2>{profileOf[type].name}</h2>
                     </div>
                     <div style={{ flex: 1 }}>
                         <div>
@@ -79,14 +60,14 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{ width: '25vw', right: 0 }}
                             />
-                            <Link to={`/profile/users/${!kingdomKing ? null : kingdomKing.id}`}>
+                            <Link to={`/profile/users/${kingdomKing.id}`}>
                                 <img
-                                    src={!kingdomKing ? null : userClass.King}
+                                    src={userClass.King}
                                     style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
                                 />
                             </Link>
                             <span style={{ width: '13vw', position: 'absolute', right: '11vw', top: '20vh' }}>
-                                {!kingdomKing ? null : kingdomKing.username}
+                                {kingdomKing.username}
                             </span>
                         </div>
                     </div>
@@ -94,50 +75,16 @@ export class Profile extends React.Component {
                 <div>
                     <div style={{ textAlign: 'center' }}>
                         <img
-                            src={
-                                type === "user"
-                                    ? userClass[level]
-                                    : type === "kingdom"
-                                        ? !kingdomMark[main.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[main.name]
-                                        : !main.allegiance
-                                            ? estCastle.none
-                                            : !estCastle[main.allegiance]
-                                                ? estCastle.undefinedKingdom
-                                                : estCastle[main.allegiance]
-                            }
+                            src={profileOf[type].image}
                             style={{ width: '75vw', height: '80vw' }}
                         />
-                        {
-                            type !== "establishment" ?
-                                null : !main.keeper ?
-                                    (
-                                        <div style={{ position: 'absolute', top: '41vh', left: '10vw' }}>
-                                            <div>
-                                                <span>No Keeper</span>
-                                            </div>
-                                            <img src={hardCoding.keeperChairUrl} style={{ width: '45vw' }} />
-                                        </div>
-                                    ) :
-                                    (
-                                        <div style={{ position: 'absolute', top: '40vh', left: '10vw' }}>
-                                            <div>
-                                                <span>Keeper : {!keeper ? null : keeper.username}</span>
-                                            </div>
-                                            <Link to={`/profile/users/${main.keeper}`}>
-                                                <img
-                                                    src={userClass[this.userLevel(keeper, kingdomKing)]}
-                                                    style={{ width: '45vw' }}
-                                                />
-                                            </Link>
-                                        </div>
-                                    )
-                        }
+                        {type !== "establishment" ? null : this.keeperView(main, users)}
                     </div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
-                    <span>Level : {level}</span>
-                    <div>{main[points]} / {levelUpPoints}</div>
-                    <span>{main[points]} / {levelUpPoints}</span>
+                    <span>Level : {profileOf[type].level}</span>
+                    <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
+                    <span>{profileOf[type].point} / {profileOf[type].levelUpPoints}</span>
                 </div>
                 <div style={{ height: '2vh' }}/>
                 <div>{this.renderWithItem(main, type)}</div>
@@ -146,6 +93,32 @@ export class Profile extends React.Component {
                         <img src={swordSingleButton} />
                     </Link>
                 </div>
+            </div>
+        )
+    }
+
+    keeperView(main, users){
+        const keeper = users.find(user => user.id === main.keeper)
+        return !main.keeper ?
+        (
+            <div style={{ position: 'absolute', top: '42vh', left: '10vw' }}>
+                <div>
+                    <span>No Keeper</span>
+                </div>
+                <img src={hardCoding.keeperChairUrl} style={{ width: '45vw' }} />
+            </div>
+        ) :
+        (
+            <div style={{ position: 'absolute', top: '41vh', left: '10vw' }}>
+                <div>
+                    <span>Keeper : {keeper.username}</span>
+                </div>
+                <Link to={`/profile/users/${main.keeper}`}>
+                    <img
+                        src={userClass[this.userLevel(keeper.id)]}
+                        style={{ width: '45vw' }}
+                    />
+                </Link>
             </div>
         )
     }
@@ -175,24 +148,17 @@ export class Profile extends React.Component {
         )
     }
 
-    levelUpPoints(main, kingdomKing){
-        const { type, kingdoms, establishments } = this.props
-        return type === 'kingdom' 
-            ? kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0)
-            : type === 'establishment'
-                ? establishments.reduce((accu, curr) => curr.popularity >= accu ? curr.popularity : accu, 0)
-                : !kingdomKing
-                    ? 0
-                    : kingdomKing.experience
-    }
-
-    userLevel(main, kingdomKing){
-        console.log(main, this.props.ownKingdom)
-        const points = main.experience
+    userLevel(userId) {
+        const { users, kingdoms } = this.props
+        const user = users.find(user => user.id === userId)
+        if(!user) return null
+        const points = user.experience
+        const ownKingdom = !user.kingdom ? 0 : kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
         const howManyEstablishments = this.props.establishments
-            .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === main.name)
+            .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === ownKingdom.name)
             .length
-        const amIKing = !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === main.id
+        const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
+        const amIKing = !user ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === user.id
         if (amIKing) return "King"
         if (points < 100) {
             if (howManyEstablishments < 20) return "Shepard"
@@ -201,6 +167,33 @@ export class Profile extends React.Component {
             return "Knight"
         }
         return "Lord"
+    }
+
+    eachTypeFor(main, type, kingdomKing){
+        const { users, establishments, kingdoms } = this.props
+        return {
+            user: type !== "user" ? null : {
+                name: main.username,
+                image: userClass[this.userLevel(main.id)],
+                point: main.experience,
+                level: this.userLevel(main.id),
+                levelUpPoints: kingdomKing.experience
+            },
+            kingdom: type !== "kingdom" ? null : {
+                name: main.name,
+                image: !kingdomMark[main.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[main.name],
+                point: main.power,
+                level: "Great Kingdom",
+                levelUpPoints: kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0)
+            },
+            establishment: type !== "establishment" ? null : {
+                name: main.name,
+                image: !main.allegiance ? estCastle.none : !estCastle[main.allegiance] ? estCastle.undefinedKingdom : estCastle[main.allegiance],
+                point: main.popularity,
+                level: "Castle",
+                levelUpPoints: establishments.reduce((accu, curr) => curr.popularity >= accu ? curr.popularity : accu, 0)
+            }
+        }
     }
 
     eachTypeForItem(main, type){
