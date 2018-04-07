@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { gem, swordSingleButton, userClass, kingdomMark, castle, knight, estCastle } from '../Assets'
+import { gem, swordSingleButton, userClass, kingdomMark, castle, knight, estCastle, changeKingdom } from '../Assets'
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
@@ -27,6 +27,7 @@ export class Profile extends React.Component {
         if(!main || !ownKingdom || !users[0]) return null
         const kingdomKing = users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type, kingdomKing)
+        console.log(this.props)
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -60,20 +61,27 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{ width: '25vw', right: 0 }}
                             />
-                            <Link to={`/profile/users/${kingdomKing.id}`}>
-                                <img
-                                    src={userClass.King}
-                                    style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
-                                />
-                            </Link>
-                            <span style={{ width: '13vw', position: 'absolute', right: '11vw', top: '20vh' }}>
-                                {kingdomKing.username}
-                            </span>
+                            {
+                                !kingdomKing ? null : (
+                                <div>
+                                    <Link to={`/profile/users/${kingdomKing.id}`}>
+                                        <img
+                                            src={userClass.King}
+                                            style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
+                                        />
+                                    </Link>
+                                    <span style={{ width: '13vw', position: 'absolute', right: '11vw', top: '20vh' }}>
+                                        {kingdomKing.username}
+                                    </span>
+                                </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
                 <div>
                     <div style={{ textAlign: 'center' }}>
+                        {type === "user" && main.id === this.props.user.id ? this.changeKingdom() : null}
                         <img
                             src={profileOf[type].image}
                             style={{ width: '75vw', height: '80vw' }}
@@ -93,6 +101,16 @@ export class Profile extends React.Component {
                         <img src={swordSingleButton} />
                     </Link>
                 </div>
+            </div>
+        )
+    }
+
+    changeKingdom(){
+        return (
+            <div style={{ position: 'absolute', top: '50vh', left: 0 }}>
+                <Link to='/changeKingdom' >
+                    <img style={{ width: '25vw' }} src={changeKingdom}/>
+                </Link>
             </div>
         )
     }
@@ -277,6 +295,7 @@ const mapProps = (state, ownProps) => {
     const paramId = +ownProps.match.params[type]
     const main = state[`${type}s`].find(each => each.id === paramId)
     if (!main) return { type, kingdoms: state.kingdoms }
+    if (!state.kingdoms[0]) return { type, kingdoms: state.kingdoms }
     const ownKingdom =
         type === "kingdom"
             ? main
@@ -290,6 +309,8 @@ const mapProps = (state, ownProps) => {
                             : main.allegiance
                 return kingdom.name === compare
             })
+    if (!ownKingdom) return { type, kingdoms: state.kingdoms }
+    console.log(main, ownKingdom)
     return {
         type,
         main,

@@ -6,6 +6,7 @@ import castleTower from './iconButtons/castleTower.png';
 import sword from './iconButtons/sword.png';
 import swordSingleButton from './iconButtons/swordSingleButton.png';
 import bridgeShield from './iconButtons/shieldBrooklynUpdate.png';
+import changeKingdom from './iconButtons/shield1.png';
 
 //resources
 import gem from './Resources/gem.png';
@@ -125,4 +126,4 @@ const estCastle = {
     Dragonstone: defaultEst
 }
 
-export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult, swordSingleButton, markersImages, estCastle };
+export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult, swordSingleButton, markersImages, estCastle, changeKingdom };

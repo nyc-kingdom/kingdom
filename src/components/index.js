@@ -12,3 +12,4 @@ export { default as User } from './User';
 export { default as Ticker } from './Ticker'
 export { default as LeaderBoard } from './LeaderBoard'
 export { default as ItemList } from './ItemList'
+export { default as ChangeKingdom } from './ChangeKingdom'
