@@ -24,10 +24,11 @@ export class Profile extends React.Component {
 
     render() {
         const { ownKingdom, main, users, type } = this.props
-        if(!main || !ownKingdom || !users[0]) return null
-        const kingdomKing = users.find(user => user.id === ownKingdom.king)
+        if(!main || !users[0]) return null
+        const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type, kingdomKing)
         console.log(this.props)
+        
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -38,16 +39,20 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{ width: '25vw', left: 0 }}
                             />
-                            <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
-                                <img
-                                    src={!kingdomMark[ownKingdom.name]
-                                        ? kingdomMark.undefinedKingdom[2]
-                                        : kingdomMark[ownKingdom.name]}
-                                    style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
-                                />
-                            </Link>
+                            {
+                                !ownKingdom ? null : (
+                                    <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
+                                        <img
+                                            src={!kingdomMark[ownKingdom.name]
+                                                ? kingdomMark.undefinedKingdom[2]
+                                                : kingdomMark[ownKingdom.name]}
+                                            style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
+                                        />
+                                    </Link>
+                                )
+                            }
                             <span style={{ width: '13vw', position: 'absolute', left: '3vw', top: '20vh' }}>
-                                {ownKingdom.name}
+                                {!ownKingdom ? main.kingdom : ownKingdom.name}
                             </span>
                         </div>
                     </div>
@@ -195,7 +200,7 @@ export class Profile extends React.Component {
                 image: userClass[this.userLevel(main.id)],
                 point: main.experience,
                 level: this.userLevel(main.id),
-                levelUpPoints: kingdomKing.experience
+                levelUpPoints: !kingdomKing ? 0 : kingdomKing.experience
             },
             kingdom: type !== "kingdom" ? null : {
                 name: main.name,
@@ -296,7 +301,7 @@ const mapProps = (state, ownProps) => {
     const main = state[`${type}s`].find(each => each.id === paramId)
     if (!main) return { type, kingdoms: state.kingdoms }
     if (!state.kingdoms[0]) return { type, kingdoms: state.kingdoms }
-    const ownKingdom =
+    let ownKingdom =
         type === "kingdom"
             ? main
             : state.kingdoms.find(kingdom => {
@@ -309,8 +314,6 @@ const mapProps = (state, ownProps) => {
                             : main.allegiance
                 return kingdom.name === compare
             })
-    if (!ownKingdom) return { type, kingdoms: state.kingdoms }
-    console.log(main, ownKingdom)
     return {
         type,
         main,
