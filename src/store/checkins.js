@@ -51,8 +51,8 @@ export const addCheckIn = (user, place, history) => dispatch => {
     .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccessful.`, err))
 }
 
-export const removeCheckin = userId => dispatch =>
-  axios.delete(`${serverUrl}/api/checkins/${userId}`)
+export const removeCheckin = (userId, kingdomId) => dispatch =>
+  axios.delete(`${serverUrl}/api/checkins/${userId}/${kingdomId}`)
     .then(() => dispatch(deleteCheckin(userId)))
     .catch(err => console.error(`Deleting Checkin (userId: ${userId} unsuccessful.`, err))
 

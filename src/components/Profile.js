@@ -26,7 +26,7 @@ export class Profile extends React.Component {
         const { ownKingdom, main, users, type } = this.props
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
-        const profileOf = this.eachTypeFor(main, type, kingdomKing)
+        const profileOf = this.eachTypeFor(main, type)
         console.log(this.props)
         
         return (
@@ -41,19 +41,21 @@ export class Profile extends React.Component {
                             />
                             {
                                 !ownKingdom ? null : (
-                                    <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
-                                        <img
-                                            src={!kingdomMark[ownKingdom.name]
-                                                ? kingdomMark.undefinedKingdom[2]
-                                                : kingdomMark[ownKingdom.name]}
-                                            style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
-                                        />
-                                    </Link>
+                                    <div>
+                                        <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
+                                            <img
+                                                src={!kingdomMark[ownKingdom.name]
+                                                    ? kingdomMark.undefinedKingdom[2]
+                                                    : kingdomMark[ownKingdom.name]}
+                                                style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
+                                            />
+                                        </Link>
+                                        <span style={{ width: '13vw', position: 'absolute', left: '3vw', top: '20vh' }}>
+                                            {!ownKingdom ? main.kingdom : ownKingdom.name}
+                                        </span>
+                                    </div>
                                 )
                             }
-                            <span style={{ width: '13vw', position: 'absolute', left: '3vw', top: '20vh' }}>
-                                {!ownKingdom ? main.kingdom : ownKingdom.name}
-                            </span>
                         </div>
                     </div>
                     <div style={{ flex: 2, textAlign: 'center' }}>
@@ -192,15 +194,32 @@ export class Profile extends React.Component {
         return "Lord"
     }
 
-    eachTypeFor(main, type, kingdomKing){
+    levelUpPointForUser(main){
+        const { users, kingdoms } = this.props
+        const ownKingdom = !main.kingdom ? 0 : kingdoms.find(kingdom => kingdom.id === main.kingdom.id)
+        const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
+        if (ownKingdom && users[0]) {
+            return {
+                King: main.experience,
+                Lord: kingdomKing.experience,
+                Knight: kingdomKing.experience > 500 ? 500 : kingdomKing.experience,
+                Shepard: kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
+                "Stone Mason": kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
+            }
+        }
+        return {}
+    }
+
+    eachTypeFor(main, type){
         const { users, establishments, kingdoms } = this.props
+        const levelUpPointForUser = this.levelUpPointForUser(main)
         return {
             user: type !== "user" ? null : {
                 name: main.username,
                 image: userClass[this.userLevel(main.id)],
                 point: main.experience,
                 level: this.userLevel(main.id),
-                levelUpPoints: !kingdomKing ? 0 : kingdomKing.experience
+                levelUpPoints: !levelUpPointForUser[this.userLevel(main.id)] ? 0 : levelUpPointForUser[this.userLevel(main.id)]
             },
             kingdom: type !== "kingdom" ? null : {
                 name: main.name,
