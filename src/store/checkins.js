@@ -8,6 +8,7 @@ import { serverUrl, paintEstablishment, fetchEstablishments, createMarker, verif
 const GET_CHECKINS = 'GET_CHECKINS'
 const CREATE_CHECKIN = 'CREATE_CHECKIN'
 const CREATE_FOURSQUARE_CHECKINS = 'CREATE_FOURSQUARE_CHECKINS'
+const DELETE_CHECKIN = 'DELETE_CHECKIN'
 
 /**
  * ACTION CREATORS
@@ -15,6 +16,7 @@ const CREATE_FOURSQUARE_CHECKINS = 'CREATE_FOURSQUARE_CHECKINS'
 const getCheckins = checkins => ({ type: GET_CHECKINS, checkins })
 export const createFoursquareCheckins = checkins => ({ type: CREATE_FOURSQUARE_CHECKINS, checkins })
 export const createCheckin = checkin => ({ type: CREATE_CHECKIN, checkin })
+const deleteCheckin = userId => ({ type: DELETE_CHECKIN, userId })
 
 /**
  * THUNK CREATORS
@@ -23,7 +25,7 @@ export const fetchCheckins = () => dispatch =>
   axios.get(`${serverUrl}/api/checkins`)
     .then(res => res.data)
     .then(checkins => dispatch(getCheckins(checkins)))
-    .catch(err => console.error('Fetching Checkins unsuccesful.', err))
+    .catch(err => console.error('Fetching Checkins unsuccessful.', err))
 
 //export const addFoursquareCheckins = () => dispatch =>
 
@@ -46,8 +48,13 @@ export const addCheckIn = (user, place, history) => dispatch => {
           dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
         })
     })
-    .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccesful.`, err))
+    .catch(err => console.error(`Creating Checkin ${checkInBundle.establishment} unsuccessful.`, err))
 }
+
+export const removeCheckin = (userId, kingdomId) => dispatch =>
+  axios.delete(`${serverUrl}/api/checkins/${userId}/${kingdomId}`)
+    .then(() => dispatch(deleteCheckin(userId)))
+    .catch(err => console.error(`Deleting Checkin (userId: ${userId} unsuccessful.`, err))
 
 export default function reducer(checkins = [], action) {
   switch (action.type) {
@@ -55,6 +62,8 @@ export default function reducer(checkins = [], action) {
       return action.checkins;
     case CREATE_CHECKIN:
       return [...checkins, action.checkin];
+    case DELETE_CHECKIN:
+      return checkins.filter(checkin => checkin.userId !== action.userId)
     default:
       return checkins;
   }

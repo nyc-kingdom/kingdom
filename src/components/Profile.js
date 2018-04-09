@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { gem, swordSingleButton, userClass, kingdomMark, castle, knight, estCastle } from '../Assets'
+import { gem, swordSingleButton, userClass, kingdomMark, castle, knight, estCastle, changeKingdom } from '../Assets'
 
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
@@ -24,9 +24,11 @@ export class Profile extends React.Component {
 
     render() {
         const { ownKingdom, main, users, type } = this.props
-        if(!main || !ownKingdom || !users[0]) return null
-        const kingdomKing = users.find(user => user.id === ownKingdom.king)
-        const profileOf = this.eachTypeFor(main, type, kingdomKing)
+        if(!main || !users[0]) return null
+        const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
+        const profileOf = this.eachTypeFor(main, type)
+        console.log(this.props)
+        
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -37,17 +39,23 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{ width: '25vw', left: 0 }}
                             />
-                            <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
-                                <img
-                                    src={!kingdomMark[ownKingdom.name]
-                                        ? kingdomMark.undefinedKingdom[2]
-                                        : kingdomMark[ownKingdom.name]}
-                                    style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
-                                />
-                            </Link>
-                            <span style={{ width: '13vw', position: 'absolute', left: '3vw', top: '20vh' }}>
-                                {ownKingdom.name}
-                            </span>
+                            {
+                                !ownKingdom ? null : (
+                                    <div>
+                                        <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
+                                            <img
+                                                src={!kingdomMark[ownKingdom.name]
+                                                    ? kingdomMark.undefinedKingdom[2]
+                                                    : kingdomMark[ownKingdom.name]}
+                                                style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
+                                            />
+                                        </Link>
+                                        <span style={{ width: '13vw', position: 'absolute', left: '3vw', top: '20vh' }}>
+                                            {!ownKingdom ? main.kingdom : ownKingdom.name}
+                                        </span>
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                     <div style={{ flex: 2, textAlign: 'center' }}>
@@ -60,20 +68,27 @@ export class Profile extends React.Component {
                                 src={hardCoding.flagBackgroundImgUrl}
                                 style={{ width: '25vw', right: 0 }}
                             />
-                            <Link to={`/profile/users/${kingdomKing.id}`}>
-                                <img
-                                    src={userClass.King}
-                                    style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
-                                />
-                            </Link>
-                            <span style={{ width: '13vw', position: 'absolute', right: '11vw', top: '20vh' }}>
-                                {kingdomKing.username}
-                            </span>
+                            {
+                                !kingdomKing ? null : (
+                                <div>
+                                    <Link to={`/profile/users/${kingdomKing.id}`}>
+                                        <img
+                                            src={userClass.King}
+                                            style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
+                                        />
+                                    </Link>
+                                    <span style={{ width: '13vw', position: 'absolute', right: '11vw', top: '20vh' }}>
+                                        {kingdomKing.username}
+                                    </span>
+                                </div>
+                                )
+                            }
                         </div>
                     </div>
                 </div>
                 <div>
                     <div style={{ textAlign: 'center' }}>
+                        {type === "user" && main.id === this.props.user.id ? this.changeKingdom() : null}
                         <img
                             src={profileOf[type].image}
                             style={{ width: '75vw', height: '80vw' }}
@@ -93,6 +108,16 @@ export class Profile extends React.Component {
                         <img src={swordSingleButton} />
                     </Link>
                 </div>
+            </div>
+        )
+    }
+
+    changeKingdom(){
+        return (
+            <div style={{ position: 'absolute', top: '50vh', left: 0 }}>
+                <Link to='/changeKingdom' >
+                    <img style={{ width: '25vw' }} src={changeKingdom}/>
+                </Link>
             </div>
         )
     }
@@ -169,15 +194,32 @@ export class Profile extends React.Component {
         return "Lord"
     }
 
-    eachTypeFor(main, type, kingdomKing){
+    levelUpPointForUser(main){
+        const { users, kingdoms } = this.props
+        const ownKingdom = !main.kingdom ? 0 : kingdoms.find(kingdom => kingdom.id === main.kingdom.id)
+        const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
+        if (ownKingdom && users[0]) {
+            return {
+                King: main.experience,
+                Lord: kingdomKing.experience,
+                Knight: kingdomKing.experience > 500 ? 500 : kingdomKing.experience,
+                Shepard: kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
+                "Stone Mason": kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
+            }
+        }
+        return {}
+    }
+
+    eachTypeFor(main, type){
         const { users, establishments, kingdoms } = this.props
+        const levelUpPointForUser = this.levelUpPointForUser(main)
         return {
             user: type !== "user" ? null : {
                 name: main.username,
                 image: userClass[this.userLevel(main.id)],
                 point: main.experience,
                 level: this.userLevel(main.id),
-                levelUpPoints: kingdomKing.experience
+                levelUpPoints: !levelUpPointForUser[this.userLevel(main.id)] ? 0 : levelUpPointForUser[this.userLevel(main.id)]
             },
             kingdom: type !== "kingdom" ? null : {
                 name: main.name,
@@ -277,7 +319,8 @@ const mapProps = (state, ownProps) => {
     const paramId = +ownProps.match.params[type]
     const main = state[`${type}s`].find(each => each.id === paramId)
     if (!main) return { type, kingdoms: state.kingdoms }
-    const ownKingdom =
+    if (!state.kingdoms[0]) return { type, kingdoms: state.kingdoms }
+    let ownKingdom =
         type === "kingdom"
             ? main
             : state.kingdoms.find(kingdom => {

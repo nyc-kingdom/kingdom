@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Router, Route, Switch } from 'react-router-dom'
 import history from '../history'
-import { About, Home, HomeDash, Profile, SingleEstablishmentView, LeaderBoard, ItemList } from './index'
+import { About, Home, HomeDash, Profile, SingleEstablishmentView, LeaderBoard, ItemList, ChangeKingdom } from './index'
 
 const Pipeline = (props) => (
 
@@ -24,6 +24,7 @@ const Pipeline = (props) => (
                     <Route path="/items/establishments/:establishment/:item" component={ItemList} />
                     <Route path="/singleEstablishment/:id" component={SingleEstablishmentView} />
                     <Route path="/leaderboard" component={LeaderBoard} />
+                    <Route path="/changeKingdom" component={ChangeKingdom} />
                 </Switch>
             }
         </Switch>

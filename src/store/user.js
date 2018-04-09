@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from './history'
-import { serverUrl, fetchKingdoms, fetchUsers } from './'
+import { serverUrl, fetchKingdoms, fetchUsers, removeCheckin, fetchCheckins, fetchEstablishments } from './'
 
 /**
  * ACTION TYPES
@@ -60,15 +60,22 @@ export const logout = () => dispatch =>
       .then(_ => dispatch(removeUser()))
       .catch(err => console.log(err))
 
-export const editUser = (user, userId) => dispatch => 
-  axios.put(`${serverUrl}/api/users/${userId}`, user)
+export const editUser = (user, userId) => dispatch => {
+  const kingdomId = !user.kingdomId ? null : user.kingdomId
+  return axios.put(`${serverUrl}/api/users/${userId}`, user)
     .then(res => res.data)
     .then(editedUser => {
+      if (kingdomId !== null) {
+        dispatch(removeCheckin(userId, kingdomId))
+        dispatch(fetchCheckins())
+        dispatch(fetchEstablishments())
+      }
       dispatch(fetchUsers())
       dispatch(fetchKingdoms())
       dispatch(updateUser(editedUser))
     })
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
+  }
 
 /**
  * REDUCER
