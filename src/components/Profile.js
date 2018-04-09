@@ -16,6 +16,7 @@ export class Profile extends React.Component {
         this.renderWithItem = this.renderWithItem.bind(this)
         this.eachTypeForItem = this.eachTypeForItem.bind(this)
         this.keeperView = this.keeperView.bind(this)
+        this.levelUpPointForUser = this.levelUpPointForUser.bind(this)
     }
 
     componentDidMount() {
@@ -27,8 +28,6 @@ export class Profile extends React.Component {
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
-        console.log(this.props)
-        
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />

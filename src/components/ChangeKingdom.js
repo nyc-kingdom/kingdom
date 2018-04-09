@@ -34,7 +34,6 @@ class ChangeKingdom extends Component {
 
   render() {
     if(!this.props.ownKingdom) return null
-    console.log(this.props)
     return (
       <div id="newUser">
         <h1>Hello {!this.props.user ? null : this.props.user.username}</h1>

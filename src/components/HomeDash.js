@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-
 import { gem, bridgeShield, castle, sword } from '../Assets'
-
 import { User, Map, Dash, Spotlight, Ticker } from './'
-
 import { logout } from '../store';
 
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.renderWithKingdom = this.renderWithKingdom.bind(this)
     this.state = {
       dashMode: 'closed',
     }
+    this.renderWithKingdom = this.renderWithKingdom.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -33,15 +30,15 @@ class Home extends Component {
   renderWithKingdom() {
     return (
       <div id="HomeDash">
-
-          <h1 id="logo" >
-            Kingdom
-          </h1>
+        <h1 id="logo" >
+          Kingdom
+        </h1>
         <div
           id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
             if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
             else this.setState({ dashMode: 'closed' })
-          }}>
+          }}
+        >
           <img src={sword} className="blip" />
         </div>
         <Link to={`/profile/users/${this.props.user.id}`}>
@@ -77,13 +74,7 @@ class Home extends Component {
   }
 }
 
-const mapProps = state => {
-  return {
-    user: state.user,
-    trackLocation: state.trackLocation,
-    checkIns: state.checkins
-  }
-}
+const mapProps = ({ user, trackLocation }) => ({ user, trackLocation })
 
 const mapDispatch = dispatch => ({
   logout: () => dispatch(logout())

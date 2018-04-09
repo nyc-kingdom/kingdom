@@ -27,10 +27,18 @@ export class ItemList extends React.Component {
                 </div>
                 <div style={{ height: '2vh' }} />
                 <div style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}>
-                    <div style={{ flex: 1 }} >Rank</div>
-                    <div style={{ flex: 1 }} >{`${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`}</div>
-                    <div style={{ flex: 3 }} >Name</div>
-                    <div style={{ flex: 1 }} >{`${itemOf[type][item].pointOf[0].toUpperCase()}${itemOf[type][item].pointOf.slice(1)}`}</div>
+                    <div style={{ flex: 1 }} >
+                        Rank
+                    </div>
+                    <div style={{ flex: 1 }} >
+                        {`${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`}
+                    </div>
+                    <div style={{ flex: 3 }} >
+                        Name
+                    </div>
+                    <div style={{ flex: 1 }} >
+                        {`${itemOf[type][item].pointOf[0].toUpperCase()}${itemOf[type][item].pointOf.slice(1)}`}
+                    </div>
                 </div>
                 <div style={{ height: '2vh' }} />
                 <div>
