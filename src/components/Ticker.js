@@ -25,9 +25,9 @@ class Ticker extends Component{
                         transitionLeaveTimeout={3000}
                     >
                 {
-                    this.props.checkIns.length > 0 &&
-                    this.props.checkIns
-                        .slice(this.props.checkIns.length - 12, this.props.checkIns.length)
+                    this.props.checkins.length > 0 &&
+                    this.props.checkins
+                        .slice(this.props.checkins.length - 12, this.props.checkins.length)
                         .reverse()
                         .map(check => 
                             <div className="tickerTape" key={check.id}>
@@ -42,14 +42,6 @@ class Ticker extends Component{
     }
 }
 
-const mapProps = state => {
-    return {
-      user: state.user,
-      trackLocation: state.trackLocation,
-      checkIns: state.checkins
-    }
-}
+const mapProps = ({ user, trackLocation, checkins }) => ({ user, trackLocation, checkins })
 
-const mapDispatch = null
-
-export default connect(mapProps, mapDispatch)(Ticker)
+export default connect(mapProps)(Ticker)

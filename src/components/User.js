@@ -15,6 +15,7 @@ const style = {
   flexDirection: 'column',
   textAlign: 'center',
 }
+
 class User extends Component {
   constructor(props) {
     super(props);
@@ -56,11 +57,7 @@ class User extends Component {
     return (
       <div id="newUser">
         <h1>
-          Welcome {
-            !this.props.user
-              ? <h2>Please sign in first</h2>
-              : this.props.user.email
-          }
+          Welcome {!this.props.user ? null : this.props.user.email}
         </h1>
         <div style={style}>
           <img
@@ -71,7 +68,6 @@ class User extends Component {
         <div>
           <h2>Enter your info to generate your profile</h2>
           <form style={{ textAlign: 'center' }} onSubmit={this.handleSubmitForm}>
-          {/* <label>Username :</label> */}
             <input
               name="username"
               onChange={this.handleChange}
@@ -80,7 +76,6 @@ class User extends Component {
               placeholder="username"
             />
             <div style={{height: '1vh'}} />
-          {/* <label>Address :</label> */}
             <input
               name="address"
               onChange={this.handleChange}
@@ -89,7 +84,6 @@ class User extends Component {
               placeholder="Street"
             />
             <div style={{height: '1vh'}} />
-            {/* <label>City :</label> */}
             <input
               name="city"
               onChange={this.handleChange}
@@ -98,7 +92,6 @@ class User extends Component {
               placeholder="City"
             />
             <div style={{height: '1vh'}} />
-            {/* <label>State :</label> */}
             <input
               name="state"
               onChange={this.handleChange}
@@ -107,7 +100,6 @@ class User extends Component {
               placeholder="State"
             />
             <div style={{height: '1vh'}} />
-            {/* <label>Zip :</label> */}
             <input
               name="zip"
               onChange={this.handleChange}

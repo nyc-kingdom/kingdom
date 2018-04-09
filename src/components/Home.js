@@ -8,13 +8,11 @@ import { serverUrl } from '../store'
 
 
 export class Home extends React.Component {
-
   constructor(props) {
     super(props)
   }
 
   render() {
-    console.log("serverUrl: ", serverUrl, "which enviroment", process.env.NODE_ENV)
     const style = {
       width: "100vw",
       display: "flex",
@@ -63,16 +61,12 @@ export class Home extends React.Component {
         <Link to='/about'>
           <h2>About</h2>
         </Link>
-
       </div>
     )
   }
 }
 
-const mapProps = state => ({
-  markers: state.markers,
-  user: state.user
-})
+const mapProps = ({ markers, user }) => ({ markers, user })
 
 const mapDispatch = dispatch => ({
   createMarker: marker => dispatch(createMarker(marker))

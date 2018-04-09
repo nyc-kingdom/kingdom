@@ -16,7 +16,6 @@ export class Markers extends Component {
     render() {
         const style = { height: '4vh', width: '2.5vw' }
         const searchView = { height: '8vh', width: '5vw' }
-
         let allegiance;
         if (markersImages[this.props.allegiance] !== undefined) allegiance = this.props.allegiance
         else allegiance = 'none'

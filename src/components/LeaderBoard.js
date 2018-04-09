@@ -124,13 +124,7 @@ export class LeaderBoard extends React.Component {
     }
 }
 
-const mapProps = state => {
-    return {
-        users: state.users,
-        kingdoms: state.kingdoms,
-        establishments: state.establishments
-    }
-}
+const mapProps = ({ users, kingdoms, establishments }) => ({ users, kingdoms, establishments })
 
 const mapDispatch = dispatch => ({
     fetchUsers: () => dispatch(fetchUsers())

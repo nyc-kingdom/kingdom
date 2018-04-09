@@ -6,8 +6,6 @@ import { Markers } from './'
 import {setMapStatus} from '../store/mapStatus'
 import knight from '../Assets/characters/knight.gif'
 
-
-
 export class Map extends Component {
   constructor(props) {
     super(props)
@@ -47,21 +45,17 @@ export class Map extends Component {
   }
 
   render() {
-
     //UPDATE MAP LOGIC
     const turn = Math.floor(this.props.establishments.length/10)%7
     console.log('Today\'s map is ', turn)
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
-
-
     //EXPERIMENTAL - MAP PANNING
     // if(this.map) console.log('MAP ', this.map)
     // if(this.map && this.map.map_) {
     //   console.log('HEY ', this.map.map_)
     //   this.map.map_.panTo({lat:40.7794366, lng:-73.96324400000003})
     // }
-
     // this.updateMapTheme()
     const style = {
       top: 0,
@@ -80,27 +74,25 @@ export class Map extends Component {
           // heatmap={this.state.heatmap}
           options={theme}
           ref = {map => {this.map=map}}
-          >
-          {
-            this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
-
-              <Markers
-                key={eachMarker.id}
-                lat={eachMarker.latitude}
-                lng={eachMarker.longitude}
-                establishmentName={eachMarker.name}
-                establishmentId={eachMarker.id}
-                allegiance={eachMarker.allegiance}
-                fourSquareId={eachMarker.fourSquareId}
-                type="establishment"
-                select={this.state.select}
-                cb={this.changeView.bind(this)}
-              />
-
-            )
-            )
-          }
-          {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
+        >
+        {
+          this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
+            <Markers
+              key={eachMarker.id}
+              lat={eachMarker.latitude}
+              lng={eachMarker.longitude}
+              establishmentName={eachMarker.name}
+              establishmentId={eachMarker.id}
+              allegiance={eachMarker.allegiance}
+              fourSquareId={eachMarker.fourSquareId}
+              type="establishment"
+              select={this.state.select}
+              cb={this.changeView.bind(this)}
+            />
+          ))
+        }
+        {
+          this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
             <Markers 
             // props={this.props}
               key={eachMarker.venue.id}
@@ -111,17 +103,27 @@ export class Map extends Component {
               type="searchResult"
               name={'restaurant'}
             />
-          )
-          )}
-          <div key={1111} lat={this.props.trackLocation.coords[0]} lng={this.props.trackLocation.coords[1]} ><img style={{maxHeight : '20px'}} src={knight}/></div>
+          ))
+        }
+        <div key={1111} lat={this.props.trackLocation.coords[0]} lng={this.props.trackLocation.coords[1]} >
+          <img style={{maxHeight : '20px'}} src={knight}/>
+        </div>
         </GoogleMapReact>
       </div>
     );
   }
 }
 
-  const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation, mapStatus: state.mapStatus })
-  const mapDispatch = dispatch => ({setMapStatus: theme=>{dispatch(setMapStatus(theme))}})
+  const mapState = state => ({
+    markers: state.markers,
+    establishments: state.establishments,
+    trackLocation: state.trackLocation,
+    mapStatus: state.mapStatus
+  })
+
+  const mapDispatch = dispatch => ({
+    setMapStatus: theme => dispatch(setMapStatus(theme))
+  })
 
   export default connect(mapState, mapDispatch)(Map)
 
