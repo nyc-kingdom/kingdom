@@ -1,10 +1,9 @@
 import React, { Component } from "react";
 import Carousel from "nuka-carousel";
-import { arrowLeft, arrowRight, shepard } from '../Assets'
+import { arrowLeft, arrowRight, shepard, bridgeShield } from '../Assets'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
-import { bridgeShield } from '../Assets'
 
 const style = {
   width: '100vw',
