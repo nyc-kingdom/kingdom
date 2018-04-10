@@ -7,6 +7,7 @@ import { gem, swordSingleButton, userClass, kingdomMark, castle, knight, estCast
 const hardCoding = {
     flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png",
     keeperChairUrl: "https://cdn4.iconfinder.com/data/icons/knight/512/as416g_7-512.png",
+    crown: "https://vignette.wikia.nocookie.net/clubpenguin/images/e/e5/King%27s_Crown_clothing_icon_ID_667.png/revision/latest/scale-to-width-down/537?cb=20141117234124"
 }
 
 export class Profile extends React.Component {
@@ -92,6 +93,7 @@ export class Profile extends React.Component {
                             src={profileOf[type].image}
                             style={{ width: '75vw', height: '80vw' }}
                         />
+                        {type === "user" && main.id === this.props.user.id && profileOf[type].level === "King" ? this.changeShield() : null}
                         {type !== "establishment" ? null : this.keeperView(main, users)}
                     </div>
                 </div>
@@ -107,6 +109,16 @@ export class Profile extends React.Component {
                         <img src={swordSingleButton} />
                     </Link>
                 </div>
+            </div>
+        )
+    }
+
+    changeShield(){
+        return (
+            <div style={{ position: 'absolute', top: '50vh', right: 0 }}>
+                <Link to='/changeShield' >
+                    <img style={{ width: '25vw' }} src={hardCoding.crown}/>
+                </Link>
             </div>
         )
     }
