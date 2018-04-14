@@ -209,7 +209,7 @@ export class Profile extends React.Component {
         const { users, kingdoms } = this.props
         const ownKingdom = !main.kingdom ? 0 : kingdoms.find(kingdom => kingdom.id === main.kingdom.id)
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
-        if (ownKingdom && users[0]) {
+        if (!!ownKingdom && !!users[0] && !!kingdomKing) {
             return {
                 King: main.experience,
                 Lord: kingdomKing.experience,
