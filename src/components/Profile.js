@@ -279,7 +279,7 @@ export class Profile extends React.Component {
                 item1: {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
-                    title: "Own Est.",
+                    title: "Local Est.",
                     result: this.props.establishments
                         .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === main.name)
                         .length
