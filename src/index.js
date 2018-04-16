@@ -6,15 +6,8 @@ import store from './store'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-let serverUrl;
-
-if (process.env.NODE_ENV === "production") {
-    serverUrl = 'https://kingdom-server.herokuapp.com'
-} else {
-    const port = 8080
-    serverUrl = `http://localhost:${port}`
-}
-export {serverUrl}
+// establishes socket connection
+import './sockets'
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import socket from '../sockets'
-import { serverUrl } from './'
+import { serverUrl } from '../sockets'
 
 /**
  * ACTION TYPES
