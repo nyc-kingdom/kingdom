@@ -10,11 +10,7 @@ import  { Routes } from './components'
 
 class App extends Component {
   componentDidMount() {
-    
-    socket.on('connect', ()=>{
-      console.log('I CONNECTED TO SERVER')
-    })
-    socket.on('new-checkIn', checkIn=> {
+    socket.on('new-checkIn', checkIn => {
       console.log('Somebody checked-in!')
       this.props.createCheckin(checkIn)
     })

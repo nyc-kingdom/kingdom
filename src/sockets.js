@@ -10,5 +10,9 @@ if (process.env.NODE_ENV === "production") {
 
 const socket = openSocket(serverUrl, {transports: ['websocket']} )
 
+socket.on('connect', ()=>{
+    console.log('I CONNECTED TO SERVER')
+})
+
 export { serverUrl }
 export default socket
