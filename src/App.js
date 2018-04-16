@@ -2,16 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import './App.css';
-import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, createCheckin, paintEstablishment } from './store';
-import { setLocationThunk } from './store/trackLocation'
-import socket from './sockets'
-import openSocket from 'socket.io-client'
-import {serverUrl} from './'
+import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, createCheckin, paintEstablishment, setLocationThunk } from './store';
+import socket, { serverUrl } from './sockets'
 
 //components
 import  { Routes } from './components'
-
-//export const socket = openSocket(serverUrl, {transports: ['websocket']} )
 
 class App extends Component {
   componentDidMount() {
@@ -33,20 +28,14 @@ class App extends Component {
 
   render() {
     return (
-      
-       <Routes/>
-      
+      <Routes/>
     );
   }
 }
 
 const mapState = (state) => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id,
     location: state.trackLocation,
-    user: state.user
   }
 }
 

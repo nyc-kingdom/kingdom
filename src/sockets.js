@@ -1,4 +1,4 @@
-const openSocket = require('socket.io-client')
+import openSocket from 'socket.io-client'
 
 let serverUrl;
 if (process.env.NODE_ENV === "production") {
@@ -9,4 +9,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const socket = openSocket(serverUrl, {transports: ['websocket']} )
+
+export { serverUrl }
 export default socket

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { serverUrl } from './'
+import { serverUrl } from '../sockets'
 
 
 const GET_KINGDOMS = 'GET_KINGDOMS';
