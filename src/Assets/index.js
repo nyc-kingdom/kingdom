@@ -97,7 +97,7 @@ const markersImages = {
     Bedford: bedfordMarker,
     Ravenswood: ravenswoodMarker,
     none: searchResult,
-    undefinedKingdom: searchResult,
+    undefinedKingdom: test,
     'Lefferts Gardens': leffertsGardenMarker,
     Lynbrook: lynbrookMarker,
     'South Slope': southSlopeMarker,
