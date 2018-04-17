@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { searchResult, markersImages } from '../Assets';
+import { searchResult, markersImages, userClass } from '../Assets';
 import { addCheckIn } from '../store';
 
 export class Markers extends Component {
@@ -11,6 +11,7 @@ export class Markers extends Component {
             showMarkerDetail: false,
             select: ''
         }
+        this.userLevel = this.userLevel.bind(this)
     }
 
     render() {
@@ -19,7 +20,6 @@ export class Markers extends Component {
         if (markersImages[this.props.allegiance] !== undefined) allegiance = this.props.allegiance
         else if (this.props.allegiance !== null) allegiance = 'undefinedKingdom'
         else allegiance = 'none'
-
         return (
             <div style={{ position: 'static' }}>
                 {
@@ -76,17 +76,41 @@ export class Markers extends Component {
                                 className="checkIn"
                             />
                         </div>
-                        :
-                        <Link to={`/dashboard/selectedView/${establishmentId}`}>
-                            <img src={searchResult} />
-                        </Link>
+                        : this.props.type === 'user'
+                            ? 
+                            <Link to={`/profile/users/${user.id}`}>
+                                <img style={{ maxHeight : '25px' }} src={userClass[this.userLevel(user)]}/>
+                            </Link>
+                            :
+                            <Link to={`/dashboard/selectedView/${establishmentId}`}>
+                                <img src={searchResult} />
+                            </Link>
                 }
             </div>
         )
     }
+
+    userLevel(user) {
+        const { kingdoms } = this.props
+        if(!user) return null
+        const points = user.experience
+        const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdomId)
+        const howManyEstablishments = this.props.establishments
+            .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === ownKingdom.name)
+            .length
+        const amIKing = !ownKingdom.king ? false : ownKingdom.king === user.id
+        if (amIKing) return "King"
+        if (points < 100) {
+            if (howManyEstablishments < 20) return "Shepard"
+            return "Stone Mason"
+        } else if (points < 500) {
+            return "Knight"
+        }
+        return "Lord"
+    }
 }
 
-const mapProps = ({ user }) => ({ user })
+const mapProps = ({ user, kingdoms, establishments }) => ({ user, kingdoms, establishments })
 
 const mapDispatch = (dispatch, ownProps) => ({
     addCheckIn: (user, place) => dispatch(addCheckIn(user, place, ownProps.history))
