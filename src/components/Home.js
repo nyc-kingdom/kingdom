@@ -22,10 +22,11 @@ export class Home extends React.Component {
       textAlign: "center",
     }
     return (
-
       <div className='home'>
         <br />
-        <h1 style={{ fontFamily: 'Apple Chancery, cursive', fontSize: '250%', textAlign: 'center'}}>Kingdom</h1>
+        <h1 style={{ fontFamily: 'Apple Chancery, cursive', fontSize: '250%', textAlign: 'center'}}>
+          Kingdom
+        </h1>
         <div>
         <Carousel
           renderCenterLeftControls={({ previousSlide }) => (
@@ -57,7 +58,9 @@ export class Home extends React.Component {
           <br />
           <br />
         </div>
-        <a href={`${serverUrl}/auth/foursquare`}><h2>Play Now</h2></a>
+        <a href={`${serverUrl}/auth/foursquare`}>
+          <h2>Play Now</h2>
+        </a>
         <Link to='/about'>
           <h2>About</h2>
         </Link>
@@ -73,4 +76,3 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(mapProps, mapDispatch)(Home)
-

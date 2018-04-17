@@ -1,9 +1,8 @@
-import React, { Component } from "react";
-import { arrowLeft, arrowRight, shepard } from '../Assets'
+import React, { Component } from 'react'
+import { arrowLeft, arrowRight, shepard, bridgeShield } from '../Assets'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
-import { bridgeShield } from '../Assets'
 
 const style = {
   width: '100vw',
@@ -29,7 +28,6 @@ class ChangeKingdom extends Component {
     }
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleCharacterSelector = this.handleCharacterSelector.bind(this);
   }
 
   render() {
@@ -91,18 +89,13 @@ class ChangeKingdom extends Component {
     evt.preventDefault();
     const { address, city, state, zip, username, experience } = this.state
     const { editUser, user, history } = this.props
-    const addressStr = `${address},${city},${state},${zip}`;
+    const addressStr = `${address},${city},${state},${zip}`
     editUser({address: addressStr, username, experience, kingdomId: user.kingdomId}, user.id)
     history.push(`/profile/users/${user.id}`)
   }
 
   handleChange(evt) {
     this.setState({[evt.target.name]: evt.target.value})
-  }
-
-  handleCharacterSelector(evt) {
-    evt.preventDefault();
-    this.setState({ character: evt.target.name })
   }
 }
 
@@ -113,6 +106,6 @@ const mapProps = ({ user, kingdoms }) => {
 
 const mapDispatch = dispatch => ({
   editUser: (user, userId) => dispatch(editUser(user, userId))
-});
+})
 
 export default connect(mapProps, mapDispatch)(ChangeKingdom)

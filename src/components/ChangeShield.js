@@ -1,7 +1,6 @@
-import React, { Component } from "react"
-import Carousel from "nuka-carousel"
+import React, { Component } from 'react'
+import Carousel from 'nuka-carousel'
 import { kingdomMark, bridgeShield } from '../Assets'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 const style = {
@@ -63,7 +62,7 @@ class ChangeShield extends Component {
   }
 
   handleShieldSelector(evt) {
-    evt.preventDefault();
+    evt.preventDefault()
     this.setState({ shield: evt.target.name })
   }
 }
@@ -73,6 +72,4 @@ const mapProps = ({ user, kingdoms }) => {
     return { user, ownKingdom }
 }
 
-const mapDispatch = null
-
-export default connect(mapProps, mapDispatch)(ChangeShield)
+export default connect(mapProps)(ChangeShield)
