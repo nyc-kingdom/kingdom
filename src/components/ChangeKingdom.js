@@ -24,7 +24,6 @@ class ChangeKingdom extends Component {
       city: '',
       state: '',
       zip: 0,
-      experience: 0,
     }
     this.handleSubmitForm = this.handleSubmitForm.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -87,10 +86,10 @@ class ChangeKingdom extends Component {
 
   handleSubmitForm(evt) {
     evt.preventDefault();
-    const { address, city, state, zip, username, experience } = this.state
+    const { address, city, state, zip, username } = this.state
     const { editUser, user, history } = this.props
     const addressStr = `${address},${city},${state},${zip}`
-    editUser({address: addressStr, username, experience, kingdomId: user.kingdomId}, user.id)
+    editUser({address: addressStr, username, kingdomId: user.kingdomId}, user.id)
     history.push(`/profile/users/${user.id}`)
   }
 
