@@ -44,10 +44,7 @@ export class About extends React.Component {
   }
 }
 
-const mapProps = state => ({
-  markers: state.markers,
-  user: state.user
-})
+const mapProps = ({ markers, user }) => ({ markers, user })
 
 const mapDispatch = dispatch => ({
   createMarker: marker => dispatch(createMarker(marker))

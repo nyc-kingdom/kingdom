@@ -7,6 +7,6 @@ const SinglePage = props => (
     </div>
 )
 
-const mapProps = state => ({markers: state.markers})
+const mapProps = ({ markers }) => ({ markers })
 
 export default connect(mapProps)(SinglePage)

@@ -1,6 +1,5 @@
-import React, { Component } from "react";
-import Carousel from "nuka-carousel";
-import { arrowLeft, arrowRight, shepard, bridgeShield } from '../Assets'
+import React, { Component } from "react"
+import { shepard, bridgeShield } from '../Assets'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
@@ -26,16 +25,16 @@ class User extends Component {
       state: '',
       zip: 0,
     }
-    this.handleSubmitForm = this.handleSubmitForm.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleCharacterSelector = this.handleCharacterSelector.bind(this);
+    this.handleSubmitForm = this.handleSubmitForm.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleCharacterSelector = this.handleCharacterSelector.bind(this)
   }
 
   handleSubmitForm(evt) {
-    evt.preventDefault();
+    evt.preventDefault()
     const { address, city, state, zip, username } = this.state
     const { editUser, user, history } = this.props
-    const addressStr = `${address},${city},${state},${zip}`;
+    const addressStr = `${address},${city},${state},${zip}`
     editUser({address: addressStr, username: username}, user.id)
     history.push(`/profile/users/${user.id}`)
   }
@@ -113,7 +112,7 @@ class User extends Component {
           </form>
         </div>
       </div>
-    );
+    )
   }
 }
 
@@ -121,6 +120,6 @@ const mapProps = ({ user }) => ({ user })
 
 const mapDispatch = dispatch => ({
   editUser: (user, userId) => dispatch(editUser(user, userId))
-});
+})
 
 export default connect(mapProps, mapDispatch)(User)

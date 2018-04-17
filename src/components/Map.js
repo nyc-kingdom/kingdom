@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld } from '../Assets/mapTheme'
 import { Markers } from './'
-import {setMapStatus} from '../store/mapStatus'
-import knight from '../Assets/characters/knight.gif'
+import { setMapStatus } from '../store'
+import { knight } from '../Assets'
 
 export class Map extends Component {
   constructor(props) {
@@ -28,15 +28,6 @@ export class Map extends Component {
   }
 
   updateMapTheme() {
-    // if (this.state.check) {
-    //   if (this.state.date.getHours() <= 18 && this.state.date.getHours() >= 6) {
-    //     this.setState({ options: greenTheme, check: !this.state.check })
-    //   }
-    // } else {
-    //   if (this.state.date.getHours() > 18 || this.state.date.getHours() < 6) {
-    //     this.setState({ options: unsaturatedBrowns, check: !this.state.check })
-    //   }
-    // }
     if (!this.state.check) {
       if (this.state.date.getMinutes() >= 0 && this.state.date.getMinutes() < 20) this.setState({ options: greenTheme, check: !this.state.check })
       if (this.state.date.getMinutes() > 20 && this.state.date.getMinutes() < 40) this.setState({ options: dark, check: !this.state.check })
@@ -106,7 +97,7 @@ export class Map extends Component {
           ))
         }
         <div key={1111} lat={this.props.trackLocation.coords[0]} lng={this.props.trackLocation.coords[1]} >
-          <img style={{maxHeight : '20px'}} src={knight}/>
+          <img style={{ maxHeight : '20px' }} src={knight}/>
         </div>
         </GoogleMapReact>
       </div>

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import socket from '../sockets'
 import { serverUrl } from '../sockets'
 
 /**
@@ -32,7 +31,6 @@ export const addShield = (shield, kingdomId) => dispatch =>
     .then(res => res.data)
     .then(newShield => {
       dispatch(createShield(newShield))
-      socket.emit('new-Shield', newShield)
     })
     .catch(err => console.error(`Creating Shield ${shield} unsuccessful.`, err))
 
@@ -40,8 +38,7 @@ export const editShield = (shield, shieldId) => dispatch =>
   axios.put(`${serverUrl}/api/shields/${shieldId}`, shield)
     .then(res => res.data)
     .then(editedShield => {
-      dispatch(createShield(editedShield))
-      socket.emit('edited-Shield', editedShield)
+      dispatch(updateShield(editedShield))
     })
     .catch(err => console.error(`Updating Shield ${shield} unsuccessful.`, err))
 

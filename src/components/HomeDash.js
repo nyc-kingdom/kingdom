@@ -67,7 +67,8 @@ class Home extends Component {
     )
   }
 
-  handleClick() {
+  handleClick(evt) {
+    evt.preventDefault()
     const { logout, history } = this.props
     logout()
     history.push('/')
