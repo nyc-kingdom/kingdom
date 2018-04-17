@@ -4,7 +4,6 @@ import GoogleMapReact from 'google-map-react'
 import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld } from '../Assets/mapTheme'
 import { Markers } from './'
 import { setMapStatus } from '../store'
-import { knight, userClass } from '../Assets'
 
 export class Map extends Component {
   constructor(props) {
@@ -122,9 +121,6 @@ export class Map extends Component {
             type="user"
           />
         }
-        {/* <div key={1111} lat={this.props.trackLocation.coords[0]} lng={this.props.trackLocation.coords[1]} >
-          <img style={{ maxHeight : '20px' }} src={knight}/>
-        </div> */}
         </GoogleMapReact>
       </div>
     );
