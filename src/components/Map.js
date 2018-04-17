@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react'
 import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld } from '../Assets/mapTheme'
 import { Markers } from './'
 import { setMapStatus } from '../store'
-import { knight } from '../Assets'
+import { knight, userClass } from '../Assets'
 
 export class Map extends Component {
   constructor(props) {
@@ -37,13 +37,6 @@ export class Map extends Component {
     if(this.state.center === null) this.setState({ center, coords: nextProps.trackLocation.coords })
     else if(latProps !== latState && lngProps !== lngState) this.setState({ center, coords: nextProps.trackLocation.coords })
   }
-
-  // componentWillReceiveProps(nextProps){
-  //   const [ lat, lng ] = nextProps.trackLocation.coords
-  //   let center = !!lat ? { lat, lng } : null
-  //   console.log(this.state.center)
-  //   if(center !== this.state.center) this.setState({ center, coords: nextProps.trackLocation.coords })
-  // }
 
   updateMapTheme() {
     if (!this.state.check) {
@@ -121,9 +114,17 @@ export class Map extends Component {
             />
           ))
         }
-        <div key={1111} lat={this.props.trackLocation.coords[0]} lng={this.props.trackLocation.coords[1]} >
+        {
+          this.props.trackLocation && this.props.trackLocation.coords && this.props.trackLocation.coords[0] &&
+          <Markers
+            lat={this.props.trackLocation.coords[0]}
+            lng={this.props.trackLocation.coords[1]}
+            type="user"
+          />
+        }
+        {/* <div key={1111} lat={this.props.trackLocation.coords[0]} lng={this.props.trackLocation.coords[1]} >
           <img style={{ maxHeight : '20px' }} src={knight}/>
-        </div>
+        </div> */}
         </GoogleMapReact>
       </div>
     );
@@ -134,7 +135,8 @@ export class Map extends Component {
     markers: state.markers,
     establishments: state.establishments,
     trackLocation: state.trackLocation,
-    mapStatus: state.mapStatus
+    mapStatus: state.mapStatus,
+    user: state.user
   })
 
   const mapDispatch = dispatch => ({
@@ -142,14 +144,3 @@ export class Map extends Component {
   })
 
   export default connect(mapState, mapDispatch)(Map)
-
-  // {
-  //   this.props.trackLocation &&
-  //   <div>
-  //   <Markers
-  //     lat={this.props.trackLocation.coords[0]}
-  //     lng={this.props.trackLocation.coords[1]}
-  //     type="user"
-  //     />
-  //   </div>
-  // }
