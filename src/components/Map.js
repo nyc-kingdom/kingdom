@@ -11,7 +11,7 @@ export class Map extends Component {
     super(props)
     this.state = {
       center: null,
-      zoom: null,
+      zoom: 13,
       bootstrapURLKeys: { key: "AIzaSyBqFElyKsNAtWKnM4pnj9CqCRc6u5ruxd4" },
       gestureHandling: 'cooperative',
       options: greenTheme,
@@ -33,10 +33,9 @@ export class Map extends Component {
     const [ latState, lngState ] = nextState.coords
     let center = !!latProps ? { lat: latProps, lng: lngProps } : null
 
-    console.log(latProps, latState)
     if(latProps === undefined) return;
-    if(this.state.center === null) this.setState({ center, zoom: 16, coords: nextProps.trackLocation.coords })
-    else if(latProps !== latState && lngProps !== lngState) this.setState({ center, zoom: 16, coords: nextProps.trackLocation.coords })
+    if(this.state.center === null) this.setState({ center, coords: nextProps.trackLocation.coords })
+    else if(latProps !== latState && lngProps !== lngState) this.setState({ center, coords: nextProps.trackLocation.coords })
   }
 
   // componentWillReceiveProps(nextProps){
@@ -55,11 +54,13 @@ export class Map extends Component {
   }
 
   render() {
-    //UPDATE MAP LOGIC
+    //USER BASED CENTER MAP
     if (this.props.trackLocation && this.props.trackLocation.coords && this.props.trackLocation.coords[0] && this.state.center === null){
       const [ lat, lng ] = this.props.trackLocation.coords  
-      this.setState({ center: { lat, lng }, zoom: 16 })
+      this.setState({ center: { lat, lng } })
     }
+
+    //UPDATE MAP LOGIC
     const turn = Math.floor(this.props.establishments.length/10)%7
     console.log('Today\'s map is ', turn)
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
@@ -77,15 +78,13 @@ export class Map extends Component {
       height: '100vh',
       width: '100vw'
     }
-    console.log(this.props.trackLocation.coords, this.state.center)
     return (
       <div id="map" style={style}>
         <GoogleMapReact
           bootstrapURLKeys={this.state.bootstrapURLKeys}
           defaultCenter={{ lat: 40.70, lng: -74.00 }}
           center={this.state.center}
-          defaultZoom={13}
-          zoom={this.state.center}
+          defaultZoom={this.state.zoom}
           heatmapLibrary={true}
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
