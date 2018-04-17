@@ -10,15 +10,16 @@ export class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      center: { lat: 40.70, lng: -74.00 },
-      zoom: 13,
+      center: null,
+      zoom: null,
       bootstrapURLKeys: { key: "AIzaSyBqFElyKsNAtWKnM4pnj9CqCRc6u5ruxd4" },
       gestureHandling: 'cooperative',
       options: greenTheme,
       date: new Date(),
       check: false,
       select: '',
-      showEstablishmentView: false
+      showEstablishmentView: false,
+      coords: []
     }
     this.changeView = (id) => {
       if (this.state.select !== id) this.setState({ select: id })
@@ -26,6 +27,24 @@ export class Map extends Component {
     }
     this.updateMapTheme = this.updateMapTheme.bind(this)
   }
+
+  componentWillUpdate(nextProps, nextState){
+    const [ latProps, lngProps ] = nextProps.trackLocation.coords
+    const [ latState, lngState ] = nextState.coords
+    let center = !!latProps ? { lat: latProps, lng: lngProps } : null
+
+    console.log(latProps, latState)
+    if(latProps === undefined) return;
+    if(this.state.center === null) this.setState({ center, zoom: 16, coords: nextProps.trackLocation.coords })
+    else if(latProps !== latState && lngProps !== lngState) this.setState({ center, zoom: 16, coords: nextProps.trackLocation.coords })
+  }
+
+  // componentWillReceiveProps(nextProps){
+  //   const [ lat, lng ] = nextProps.trackLocation.coords
+  //   let center = !!lat ? { lat, lng } : null
+  //   console.log(this.state.center)
+  //   if(center !== this.state.center) this.setState({ center, coords: nextProps.trackLocation.coords })
+  // }
 
   updateMapTheme() {
     if (!this.state.check) {
@@ -37,6 +56,10 @@ export class Map extends Component {
 
   render() {
     //UPDATE MAP LOGIC
+    if (this.props.trackLocation && this.props.trackLocation.coords && this.props.trackLocation.coords[0] && this.state.center === null){
+      const [ lat, lng ] = this.props.trackLocation.coords  
+      this.setState({ center: { lat, lng }, zoom: 16 })
+    }
     const turn = Math.floor(this.props.establishments.length/10)%7
     console.log('Today\'s map is ', turn)
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
@@ -54,12 +77,15 @@ export class Map extends Component {
       height: '100vh',
       width: '100vw'
     }
+    console.log(this.props.trackLocation.coords, this.state.center)
     return (
       <div id="map" style={style}>
         <GoogleMapReact
           bootstrapURLKeys={this.state.bootstrapURLKeys}
-          defaultCenter={this.state.center}
-          defaultZoom={this.state.zoom}
+          defaultCenter={{ lat: 40.70, lng: -74.00 }}
+          center={this.state.center}
+          defaultZoom={13}
+          zoom={this.state.center}
           heatmapLibrary={true}
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
