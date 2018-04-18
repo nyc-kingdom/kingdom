@@ -13,7 +13,7 @@ class Ticker extends Component{
             <div id="Ticker">
                 <div
                     className='tickerTape'
-                    onClick={()=>{this.setState({hidden: !this.state.hidden})}}
+                    onClick={() => this.setState({ hidden: !this.state.hidden })}
                 >
                     See what's happening!
                 </div>
@@ -24,24 +24,24 @@ class Ticker extends Component{
                         transitionEnterTimeout={5000}
                         transitionLeaveTimeout={3000}
                     >
-                {
-                    this.props.checkins.length > 0 &&
-                    this.props.checkins
-                        .slice(this.props.checkins.length - 12, this.props.checkins.length)
-                        .reverse()
-                        .map(check => 
-                            <div className="tickerTape" key={check.id}>
-                                {`${check.user.username} just checked into ${check.establishment.name}!`}
-                            </div>
-                        )
-                }
-                </CSSTransitionGroup>
+                        {
+                            this.props.checkins.length > 0 &&
+                            this.props.checkins
+                                .slice(this.props.checkins.length - 12, this.props.checkins.length)
+                                .reverse()
+                                .map(check => 
+                                    <div className="tickerTape" key={check.id}>
+                                        {`${check.user.username} just checked into ${check.establishment.name}!`}
+                                    </div>
+                                )
+                        }
+                    </CSSTransitionGroup>
                 }
             </div>
         )
     }
 }
 
-const mapProps = ({ user, trackLocation, checkins }) => ({ user, trackLocation, checkins })
+const mapProps = ({ checkins }) => ({ checkins })
 
 export default connect(mapProps)(Ticker)
