@@ -58,9 +58,17 @@ export class Home extends React.Component {
           <br />
           <br />
         </div>
-        <a href={`${serverUrl}/auth/foursquare`}>
-          <h2>Play Now</h2>
-        </a>
+        {
+          !!this.props.user.id
+            ?
+            <Link to='/dashboard'>
+              <h2>Play Now</h2>
+            </Link>
+            :
+            <a href={`${serverUrl}/auth/foursquare`}>
+              <h2>Play Now</h2>
+            </a>
+        }
         <Link to='/about'>
           <h2>About</h2>
         </Link>
