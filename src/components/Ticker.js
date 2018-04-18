@@ -29,7 +29,7 @@ class Ticker extends Component{
                             this.props.checkins
                                 .slice(this.props.checkins.length - 12, this.props.checkins.length)
                                 // only showing less than 30 mins
-                                .filter(checkin => Date.parse(Date()) - Date.parse(checkin.createdAt) < 1800000)
+                                .filter(checkin => Date.now() - Date.parse(checkin.createdAt) < 1800000)
                                 .reverse()
                                 .map(check => 
                                     <div className="tickerTape" key={check.id}>
