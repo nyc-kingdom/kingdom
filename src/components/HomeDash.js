@@ -20,7 +20,7 @@ class Home extends Component {
       <div>
         {
           !this.props.user.kingdomId
-            ? <User history={this.props.history} />
+            ? <User/>
             : this.renderWithKingdom()
         }
       </div>
@@ -34,7 +34,9 @@ class Home extends Component {
           Kingdom
         </h1>
         <div
-          id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
+          id="sword"
+          className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'}
+          onClick={() => {
             if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
             else this.setState({ dashMode: 'closed' })
           }}
@@ -56,7 +58,11 @@ class Home extends Component {
             <img src={bridgeShield} className="blip" />
           </div>
         </Link>
-        <div id="logout" style={{fontFamily: 'Apple Chancery, cursive'}} onClick={this.handleClick}>
+        <div
+          id="logout"
+          style={{fontFamily: 'Apple Chancery, cursive'}}
+          onClick={this.handleClick}
+        >
           <h2>Logout</h2>
         </div>
         <Dash mode={this.state.dashMode} />
@@ -69,16 +75,12 @@ class Home extends Component {
 
   handleClick(evt) {
     evt.preventDefault()
-    const { logout, history } = this.props
-    logout()
-    history.push('/')
+    this.props.logout()
   }
 }
 
 const mapProps = ({ user, trackLocation }) => ({ user, trackLocation })
 
-const mapDispatch = dispatch => ({
-  logout: () => dispatch(logout())
-})
+const mapDispatch = dispatch => ({ logout: () => dispatch(logout()) })
 
 export default connect(mapProps, mapDispatch)(Home)

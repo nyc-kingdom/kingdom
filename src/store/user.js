@@ -58,7 +58,10 @@ export const logout = () => dispatch =>
       url: `${serverUrl}/auth/logout`,
       withCredentials: true
     })
-      .then(_ => dispatch(removeUser()))
+      .then(_ => {
+        dispatch(removeUser())
+        history.push('/')
+      })
       .catch(err => console.log(err))
 
 export const editUser = (user, userId) => dispatch => {
