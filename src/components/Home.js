@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createMarker } from '../store';
 import Carousel from 'nuka-carousel';
 import { arrowRight, arrowLeft, king, shepard, lord, knight, knightsword, blacksmith } from '../Assets'
 import { serverUrl } from '../sockets'
@@ -79,8 +78,4 @@ export class Home extends React.Component {
 
 const mapProps = ({ markers, user }) => ({ markers, user })
 
-const mapDispatch = dispatch => ({
-  createMarker: marker => dispatch(createMarker(marker))
-})
-
-export default connect(mapProps, mapDispatch)(Home)
+export default connect(mapProps)(Home)

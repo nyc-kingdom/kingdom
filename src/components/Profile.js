@@ -237,14 +237,14 @@ export class Profile extends React.Component {
                 image: !kingdomMark[main.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[main.name],
                 point: main.power,
                 level: "Great Kingdom",
-                levelUpPoints: kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0)
+                levelUpPoints: kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0),
             },
             establishment: type !== "establishment" ? null : {
                 name: main.name,
                 image: !main.allegiance ? estCastle.none : !estCastle[main.allegiance] ? estCastle.undefinedKingdom : estCastle[main.allegiance],
-                point: main.popularity,
+                point: users.find(user => user.id === this.props.user.id).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
                 level: "Castle",
-                levelUpPoints: establishments.reduce((accu, curr) => curr.popularity >= accu ? curr.popularity : accu, 0)
+                levelUpPoints: users.find(user => user.id === main.keeper).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
             }
         }
     }
