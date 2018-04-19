@@ -1,5 +1,5 @@
 import axios from 'axios'
-import history from './history'
+import history from '../history'
 import { fetchKingdoms, fetchUsers, removeCheckin, fetchCheckins, fetchEstablishments } from './'
 import { serverUrl } from '../sockets'
 
@@ -74,6 +74,7 @@ export const editUser = (user, userId) => dispatch => {
       dispatch(fetchUsers())
       dispatch(fetchKingdoms())
       dispatch(updateUser(editedUser))
+      history.push(`/profile/users/${userId}`)
     })
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
   }
