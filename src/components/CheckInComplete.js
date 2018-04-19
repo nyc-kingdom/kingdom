@@ -28,10 +28,10 @@ const Success = props => {
 }
 
 
-const mapProps = (state, ownProps) => ({ verifyCheckIn: state.verify })
+const mapProps = state => ({ verifyCheckIn: state.verify })
 
-const mapDispatch = (dispatch, ownProps) => ({
-    addCheckIn: (user, place) => dispatch(addCheckIn(user, place, ownProps.history))
+const mapDispatch = dispatch => ({
+    addCheckIn: (user, place) => dispatch(addCheckIn(user, place))
 })
 
 export default connect(mapProps, mapDispatch)(Success)

@@ -30,7 +30,7 @@ export const fetchCheckins = () => dispatch =>
 
 //export const addFoursquareCheckins = () => dispatch =>
 
-export const addCheckIn = (user, place, history) => dispatch => {
+export const addCheckIn = (user, place) => dispatch => {
   const checkInBundle = { user, place }
   return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
     .then(res => res.data)

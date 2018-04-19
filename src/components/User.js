@@ -33,10 +33,9 @@ class User extends Component {
   handleSubmitForm(evt) {
     evt.preventDefault()
     const { address, city, state, zip, username } = this.state
-    const { editUser, user, history } = this.props
+    const { editUser, user } = this.props
     const addressStr = `${address},${city},${state},${zip}`
     editUser({address: addressStr, username: username}, user.id)
-    history.push(`/profile/users/${user.id}`)
   }
 
   handleChange(evt) {

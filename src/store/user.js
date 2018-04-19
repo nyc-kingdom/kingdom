@@ -1,5 +1,5 @@
 import axios from 'axios'
-import history from './history'
+import history from '../history'
 import { fetchKingdoms, fetchUsers, removeCheckin, fetchCheckins, fetchEstablishments } from './'
 import { serverUrl } from '../sockets'
 
@@ -58,7 +58,10 @@ export const logout = () => dispatch =>
       url: `${serverUrl}/auth/logout`,
       withCredentials: true
     })
-      .then(_ => dispatch(removeUser()))
+      .then(_ => {
+        dispatch(removeUser())
+        history.push('/')
+      })
       .catch(err => console.log(err))
 
 export const editUser = (user, userId) => dispatch => {
@@ -74,6 +77,7 @@ export const editUser = (user, userId) => dispatch => {
       dispatch(fetchUsers())
       dispatch(fetchKingdoms())
       dispatch(updateUser(editedUser))
+      history.push(`/profile/users/${userId}`)
     })
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
   }
