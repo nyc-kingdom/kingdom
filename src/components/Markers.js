@@ -112,8 +112,8 @@ export class Markers extends Component {
 
 const mapProps = ({ user, kingdoms, establishments }) => ({ user, kingdoms, establishments })
 
-const mapDispatch = (dispatch, ownProps) => ({
-    addCheckIn: (user, place) => dispatch(addCheckIn(user, place, ownProps.history))
+const mapDispatch = dispatch => ({
+    addCheckIn: (user, place) => dispatch(addCheckIn(user, place))
 })
 
 export default connect(mapProps, mapDispatch)(Markers)
