@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import history from '../history'
 import { addCheckIn, verifyCheckIn, setLocationThunk } from '../store'
 import distanceCalc from '../functions/distanceCalc'
 import { SuccessMenu } from './'
 
 const Spotlight = props => {
     if (props.markers.length === 0) {
-        props.redirect.push('/dashboard');
+        history.push('/dashboard');
         return null
     } else {
         const place = props.markers.find(eachMarker => eachMarker.venue.id === props.match.params.id)
@@ -52,22 +53,21 @@ const Spotlight = props => {
                     </div>
             )
         } else {
-            props.redirect.push('/dashboard');
+            history.push('/dashboard');
             return null
         } //EDGE CASE
     }
 }
 
-const mapProps = (state, ownProps) => ({
+const mapProps = state => ({
     markers: state.markers,
     user: state.user,
     location: state.trackLocation,
     verifyCheckIn: state.verify,
-    redirect: ownProps.history
 })
 
-const mapDispatch = (dispatch, ownProps) => ({
-    addCheckIn: (user, place) => dispatch(addCheckIn(user, place, ownProps.history)),
+const mapDispatch = dispatch => ({
+    addCheckIn: (user, place) => dispatch(addCheckIn(user, place)),
     setLocation: location => dispatch(setLocationThunk()),
     verify: bundle => dispatch(verifyCheckIn(bundle))
 })

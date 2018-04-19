@@ -96,7 +96,9 @@ export class Markers extends Component {
         const points = user.experience
         const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdomId)
         const howManyEstablishments = this.props.establishments
-            .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === ownKingdom.name)
+            .filter(establishment =>
+                establishment.kingdom === establishment.allegiance && establishment.allegiance === ownKingdom.name
+            )
             .length
         const amIKing = !ownKingdom.king ? false : ownKingdom.king === user.id
         if (amIKing) return "King"
