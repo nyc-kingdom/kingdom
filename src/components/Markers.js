@@ -12,6 +12,7 @@ export class Markers extends Component {
             select: ''
         }
         this.userLevel = this.userLevel.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     render() {
@@ -45,19 +46,7 @@ export class Markers extends Component {
                                     <br />
                                     <button
                                         className='powerButtonEst'
-                                        onClick={() => {
-                                            this.props.addCheckIn(
-                                                user,
-                                                {
-                                                    id: this.props.fourSquareId,
-                                                    location: {
-                                                        lat: this.props.lat,
-                                                        lng: this.props.lng
-                                                    },
-                                                    name: establishmentName
-                                                }
-                                            )
-                                        }}
+                                        onClick={this.handleClick}
                                     >
                                         Check in here!
                                     </button>
@@ -105,6 +94,19 @@ export class Markers extends Component {
             return "Knight"
         }
         return "Lord"
+    }
+
+    handleClick(evt){
+        evt.preventDefault()
+        const { addCheckIn, fourSquareId, lat, lng, establishmentName, user } = this.props
+        addCheckIn(
+            user,
+            {
+                id: fourSquareId,
+                location: { lat, lng },
+                name: establishmentName
+            }
+        )
     }
 }
 
