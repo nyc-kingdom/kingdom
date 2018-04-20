@@ -74,14 +74,12 @@ export class ItemList extends React.Component {
         if(!user) return null
         const points = user.experience
         const ownKingdom = !user.kingdom ? 0 : kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
-        const howManyEstablishments = this.props.establishments
-            .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === ownKingdom.name)
-            .length
+        const howManyLocalDomains = ownKingdom.localDomain
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const amIKing = !user ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === user.id
         if (amIKing) return "King"
         if (points < 100) {
-            if (howManyEstablishments < 20) return "Shepard"
+            if (howManyLocalDomains < 20) return "Shepard"
             return "Stone Mason"
         } else if (points < 500) {
             return "Knight"
@@ -129,7 +127,7 @@ export class ItemList extends React.Component {
                     listFor: "establishment",
                     image: () => castle,
                     style: { width: '10vw', height: '5vh' },
-                    title: "Own Establishments",
+                    title: "Local Domains",
                     pointOf: "popularity",
                     name: "name",
                     result: establishments

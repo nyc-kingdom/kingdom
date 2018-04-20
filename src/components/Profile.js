@@ -278,7 +278,7 @@ export class Profile extends React.Component {
                 item1: {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
-                    title: "Local Est.",
+                    title: "Local Domains",
                     result: main.localDomain
                 },
                 item2: {
