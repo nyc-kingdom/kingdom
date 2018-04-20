@@ -192,8 +192,7 @@ export class Profile extends React.Component {
         const points = user.experience
         const ownKingdom = !user.kingdom ? 0 : kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
         const howManyLocalDomains = ownKingdom.localDomain
-        const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
-        const amIKing = !user ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === user.id
+        const amIKing = ownKingdom.king === user.id
         if (amIKing) return "King"
         if (points < 100) {
             if (howManyLocalDomains < 20) return "Shepard"
