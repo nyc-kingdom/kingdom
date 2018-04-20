@@ -1,6 +1,6 @@
 import axios from 'axios'
 import socket from '../sockets'
-import { paintEstablishment, fetchEstablishments, createMarker, verifyCheckIn } from './'
+import { paintEstablishment, fetchEstablishments, createMarker, verifyCheckIn, fetchUsers, fetchKingdoms } from './'
 import { serverUrl } from '../sockets'
 
 /**
@@ -44,8 +44,10 @@ export const addCheckIn = (user, place) => dispatch => {
         .then(establishment=>{
           dispatch(paintEstablishment(establishment))
           socket.emit('paint-new-establishment', establishment)
-          dispatch(fetchEstablishments())
           dispatch(createMarker([]))
+          dispatch(fetchEstablishments())
+          dispatch(fetchKingdoms())
+          dispatch(fetchUsers())
           dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
         })
     })
