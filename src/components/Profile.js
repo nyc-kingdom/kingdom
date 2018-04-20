@@ -29,6 +29,7 @@ export class Profile extends React.Component {
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
+        console.log(main)
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -190,14 +191,12 @@ export class Profile extends React.Component {
         if(!user) return null
         const points = user.experience
         const ownKingdom = !user.kingdom ? 0 : kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
-        const howManyEstablishments = this.props.establishments
-            .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === ownKingdom.name)
-            .length
+        const howManyLocalDomains = ownKingdom.localDomain
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const amIKing = !user ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === user.id
         if (amIKing) return "King"
         if (points < 100) {
-            if (howManyEstablishments < 20) return "Shepard"
+            if (howManyLocalDomains < 20) return "Shepard"
             return "Stone Mason"
         } else if (points < 500) {
             return "Knight"
@@ -280,17 +279,13 @@ export class Profile extends React.Component {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
                     title: "Local Est.",
-                    result: this.props.establishments
-                        .filter(establishment => establishment.kingdom === establishment.allegiance && establishment.allegiance === main.name)
-                        .length
+                    result: main.localDomain
                 },
                 item2: {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
                     title: "Total Colonies",
-                    result: this.props.establishments
-                        .filter(establishment => establishment.kingdom !== establishment.allegiance && establishment.allegiance === main.name)
-                        .length
+                    result: main.colonies
                 },
                 item3: {
                     image: knight,
