@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { About, Home, HomeDash, Profile, SingleEstablishmentView, LeaderBoard, ItemList, ChangeKingdom, ChangeShield } from './'
-import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, setLocationThunk, createCheckin, paintEstablishment } from '../store';
-import socket from '../sockets'
+import { About, Home, HomeDash, Profile, SingleEstablishmentView, LeaderBoard, ItemList, ChangeKingdom, ChangeShield } from './components'
+import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, setLocationThunk, createCheckin, paintEstablishment } from './store';
+import socket from './sockets'
 
 /**
  * COMPONENT
@@ -25,7 +25,7 @@ class Pipeline extends Component {
 
     render () {
         const { isLoggedIn } = this.props
-
+        console.log(this.props)
         return (
             <Switch>
                 {/* Routes placed here are available to all visitors */}

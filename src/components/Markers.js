@@ -31,7 +31,7 @@ export class Markers extends Component {
                                 select === establishmentId &&
                                 <div className="establishmentCard">
                                     <h3>{establishmentName}</h3>
-                                    <Link to={`/profile/establishments/${establishmentId}`}>
+                                    <Link to={`/profil/${establishmentId}`}>
                                         Details
                                     </Link>
                                     <br />
@@ -110,7 +110,7 @@ export class Markers extends Component {
     }
 }
 
-const mapProps = ({ user, kingdoms, establishments }) => ({ user, kingdoms, establishments })
+const mapProps = ({ user, kingdoms }) => ({ user, kingdoms })
 
 const mapDispatch = dispatch => ({
     addCheckIn: (user, place) => dispatch(addCheckIn(user, place))

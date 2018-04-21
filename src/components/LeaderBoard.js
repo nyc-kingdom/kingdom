@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { userClass, knight, kingdomMark, wolfShield, castle, castleTower, markersImages, swordSingleButton, bridgeShield, estCastle } from '../Assets'
+import { userClass, knight, kingdomMark, castle, swordSingleButton, bridgeShield, estCastle } from '../Assets'
 
 export class LeaderBoard extends React.Component {
     constructor(props) {

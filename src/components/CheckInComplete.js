@@ -28,7 +28,7 @@ const Success = props => {
 }
 
 
-const mapProps = state => ({ verifyCheckIn: state.verify })
+const mapProps = ({ verify }) => ({ verifyCheckIn: verify })
 
 const mapDispatch = dispatch => ({
     addCheckIn: (user, place) => dispatch(addCheckIn(user, place))

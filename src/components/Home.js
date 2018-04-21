@@ -20,6 +20,7 @@ export class Home extends React.Component {
       flexDirection: "column",
       textAlign: "center",
     }
+    console.log(!!this.props.user.id, this.props.user.id, this.props)
     return (
       <div className='home'>
         <br />
@@ -76,6 +77,6 @@ export class Home extends React.Component {
   }
 }
 
-const mapProps = ({ markers, user }) => ({ markers, user })
+const mapProps = ({ user }) => ({ user })
 
 export default connect(mapProps)(Home)

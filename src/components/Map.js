@@ -78,7 +78,7 @@ export class Map extends Component {
           center={this.state.center}
           defaultZoom={this.state.zoom}
           heatmapLibrary={true}
-          defaultAverageCenter={true}
+          // defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
           options={theme}
           ref = {map => {this.map=map}}

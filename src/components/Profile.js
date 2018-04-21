@@ -29,7 +29,6 @@ export class Profile extends React.Component {
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
-        console.log(main)
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -190,7 +189,7 @@ export class Profile extends React.Component {
         const user = users.find(user => user.id === userId)
         if(!user) return null
         const points = user.experience
-        const ownKingdom = !user.kingdom ? 0 : kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
+        const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
         const howManyLocalDomains = ownKingdom.localDomain
         const amIKing = ownKingdom.king === user.id
         if (amIKing) return "King"
