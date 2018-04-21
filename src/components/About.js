@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createMarker } from '../store';
-
 
 export class About extends React.Component {
 
@@ -45,10 +43,6 @@ export class About extends React.Component {
   }
 }
 
-const mapProps = ({ markers, user }) => ({ markers, user })
+const mapProps = ({ user }) => ({ user })
 
-const mapDispatch = dispatch => ({
-  createMarker: marker => dispatch(createMarker(marker))
-})
-
-export default connect(mapProps, mapDispatch)(About)
+export default connect(mapProps)(About)

@@ -39,16 +39,13 @@ class User extends Component {
   }
 
   handleChange(evt) {
-    this.setState({
-      [evt.target.name]: evt.target.value
-    })
+    this.setState({ [evt.target.name]: evt.target.value })
   }
 
   handleCharacterSelector(evt) {
     evt.preventDefault();
     this.setState({ character: evt.target.name })
   }
-
 
   render() {
     return (

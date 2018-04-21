@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { addCheckIn, queryMarkers, getUserCheckIns, setLocationThunk, verifyCheckIn } from '../store'
+import { queryMarkers, getUserCheckIns, setLocationThunk, verifyCheckIn } from '../store'
 import { gem, knightsword, sword } from '../Assets'
 
 export class Dash extends React.Component {
