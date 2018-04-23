@@ -31,7 +31,7 @@ export class Markers extends Component {
                                 select === establishmentId &&
                                 <div className="establishmentCard">
                                     <h3>{establishmentName}</h3>
-                                    <Link to={`/profil/${establishmentId}`}>
+                                    <Link to={`/profile/establishments/${establishmentId}`}>
                                         Details
                                     </Link>
                                     <br />
