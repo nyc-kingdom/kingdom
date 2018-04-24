@@ -29,6 +29,7 @@ export class Profile extends React.Component {
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
+        console.log(main)
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -240,7 +241,7 @@ export class Profile extends React.Component {
                 name: main.name,
                 image: !main.allegiance ? estCastle.none : !estCastle[main.allegiance] ? estCastle.undefinedKingdom : estCastle[main.allegiance],
                 point: users.find(user => user.id === this.props.user.id).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
-                level: "Castle",
+                level: `Castle in ${main.kingdom}`,
                 levelUpPoints: !users ? 0 : users.find(user => user.id === main.keeper).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
             }
         }

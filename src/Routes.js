@@ -25,7 +25,6 @@ class Pipeline extends Component {
 
     render () {
         const { isLoggedIn } = this.props
-        console.log(this.props)
         return (
             <Switch>
                 {/* Routes placed here are available to all visitors */}
@@ -48,6 +47,8 @@ class Pipeline extends Component {
                         <Route path="/changeShield" component={ChangeShield} />
                     </Switch>
                 }
+                {/* Displays our Home component as a fallback */}
+                <Route component={Home} />
             </Switch>
         )
     }
@@ -56,12 +57,11 @@ class Pipeline extends Component {
 /**
  * CONTAINER
  */
-const mapProps = ({ user, trackLocation }) => {
+const mapProps = ({ user }) => {
     return {
         // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
         // Otherwise, state.user will be an empty object, and state.user.id will be falsey
         isLoggedIn: !!user.id,
-        location: trackLocation,
     }
 }
 
