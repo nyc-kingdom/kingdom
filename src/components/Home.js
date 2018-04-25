@@ -1,9 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Carousel from 'nuka-carousel';
-import { arrowRight, arrowLeft, king, shepard, lord, knight, knightsword, blacksmith } from '../Assets'
+import { arrowRight, arrowLeft, userClass } from '../Assets'
 import { serverUrl } from '../sockets'
-
 
 const Home = () => {
   const style = {
@@ -14,6 +13,7 @@ const Home = () => {
     flexDirection: "column",
     textAlign: "center",
   }
+  const charactors = ["King", "Lord", "Knight", "Shepard", "Stone Mason", "Knightsword"]
   return (
     <div className='home'>
       <br />
@@ -22,38 +22,27 @@ const Home = () => {
       </h1>
       <div>
       <Carousel
-        renderCenterLeftControls={({ previousSlide }) => (
+        renderCenterLeftControls={({ previousSlide }) =>
           <img src={arrowLeft} onClick={previousSlide} />
-        )}
-        renderCenterRightControls={({ nextSlide }) => (
+        }
+        renderCenterRightControls={({ nextSlide }) =>
           <img src={arrowRight} onClick={nextSlide} />
-        )}
+        }
       >
-        <div className="carousel-summary" style={style}>
-          <img src={king} style={{width: "60vw", padding:"50px"}}/>
-        </div>
-        <div className="carousel-summary" style={style}>
-          <img src={shepard} style={{width: "60vw", padding:"50px"}}/>
-        </div>
-        <div className="carousel-summary" style={style}>
-          <img src={lord} style={{width: "60vw", padding:"50px"}}/>
-        </div>
-        <div className="carousel-summary" style={style}>
-          <img src={knight} style={{width: "60vw", padding:"50px"}}/>
-        </div>
-        <div className="carousel-summary" style={style}>
-          <img src={knightsword} style={{width: "60vw", padding:"50px"}}/>
-        </div>
-        <div className="carousel-summary" style={style}>
-          <img src={blacksmith} style={{width: "60vw", padding:"50px"}}/>
-        </div>
+        {
+          charactors.map(charactor => (
+            <div className="carousel-summary" style={style}>
+              <img src={userClass[charactor]} style={{width: "60vw", padding:"50px"}}/>
+            </div>
+          ))
+        }
       </Carousel>
         <br />
         <br />
       </div>
-        <a href={`${serverUrl}/auth/foursquare`}>
-          <h2>Play Now</h2>
-        </a>
+      <a href={`${serverUrl}/auth/foursquare`}>
+        <h2>Play Now</h2>
+      </a>
       <Link to='/about'>
         <h2>About</h2>
       </Link>

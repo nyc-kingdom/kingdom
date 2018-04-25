@@ -72,6 +72,7 @@ const userClass = {
     Knight: knight,
     Shepard: shepard,
     'Stone Mason': blacksmith,
+    Knightsword: knightsword,
 }
 
 //kingdom shields
