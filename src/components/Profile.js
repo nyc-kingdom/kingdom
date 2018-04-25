@@ -78,7 +78,7 @@ class Profile extends React.Component {
                                             style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
                                         />
                                     </Link>
-                                    <span style={{ width: '13vw', position: 'absolute', right: '11vw', top: '20vh' }}>
+                                    <span style={{width: '13vw', position: 'absolute', right: '11vw', top: '20vh'}}>
                                         {kingdomKing.username}
                                     </span>
                                 </div>
@@ -89,13 +89,28 @@ class Profile extends React.Component {
                 </div>
                 <div>
                     <div style={{ textAlign: 'center' }}>
-                        {type === "user" && main.id === this.props.user.id ? this.changeKingdom() : null}
+                        {
+                            type === "user" &&
+                            main.id === this.props.user.id
+                                ? this.changeKingdom()
+                                : null
+                        }
                         <img
                             src={profileOf[type].image}
                             style={{ width: '75vw', height: '80vw' }}
                         />
-                        {type === "user" && main.id === this.props.user.id && profileOf[type].level === "King" ? this.changeShield() : null}
-                        {type !== "establishment" ? null : this.keeperView(main, users)}
+                        {
+                            type === "user" && 
+                            main.id === this.props.user.id &&
+                            profileOf[type].level === "King"
+                                ? this.changeShield()
+                                : null
+                        }
+                        {
+                            type !== "establishment"
+                                ? null
+                                : this.keeperView(main, users)
+                        }
                     </div>
                 </div>
                 <div style={{ textAlign: 'center' }}>
