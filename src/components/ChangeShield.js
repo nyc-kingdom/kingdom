@@ -52,7 +52,7 @@ class ChangeShield extends Component {
   }
 
   handleSubmitForm(evt) {
-    evt.preventDefault();
+    evt.preventDefault()
     const { history, ownKingdom } = this.props
     history.push(`/profile/kingdoms/${ownKingdom.id}`)
   }
@@ -68,8 +68,8 @@ class ChangeShield extends Component {
 }
 
 const mapProps = ({ user, kingdoms }) => {
-    const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdomId)
-    return { user, ownKingdom }
+  const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdomId)
+  return { user, ownKingdom }
 }
 
 export default connect(mapProps)(ChangeShield)

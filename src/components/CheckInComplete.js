@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addCheckIn } from '../store'
 
-
 const Success = props => {
 
     if(props.verifyCheckIn.status==='FULFILLED'){
