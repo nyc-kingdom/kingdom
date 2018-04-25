@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
 import { userClass, knight, kingdomMark, wolfShield, castle, castleTower, swordSingleButton, gem } from '../Assets'
 
-export class ItemList extends React.Component {
+class ItemList extends React.Component {
     constructor(props) {
         super(props)
         this.eachItemFor = this.eachItemFor.bind(this)

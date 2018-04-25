@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { queryMarkers, getUserCheckIns, setLocationThunk, verifyCheckIn } from '../store'
 import { gem, knightsword, sword } from '../Assets'
 
-export class Dash extends React.Component {
+class Dash extends React.Component {
     constructor(props) {
         super(props)
         this.state = {

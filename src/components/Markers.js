@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { searchResult, markersImages, userClass } from '../Assets';
 import { addCheckIn } from '../store';
 
-export class Markers extends Component {
+class Markers extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -36,7 +36,16 @@ export class Markers extends Component {
                                     </Link>
                                     <br />
                                     <div>
-                                        {this.props.allegiance} <br /> Kingdom
+                                        {
+                                            this.props.allegiance
+                                                ?
+                                                (
+                                                    <div>
+                                                        {this.props.allegiance} <br /> Kingdom
+                                                    </div>
+                                                )
+                                                : this.props.origin 
+                                        }
                                         <br />
                                     </div>
                                     <img
