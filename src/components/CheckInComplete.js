@@ -3,29 +3,52 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { addCheckIn } from '../store'
 
-const Success = props => {
+class Success extends React.Component {
+    constructor(props) {
+        super(props)
+        this.handleClick = this.handleClick.bind(this)
+    }
 
-    if(props.verifyCheckIn.status==='FULFILLED'){
-        console.log('river flowing here')
+    render() {
         return (
-            <div id='Spotlight'>
-                <h3>CONGRATULATIONS YOU SUCCESSFULLY CHECKED IN, PLEASE PICK AN ITEM</h3>
-                <button className='powerButton' onClick={() => { props.addCheckIn(props.user, props.venue) }}>CONFIRM</button>
-                <Link id='clean' to='/dashboard' className="escape">X</Link>
-            </div>
+            this.props.verifyCheckIn.status==='FULFILLED'
+                ?
+                (
+                    <div id='Spotlight'>
+                        <br />
+                        <h3>
+                            CONGRATULATIONS YOU SUCCESSFULLY CHECKED IN, PLEASE PICK AN ITEM
+                        </h3>
+                        <button className='powerButton' onClick={this.handleClick}>
+                            CONFIRM
+                        </button>
+                        <Link id='clean' to='/dashboard' className="escape">
+                            X
+                        </Link>
+                    </div>
+                )
+                : this.props.verifyCheckIn.status==='FAILURE'
+                    ?
+                    (
+                        <div id='Spotlight'>
+                            <br />
+                            <h3>
+                                NICE TRY, SEEMS LIKE YOU'RE NOT NEAR THIS LOCATION
+                            </h3>
+                            <Link id='clean' to='/dashboard' className="escape">
+                                X
+                            </Link>
+                        </div>
+                    )
+                    : <div id='Spotlight'></div>
         )
     }
-    else if(props.verifyCheckIn.status==='FAILURE'){
-        return (
-            <div id='Spotlight'>
-                <h3>NICE TRY, SEEMS LIKE YOU'RE NOT NEAR THIS LOCATION</h3>
-                <Link id='clean' to='/dashboard' className="escape">X</Link>
-            </div>
-        )
+
+    handleClick(evt) {
+        evt.preventDefault()
+        this.props.addCheckIn(this.props.user, this.props.venue)
     }
-    else return (<div id='Spotlight'></div>)
 }
-
 
 const mapProps = ({ verify }) => ({ verifyCheckIn: verify })
 

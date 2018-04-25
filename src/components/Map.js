@@ -5,7 +5,7 @@ import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld }
 import { Markers } from './'
 import { setMapStatus } from '../store'
 
-export class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -81,6 +81,8 @@ export class Map extends Component {
           // defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
           options={theme}
+          // onChildMouseEnter={this.onChildMouseEnter}
+          // onChildMouseLeave={this.onChildMouseLeave}
           ref = {map => {this.map=map}}
         >
         {
@@ -92,6 +94,7 @@ export class Map extends Component {
               establishmentName={eachMarker.name}
               establishmentId={eachMarker.id}
               allegiance={eachMarker.allegiance}
+              origin={eachMarker.kingdom}
               fourSquareId={eachMarker.fourSquareId}
               type="establishment"
               select={this.state.select}

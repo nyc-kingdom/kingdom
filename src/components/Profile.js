@@ -10,7 +10,7 @@ const hardCoding = {
     crown: "https://vignette.wikia.nocookie.net/clubpenguin/images/e/e5/King%27s_Crown_clothing_icon_ID_667.png/revision/latest/scale-to-width-down/537?cb=20141117234124"
 }
 
-export class Profile extends React.Component {
+class Profile extends React.Component {
     constructor(props) {
         super(props)
         this.userLevel = this.userLevel.bind(this)

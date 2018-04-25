@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
 import { userClass, knight, kingdomMark, castle, swordSingleButton, bridgeShield, estCastle } from '../Assets'
 
-export class LeaderBoard extends React.Component {
+class LeaderBoard extends React.Component {
     constructor(props) {
         super(props)
         this.state = { show: 'kingdoms' }
