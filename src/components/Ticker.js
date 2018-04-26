@@ -4,10 +4,9 @@ import { CSSTransitionGroup } from 'react-transition-group'
 
 
 class Ticker extends Component{
-
     constructor(props){
         super(props)
-        this.state={hidden: false}
+        this.state = { hidden: false }
     }
 
     render(){
@@ -40,4 +39,4 @@ const mapProps = state => {
 
 const mapDispatch = null
 
-export default connect(mapProps, mapDispatch)(Ticker)
+export default connect(mapProps)(Ticker)

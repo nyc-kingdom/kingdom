@@ -12,8 +12,9 @@ import trackLocation from './trackLocation'
 import verify from './gameplay'
 import mapStatus from './mapStatus'
 import panning from './panning'
+import shields from './shields'
 
-const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation, verify, mapStatus, panning })
+const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation, verify, mapStatus, shields, panning })
 
 const middleware = composeWithDevTools(applyMiddleware(
     thunkMiddleware,
@@ -22,19 +23,6 @@ const middleware = composeWithDevTools(applyMiddleware(
 
 const store = createStore(reducer, middleware)
 
-
-// let serverUrl;
-
-// if (process.env.NODE_ENV === "production") {
-//     serverUrl = 'https://kingdom-server.herokuapp.com'
-// } else {
-//     const port = 8080
-//     serverUrl = `http://localhost:${port}`
-// }
-
-//grab location + store
-//console.log("serverUrl: ", serverUrl, "which enviroment", process.env.NODE_ENV)
-//export { serverUrl }
 export default store
 
 export * from './markers'
@@ -45,4 +33,5 @@ export * from './checkins'
 export * from './kingdoms'
 export * from './trackLocation'
 export * from './gameplay'
-// export {serverUrl} from '../'
+export * from './shields'
+export * from './mapStatus'

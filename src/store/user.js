@@ -1,6 +1,6 @@
 import axios from 'axios'
-import history from './history'
-import { fetchKingdoms, fetchUsers } from './'
+import history from '../history'
+import { fetchKingdoms, fetchUsers, removeCheckin, fetchCheckins, fetchEstablishments } from './'
 import serverUrl from '../environment'
 
 /**
@@ -42,11 +42,11 @@ export const login = () => dispatch =>
       dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
 
-export const auth = (email, password, method) => dispatch =>
-  axios.post(`/auth/${method}`, { email, password })
+export const auth = (data, method) => dispatch =>
+  axios.post(`${serverUrl}/auth/${method}`, data)
     .then(res => {
       dispatch(getUser(res.data))
-      history.push('/home')
+      history.push(`${serverUrl}/dashboard`)
     }, authError => { // rare example: a good use case for parallel (non-catch) error handler
       dispatch(getUser({ error: authError }))
     })
@@ -58,18 +58,29 @@ export const logout = () => dispatch =>
       url: `${serverUrl}/auth/logout`,
       withCredentials: true
     })
-      .then(_ => dispatch(removeUser()))
+      .then(_ => {
+        dispatch(removeUser())
+        history.push('/')
+      })
       .catch(err => console.log(err))
 
-export const editUser = (user, userId) => dispatch => 
-  axios.put(`${serverUrl}/api/users/${userId}`, user)
+export const editUser = (user, userId) => dispatch => {
+  const kingdomId = !user.kingdomId ? null : user.kingdomId
+  return axios.put(`${serverUrl}/api/users/${userId}`, user)
     .then(res => res.data)
     .then(editedUser => {
+      if (kingdomId !== null) {
+        dispatch(removeCheckin(userId, kingdomId))
+        dispatch(fetchCheckins())
+        dispatch(fetchEstablishments())
+      }
       dispatch(fetchUsers())
       dispatch(fetchKingdoms())
       dispatch(updateUser(editedUser))
+      history.push(`/profile/users/${userId}`)
     })
     .catch(err => console.error(`Updating User ${user} unsuccesful.`, err))
+  }
 
 /**
  * REDUCER

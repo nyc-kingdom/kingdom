@@ -6,6 +6,7 @@ import castleTower from './iconButtons/castleTower.png';
 import sword from './iconButtons/sword.png';
 import swordSingleButton from './iconButtons/swordSingleButton.png';
 import bridgeShield from './iconButtons/shieldBrooklynUpdate.png';
+import changeKingdom from './iconButtons/shield1.png';
 
 //resources
 import gem from './Resources/gem.png';
@@ -71,6 +72,7 @@ const userClass = {
     Knight: knight,
     Shepard: shepard,
     'Stone Mason': blacksmith,
+    Knightsword: knightsword,
 }
 
 //kingdom shields
@@ -84,9 +86,9 @@ const kingdomMark = {
     Astoria: ravenswoodS,
     Ravenswood: ravenswoodS,
     'South Slope': southSlopeS,
-    'Bath Beach' : sample5,
-    'Ocean Hill' : sample3,
-    Meeren: sample,
+    'Bath Beach': sample5,
+    'Ocean Hill': sample3,
+    'Southern Tip': sample,
     Arlen: sample,
     Qarth: sample,
     Dragonstone: sample
@@ -95,14 +97,14 @@ const kingdomMark = {
 const markersImages = {
     Bedford: bedfordMarker,
     Ravenswood: ravenswoodMarker,
-    none: test,
+    none: searchResult,
     undefinedKingdom: test,
     'Lefferts Gardens': leffertsGardenMarker,
     Lynbrook: lynbrookMarker,
     'South Slope': southSlopeMarker,
     Bushwick: bushwickMarker,
     Astoria: ravenswoodMarker,
-    Meeren: test,
+    'Southern Tip': leffertsGardenMarker,
     Arlen: test,
     Qarth: test,
     Dragonstone: test
@@ -119,10 +121,10 @@ const estCastle = {
     Bushwick: bushwickEst,
     Astoria: ravenswoodEst,
     'Financial District': financialDistrictEst,
-    Meeren: defaultEst,
+    'Southern Tip': leffertsGardenEst,
     Arlen: defaultEst,
     Qarth: defaultEst,
     Dragonstone: defaultEst
 }
 
-export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult, swordSingleButton, markersImages, estCastle };
+export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult, swordSingleButton, markersImages, estCastle, changeKingdom };

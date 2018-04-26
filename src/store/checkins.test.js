@@ -1,7 +1,7 @@
 /* global describe beforeEach afterEach it */
 
 import { expect } from 'chai'
-import { fetchCheckins, addCheckin, editCheckin, removeCheckin } from './checkins'
+import { fetchCheckins, addCheckin, editCheckin, removeCheckin } from './'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureMockStore from 'redux-mock-store'

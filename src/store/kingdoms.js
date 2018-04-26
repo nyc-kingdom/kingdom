@@ -4,10 +4,7 @@ import serverUrl from '../environment'
 
 const GET_KINGDOMS = 'GET_KINGDOMS';
 
-const getKingdoms = kingdoms => {
-  const action = {type: GET_KINGDOMS, kingdoms};
-  return action;
-}
+const getKingdoms = kingdoms => ({type: GET_KINGDOMS, kingdoms})
 
 export const fetchKingdoms = () => dispatch => {
   return axios.get(`${serverUrl}/api/kingdoms`)

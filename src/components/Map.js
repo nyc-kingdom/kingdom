@@ -7,13 +7,11 @@ import {setMapStatus} from '../store/mapStatus'
 import knight from '../Assets/characters/knight.gif'
 import {setPan} from '../store/panning.js'  
 
-
-
-export class Map extends Component {
+class Map extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      center: { lat: 40.70, lng: -74.00 },
+      center: null,
       zoom: 13,
       bootstrapURLKeys: { key: "AIzaSyBqFElyKsNAtWKnM4pnj9CqCRc6u5ruxd4" },
       gestureHandling: 'cooperative',
@@ -21,7 +19,8 @@ export class Map extends Component {
       date: new Date(),
       check: false,
       select: '',
-      showEstablishmentView: false
+      showEstablishmentView: false,
+      coords: []
     }
     this.changeView = (id) => {
       if (this.state.select !== id) this.setState({ select: id })
@@ -31,16 +30,17 @@ export class Map extends Component {
     this.toggle = true
   }
 
+  componentWillUpdate(nextProps, nextState){
+    const [ latProps, lngProps ] = nextProps.trackLocation.coords
+    const [ latState, lngState ] = nextState.coords
+    let center = !!latProps ? { lat: latProps, lng: lngProps } : null
+
+    if(latProps === undefined) return;
+    if(this.state.center === null) this.setState({ center, coords: nextProps.trackLocation.coords })
+    else if(latProps !== latState && lngProps !== lngState) this.setState({ center, coords: nextProps.trackLocation.coords })
+  }
+
   updateMapTheme() {
-    // if (this.state.check) {
-    //   if (this.state.date.getHours() <= 18 && this.state.date.getHours() >= 6) {
-    //     this.setState({ options: greenTheme, check: !this.state.check })
-    //   }
-    // } else {
-    //   if (this.state.date.getHours() > 18 || this.state.date.getHours() < 6) {
-    //     this.setState({ options: unsaturatedBrowns, check: !this.state.check })
-    //   }
-    // }
     if (!this.state.check) {
       if (this.state.date.getMinutes() >= 0 && this.state.date.getMinutes() < 20) this.setState({ options: greenTheme, check: !this.state.check })
       if (this.state.date.getMinutes() > 20 && this.state.date.getMinutes() < 40) this.setState({ options: dark, check: !this.state.check })
@@ -49,26 +49,23 @@ export class Map extends Component {
   }
 
   render() {
+    //USER BASED CENTER MAP
+    if (this.props.trackLocation && this.props.trackLocation.coords && this.props.trackLocation.coords[0] && this.state.center === null){
+      const [ lat, lng ] = this.props.trackLocation.coords  
+      this.setState({ center: { lat, lng } })
+    }
 
     //UPDATE MAP LOGIC
     const turn = Math.floor(this.props.establishments.length/10)%7
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
-    if(this.props.mapStatus!==theme) this.props.setMapStatus(theme) 
-
+    if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
     //EXPERIMENTAL - MAP PANNING
-    console.log('NOW THE MAP RENDERS', this.toggle)
-    
-    if(this.toggle){
-      if(this.map && this.map.map_) {
-        console.log('HEY Mappy', this.map.map_)
-        const panning = this.map.map_.panTo.bind(this)
-        this.props.setPan(panning)
-        this.toggle=false
-      }
-    }
-
-
-    
+    // if(this.map) console.log('MAP ', this.map)
+    // if(this.map && this.map.map_) {
+    //   console.log('HEY ', this.map.map_)
+    //   this.map.map_.panTo({lat:40.7794366, lng:-73.96324400000003})
+    // }
+    // this.updateMapTheme()
     const style = {
       top: 0,
       bottom: 0,
@@ -79,34 +76,36 @@ export class Map extends Component {
       <div id="map" style={style}>
         <GoogleMapReact
           bootstrapURLKeys={this.state.bootstrapURLKeys}
-          defaultCenter={this.state.center}
+          defaultCenter={{ lat: 40.70, lng: -74.00 }}
+          center={this.state.center}
           defaultZoom={this.state.zoom}
           heatmapLibrary={true}
-          defaultAverageCenter={true}
+          // defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
-          options={this.props.mapStatus}
+          options={theme}
+          // onChildMouseEnter={this.onChildMouseEnter}
+          // onChildMouseLeave={this.onChildMouseLeave}
           ref = {map => {this.map=map}}
-          >
-          {
-            this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
-
-              <Markers
-                key={eachMarker.id}
-                lat={eachMarker.latitude}
-                lng={eachMarker.longitude}
-                establishmentName={eachMarker.name}
-                establishmentId={eachMarker.id}
-                allegiance={eachMarker.allegiance}
-                fourSquareId={eachMarker.fourSquareId}
-                type="establishment"
-                select={this.state.select}
-                cb={this.changeView.bind(this)}
-              />
-
-            )
-            )
-          }
-          {this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
+        >
+        {
+          this.props.establishments.length > 0 && this.props.establishments.map(eachMarker => (
+            <Markers
+              key={eachMarker.id}
+              lat={eachMarker.latitude}
+              lng={eachMarker.longitude}
+              establishmentName={eachMarker.name}
+              establishmentId={eachMarker.id}
+              allegiance={eachMarker.allegiance}
+              origin={eachMarker.kingdom}
+              fourSquareId={eachMarker.fourSquareId}
+              type="establishment"
+              select={this.state.select}
+              cb={this.changeView.bind(this)}
+            />
+          ))
+        }
+        {
+          this.props.markers.length > 0 && this.props.markers.map(eachMarker => (
             <Markers 
             // props={this.props}
               key={eachMarker.venue.id}
@@ -117,18 +116,32 @@ export class Map extends Component {
               type="searchResult"
               name={'restaurant'}
             />
-          )
-          )}
-          <div key={1111} lat={this.props.trackLocation.coords[0]} lng={this.props.trackLocation.coords[1]} ><img style={{maxHeight : '20px'}} src={knight}/></div>
+          ))
+        }
+        {
+          this.props.trackLocation && this.props.trackLocation.coords && this.props.trackLocation.coords[0] &&
+          <Markers
+            lat={this.props.trackLocation.coords[0]}
+            lng={this.props.trackLocation.coords[1]}
+            type="user"
+          />
+        }
         </GoogleMapReact>
       </div>
     );
   }
 }
 
-  const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation, mapStatus: state.mapStatus })
-  const mapDispatch = dispatch => ({setMapStatus: theme=>{dispatch(setMapStatus(theme))}, setPan: func => {dispatch(setPan(func))}})
+  const mapState = state => ({
+    markers: state.markers,
+    establishments: state.establishments,
+    trackLocation: state.trackLocation,
+    mapStatus: state.mapStatus,
+    user: state.user
+  })
+
+  const mapDispatch = dispatch => ({
+    setMapStatus: theme => dispatch(setMapStatus(theme))
+  })
 
   export default connect(mapState, mapDispatch)(Map)
-
-

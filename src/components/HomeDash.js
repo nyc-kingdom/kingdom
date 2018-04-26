@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
 import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
-
 import { gem, bridgeShield, castle, sword } from '../Assets'
-
 import { User, Map, Dash, Spotlight, Ticker } from './'
-
 import { logout } from '../store';
 
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.renderWithKingdom = this.renderWithKingdom.bind(this)
     this.state = {
       dashMode: 'closed',
     }
+    this.renderWithKingdom = this.renderWithKingdom.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
@@ -23,7 +20,7 @@ class Home extends Component {
       <div>
         {
           !this.props.user.kingdomId
-            ? <User history={this.props.history} />
+            ? <User/>
             : this.renderWithKingdom()
         }
       </div>
@@ -33,15 +30,17 @@ class Home extends Component {
   renderWithKingdom() {
     return (
       <div id="HomeDash">
-
-          <h1 id="logo" >
-            Kingdom
-          </h1>
+        <h1 id="logo" >
+          Kingdom
+        </h1>
         <div
-          id="sword" className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'} onClick={() => {
+          id="sword"
+          className={this.props.trackLocation.status === 'LOCATIONFOUND' ? 'on' : 'off'}
+          onClick={() => {
             if (this.state.dashMode === 'closed') this.setState({ dashMode: 'active' })
             else this.setState({ dashMode: 'closed' })
-          }}>
+          }}
+        >
           <img src={sword} className="blip" />
         </div>
         <Link to={`/profile/users/${this.props.user.id}`}>
@@ -59,7 +58,11 @@ class Home extends Component {
             <img src={bridgeShield} className="blip" />
           </div>
         </Link>
-        <div id="logout" style={{fontFamily: 'Apple Chancery, cursive'}} onClick={this.handleClick}>
+        <div
+          id="logout"
+          style={{fontFamily: 'Apple Chancery, cursive'}}
+          onClick={this.handleClick}
+        >
           <h2>Logout</h2>
         </div>
         <Dash mode={this.state.dashMode} />
@@ -70,23 +73,14 @@ class Home extends Component {
     )
   }
 
-  handleClick() {
-    const { logout, history } = this.props
-    logout()
-    history.push('/')
+  handleClick(evt) {
+    evt.preventDefault()
+    this.props.logout()
   }
 }
 
-const mapProps = state => {
-  return {
-    user: state.user,
-    trackLocation: state.trackLocation,
-    checkIns: state.checkins
-  }
-}
+const mapProps = ({ user, trackLocation }) => ({ user, trackLocation })
 
-const mapDispatch = dispatch => ({
-  logout: () => dispatch(logout())
-})
+const mapDispatch = dispatch => ({ logout: () => dispatch(logout()) })
 
 export default connect(mapProps, mapDispatch)(Home)

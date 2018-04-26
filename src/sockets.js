@@ -10,4 +10,10 @@ import openSocket from 'socket.io-client'
 // }
 
 const socket = openSocket(serverUrl, {transports: ['websocket']} )
+
+socket.on('connect', ()=>{
+    console.log('I CONNECTED TO SERVER')
+})
+
+export { serverUrl }
 export default socket

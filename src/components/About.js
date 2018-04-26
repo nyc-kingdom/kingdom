@@ -1,20 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { createMarker } from '../store';
 
-
-export class About extends React.Component {
-
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-      <div style={{ fontFamily: 'Apple Chancery, cursive', margin: '20px', fontWeight: 'bold'}}>
-        <h1>Welcome to Kingdom: <br />a game of neighborhood pride</h1>
-        <p>
+const About = props => {
+  return (
+    <div style={{ fontFamily: 'Apple Chancery, cursive', margin: '20px', fontWeight: 'bold'}}>
+      <h1>Welcome to Kingdom: <br />a game of neighborhood pride</h1>
+      <p>
         Pledge your Allegiance:
         Sign up with your Foursquare account.
         Your neighborhood is your kingdom.
@@ -35,22 +27,15 @@ export class About extends React.Component {
         <br />
         Become the King:
         Own the most establishments within your kingdom, and become the king of your
-        realm.</p>
-        <Link to={!this.props.user.id ? '/' : '/dashboard'} >
-          <h3>Explore Now!</h3>
-        </Link>
-      </div>
-    )
-  }
+        realm.
+      </p>
+      <Link to={!props.user.id ? '/' : '/dashboard'} >
+        <h3>Explore Now!</h3>
+      </Link>
+    </div>
+  )
 }
 
-const mapProps = state => ({
-  markers: state.markers,
-  user: state.user
-})
+const mapProps = ({ user }) => ({ user })
 
-const mapDispatch = dispatch => ({
-  createMarker: marker => dispatch(createMarker(marker))
-})
-
-export default connect(mapProps, mapDispatch)(About)
+export default connect(mapProps)(About)

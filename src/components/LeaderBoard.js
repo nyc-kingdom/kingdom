@@ -2,9 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { fetchUsers } from '../store'
-import { userClass, knight, kingdomMark, wolfShield, castle, castleTower, markersImages, swordSingleButton, bridgeShield, estCastle } from '../Assets'
+import { userClass, knight, kingdomMark, castle, swordSingleButton, bridgeShield, estCastle } from '../Assets'
 
-export class LeaderBoard extends React.Component {
+class LeaderBoard extends React.Component {
     constructor(props) {
         super(props)
         this.state = { show: 'kingdoms' }
@@ -104,30 +104,19 @@ export class LeaderBoard extends React.Component {
     }
 
     userLevel(userId) {
-        const user = this.props.users.find(user => user.id === userId)
-        const points = !user ? 0 : user.experience
-        const ownKingdom = !user.kingdom ? 0 : this.props.kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
-        const howManyEstablishments = user.kingdom.domainSize
-        const kingdomKing = !ownKingdom ? null : this.props.users.find(user => user.id === ownKingdom.king)
-        const amIKing = !user ? false : !kingdomKing ? false : !kingdomKing.id ? true : kingdomKing.id === user.id
-        if (amIKing) return "King"
-        if (points < 100) {
-            if (howManyEstablishments < 20) return "Shepard"
+        const { users, kingdoms } = this.props
+        const user = users.find(user => user.id === userId)
+        const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
+        if (ownKingdom.king === user.id) return "King"
+        if (user.experience < 100) {
+            if (ownKingdom.localDomain < 20) return "Shepard"
             return "Stone Mason"
-        } else if (points < 500) {
-            return "Knight"
-        }
+        } else if (user.experience < 500) return "Knight"
         return "Lord"
     }
 }
 
-const mapProps = state => {
-    return {
-        users: state.users,
-        kingdoms: state.kingdoms,
-        establishments: state.establishments
-    }
-}
+const mapProps = ({ users, kingdoms, establishments }) => ({ users, kingdoms, establishments })
 
 const mapDispatch = dispatch => ({
     fetchUsers: () => dispatch(fetchUsers())
