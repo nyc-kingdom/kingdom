@@ -39,7 +39,7 @@ const Spotlight = props => {
                         const distance = distanceCalc(props.location.coords[0], props.location.coords[1], place.venue.location.lat, place.venue.location.lng)
                         console.log('WE ARE THIS FAR APART ', distance)
                         let bundle
-                            bundle = distance < 0.0005 ? { id: place.venue.id, status: 'FULFILLED' } : {id: place.venue.id, status: 'FAILURE'}
+                            bundle = distance < 0.001 ? { id: place.venue.id, status: 'FULFILLED' } : {id: place.venue.id, status: 'FAILURE'}
                         props.verify(bundle)
                     }
                 }}>Check in here </button> : <button>SWORD IN THE STONE</button>

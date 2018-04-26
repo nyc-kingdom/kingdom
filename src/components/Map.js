@@ -5,6 +5,7 @@ import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld }
 import { Markers } from './'
 import {setMapStatus} from '../store/mapStatus'
 import knight from '../Assets/characters/knight.gif'
+import {setPan} from '../store/panning.js'  
 
 
 
@@ -27,6 +28,7 @@ export class Map extends Component {
       else this.setState({select: '' })
     }
     this.updateMapTheme = this.updateMapTheme.bind(this)
+    this.toggle = true
   }
 
   updateMapTheme() {
@@ -50,19 +52,23 @@ export class Map extends Component {
 
     //UPDATE MAP LOGIC
     const turn = Math.floor(this.props.establishments.length/10)%7
-    console.log('Today\'s map is ', turn)
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
-    if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
-
+    if(this.props.mapStatus!==theme) this.props.setMapStatus(theme) 
 
     //EXPERIMENTAL - MAP PANNING
-    // if(this.map) console.log('MAP ', this.map)
-    // if(this.map && this.map.map_) {
-    //   console.log('HEY ', this.map.map_)
-    //   this.map.map_.panTo({lat:40.7794366, lng:-73.96324400000003})
-    // }
+    console.log('NOW THE MAP RENDERS', this.toggle)
+    
+    if(this.toggle){
+      if(this.map && this.map.map_) {
+        console.log('HEY Mappy', this.map.map_)
+        const panning = this.map.map_.panTo.bind(this)
+        this.props.setPan(panning)
+        this.toggle=false
+      }
+    }
 
-    // this.updateMapTheme()
+
+    
     const style = {
       top: 0,
       bottom: 0,
@@ -78,7 +84,7 @@ export class Map extends Component {
           heatmapLibrary={true}
           defaultAverageCenter={true}
           // heatmap={this.state.heatmap}
-          options={theme}
+          options={this.props.mapStatus}
           ref = {map => {this.map=map}}
           >
           {
@@ -121,17 +127,8 @@ export class Map extends Component {
 }
 
   const mapState = state => ({ markers: state.markers, establishments: state.establishments, trackLocation: state.trackLocation, mapStatus: state.mapStatus })
-  const mapDispatch = dispatch => ({setMapStatus: theme=>{dispatch(setMapStatus(theme))}})
+  const mapDispatch = dispatch => ({setMapStatus: theme=>{dispatch(setMapStatus(theme))}, setPan: func => {dispatch(setPan(func))}})
 
   export default connect(mapState, mapDispatch)(Map)
 
-  // {
-  //   this.props.trackLocation &&
-  //   <div>
-  //   <Markers
-  //     lat={this.props.trackLocation.coords[0]}
-  //     lng={this.props.trackLocation.coords[1]}
-  //     type="user"
-  //     />
-  //   </div>
-  // }
+

@@ -6,7 +6,7 @@ import { me, fetchEstablishments, fetchCheckins, fetchKingdoms, createCheckin, p
 import { setLocationThunk } from './store/trackLocation'
 import socket from './sockets'
 import openSocket from 'socket.io-client'
-import {serverUrl} from './'
+import serverUrl from './environment'
 
 //components
 import  { Routes } from './components'

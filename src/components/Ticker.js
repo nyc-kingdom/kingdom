@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransitionGroup } from 'react-transition-group' 
 
+
 class Ticker extends Component{
 
     constructor(props){
@@ -18,7 +19,8 @@ class Ticker extends Component{
         {
             this.props.checkIns.length > 0 &&
             this.props.checkIns.slice(this.props.checkIns.length - 12, this.props.checkIns.length).reverse()
-                .map(check => <div className="tickerTape" key={check.id}>{`${check.user.username} just checked into ${check.establishment.name}!`}</div>)
+                .map(check => <div onClick={()=>{ console.log(this.props.pan)
+                    this.props.pan({lat: 33.99527380000001, lng: -118.47453610000002})}} className="tickerTape" key={check.id}>{`${check.user.username} just checked into ${check.establishment.name}!`}</div>)
         }
         </CSSTransitionGroup>
         }
@@ -31,8 +33,8 @@ const mapProps = state => {
     return {
       user: state.user,
       trackLocation: state.trackLocation,
-      checkIns: state.checkins
-  
+      checkIns: state.checkins,
+        pan: state.panning
     }
   }
 

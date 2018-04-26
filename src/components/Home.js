@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { createMarker } from '../store';
 import Carousel from 'nuka-carousel';
 import { arrowRight, arrowLeft, king, shepard, lord, knight, knightsword, blacksmith } from '../Assets'
-import { serverUrl } from '../store'
+import serverUrl from '../environment'
 
 
 export class Home extends React.Component {

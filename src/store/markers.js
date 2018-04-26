@@ -1,4 +1,4 @@
-import { serverUrl } from './'
+import serverUrl from '../environment'
 
 const axios = require('axios')
 const ADD_MARKER = 'ADD_MARKER'

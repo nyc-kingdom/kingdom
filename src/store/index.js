@@ -11,8 +11,9 @@ import users from './users'
 import trackLocation from './trackLocation'
 import verify from './gameplay'
 import mapStatus from './mapStatus'
+import panning from './panning'
 
-const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation, verify, mapStatus })
+const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation, verify, mapStatus, panning })
 
 const middleware = composeWithDevTools(applyMiddleware(
     thunkMiddleware,
@@ -20,6 +21,7 @@ const middleware = composeWithDevTools(applyMiddleware(
 ))
 
 const store = createStore(reducer, middleware)
+
 
 // let serverUrl;
 
@@ -43,4 +45,4 @@ export * from './checkins'
 export * from './kingdoms'
 export * from './trackLocation'
 export * from './gameplay'
-export {serverUrl} from '../'
+// export {serverUrl} from '../'
