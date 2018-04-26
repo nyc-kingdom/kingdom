@@ -29,7 +29,7 @@ class Profile extends React.Component {
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
-        console.log(main)
+        console.log(main, ownKingdom)
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -277,9 +277,7 @@ class Profile extends React.Component {
                     image: castle,
                     style: { width: '10vw', height: '5vh' },
                     title: "Est. Found",
-                    result: main.checkins
-                        .reduce((accu, curr) => accu.includes(curr.establishmentId) ? accu : accu.concat(curr.establishmentId), [])
-                        .length
+                    result: main.discover
                 },
                 item3: {
                     image: gem,
@@ -325,9 +323,7 @@ class Profile extends React.Component {
                     image: knight,
                     style: { width: '10vw' },
                     title: "Total Visitors",
-                    result: main.checkins
-                        .reduce((accu, curr) => accu.includes(curr.userId) ? accu : accu.concat(curr.userId), [])
-                        .length
+                    result: main.visitors
                 }
             }
         }
