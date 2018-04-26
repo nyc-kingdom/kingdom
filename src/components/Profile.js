@@ -204,17 +204,12 @@ class Profile extends React.Component {
         const { users, kingdoms } = this.props
         const user = users.find(user => user.id === userId)
         if(!user) return null
-        const points = user.experience
         const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
-        const howManyLocalDomains = ownKingdom.localDomain
-        const amIKing = ownKingdom.king === user.id
-        if (amIKing) return "King"
-        if (points < 100) {
-            if (howManyLocalDomains < 20) return "Shepard"
+        if (ownKingdom.king === user.id) return "King"
+        if (user.experience < 100) {
+            if (ownKingdom.localDomain < 20) return "Shepard"
             return "Stone Mason"
-        } else if (points < 500) {
-            return "Knight"
-        }
+        } else if (user.experience < 500) return "Knight"
         return "Lord"
     }
 
@@ -227,8 +222,7 @@ class Profile extends React.Component {
                 King: main.experience,
                 Lord: kingdomKing.experience,
                 Knight: kingdomKing.experience > 500 ? 500 : kingdomKing.experience,
-                Shepard: kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
-                "Stone Mason": kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
+                ["Shepard" && "Stone Mason"]: kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
             }
         }
         return {}

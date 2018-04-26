@@ -106,17 +106,12 @@ class LeaderBoard extends React.Component {
     userLevel(userId) {
         const { users, kingdoms } = this.props
         const user = users.find(user => user.id === userId)
-        const points = user.experience
         const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
-        const howManyLocalDomains = ownKingdom.localDomain
-        const amIKing = ownKingdom.king === user.id
-        if (amIKing) return "King"
-        if (points < 100) {
-            if (howManyLocalDomains < 20) return "Shepard"
+        if (ownKingdom.king === user.id) return "King"
+        if (user.experience < 100) {
+            if (ownKingdom.localDomain < 20) return "Shepard"
             return "Stone Mason"
-        } else if (points < 500) {
-            return "Knight"
-        }
+        } else if (user.experience < 500) return "Knight"
         return "Lord"
     }
 }
