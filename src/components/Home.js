@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Carousel from 'nuka-carousel';
 import { arrowRight, arrowLeft, userClass } from '../Assets'
-import { serverUrl } from '../sockets'
+import serverUrl from '../environment'
 
 const Home = () => {
   const style = {

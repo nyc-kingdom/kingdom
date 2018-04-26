@@ -1,7 +1,9 @@
 import axios from 'axios'
+import serverUrl from '../environment'
+//SOCKET
 import socket from '../sockets'
 import { paintEstablishment, fetchEstablishments, createMarker, verifyCheckIn, fetchUsers, fetchKingdoms } from './'
-import { serverUrl } from '../sockets'
+
 
 /**
  * ACTION TYPES

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { serverUrl } from '../sockets'
+import serverUrl from '../environment'
 
 
 const GET_ESTABLISHMENTS = 'GET_ESTABLISHMENTS';

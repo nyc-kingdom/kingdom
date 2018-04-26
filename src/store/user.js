@@ -1,7 +1,7 @@
 import axios from 'axios'
 import history from '../history'
 import { fetchKingdoms, fetchUsers, removeCheckin, fetchCheckins, fetchEstablishments } from './'
-import { serverUrl } from '../sockets'
+import serverUrl from '../environment'
 
 /**
  * ACTION TYPES

@@ -1,4 +1,4 @@
-import { serverUrl } from '../sockets'
+import serverUrl from '../environment'
 import axios from 'axios'
 
 /**

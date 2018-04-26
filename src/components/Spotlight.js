@@ -23,6 +23,8 @@ class Spotlight extends React.Component {
             history.push('/dashboard')
             return null
         }
+
+
         return (
             verify.id === place.venue.id
                 ? <SuccessMenu user={user} venue={place.venue} />
@@ -47,6 +49,7 @@ class Spotlight extends React.Component {
                             </button>
                         : <button>SWORD IN THE STONE</button>
                     }
+                    
                     <h4 className='spot'>
                         {place.venue.stats.checkinsCount + ' people have checked in here.'}
                     </h4>
@@ -63,6 +66,7 @@ class Spotlight extends React.Component {
                     </Link>
                 </div>
         )
+        
     }
 
     handleClick(evt){

@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { serverUrl } from '../sockets'
+import history from '../history'
+import serverUrl from '../environment'
 
 /**
  * ACTION TYPES

@@ -3,7 +3,9 @@ import { connect } from 'react-redux'
 import GoogleMapReact from 'google-map-react'
 import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld } from '../Assets/mapTheme'
 import { Markers } from './'
-import { setMapStatus } from '../store'
+import {setMapStatus} from '../store/mapStatus'
+import knight from '../Assets/characters/knight.gif'
+import {setPan} from '../store/panning.js'  
 
 class Map extends Component {
   constructor(props) {
@@ -25,6 +27,7 @@ class Map extends Component {
       else this.setState({select: '' })
     }
     this.updateMapTheme = this.updateMapTheme.bind(this)
+    this.toggle = true
   }
 
   componentWillUpdate(nextProps, nextState){
@@ -54,7 +57,6 @@ class Map extends Component {
 
     //UPDATE MAP LOGIC
     const turn = Math.floor(this.props.establishments.length/10)%7
-    console.log('Today\'s map is ', turn)
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
     //EXPERIMENTAL - MAP PANNING
