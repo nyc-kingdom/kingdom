@@ -35,55 +35,54 @@ class Profile extends React.Component {
                 <div style={{ height: '3vh' }} />
                 <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1 }}>
-                        <div>
-                            <img
-                                src={hardCoding.flagBackgroundImgUrl}
-                                style={{ width: '25vw', left: 0 }}
-                            />
-                            {
-                                !ownKingdom ? null : (
-                                    <div>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ flex: '0 5' }}>
+                                <img
+                                    src={hardCoding.flagBackgroundImgUrl}
+                                    style={{ width: '25vw', left: 0, maxHeight: '18vh' }}
+                                />
+                                {
+                                    !ownKingdom ? null : (
                                         <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
                                             <img
                                                 src={!kingdomMark[ownKingdom.name]
                                                     ? kingdomMark.undefinedKingdom[2]
                                                     : kingdomMark[ownKingdom.name]}
-                                                style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
+                                                style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh', maxHeight: '10vh' }}
                                             />
-                                        </Link>
-                                        <span style={{ width: '13vw', position: 'absolute', left: '3vw', top: '20vh' }}>
-                                            {!ownKingdom ? main.kingdom : ownKingdom.name}
-                                        </span>
-                                    </div>
-                                )
-                            }
+                                        </Link>                                        
+                                    )
+                                }
+                            </div>
+                            <div style={{ flex: '0 1', textAlign: 'center' }}>
+                                {!ownKingdom ? null : ownKingdom.name}
+                            </div>
                         </div>
                     </div>
                     <div style={{ flex: 2, textAlign: 'center' }}>
-                        <div style={{ height: '3vh' }} />
                         <h2>{profileOf[type].name}</h2>
                     </div>
                     <div style={{ flex: 1 }}>
-                        <div>
-                            <img
-                                src={hardCoding.flagBackgroundImgUrl}
-                                style={{ width: '25vw', right: 0 }}
-                            />
-                            {
-                                !kingdomKing ? null : (
-                                <div>
-                                    <Link to={`/profile/users/${kingdomKing.id}`}>
-                                        <img
-                                            src={userClass.King}
-                                            style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
-                                        />
-                                    </Link>
-                                    <span style={{width: '13vw', position: 'absolute', right: '11vw', top: '20vh'}}>
-                                        {kingdomKing.username}
-                                    </span>
-                                </div>
-                                )
-                            }
+                        <div style={{ display: 'flex', flexDirection: 'column'}}>
+                            <div style={{ flex: '0 5' }}>
+                                <img
+                                    src={hardCoding.flagBackgroundImgUrl}
+                                    style={{ width: '25vw', right: 0, maxHeight: '18vh' }}
+                                />
+                                {
+                                    !kingdomKing ? null : (
+                                        <Link to={`/profile/users/${kingdomKing.id}`}>
+                                            <img
+                                                src={userClass.King}
+                                                style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh', maxHeight: '10vh'}}
+                                            />
+                                        </Link>
+                                    )
+                                }
+                            </div>
+                            <div style={{ flex: '0 1', textAlign: 'center' }}>
+                                {!kingdomKing ? null : kingdomKing.username}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -97,7 +96,7 @@ class Profile extends React.Component {
                         }
                         <img
                             src={profileOf[type].image}
-                            style={{ width: '75vw', height: '80vw' }}
+                            style={{ width: '85vw', maxHeight: '45vh' }}
                         />
                         {
                             type === "user" && 
