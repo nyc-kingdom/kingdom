@@ -35,55 +35,54 @@ class Profile extends React.Component {
                 <div style={{ height: '3vh' }} />
                 <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1 }}>
-                        <div>
-                            <img
-                                src={hardCoding.flagBackgroundImgUrl}
-                                style={{ width: '25vw', left: 0 }}
-                            />
-                            {
-                                !ownKingdom ? null : (
-                                    <div>
+                        <div style={{ display: 'flex', flexDirection: 'column' }}>
+                            <div style={{ flex: '0 5' }}>
+                                <img
+                                    src={hardCoding.flagBackgroundImgUrl}
+                                    style={{ width: '25vw', left: 0, maxHeight: '18vh' }}
+                                />
+                                {
+                                    !ownKingdom ? null : (
                                         <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
                                             <img
                                                 src={!kingdomMark[ownKingdom.name]
                                                     ? kingdomMark.undefinedKingdom[2]
                                                     : kingdomMark[ownKingdom.name]}
-                                                style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh' }}
+                                                style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh', maxHeight: '10vh' }}
                                             />
-                                        </Link>
-                                        <span style={{ width: '13vw', position: 'absolute', left: '3vw', top: '20vh' }}>
-                                            {!ownKingdom ? main.kingdom : ownKingdom.name}
-                                        </span>
-                                    </div>
-                                )
-                            }
+                                        </Link>                                        
+                                    )
+                                }
+                            </div>
+                            <div style={{ flex: '0 1', textAlign: 'center' }}>
+                                {!ownKingdom ? null : ownKingdom.name}
+                            </div>
                         </div>
                     </div>
                     <div style={{ flex: 2, textAlign: 'center' }}>
-                        <div style={{ height: '3vh' }} />
                         <h2>{profileOf[type].name}</h2>
                     </div>
                     <div style={{ flex: 1 }}>
-                        <div>
-                            <img
-                                src={hardCoding.flagBackgroundImgUrl}
-                                style={{ width: '25vw', right: 0 }}
-                            />
-                            {
-                                !kingdomKing ? null : (
-                                <div>
-                                    <Link to={`/profile/users/${kingdomKing.id}`}>
-                                        <img
-                                            src={userClass.King}
-                                            style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh'}}
-                                        />
-                                    </Link>
-                                    <span style={{width: '13vw', position: 'absolute', right: '11vw', top: '20vh'}}>
-                                        {kingdomKing.username}
-                                    </span>
-                                </div>
-                                )
-                            }
+                        <div style={{ display: 'flex', flexDirection: 'column'}}>
+                            <div style={{ flex: '0 5' }}>
+                                <img
+                                    src={hardCoding.flagBackgroundImgUrl}
+                                    style={{ width: '25vw', right: 0, maxHeight: '18vh' }}
+                                />
+                                {
+                                    !kingdomKing ? null : (
+                                        <Link to={`/profile/users/${kingdomKing.id}`}>
+                                            <img
+                                                src={userClass.King}
+                                                style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh', maxHeight: '10vh'}}
+                                            />
+                                        </Link>
+                                    )
+                                }
+                            </div>
+                            <div style={{ flex: '0 1', textAlign: 'center' }}>
+                                {!kingdomKing ? null : kingdomKing.username}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -95,9 +94,14 @@ class Profile extends React.Component {
                                 ? this.changeKingdom()
                                 : null
                         }
+                        {
+                            type !== "establishment"
+                                ? null
+                                : this.keeperView(main, users)
+                        }
                         <img
                             src={profileOf[type].image}
-                            style={{ width: '75vw', height: '80vw' }}
+                            style={{ maxWidth: '85vw', height: '45vh' }}
                         />
                         {
                             type === "user" && 
@@ -105,11 +109,6 @@ class Profile extends React.Component {
                             profileOf[type].level === "King"
                                 ? this.changeShield()
                                 : null
-                        }
-                        {
-                            type !== "establishment"
-                                ? null
-                                : this.keeperView(main, users)
                         }
                     </div>
                 </div>
@@ -131,9 +130,9 @@ class Profile extends React.Component {
 
     changeShield(){
         return (
-            <div style={{ position: 'absolute', top: '50vh', right: 0 }}>
+            <div style={{ position: 'fixed', right: 0, bottom: '31vh' }}>
                 <Link to='/changeShield' >
-                    <img style={{ width: '25vw' }} src={hardCoding.crown}/>
+                    <img style={{ width: '25vw', maxHeight: '20vh' }} src={hardCoding.crown}/>
                 </Link>
             </div>
         )
@@ -141,9 +140,9 @@ class Profile extends React.Component {
 
     changeKingdom(){
         return (
-            <div style={{ position: 'absolute', top: '50vh', left: 0 }}>
+            <div style={{ position: 'fixed', left: 0, bottom: '31vh' }}>
                 <Link to='/changeKingdom' >
-                    <img style={{ width: '25vw' }} src={changeKingdom}/>
+                    <img style={{ width: '25vw', maxHeight: '20vh' }} src={changeKingdom}/>
                 </Link>
             </div>
         )
@@ -153,22 +152,25 @@ class Profile extends React.Component {
         const keeper = users.find(user => user.id === main.keeper)
         return !main.keeper ?
         (
-            <div style={{ position: 'absolute', top: '42vh', left: '10vw' }}>
+            <div style={{ position: 'fixed', left: '10vw', bottom: '31vh' }}>
                 <div>
                     <span>No Keeper</span>
                 </div>
-                <img src={hardCoding.keeperChairUrl} style={{ width: '45vw' }} />
+                <img
+                    src={hardCoding.keeperChairUrl}
+                    style={{ maxWidth: '45vw', maxHeight: '20vh' }}
+                />
             </div>
         ) :
         (
-            <div style={{ position: 'absolute', top: '41vh', left: '10vw' }}>
+            <div style={{ position: 'fixed', left: '10vw', bottom: '31vh' }}>
                 <div>
                     <span>Keeper : {keeper.username}</span>
                 </div>
                 <Link to={`/profile/users/${main.keeper}`}>
                     <img
                         src={userClass[this.userLevel(keeper.id)]}
-                        style={{ width: '45vw' }}
+                        style={{ maxWidth: '45vw', maxHeight: '20vh' }}
                     />
                 </Link>
             </div>
@@ -237,7 +239,8 @@ class Profile extends React.Component {
                 image: userClass[this.userLevel(main.id)],
                 point: main.experience,
                 level: this.userLevel(main.id),
-                levelUpPoints: !levelUpPointForUser[this.userLevel(main.id)] ? 0 : levelUpPointForUser[this.userLevel(main.id)]
+                levelUpPoints: !levelUpPointForUser[this.userLevel(main.id)] ? 0 : levelUpPointForUser[this.userLevel(main.id)],
+                style: { maxWidth: '85vw', maxHeight: '50vh' }
             },
             kingdom: type !== "kingdom" ? null : {
                 name: main.name,
@@ -245,6 +248,7 @@ class Profile extends React.Component {
                 point: main.power,
                 level: "Great Kingdom",
                 levelUpPoints: kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0),
+                style: { maxWidth: '85vw', maxHeight: '45vh' }
             },
             establishment: type !== "establishment" ? null : {
                 name: main.name,
@@ -252,6 +256,7 @@ class Profile extends React.Component {
                 point: users.find(user => user.id === this.props.user.id).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
                 level: `Castle in ${main.kingdom}`,
                 levelUpPoints: !users ? 0 : users.find(user => user.id === main.keeper).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
+                style: { maxWidth: '85vw', maxHeight: '45vh' }
             }
         }
     }
@@ -275,7 +280,7 @@ class Profile extends React.Component {
                 },
                 item3: {
                     image: gem,
-                    style: { width: '10vw' },
+                    style: { width: '10vw', maxHeight: '5vh' },
                     title: "Resources",
                     result: main.resources.length
                 }
@@ -295,7 +300,7 @@ class Profile extends React.Component {
                 },
                 item3: {
                     image: knight,
-                    style: { width: '10vw' },
+                    style: { width: '10vw', maxHeight: '5vh' },
                     title: "Total Citizen",
                     result: main.users.length
                 }
@@ -315,7 +320,7 @@ class Profile extends React.Component {
                 },
                 item3: {
                     image: knight,
-                    style: { width: '10vw' },
+                    style: { width: '10vw', maxHeight: '5vh' },
                     title: "Total Visitors",
                     result: main.visitors
                 }
