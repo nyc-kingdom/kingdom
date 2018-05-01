@@ -27,19 +27,19 @@ class LeaderBoard extends React.Component {
                 <form onClick={this.handleSubmit} style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }} >
                     <div style={{ flex: 1 }} name="users" >
                         <div name="users">
-                            <img name="users" src={knight} style={{ width: '15vw' }} />
+                            <img name="users" src={knight} style={{ width: '15vw', maxHeight: '10vh' }} />
                         </div>
                         <span name="users">Users</span>
                     </div>
                     <div style={{ flex: 1 }} name="kingdoms">
                         <div name="kingdoms">
-                            <img name="kingdoms" src={bridgeShield} style={{ width: '12vw' }} />
+                            <img name="kingdoms" src={bridgeShield} style={{ width: '12vw', maxHeight: '10vh' }} />
                         </div>
                         <span name="kingdoms">Kingdoms</span>
                     </div>
                     <div style={{ flex: 1 }} name="establishments">
                         <div name="establishments">
-                            <img name="establishments" src={castle} style={{ width: '10vw' }} />
+                            <img name="establishments" src={castle} style={{ width: '10vw', maxHeight: '10vh' }} />
                         </div>
                         <span name="establishments">Establishments</span>
                     </div>
@@ -78,7 +78,7 @@ class LeaderBoard extends React.Component {
                             <div style={{ flex: 1 }}>
                                 <Link to={`/profile/${chosen}/${one.id}`}>
                                     <img
-                                        style={{ width: '10vw', height: '5vh' }}
+                                        style={{ maxWidth: '10vw', height: '5vh' }}
                                         src={chosen === "kingdoms"
                                             ? !kingdomMark[one.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[one.name]
                                             : chosen === "users"
