@@ -75,7 +75,6 @@ class ChangeKingdom extends Component {
 
   userLevel() {
     const { user, ownKingdom } = this.props
-    console.log(user)
     if (ownKingdom.king === user.id) return "King"
     if (user.experience < 100) {
         if (ownKingdom.localDomain < 20) return "Shepard"
