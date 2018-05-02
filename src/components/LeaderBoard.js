@@ -62,7 +62,7 @@ class LeaderBoard extends React.Component {
         const rankAbout = chosen === "kingdoms" ? "power" : chosen === "users" ? "experience" : "popularity"
         const top10 = !chosenGroup ? [] : chosenGroup.sort((a, b) => b[rankAbout] - a[rankAbout]).slice(0, 10)
         return (
-            <div>
+            <div style={{ height: '65vh' }}>
                 <div style={{ height: '2vh' }} />
                 <div style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}>
                     <div style={{ flex: 1 }} >Rank</div>

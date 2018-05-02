@@ -7,8 +7,13 @@ import { userClass, knight, kingdomMark, wolfShield, castle, castleTower, swordS
 class ItemList extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            start: 0,
+            end: 10,
+        }
         this.eachItemFor = this.eachItemFor.bind(this)
         this.userLevel = this.userLevel.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount() {
@@ -17,10 +22,11 @@ class ItemList extends React.Component {
 
     render() {
         const { type, main, item } = this.props
-        if(!main) return null
+        if (!main) return null
         const itemOf = this.eachItemFor(main)
+        let navigateLength = Math.ceil(itemOf[type][item].result.length/10)
         return (
-            <div>
+            <div style={{ fontWeight: 'bold' }}>
                 <div style={{ height: '5vh' }} />
                 <div>
                     <h2>{itemOf[type][item].title}</h2>
@@ -41,16 +47,25 @@ class ItemList extends React.Component {
                     </div>
                 </div>
                 <div style={{ height: '2vh' }} />
-                <div>
+                <div style={{ height: '60vh'}}>
                     {
                         itemOf[type][item].result
-                            .sort((front, back) => back[itemOf[type][item].pointOf] - front[itemOf[type][item].pointOf])
+                            .sort((front, back) =>
+                                back[itemOf[type][item].pointOf] - front[itemOf[type][item].pointOf]
+                            )
+                            .slice(this.state.start, this.state.end)
                             .map((one, index) => !one ? null : (
-                                <div key={one.id} style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}>
-                                    <div style={{ flex: 1 }}>{index+1}</div>
+                                <div
+                                    key={one.id}
+                                    style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}
+                                >
+                                    <div style={{ flex: 1 }}>{index+1+this.state.start}</div>
                                     <div style={{ flex: 1 }}>
                                         <Link to={`/profile/${itemOf[type][item].listFor}s/${one.id}`}>
-                                            <img style={itemOf[type][item].style} src={itemOf[type][item].image(one.id)}/>
+                                            <img
+                                                style={{ maxWidth: '10vw', height: '5vh' }}
+                                                src={itemOf[type][item].image(one.id)}
+                                            />
                                         </Link>
                                     </div>
                                     <div style={{ flex: 3 }}>{one[itemOf[type][item].name]}</div>
@@ -59,6 +74,20 @@ class ItemList extends React.Component {
                             ))
                     }
                 </div>
+                <form style={{ textAlign: 'center' }} onClick={this.handleClick}>
+                    {
+                        this.navigate(navigateLength).map((one, index) =>
+                            <button
+                                key={one}
+                                name={index}
+                                style={{ fontSize: '20px', background: 'none', border: 'none'}}
+                            >
+                                {one}
+                            </button>
+                        )
+                    }
+                </form>
+                <div style={{ height: '3vh' }}/>
                 <div style={{ textAlign: 'center' }}>
                     <Link to='/dashboard'>
                         <img src={swordSingleButton} />
@@ -66,6 +95,22 @@ class ItemList extends React.Component {
                 </div>
             </div>
         )
+    }
+
+    handleClick (evt) {
+        evt.preventDefault()
+        const start = +evt.target.name * 10
+        const end = (+evt.target.name + 1) * 10
+        this.setState({ start, end })
+        console.log(start, end)
+    }
+
+    navigate(length) {
+        let arrNavi = []
+        for (var i = 1; i <= length; i++){
+            arrNavi.push(` ${i} `)
+        }
+        return arrNavi
     }
 
     userLevel(userId) {
@@ -88,7 +133,6 @@ class ItemList extends React.Component {
                 item1: {
                     listFor: "establishment",
                     image: () => castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Own Establishments",
                     pointOf: "popularity",
                     name: "name",
@@ -98,7 +142,6 @@ class ItemList extends React.Component {
                 item2: {
                     listFor: "establishment",
                     image: () => castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Establishments Found",
                     pointOf: "popularity",
                     name: "name",                    
@@ -109,7 +152,6 @@ class ItemList extends React.Component {
                 item3: {
                     listFor: "item",
                     image: () => gem,
-                    style: { width: '10vw' },
                     title: "Resources",
                     pointOf: "quantity",
                     name: "name",
@@ -120,7 +162,6 @@ class ItemList extends React.Component {
                 item1: {
                     listFor: "establishment",
                     image: () => castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Local Domains",
                     pointOf: "popularity",
                     name: "name",
@@ -130,7 +171,6 @@ class ItemList extends React.Component {
                 item2: {
                     listFor: "establishment",
                     image: () => castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Total Colonies",
                     pointOf: "popularity",
                     name: "name",
@@ -140,7 +180,6 @@ class ItemList extends React.Component {
                 item3: {
                     listFor: "user",
                     image: userId => userClass[this.userLevel(userId)],
-                    style: { width: '10vw' },
                     title: "All Citizen",
                     pointOf: "experience",
                     name: "username",
@@ -151,7 +190,6 @@ class ItemList extends React.Component {
                 item1: item !== "item1" ? null : {
                     listFor: "user",
                     image: userId => userClass[this.userLevel(userId)],
-                    style: { width: '10vw' },
                     title: "Total Visit",
                     pointOf: "experience",
                     name: "username",
@@ -162,7 +200,6 @@ class ItemList extends React.Component {
                 item2: {
                     listFor: "establishment",
                     image: () => castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Total Attack",
                     pointOf: "popularity",
                     name: "name",
@@ -171,7 +208,6 @@ class ItemList extends React.Component {
                 item3: {
                     listFor: "user",
                     image: userId => userClass[this.userLevel(userId)],
-                    style: { width: '10vw' },
                     title: "Total Visitors",
                     pointOf: "experience",
                     name: "username",
