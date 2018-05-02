@@ -32,7 +32,7 @@ class ItemList extends React.Component {
                     <h2>{itemOf[type][item].title}</h2>
                 </div>
                 <div style={{ height: '2vh' }} />
-                <div style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}>
+                <div style={{ display: 'flex', textAlign: 'center', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
                     <div style={{ flex: 1 }} >
                         Rank
                     </div>
@@ -47,7 +47,7 @@ class ItemList extends React.Component {
                     </div>
                 </div>
                 <div style={{ height: '2vh' }} />
-                <div style={{ height: '60vh'}}>
+                <div style={{ height: '60vh', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
                     {
                         itemOf[type][item].result
                             .sort((front, back) =>
@@ -102,7 +102,6 @@ class ItemList extends React.Component {
         const start = +evt.target.name * 10
         const end = (+evt.target.name + 1) * 10
         this.setState({ start, end })
-        console.log(start, end)
     }
 
     navigate(length) {

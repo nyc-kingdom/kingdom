@@ -19,12 +19,12 @@ class LeaderBoard extends React.Component {
 
     render() {
         return (
-            <div>
+            <div style={{ fontWeight: 'bold' }}>
                 <div style={{ height: '5vh' }} />
                 <div>
                     <h2>Leaderboards</h2>
                 </div>
-                <form onClick={this.handleSubmit} style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }} >
+                <form onClick={this.handleSubmit} style={{ display: 'flex', textAlign: 'center', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }} >
                     <div style={{ flex: 1 }} name="users" >
                         <div name="users">
                             <img name="users" src={knight} style={{ width: '15vw', maxHeight: '10vh' }} />
@@ -62,9 +62,9 @@ class LeaderBoard extends React.Component {
         const rankAbout = chosen === "kingdoms" ? "power" : chosen === "users" ? "experience" : "popularity"
         const top10 = !chosenGroup ? [] : chosenGroup.sort((a, b) => b[rankAbout] - a[rankAbout]).slice(0, 10)
         return (
-            <div style={{ height: '65vh' }}>
+            <div style={{ height: '65vh', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
                 <div style={{ height: '2vh' }} />
-                <div style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}>
+                <div style={{ display: 'flex', textAlign: 'center' }}>
                     <div style={{ flex: 1 }} >Rank</div>
                     <div style={{ flex: 1 }} >{`${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
                     <div style={{ flex: 4 }} >Name</div>
@@ -73,7 +73,7 @@ class LeaderBoard extends React.Component {
                 <div style={{ height: '2vh' }} />
                 {
                     top10.map((one, index) => (
-                        <div key={one.id} style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }} >
+                        <div key={one.id} style={{ display: 'flex', textAlign: 'center' }} >
                             <div style={{ flex: 1 }} >{` ${index + 1} `}</div>
                             <div style={{ flex: 1 }}>
                                 <Link to={`/profile/${chosen}/${one.id}`}>
