@@ -29,17 +29,14 @@ class Profile extends React.Component {
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
+        console.log(main.king === this.props.user.id, type === "kingdom")
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
                     <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <div style={{ flex: '0 5' }}>
-                                <img
-                                    src={hardCoding.flagBackgroundImgUrl}
-                                    style={{ width: '25vw', left: 0, maxHeight: '18vh' }}
-                                />
                                 {
                                     !ownKingdom ? null : (
                                         <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
@@ -47,11 +44,15 @@ class Profile extends React.Component {
                                                 src={!kingdomMark[ownKingdom.name]
                                                     ? kingdomMark.undefinedKingdom[2]
                                                     : kingdomMark[ownKingdom.name]}
-                                                style={{ width: '13vw', position: 'absolute', left: '4.5vw', top: '8vh', maxHeight: '10vh' }}
+                                                style={{ maxWidth: '13vw', position: 'fixed', margin: '4vh 0 0 15px', maxHeight: '9vh' }}
                                             />
                                         </Link>                                        
                                     )
                                 }
+                                <img
+                                    src={hardCoding.flagBackgroundImgUrl}
+                                    style={{ maxWidth: '25vw', maxHeight: '18vh' }}
+                                />
                             </div>
                             <div style={{ flex: '0 1', textAlign: 'center' }}>
                                 {!ownKingdom ? null : ownKingdom.name}
@@ -64,20 +65,20 @@ class Profile extends React.Component {
                     <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', flexDirection: 'column'}}>
                             <div style={{ flex: '0 5' }}>
-                                <img
-                                    src={hardCoding.flagBackgroundImgUrl}
-                                    style={{ width: '25vw', right: 0, maxHeight: '18vh' }}
-                                />
                                 {
                                     !kingdomKing ? null : (
                                         <Link to={`/profile/users/${kingdomKing.id}`}>
                                             <img
                                                 src={userClass.King}
-                                                style={{width: '17vw', position: 'absolute', right: '5vw', top : '7vh', maxHeight: '10vh'}}
+                                                style={{maxWidth: '17vw', position: 'fixed', margin: '4vh 0 0 10px', maxHeight: '9vh'}}
                                             />
                                         </Link>
                                     )
                                 }
+                                <img
+                                    src={hardCoding.flagBackgroundImgUrl}
+                                    style={{ maxWidth: '25vw', right: 0, maxHeight: '18vh' }}
+                                />
                             </div>
                             <div style={{ flex: '0 1', textAlign: 'center' }}>
                                 {!kingdomKing ? null : kingdomKing.username}
@@ -85,31 +86,28 @@ class Profile extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div style={{ textAlign: 'center' }}>
-                        {
-                            type === "user" &&
-                            main.id === this.props.user.id
-                                ? this.changeKingdom()
-                                : null
-                        }
-                        {
-                            type !== "establishment"
-                                ? null
-                                : this.keeperView(main, users)
-                        }
-                        <img
-                            src={profileOf[type].image}
-                            style={{ maxWidth: '85vw', height: '45vh' }}
-                        />
-                        {
-                            type === "user" && 
-                            main.id === this.props.user.id &&
-                            profileOf[type].level === "King"
-                                ? this.changeShield()
-                                : null
-                        }
-                    </div>
+                <div style={{ textAlign: 'center', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
+                    {
+                        type === "user" &&
+                        main.id === this.props.user.id
+                            ? this.changeKingdom()
+                            : null
+                    }
+                    {
+                        type !== "establishment"
+                            ? null
+                            : this.keeperView(main, users)
+                    }
+                    {
+                        type === "kingdom" && 
+                        main.king === this.props.user.id
+                            ? this.changeShield()
+                            : null
+                    }
+                    <img
+                        src={profileOf[type].image}
+                        style={{ maxWidth: '85vw', height: '45vh' }}
+                    />
                 </div>
                 <div style={{ textAlign: 'center' }}>
                     <span>Level : {profileOf[type].level}</span>
@@ -117,7 +115,9 @@ class Profile extends React.Component {
                     <span>{profileOf[type].point} / {profileOf[type].levelUpPoints}</span>
                 </div>
                 <div style={{ height: '2vh' }}/>
-                <div>{this.renderWithItem(main, type)}</div>
+                <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
+                    {this.renderWithItem(main, type)}
+                </div>
                 <div style={{ textAlign: 'center' }}>
                     <Link to='/dashboard'>
                         <img src={swordSingleButton} />
@@ -129,9 +129,9 @@ class Profile extends React.Component {
 
     changeShield(){
         return (
-            <div style={{ position: 'fixed', right: 0, bottom: '31vh' }}>
+            <div style={{ position: 'fixed', bottom: '31vh' }}>
                 <Link to='/changeShield' >
-                    <img style={{ width: '25vw', maxHeight: '20vh' }} src={hardCoding.crown}/>
+                    <img style={{ maxWidth: '25vw', maxHeight: '20vh' }} src={hardCoding.crown}/>
                 </Link>
             </div>
         )
@@ -139,9 +139,9 @@ class Profile extends React.Component {
 
     changeKingdom(){
         return (
-            <div style={{ position: 'fixed', left: 0, bottom: '31vh' }}>
+            <div style={{ position: 'fixed', bottom: '33vh' }}>
                 <Link to='/changeKingdom' >
-                    <img style={{ width: '25vw', maxHeight: '20vh' }} src={changeKingdom}/>
+                    <img style={{ maxWidth: '25vw', maxHeight: '20vh' }} src={changeKingdom}/>
                 </Link>
             </div>
         )
@@ -151,7 +151,7 @@ class Profile extends React.Component {
         const keeper = users.find(user => user.id === main.keeper)
         return !main.keeper ?
         (
-            <div style={{ position: 'fixed', left: '10vw', bottom: '31vh' }}>
+            <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
                 <div>
                     <span>No Keeper</span>
                 </div>
@@ -162,7 +162,7 @@ class Profile extends React.Component {
             </div>
         ) :
         (
-            <div style={{ position: 'fixed', left: '10vw', bottom: '31vh' }}>
+            <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
                 <div>
                     <span>Keeper : {keeper.username}</span>
                 </div>
@@ -178,29 +178,24 @@ class Profile extends React.Component {
 
     renderWithItem(main, type) {
         const itemOf = this.eachTypeForItem(main, type)
-        return (
-            <div style={{ display: 'flex' }}>
-                {
-                    ["item1", "item2", "item3"].map(item => (
-                        <div key={item} style={{ flex: 1, textAlign: 'center'}}>
-                            <div>
-                                <Link to={`/items/${type}s/${main.id}/${item}`}>
-                                    <img
-                                        src={itemOf[type][item].image}
-                                        style={{ width: '10vw', maxHeight: '5vh' }}
-                                    />
-                                </Link>
-                            </div>
-                            <div>
-                                <span>{itemOf[type][item].title}</span>
-                            </div>
-                            <div>
-                                <span>{itemOf[type][item].result}</span>
-                            </div>
-                        </div>
-                    ))
-                }
-            </div>
+        return ["item1", "item2", "item3"].map(item => (
+                <div key={item} style={{ flex: 1, textAlign: 'center'}}>
+                    <div>
+                        <Link to={`/items/${type}s/${main.id}/${item}`}>
+                            <img
+                                src={itemOf[type][item].image}
+                                style={{ width: '10vw', maxHeight: '5vh' }}
+                            />
+                        </Link>
+                    </div>
+                    <div>
+                        <span>{itemOf[type][item].title}</span>
+                    </div>
+                    <div>
+                        <span>{itemOf[type][item].result}</span>
+                    </div>
+                </div>
+            )
         )
     }
 
