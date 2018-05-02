@@ -29,7 +29,6 @@ class Profile extends React.Component {
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
-        console.log(main.king === this.props.user.id, type === "kingdom")
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
