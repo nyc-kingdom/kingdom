@@ -47,17 +47,25 @@ class ItemList extends React.Component {
                     </div>
                 </div>
                 <div style={{ height: '2vh' }} />
-                <div>
+                <div style={{ height: '60vh'}}>
                     {
                         itemOf[type][item].result
-                            .sort((front, back) => back[itemOf[type][item].pointOf] - front[itemOf[type][item].pointOf])
+                            .sort((front, back) =>
+                                back[itemOf[type][item].pointOf] - front[itemOf[type][item].pointOf]
+                            )
                             .slice(this.state.start, this.state.end)
                             .map((one, index) => !one ? null : (
-                                <div key={one.id} style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}>
+                                <div
+                                    key={one.id}
+                                    style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}
+                                >
                                     <div style={{ flex: 1 }}>{index+1+this.state.start}</div>
                                     <div style={{ flex: 1 }}>
                                         <Link to={`/profile/${itemOf[type][item].listFor}s/${one.id}`}>
-                                            <img style={{ maxWidth: '10vw', height: '5vh' }} src={itemOf[type][item].image(one.id)}/>
+                                            <img
+                                                style={{ maxWidth: '10vw', height: '5vh' }}
+                                                src={itemOf[type][item].image(one.id)}
+                                            />
                                         </Link>
                                     </div>
                                     <div style={{ flex: 3 }}>{one[itemOf[type][item].name]}</div>
@@ -66,11 +74,14 @@ class ItemList extends React.Component {
                             ))
                     }
                 </div>
-                <div style={{ height: '3vh' }}/>
                 <form style={{ textAlign: 'center' }} onClick={this.handleClick}>
                     {
                         this.navigate(navigateLength).map((one, index) =>
-                            <button key={one} name={index} style={{ fontSize: '20px', background: 'none', border: 'none'}}>
+                            <button
+                                key={one}
+                                name={index}
+                                style={{ fontSize: '20px', background: 'none', border: 'none'}}
+                            >
                                 {one}
                             </button>
                         )
