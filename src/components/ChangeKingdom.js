@@ -1,48 +1,37 @@
 import React, { Component } from 'react'
-import { arrowLeft, arrowRight, shepard, bridgeShield } from '../Assets'
+import { arrowLeft, arrowRight, bridgeShield, userClass } from '../Assets'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
-
-const style = {
-  width: '100vw',
-  height: '30vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
-  textAlign: 'center',
-}
 
 class ChangeKingdom extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: props.user.username,
-      character: 'shepard1',
       address: '',
       city: '',
       state: '',
       zip: 0,
     }
-    this.handleSubmitForm = this.handleSubmitForm.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmitForm = this.handleSubmitForm.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.userLevel = this.userLevel.bind(this)
   }
 
   render() {
     if(!this.props.ownKingdom) return null
     return (
-      <div id="newUser">
-        <h1>Hello {!this.props.user ? null : this.props.user.username}</h1>
+      <div style={{ fontWeight: 'bold', textAlign: 'center', maxWidth: '700px', marginLeft: 'auto', marginRight: 'auto'}}>
+        <h1>Hello, {!this.props.user ? null : this.props.user.username}!</h1>
         <span>if you change your kingdom, you will lose all experience and checkins</span>
-        <div style={style}>
-          <img src={shepard} name="shepard1" />
+        <div>
+          <img style={{width: '50vw', maxHeight: '45vh'}} src={userClass[this.userLevel()]}/>
         </div>
         <div>
           <h3>Your Current Kingdom</h3>
           <h2>{this.props.ownKingdom.name}</h2>
-          <span>We don't storage your address, so if you moved, but stay same neighbor, you do not need to Update your info</span>
-          <form style={{ textAlign: 'center' }} onSubmit={this.handleSubmitForm}>
+          <span>We don't storage your address, so if you moved, but stay same neighborhood, you do not need to Update your info</span>
+          <form onSubmit={this.handleSubmitForm}>
             <input
               name="address"
               onChange={this.handleChange}
@@ -75,7 +64,7 @@ class ChangeKingdom extends Component {
               placeholder="Zip Code"
             />
             <div style={{height: '2vh'}} />
-              <button>
+              <button style={{ background: 'none', border: 'none'}}>
                 <img src={bridgeShield}/>
               </button>
           </form>
@@ -84,12 +73,23 @@ class ChangeKingdom extends Component {
     );
   }
 
+  userLevel() {
+    const { user, ownKingdom } = this.props
+    console.log(user)
+    if (ownKingdom.king === user.id) return "King"
+    if (user.experience < 100) {
+        if (ownKingdom.localDomain < 20) return "Shepard"
+        return "Stone Mason"
+    } else if (user.experience < 500) return "Knight"
+    return "Lord"
+  }
+
   handleSubmitForm(evt) {
     evt.preventDefault();
-    const { address, city, state, zip, username } = this.state
+    const { address, city, state, zip } = this.state
     const { editUser, user } = this.props
     const addressStr = `${address},${city},${state},${zip}`
-    editUser({address: addressStr, username, kingdomId: user.kingdomId}, user.id)
+    editUser({address: addressStr, username: user.username, kingdomId: user.kingdomId}, user.id)
   }
 
   handleChange(evt) {
