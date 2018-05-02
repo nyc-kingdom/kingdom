@@ -29,7 +29,6 @@ class Profile extends React.Component {
         if(!main || !users[0]) return null
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
-        console.log(main, ownKingdom)
         return (
             <div style={{fontWeight: 'bold'}}>
                 <div style={{ height: '3vh' }} />
@@ -186,7 +185,10 @@ class Profile extends React.Component {
                         <div key={item} style={{ flex: 1, textAlign: 'center'}}>
                             <div>
                                 <Link to={`/items/${type}s/${main.id}/${item}`}>
-                                    <img src={itemOf[type][item].image} style={itemOf[type][item].style}/>
+                                    <img
+                                        src={itemOf[type][item].image}
+                                        style={{ width: '10vw', maxHeight: '5vh' }}
+                                    />
                                 </Link>
                             </div>
                             <div>
@@ -266,7 +268,6 @@ class Profile extends React.Component {
             user: type !== "user" ? null : {
                 item1: {
                     image: castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Own Est.",
                     result: this.props.establishments
                         .filter(establishment => establishment.keeper === main.id)
@@ -274,13 +275,11 @@ class Profile extends React.Component {
                 },
                 item2: {
                     image: castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Est. Found",
                     result: main.discover
                 },
                 item3: {
                     image: gem,
-                    style: { width: '10vw', maxHeight: '5vh' },
                     title: "Resources",
                     result: main.resources.length
                 }
@@ -288,19 +287,16 @@ class Profile extends React.Component {
             kingdom: type !== "kingdom" ? null : {
                 item1: {
                     image: castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Local Domains",
                     result: main.localDomain
                 },
                 item2: {
                     image: castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Total Colonies",
                     result: main.colonies
                 },
                 item3: {
                     image: knight,
-                    style: { width: '10vw', maxHeight: '5vh' },
                     title: "Total Citizen",
                     result: main.users.length
                 }
@@ -308,19 +304,16 @@ class Profile extends React.Component {
             establishment: type !== "establishment" ? null : {
                 item1: {
                     image: castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Total Visit",
                     result: main.popularity
                 },
                 item2: {
                     image: castle,
-                    style: { width: '10vw', height: '5vh' },
                     title: "Total Attack",
                     result: 0
                 },
                 item3: {
                     image: knight,
-                    style: { width: '10vw', maxHeight: '5vh' },
                     title: "Total Visitors",
                     result: main.visitors
                 }
