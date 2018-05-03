@@ -220,7 +220,7 @@ class Profile extends React.Component {
                 image: !main.allegiance ? estCastle.none : !estCastle[main.allegiance] ? estCastle.undefinedKingdom : estCastle[main.allegiance],
                 point: users.find(user => user.id === this.props.user.id).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
                 level: `Castle in ${main.kingdom}`,
-                levelUpPoints: !users ? 0 : users.find(user => user.id === main.keeper).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
+                levelUpPoints: !main.keeper ? 0 : !users ? 0 : users.find(user => user.id === main.keeper).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
             }
         }
     }
