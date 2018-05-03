@@ -5,14 +5,14 @@ import { arrowRight, arrowLeft, userClass } from '../Assets'
 import { serverUrl } from '../sockets'
 
 const Home = () => {
-  const charactors = ["King", "Lord", "Knight", "Shepard", "Stone Mason", "Knightsword"]
+  const charactors = Object.keys(userClass)
   return (
     <div className='home'>
       <br />
-      <h1 style={{ fontFamily: 'Apple Chancery, cursive', fontSize: '250%', textAlign: 'center'}}>
+      <h1 style={{ fontFamily: 'Apple Chancery, cursive', fontSize: '250%' }}>
         Kingdom
       </h1>
-      <div style={{ flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px'}}>
+      <div style={{ flexWrap: 'wrap', margin: '0 auto 0 auto', maxWidth: '700px'}}>
         <Carousel
           renderCenterLeftControls={({ previousSlide }) =>
             <img src={arrowLeft} onClick={previousSlide} />
@@ -23,8 +23,11 @@ const Home = () => {
         >
           {
             charactors.map(charactor => (
-              <div className="carousel-summary">
-                <img src={userClass[charactor]} style={{maxWidth: "60vw", height: '50vh', marginBottom: '10vh'}}/>
+              <div>
+                <img
+                  src={userClass[charactor]}
+                  style={{maxWidth: "100vw", height: '45vh', marginBottom: '10vh'}}
+                />
               </div>
             ))
           }
