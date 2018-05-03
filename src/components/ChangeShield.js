@@ -23,7 +23,7 @@ class ChangeShield extends Component {
     if(!ownKingdom) return null
     const shields = Object.keys(kingdomShields)
     return (
-      <div>
+      <div style={{ textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', margin: '3vh auto 0 auto', maxWidth: '700px' }}>
           <div>
             <img
@@ -35,12 +35,12 @@ class ChangeShield extends Component {
                 style={{ maxWidth: '25vw', maxHeight: '18vh' }}
             />
           </div>
-          <div style={{ textAlign: 'center', flex: 1 }}>
+          <div style={{ flex: 1 }}>
             <h2>King of {ownKingdom.name}</h2>
             <span>As a King, you have a power to change a Shield</span>
           </div>
         </div>
-        <div style={{ textAlign: 'center', display: 'flex', flexWrap: 'wrap', margin: '3vh auto 0 auto', maxWidth: '700px'}}>
+        <div style={{ margin: '3vh auto 0 auto', maxWidth: '700px'}}>
           <Carousel
             renderCenterLeftControls={({ previousSlide }) =>
               <img src={arrowLeft} onClick={previousSlide} />
@@ -61,9 +61,9 @@ class ChangeShield extends Component {
             }
           </Carousel>
         </div>
-        <div style={{ textAlign: 'center'}}>
+        <div>
           <span>this is for test, nothing will change any for now.</span>
-          <form style={{ textAlign: 'center' }} onSubmit={this.handleSubmitForm}>
+          <form onSubmit={this.handleSubmitForm}>
             <div style={{height: '2vh'}} />
               <button style={{ background: 'none', border: 'none'}}>
                 <img src={bridgeShield}/>

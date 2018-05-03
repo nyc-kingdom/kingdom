@@ -19,39 +19,45 @@ class LeaderBoard extends React.Component {
 
     render() {
         return (
-            <div style={{ fontWeight: 'bold' }}>
-                <div style={{ height: '5vh' }} />
-                <div>
-                    <h2>Leaderboards</h2>
-                </div>
-                <form onClick={this.handleSubmit} style={{ display: 'flex', textAlign: 'center', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }} >
+            <div style={{ fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px' }}>
+                <div style={{ height: '3vh' }} />
+                <h2>Leaderboards</h2>
+                <form onClick={this.handleSubmit} style={{ display: 'flex' }} >
                     <div style={{ flex: 1 }} name="users" >
                         <div name="users">
-                            <img name="users" src={knight} style={{ width: '15vw', maxHeight: '10vh' }} />
+                            <img
+                                name="users"
+                                src={knight}
+                                style={{ width: '15vw', maxHeight: '9vh' }}
+                            />
                         </div>
                         <span name="users">Users</span>
                     </div>
                     <div style={{ flex: 1 }} name="kingdoms">
                         <div name="kingdoms">
-                            <img name="kingdoms" src={bridgeShield} style={{ width: '12vw', maxHeight: '10vh' }} />
+                            <img
+                                name="kingdoms"
+                                src={bridgeShield}
+                                style={{ width: '12vw', maxHeight: '9vh' }}
+                            />
                         </div>
                         <span name="kingdoms">Kingdoms</span>
                     </div>
                     <div style={{ flex: 1 }} name="establishments">
                         <div name="establishments">
-                            <img name="establishments" src={castle} style={{ width: '10vw', maxHeight: '10vh' }} />
+                            <img
+                                name="establishments"
+                                src={castle}
+                                style={{ width: '10vw', maxHeight: '9vh' }}
+                            />
                         </div>
                         <span name="establishments">Establishments</span>
                     </div>
                 </form>
-                <div>
-                    {!this.props.users ? null : this.top10()}
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                    <Link to='/dashboard'>
-                        <img src={swordSingleButton} />
-                    </Link>
-                </div>
+                {!this.props.users ? null : this.top10()}
+                <Link to='/dashboard'>
+                    <img src={swordSingleButton} />
+                </Link>
             </div>
         )
     }
@@ -62,9 +68,9 @@ class LeaderBoard extends React.Component {
         const rankAbout = chosen === "kingdoms" ? "power" : chosen === "users" ? "experience" : "popularity"
         const top10 = !chosenGroup ? [] : chosenGroup.sort((a, b) => b[rankAbout] - a[rankAbout]).slice(0, 10)
         return (
-            <div style={{ height: '65vh', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
+            <div style={{ height: '65vh' }}>
                 <div style={{ height: '2vh' }} />
-                <div style={{ display: 'flex', textAlign: 'center' }}>
+                <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1 }} >Rank</div>
                     <div style={{ flex: 1 }} >{`${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
                     <div style={{ flex: 4 }} >Name</div>
@@ -73,7 +79,7 @@ class LeaderBoard extends React.Component {
                 <div style={{ height: '2vh' }} />
                 {
                     top10.map((one, index) => (
-                        <div key={one.id} style={{ display: 'flex', textAlign: 'center' }} >
+                        <div key={one.id} style={{ display: 'flex' }} >
                             <div style={{ flex: 1 }} >{` ${index + 1} `}</div>
                             <div style={{ flex: 1 }}>
                                 <Link to={`/profile/${chosen}/${one.id}`}>

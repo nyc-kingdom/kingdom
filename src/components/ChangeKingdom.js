@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { arrowLeft, arrowRight, bridgeShield, userClass } from '../Assets'
-import { Link } from 'react-router-dom'
+import { bridgeShield, userClass } from '../Assets'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
 
@@ -21,14 +20,12 @@ class ChangeKingdom extends Component {
   render() {
     if(!this.props.ownKingdom) return null
     return (
-      <div style={{ fontWeight: 'bold', textAlign: 'center', maxWidth: '700px', marginLeft: 'auto', marginRight: 'auto'}}>
-        <h1>Hello, {!this.props.user ? null : this.props.user.username}!</h1>
-        <span>if you change your kingdom, you will lose all experience and checkins</span>
+      <div style={{ fontWeight: 'bold', textAlign: 'center', maxWidth: '700px', margin: '0 auto 0 auto' }}>
+        <h2>Hello, {!this.props.user ? null : this.props.user.username}!</h2>
+        <div>if you change your kingdom, you will lose all experience and checkins</div>
+        <img style={{maxWidth: '100vw', height: '35vh'}} src={userClass[this.userLevel()]}/>
         <div>
-          <img style={{width: '50vw', maxHeight: '45vh'}} src={userClass[this.userLevel()]}/>
-        </div>
-        <div>
-          <h3>Your Current Kingdom</h3>
+          <h4>Your Current Kingdom</h4>
           <h2>{this.props.ownKingdom.name}</h2>
           <span>We don't storage your address, so if you moved, but stay same neighborhood, you do not need to Update your info</span>
           <form onSubmit={this.handleSubmitForm}>
@@ -64,9 +61,9 @@ class ChangeKingdom extends Component {
               placeholder="Zip Code"
             />
             <div style={{height: '2vh'}} />
-              <button style={{ background: 'none', border: 'none'}}>
-                <img src={bridgeShield}/>
-              </button>
+            <button style={{ background: 'none', border: 'none'}}>
+              <img src={bridgeShield}/>
+            </button>
           </form>
         </div>
       </div>

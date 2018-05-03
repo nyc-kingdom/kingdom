@@ -30,9 +30,9 @@ class Profile extends React.Component {
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
         return (
-            <div style={{fontWeight: 'bold'}}>
+            <div style={{fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px'}}>
                 <div style={{ height: '3vh' }} />
-                <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
+                <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <div style={{ flex: '0 5' }}>
@@ -53,12 +53,12 @@ class Profile extends React.Component {
                                     style={{ maxWidth: '25vw', maxHeight: '18vh' }}
                                 />
                             </div>
-                            <div style={{ flex: '0 1', textAlign: 'center' }}>
+                            <div style={{ flex: '0 1' }}>
                                 {!ownKingdom ? null : ownKingdom.name}
                             </div>
                         </div>
                     </div>
-                    <div style={{ flex: 2, textAlign: 'center' }}>
+                    <div style={{ flex: 2 }}>
                         <h2>{profileOf[type].name}</h2>
                     </div>
                     <div style={{ flex: 1 }}>
@@ -79,49 +79,30 @@ class Profile extends React.Component {
                                     style={{ maxWidth: '25vw', right: 0, maxHeight: '18vh' }}
                                 />
                             </div>
-                            <div style={{ flex: '0 1', textAlign: 'center' }}>
+                            <div style={{ flex: '0 1' }}>
                                 {!kingdomKing ? null : kingdomKing.username}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div style={{ textAlign: 'center', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
-                    {
-                        type === "user" &&
-                        main.id === this.props.user.id
-                            ? this.changeKingdom()
-                            : null
-                    }
-                    {
-                        type !== "establishment"
-                            ? null
-                            : this.keeperView(main, users)
-                    }
-                    {
-                        type === "kingdom" && 
-                        main.king === this.props.user.id
-                            ? this.changeShield()
-                            : null
-                    }
-                    <img
-                        src={profileOf[type].image}
-                        style={{ maxWidth: '85vw', height: '45vh' }}
-                    />
+                <div>
+                    {type === "user" && main.id === this.props.user.id ? this.changeKingdom() : null}
+                    {type === "establishment" ? this.keeperView(main, users) : null}
+                    {type === "kingdom" &&  main.king === this.props.user.id ? this.changeShield() : null}
+                    <img src={profileOf[type].image} style={{ maxWidth: '85vw', height: '45vh' }}/>
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                    <span>Level : {profileOf[type].level}</span>
+                <div>
+                    <div>Level : {profileOf[type].level}</div>
                     <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
-                    <span>{profileOf[type].point} / {profileOf[type].levelUpPoints}</span>
+                    <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
                 </div>
                 <div style={{ height: '2vh' }}/>
-                <div style={{ display: 'flex', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
+                <div style={{ display: 'flex' }}>
                     {this.renderWithItem(main, type)}
                 </div>
-                <div style={{ textAlign: 'center' }}>
-                    <Link to='/dashboard'>
-                        <img src={swordSingleButton} />
-                    </Link>
-                </div>
+                <Link to='/dashboard'>
+                    <img src={swordSingleButton} />
+                </Link>
             </div>
         )
     }
@@ -151,9 +132,7 @@ class Profile extends React.Component {
         return !main.keeper ?
         (
             <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
-                <div>
-                    <span>No Keeper</span>
-                </div>
+                <div>No Keeper</div>
                 <img
                     src={hardCoding.keeperChairUrl}
                     style={{ maxWidth: '45vw', maxHeight: '20vh' }}
@@ -162,9 +141,7 @@ class Profile extends React.Component {
         ) :
         (
             <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
-                <div>
-                    <span>Keeper : {keeper.username}</span>
-                </div>
+                <div>Keeper : {keeper.username}</div>
                 <Link to={`/profile/users/${main.keeper}`}>
                     <img
                         src={userClass[this.userLevel(keeper.id)]}
@@ -178,21 +155,15 @@ class Profile extends React.Component {
     renderWithItem(main, type) {
         const itemOf = this.eachTypeForItem(main, type)
         return ["item1", "item2", "item3"].map(item => (
-                <div key={item} style={{ flex: 1, textAlign: 'center'}}>
-                    <div>
-                        <Link to={`/items/${type}s/${main.id}/${item}`}>
-                            <img
-                                src={itemOf[type][item].image}
-                                style={{ width: '10vw', maxHeight: '5vh' }}
-                            />
-                        </Link>
-                    </div>
-                    <div>
-                        <span>{itemOf[type][item].title}</span>
-                    </div>
-                    <div>
-                        <span>{itemOf[type][item].result}</span>
-                    </div>
+                <div key={item} style={{ flex: 1 }}>
+                    <Link to={`/items/${type}s/${main.id}/${item}`}>
+                        <img
+                            src={itemOf[type][item].image}
+                            style={{ width: '10vw', maxHeight: '5vh' }}
+                        />
+                    </Link>
+                    <div>{itemOf[type][item].title}</div>
+                    <div>{itemOf[type][item].result}</div>
                 </div>
             )
         )
@@ -236,7 +207,6 @@ class Profile extends React.Component {
                 point: main.experience,
                 level: this.userLevel(main.id),
                 levelUpPoints: !levelUpPointForUser[this.userLevel(main.id)] ? 0 : levelUpPointForUser[this.userLevel(main.id)],
-                style: { maxWidth: '85vw', maxHeight: '50vh' }
             },
             kingdom: type !== "kingdom" ? null : {
                 name: main.name,
@@ -244,7 +214,6 @@ class Profile extends React.Component {
                 point: main.power,
                 level: "Great Kingdom",
                 levelUpPoints: kingdoms.reduce((accu, curr) => curr.power >= accu ? curr.power : accu, 0),
-                style: { maxWidth: '85vw', maxHeight: '45vh' }
             },
             establishment: type !== "establishment" ? null : {
                 name: main.name,
@@ -252,7 +221,6 @@ class Profile extends React.Component {
                 point: users.find(user => user.id === this.props.user.id).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
                 level: `Castle in ${main.kingdom}`,
                 levelUpPoints: !users ? 0 : users.find(user => user.id === main.keeper).checkins.reduce((accu, curr) => curr.establishmentId === main.id ? accu + 1 : accu, 0),
-                style: { maxWidth: '85vw', maxHeight: '45vh' }
             }
         }
     }

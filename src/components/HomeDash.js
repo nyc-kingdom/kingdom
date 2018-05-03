@@ -8,23 +8,13 @@ import { logout } from '../store';
 class Home extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      dashMode: 'closed',
-    }
+    this.state = { dashMode: 'closed' }
     this.renderWithKingdom = this.renderWithKingdom.bind(this)
     this.handleClick = this.handleClick.bind(this)
   }
 
   render() {
-    return (
-      <div>
-        {
-          !this.props.user.kingdomId
-            ? <User/>
-            : this.renderWithKingdom()
-        }
-      </div>
-    )
+    return !this.props.user.kingdomId ? <User/> : this.renderWithKingdom()
   }
 
   renderWithKingdom() {
