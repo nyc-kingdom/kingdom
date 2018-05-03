@@ -26,13 +26,11 @@ class ItemList extends React.Component {
         const itemOf = this.eachItemFor(main)
         let navigateLength = Math.ceil(itemOf[type][item].result.length/10)
         return (
-            <div style={{ fontWeight: 'bold' }}>
-                <div style={{ height: '5vh' }} />
-                <div>
-                    <h2>{itemOf[type][item].title}</h2>
-                </div>
+            <div style={{ fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px' }}>
+                <div style={{ height: '3vh' }} />
+                <h2>{itemOf[type][item].title}</h2>
                 <div style={{ height: '2vh' }} />
-                <div style={{ display: 'flex', textAlign: 'center', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
+                <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1 }} >
                         Rank
                     </div>
@@ -47,7 +45,7 @@ class ItemList extends React.Component {
                     </div>
                 </div>
                 <div style={{ height: '2vh' }} />
-                <div style={{ height: '60vh', flexWrap: 'wrap', marginLeft: 'auto', marginRight: 'auto', maxWidth: '700px' }}>
+                <div style={{ height: '60vh' }}>
                     {
                         itemOf[type][item].result
                             .sort((front, back) =>
@@ -55,10 +53,7 @@ class ItemList extends React.Component {
                             )
                             .slice(this.state.start, this.state.end)
                             .map((one, index) => !one ? null : (
-                                <div
-                                    key={one.id}
-                                    style={{ display: 'flex', textAlign: 'center', fontWeight: 'bold' }}
-                                >
+                                <div key={one.id} style={{ display: 'flex' }}>
                                     <div style={{ flex: 1 }}>{index+1+this.state.start}</div>
                                     <div style={{ flex: 1 }}>
                                         <Link to={`/profile/${itemOf[type][item].listFor}s/${one.id}`}>
@@ -74,7 +69,7 @@ class ItemList extends React.Component {
                             ))
                     }
                 </div>
-                <form style={{ textAlign: 'center' }} onClick={this.handleClick}>
+                <form onClick={this.handleClick}>
                     {
                         this.navigate(navigateLength).map((one, index) =>
                             <button
@@ -87,8 +82,8 @@ class ItemList extends React.Component {
                         )
                     }
                 </form>
-                <div style={{ height: '3vh' }}/>
-                <div style={{ textAlign: 'center' }}>
+                <div style={{ height: '2vh' }}/>
+                <div>
                     <Link to='/dashboard'>
                         <img src={swordSingleButton} />
                     </Link>
