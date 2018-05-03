@@ -35,6 +35,7 @@ class Pipeline extends Component {
                     <Switch>
                         {/* Routes placed here are only available after logging in */}
                         <Route path="/dashboard" component={HomeDash} />
+                        <Route path="/dashboard#_=_" component={HomeDash} />
                         <Route path="/profile/users/:user" component={Profile} />
                         <Route path="/profile/kingdoms/:kingdom" component={Profile} />
                         <Route path="/profile/establishments/:establishment" component={Profile} />

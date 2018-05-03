@@ -14,7 +14,6 @@ class Home extends Component {
   }
 
   render() {
-    if(this.props.location.hash === '#_=_') this.props.history.push('/dashboard')
     return !this.props.user.kingdomId ? <User/> : this.renderWithKingdom()
   }
 
