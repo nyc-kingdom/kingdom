@@ -1,16 +1,10 @@
 import React, { Component } from 'react'
 import Carousel from 'nuka-carousel'
-import { kingdomMark, bridgeShield } from '../Assets'
+import { arrowRight, arrowLeft, kingdomMark, bridgeShield, kingdomShields } from '../Assets'
 import { connect } from 'react-redux'
 
-const style = {
-  width: '100vw',
-  height: '45vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
-  textAlign: 'center',
+const hardCoding = {
+  flagBackgroundImgUrl: "https://i.pinimg.com/originals/0d/26/fd/0d26fd531a191bdf6659fd0b9ef4c73c.png"
 }
 
 class ChangeShield extends Component {
@@ -27,22 +21,51 @@ class ChangeShield extends Component {
   render() {
     const { ownKingdom } = this.props
     if(!ownKingdom) return null
+    const shields = Object.keys(kingdomShields)
     return (
-      <div id="newUser">
-        <h1>King of {ownKingdom.name}</h1>
-        <span>As a King, you have a power to change a Shield</span>
-        <div style={style}>
-          <img
-            src={!kingdomMark[ownKingdom.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[ownKingdom.name]}
-            name={ownKingdom.name}
-          />
+      <div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', margin: '3vh auto 0 auto', maxWidth: '700px' }}>
+          <div>
+            <img
+                src={!kingdomMark[ownKingdom.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[ownKingdom.name]}
+                style={{ maxWidth: '13vw', position: 'fixed', margin: '4vh 0 0 15px', maxHeight: '9vh' }}
+            />
+            <img
+                src={hardCoding.flagBackgroundImgUrl}
+                style={{ maxWidth: '25vw', maxHeight: '18vh' }}
+            />
+          </div>
+          <div style={{ textAlign: 'center', flex: 1 }}>
+            <h2>King of {ownKingdom.name}</h2>
+            <span>As a King, you have a power to change a Shield</span>
+          </div>
         </div>
-        <div>
+        <div style={{ textAlign: 'center', display: 'flex', flexWrap: 'wrap', margin: '3vh auto 0 auto', maxWidth: '700px'}}>
+          <Carousel
+            renderCenterLeftControls={({ previousSlide }) =>
+              <img src={arrowLeft} onClick={previousSlide} />
+            }
+            renderCenterRightControls={({ nextSlide }) =>
+              <img src={arrowRight} onClick={nextSlide} />
+            }
+          >
+            {
+              shields.map(shield => (
+                <div>
+                  <img
+                    src={kingdomShields[shield]}
+                    style={{maxWidth: "100vw", height: '40vh', marginBottom: '15vh'}}
+                  />
+                </div>
+              ))
+            }
+          </Carousel>
+        </div>
+        <div style={{ textAlign: 'center'}}>
           <span>this is for test, nothing will change any for now.</span>
           <form style={{ textAlign: 'center' }} onSubmit={this.handleSubmitForm}>
-            
             <div style={{height: '2vh'}} />
-              <button>
+              <button style={{ background: 'none', border: 'none'}}>
                 <img src={bridgeShield}/>
               </button>
           </form>

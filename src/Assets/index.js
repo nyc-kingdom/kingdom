@@ -94,6 +94,20 @@ const kingdomMark = {
     Dragonstone: sample
 }
 
+const kingdomShields = {
+    a: defaultS,
+    b: sample4,
+    c: bedfordS,
+    d: bushwickS,
+    e: financialDistrictS,
+    f: sample,
+    g: lynbrookS,
+    h: ravenswoodS,
+    i: southSlopeS,
+    j: sample5,
+    k: sample3
+}
+
 const markersImages = {
     Bedford: bedfordMarker,
     Ravenswood: ravenswoodMarker,
@@ -127,4 +141,4 @@ const estCastle = {
     Dragonstone: defaultEst
 }
 
-export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult, swordSingleButton, markersImages, estCastle, changeKingdom };
+export { userClass, kingdomMark, arrowLeft, arrowRight, castle, castleTower, sword, bridgeShield, gem, anvil, scroll, wand, king, lord, shepard, knight, blacksmith, knightsword, bushwickS, bushwickMarker, cityHallS, cityHallMarker, financialDistrictS, financialDistrictMarker, lynbrookS, lynbrookMarker, ravenswoodS, ravenswoodMarker, test, searchResult, swordSingleButton, markersImages, estCastle, changeKingdom, kingdomShields };
