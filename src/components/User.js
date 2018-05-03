@@ -1,25 +1,14 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import { shepard, bridgeShield } from '../Assets'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { editUser } from '../store'
 
-const style = {
-  width: '100vw',
-  height: '35vh',
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
-  textAlign: 'center',
-}
-
 class User extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       username: '',
-      character: 'shepard1',
       address: '',
       city: '',
       state: '',
@@ -27,7 +16,6 @@ class User extends Component {
     }
     this.handleSubmitForm = this.handleSubmitForm.bind(this)
     this.handleChange = this.handleChange.bind(this)
-    this.handleCharacterSelector = this.handleCharacterSelector.bind(this)
   }
 
   handleSubmitForm(evt) {
@@ -42,26 +30,16 @@ class User extends Component {
     this.setState({ [evt.target.name]: evt.target.value })
   }
 
-  handleCharacterSelector(evt) {
-    evt.preventDefault();
-    this.setState({ character: evt.target.name })
-  }
-
   render() {
     return (
-      <div id="newUser">
+      <div style={{textAlign: 'center'}}>
         <h1>
           Welcome {!this.props.user ? null : this.props.user.email}
         </h1>
-        <div style={style}>
-          <img
-            src={shepard}
-            name="shepard1"
-          />
-        </div>
+        <img src={shepard} style={{maxWidth: '100vw', height: '35vh'}}/>
         <div>
           <h2>Enter your info to generate your profile</h2>
-          <form style={{ textAlign: 'center' }} onSubmit={this.handleSubmitForm}>
+          <form onSubmit={this.handleSubmitForm}>
             <input
               name="username"
               onChange={this.handleChange}
@@ -102,9 +80,9 @@ class User extends Component {
               placeholder="Zip Code"
             />
             <div style={{height: '2vh'}} />
-              <button>
-                <img src={bridgeShield}/>
-              </button>
+            <button style={{ background: 'none', border: 'none'}}>
+              <img src={bridgeShield}/>
+            </button>
           </form>
         </div>
       </div>
