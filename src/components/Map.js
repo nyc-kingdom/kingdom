@@ -4,6 +4,17 @@ import GoogleMapReact from 'google-map-react'
 import { blueWater, unsaturatedBrowns, greenTheme, dark, midnight, autumnWorld } from '../Assets/mapTheme'
 import { Markers } from './'
 import { setMapStatus } from '../store'
+import {setPanning} from '../store/panCoords'
+
+
+const defaultCenter = { lat: 40.70, lng: -74.00 }
+
+const style = {
+  top: 0,
+  bottom: 0,
+  height: '100vh',
+  width: '100vw'
+}
 
 class Map extends Component {
   constructor(props) {
@@ -52,29 +63,25 @@ class Map extends Component {
       this.setState({ center: { lat, lng } })
     }
 
-    //UPDATE MAP LOGIC
+    //UPDATE MAP THEME
     const turn = Math.floor(this.props.establishments.length/10)%7
     console.log('Today\'s map is ', turn)
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
-    //EXPERIMENTAL - MAP PANNING
-    // if(this.map) console.log('MAP ', this.map)
-    // if(this.map && this.map.map_) {
-    //   console.log('HEY ', this.map.map_)
-    //   this.map.map_.panTo({lat:40.7794366, lng:-73.96324400000003})
-    // }
-    // this.updateMapTheme()
-    const style = {
-      top: 0,
-      bottom: 0,
-      height: '100vh',
-      width: '100vw'
+    
+
+    if(this.map && this.map.map_){
+        console.log('Hey the api has loaded? ', this.map.map_)
+        console.log('How are pancoords doing ', this.state.panCoords)
+        if(this.props.panCoords.length>1){ this.map.map_.panTo({lat:this.props.panCoords[0], lng: this.props.panCoords[1]}) ; this.props.setPanning([]) }
     }
+
+
     return (
       <div id="map" style={style}>
         <GoogleMapReact
           bootstrapURLKeys={this.state.bootstrapURLKeys}
-          defaultCenter={{ lat: 40.70, lng: -74.00 }}
+          defaultCenter={ defaultCenter }
           center={this.state.center}
           defaultZoom={this.state.zoom}
           heatmapLibrary={true}
@@ -135,11 +142,13 @@ class Map extends Component {
     establishments: state.establishments,
     trackLocation: state.trackLocation,
     mapStatus: state.mapStatus,
-    user: state.user
+    user: state.user,
+    panCoords: state.panCoords
   })
 
   const mapDispatch = dispatch => ({
-    setMapStatus: theme => dispatch(setMapStatus(theme))
+    setMapStatus: theme => dispatch(setMapStatus(theme)),
+    setPanning: coords => dispatch(setPanning(coords))
   })
 
   export default connect(mapState, mapDispatch)(Map)

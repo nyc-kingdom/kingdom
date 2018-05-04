@@ -12,8 +12,9 @@ import trackLocation from './trackLocation'
 import verify from './gameplay'
 import mapStatus from './mapStatus'
 import shields from './shields'
+import panCoords from './panCoords'
 
-const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation, verify, mapStatus, shields })
+const reducer = combineReducers({ user, users, markers, checkins, establishments, kingdoms, trackLocation, verify, mapStatus, shields, panCoords })
 
 const middleware = composeWithDevTools(applyMiddleware(
     thunkMiddleware,

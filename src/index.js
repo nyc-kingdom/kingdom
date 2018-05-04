@@ -8,8 +8,6 @@ import store from './store'
 import App from './App';
 import registerServiceWorker from './registerServiceWorker'
 
-// establishes socket connection
-import './sockets'
 
 ReactDOM.render(
   <Provider store={store}>
