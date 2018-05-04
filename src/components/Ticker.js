@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { CSSTransitionGroup } from 'react-transition-group' 
+import { setPanning } from '../store/panCoords'
 
 class Ticker extends Component{
     constructor(props){
@@ -32,7 +33,7 @@ class Ticker extends Component{
                                 .filter(checkin => Date.now() - Date.parse(checkin.createdAt) < 1800000)
                                 .reverse()
                                 .map(check => 
-                                    <div className="tickerTape" key={check.id}>
+                                    <div className="tickerTape" key={check.id} onClick={()=>{console.log(check.establishment);this.props.setPanning([Number(check.establishment.latitude), Number(check.establishment.longitude)])}}>
                                         {`${check.user.username} just checked into ${check.establishment.name}!`}
                                     </div>
                                 )
@@ -45,5 +46,6 @@ class Ticker extends Component{
 }
 
 const mapProps = ({ checkins }) => ({ checkins })
+const mapDispatch = dispatch => ({setPanning: coords => {dispatch(setPanning(coords))}})
 
-export default connect(mapProps)(Ticker)
+export default connect(mapProps, mapDispatch)(Ticker)
