@@ -38,12 +38,7 @@ class Markers extends Component {
                                     <div>
                                         {
                                             this.props.allegiance
-                                                ?
-                                                (
-                                                    <div>
-                                                        {this.props.allegiance} <br /> Kingdom
-                                                    </div>
-                                                )
+                                                ? this.props.allegiance + " Kingdom"
                                                 : this.props.origin 
                                         }
                                         <br />
@@ -77,7 +72,10 @@ class Markers extends Component {
                         : this.props.type === 'user'
                             ? 
                             <Link to={`/profile/users/${user.id}`}>
-                                <img style={{ maxHeight : '25px' }} src={userClass[this.userLevel(user)]}/>
+                                <img
+                                    style={{ maxHeight : '25px' }}
+                                    src={userClass[this.userLevel(user)]}
+                                />
                             </Link>
                             :
                             <Link to={`/dashboard/selectedView/${establishmentId}`}>
