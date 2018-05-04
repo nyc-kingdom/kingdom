@@ -31,8 +31,7 @@ class Profile extends React.Component {
         const profileOf = this.eachTypeFor(main, type)
         return (
             <div style={{fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px'}}>
-                <div style={{ height: '3vh' }} />
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', marginTop: '3vh' }}>
                     <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>
                             <div style={{ flex: '0 5' }}>
@@ -86,18 +85,15 @@ class Profile extends React.Component {
                     </div>
                 </div>
                 <div>
-                    {type === "user" && main.id === this.props.user.id ? this.changeKingdom() : null}
+                    {type === "user" && main.id === this.props.user.id ? this.changeOne("Kingdom") : null}
                     {type === "establishment" ? this.keeperView(main, users) : null}
-                    {type === "kingdom" &&  main.king === this.props.user.id ? this.changeShield() : null}
+                    {type === "kingdom" &&  main.king === this.props.user.id ? this.changeOne("Shield") : null}
                     <img src={profileOf[type].image} style={{ maxWidth: '85vw', height: '45vh' }}/>
                 </div>
-                <div>
-                    <div>Level : {profileOf[type].level}</div>
-                    <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
-                    <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
-                </div>
-                <div style={{ height: '2vh' }}/>
-                <div style={{ display: 'flex' }}>
+                <div>Level : {profileOf[type].level}</div>
+                <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
+                <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
+                <div style={{ display: 'flex', marginTop: '1vh' }}>
                     {this.renderWithItem(main, type)}
                 </div>
                 <Link to='/dashboard'>
@@ -107,21 +103,12 @@ class Profile extends React.Component {
         )
     }
 
-    changeShield(){
+    changeOne(one) {
+        const source = one === "Shield" ? hardCoding.crown: changeKingdom
         return (
             <div style={{ position: 'fixed', bottom: '31vh' }}>
-                <Link to='/changeShield' >
-                    <img style={{ maxWidth: '25vw', maxHeight: '20vh' }} src={hardCoding.crown}/>
-                </Link>
-            </div>
-        )
-    }
-
-    changeKingdom(){
-        return (
-            <div style={{ position: 'fixed', bottom: '33vh' }}>
-                <Link to='/changeKingdom' >
-                    <img style={{ maxWidth: '25vw', maxHeight: '20vh' }} src={changeKingdom}/>
+                <Link to={`/change${one}`} >
+                    <img style={{ maxWidth: '25vw', maxHeight: '20vh' }} src={source}/>
                 </Link>
             </div>
         )
@@ -188,10 +175,9 @@ class Profile extends React.Component {
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         if (!!ownKingdom && !!users[0] && !!kingdomKing) {
             return {
-                King: main.experience,
-                Lord: kingdomKing.experience,
+                ["King" || "Lord"]: kingdomKing.experience,
                 Knight: kingdomKing.experience > 500 ? 500 : kingdomKing.experience,
-                ["Shepard" && "Stone Mason"]: kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
+                ["Shepard" || "Stone Mason"]: kingdomKing.experience > 100 ? 100 : kingdomKing.experience,
             }
         }
         return {}
