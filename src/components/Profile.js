@@ -299,7 +299,7 @@ const mapProps = (state, ownProps) => {
                     : type === "user"
                         ? main.kingdom.name
                         : !main.allegiance
-                            ? main.kingdom
+                            ? null
                             : main.allegiance
                 return kingdom.name === compare
             })
