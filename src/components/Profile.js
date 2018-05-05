@@ -216,14 +216,14 @@ class Profile extends React.Component {
             user: type !== "user" ? null : {
                 item1: {
                     image: castle,
-                    title: "Own Est.",
+                    title: "Own Castles",
                     result: this.props.establishments
                         .filter(establishment => establishment.keeper === main.id)
                         .length
                 },
                 item2: {
                     image: castle,
-                    title: "Est. Found",
+                    title: "Castles Visit",
                     result: main.discover
                 },
                 item3: {
@@ -235,7 +235,7 @@ class Profile extends React.Component {
             kingdom: type !== "kingdom" ? null : {
                 item1: {
                     image: castle,
-                    title: "Local Domains",
+                    title: "Local Castles",
                     result: main.localDomain
                 },
                 item2: {
@@ -274,21 +274,11 @@ const mapProps = (state, ownProps) => {
     const type = Object.keys(ownProps.match.params)[0]
     const paramId = +ownProps.match.params[type]
     const main = state[`${type}s`].find(each => each.id === paramId)
-    if (!main) return { type, kingdoms: state.kingdoms }
-    if (!state.kingdoms[0]) return { type, kingdoms: state.kingdoms }
-    let ownKingdom =
-        type === "kingdom"
-            ? main
-            : state.kingdoms.find(kingdom => {
-                const compare = !main.kingdom
-                    ? null
-                    : type === "user"
-                        ? main.kingdom.name
-                        : !main.allegiance
-                            ? null
-                            : main.allegiance
-                return kingdom.name === compare
-            })
+    if (!main || !state.kingdoms[0]) return { type, kingdoms: state.kingdoms }
+    let ownKingdom = type === "kingdom" ? main : state.kingdoms.find(kingdom => {
+        const compare = type === "user" ? main.kingdom.name : main.allegiance
+        return kingdom.name === compare
+    })
     return {
         type,
         main,

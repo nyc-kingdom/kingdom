@@ -29,8 +29,7 @@ class ItemList extends React.Component {
             <div style={{ fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px' }}>
                 <div style={{ height: '3vh' }} />
                 <h2>{itemOf[type][item].title}</h2>
-                <div style={{ height: '2vh' }} />
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', marginTop: '3vh' }}>
                     <div style={{ flex: 1 }} >
                         Rank
                     </div>
@@ -44,8 +43,7 @@ class ItemList extends React.Component {
                         {`${itemOf[type][item].pointOf[0].toUpperCase()}${itemOf[type][item].pointOf.slice(1)}`}
                     </div>
                 </div>
-                <div style={{ height: '2vh' }} />
-                <div style={{ height: '60vh' }}>
+                <div style={{ height: '60vh', marginTop: '2vh' }}>
                     {
                         itemOf[type][item].result
                             .sort((front, back) =>
@@ -83,11 +81,9 @@ class ItemList extends React.Component {
                     }
                 </form>
                 <div style={{ height: '2vh' }}/>
-                <div>
-                    <Link to='/dashboard'>
-                        <img src={swordSingleButton} />
-                    </Link>
-                </div>
+                <Link to='/dashboard'>
+                    <img src={swordSingleButton} />
+                </Link>
             </div>
         )
     }
@@ -127,7 +123,7 @@ class ItemList extends React.Component {
                 item1: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: "Own Establishments",
+                    title: `Castles Own by ${main.username}`,
                     pointOf: "popularity",
                     name: "name",
                     result: establishments
@@ -156,7 +152,7 @@ class ItemList extends React.Component {
                 item1: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: "Local Domains",
+                    title: `Castles in ${main.name}`,
                     pointOf: "popularity",
                     name: "name",
                     result: establishments
@@ -165,7 +161,7 @@ class ItemList extends React.Component {
                 item2: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: "Total Colonies",
+                    title: `Colonies by ${main.name}`,
                     pointOf: "popularity",
                     name: "name",
                     result: establishments
@@ -174,7 +170,7 @@ class ItemList extends React.Component {
                 item3: {
                     listFor: "user",
                     image: userId => userClass[this.userLevel(userId)],
-                    title: "All Citizen",
+                    title: `${main.name} Citizens`,
                     pointOf: "experience",
                     name: "username",
                     result: main.users
