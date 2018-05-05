@@ -51,7 +51,7 @@ class LeaderBoard extends React.Component {
                                 style={{ width: '10vw', maxHeight: '9vh' }}
                             />
                         </div>
-                        <span name="establishments">Establishments</span>
+                        <span name="establishments">Castles</span>
                     </div>
                 </form>
                 {!this.props.users ? null : this.top10()}
@@ -72,7 +72,7 @@ class LeaderBoard extends React.Component {
                 <div style={{ height: '2vh' }} />
                 <div style={{ display: 'flex' }}>
                     <div style={{ flex: 1 }} >Rank</div>
-                    <div style={{ flex: 1 }} >{`${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
+                    <div style={{ flex: 1 }} >{chosen === "establishments" ? "Castles" : `${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
                     <div style={{ flex: 4 }} >Name</div>
                     <div style={{ flex: 1 }} >{rankAbout}</div>
                 </div>

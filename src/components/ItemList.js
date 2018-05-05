@@ -34,7 +34,7 @@ class ItemList extends React.Component {
                         Rank
                     </div>
                     <div style={{ flex: 1 }} >
-                        {`${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`}
+                        {itemOf[type][item].listFor === "establishment" ? "Castles" : `${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`}
                     </div>
                     <div style={{ flex: 3 }} >
                         Name
