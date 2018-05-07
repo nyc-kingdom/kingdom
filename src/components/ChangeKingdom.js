@@ -20,16 +20,13 @@ class ChangeKingdom extends Component {
   render() {
     if(!this.props.ownKingdom) return null
     return (
-      <div style={{ fontWeight: 'bold', textAlign: 'center', maxWidth: '700px', margin: '0 auto 0 auto' }}>
+      <div className='fit'>
         <h2>Hello, {!this.props.user ? null : this.props.user.username}!</h2>
         <div>
           if you change your kingdom, 
           you will lose all experience and checkins
         </div>
-        <img
-          style={{maxWidth: '100vw', height: '35vh', margin: '1vh 0 1vh 0'}}
-          src={userClass[this.userLevel()]}
-        />
+        <img id='change-kingdom-img' src={userClass[this.userLevel()]}/>
         <div>
           <span>Your Current Kingdom</span>
           <h2>{this.props.ownKingdom.name}</h2>

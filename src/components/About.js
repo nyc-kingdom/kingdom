@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 const About = props => {
   return (
-    <div id='about'>
+    <div id='about' className='fit'>
       <h2>Welcome to Kingdom: <br />a game of neighborhood pride</h2>
       <p>
         Pledge your Allegiance:
