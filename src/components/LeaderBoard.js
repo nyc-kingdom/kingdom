@@ -19,8 +19,7 @@ class LeaderBoard extends React.Component {
 
     render() {
         return (
-            <div style={{ fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px' }}>
-                <div style={{ height: '3vh' }} />
+            <div style={{ fontWeight: 'bold', textAlign: 'center', margin: '3vh auto 0 auto', maxWidth: '700px' }}>
                 <h2>Leaderboards</h2>
                 <form onClick={this.handleSubmit} style={{ display: 'flex' }} >
                     <div style={{ flex: 1 }} name="users" >
@@ -69,14 +68,12 @@ class LeaderBoard extends React.Component {
         const top10 = !chosenGroup ? [] : chosenGroup.sort((a, b) => b[rankAbout] - a[rankAbout]).slice(0, 10)
         return (
             <div style={{ height: '65vh' }}>
-                <div style={{ height: '2vh' }} />
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', margin: '2vh 0 2vh 0' }}>
                     <div style={{ flex: 1 }} >Rank</div>
                     <div style={{ flex: 1 }} >{chosen === "establishments" ? "Castles" : `${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
                     <div style={{ flex: 4 }} >Name</div>
                     <div style={{ flex: 1 }} >{rankAbout}</div>
                 </div>
-                <div style={{ height: '2vh' }} />
                 {
                     top10.map((one, index) => (
                         <div key={one.id} style={{ display: 'flex' }} >

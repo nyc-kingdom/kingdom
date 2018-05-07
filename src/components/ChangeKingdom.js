@@ -22,12 +22,22 @@ class ChangeKingdom extends Component {
     return (
       <div style={{ fontWeight: 'bold', textAlign: 'center', maxWidth: '700px', margin: '0 auto 0 auto' }}>
         <h2>Hello, {!this.props.user ? null : this.props.user.username}!</h2>
-        <div>if you change your kingdom, you will lose all experience and checkins</div>
-        <img style={{maxWidth: '100vw', height: '35vh'}} src={userClass[this.userLevel()]}/>
         <div>
-          <h4>Your Current Kingdom</h4>
+          if you change your kingdom, 
+          you will lose all experience and checkins
+        </div>
+        <img
+          style={{maxWidth: '100vw', height: '35vh', margin: '1vh 0 1vh 0'}}
+          src={userClass[this.userLevel()]}
+        />
+        <div>
+          <span>Your Current Kingdom</span>
           <h2>{this.props.ownKingdom.name}</h2>
-          <span>We don't storage your address, so if you moved, but stay same neighborhood, you do not need to Update your info</span>
+          <span>
+            We don't storage your address, 
+            so if you moved, but stay same neighborhood, 
+            you do not need to Update your info
+          </span>
           <form onSubmit={this.handleSubmitForm}>
             <input
               name="address"
@@ -36,7 +46,7 @@ class ChangeKingdom extends Component {
               required
               placeholder="Street"
             />
-            <div style={{height: '1vh'}} />
+            <br/>
             <input
               name="city"
               onChange={this.handleChange}
@@ -44,7 +54,7 @@ class ChangeKingdom extends Component {
               required
               placeholder="City"
             />
-            <div style={{height: '1vh'}} />
+            <br/>
             <input
               name="state"
               onChange={this.handleChange}
@@ -52,7 +62,7 @@ class ChangeKingdom extends Component {
               required
               placeholder="State"
             />
-            <div style={{height: '1vh'}} />
+            <br/>
             <input
               name="zip"
               onChange={this.handleChange}
@@ -60,8 +70,8 @@ class ChangeKingdom extends Component {
               required
               placeholder="Zip Code"
             />
-            <div style={{height: '2vh'}} />
-            <button style={{ background: 'none', border: 'none'}}>
+            <br/>
+            <button className='simpleButton'>
               <img src={bridgeShield}/>
             </button>
           </form>

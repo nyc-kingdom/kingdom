@@ -15,6 +15,12 @@ h1, h2, h3 {
   text-align: center;
 }
 
+input {
+  height: 2vh;
+  margin: 0.5vh 0 0.5vh 0;
+  width: 200px;
+}
+
 .home {
   text-align: center;
 }
@@ -250,12 +256,6 @@ h1, h2, h3 {
   border-radius: 70px;
 }
 
-#newUser {
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
 #nav {
   position: fixed;
   top: 1vh;
@@ -313,6 +313,11 @@ h1, h2, h3 {
   border: 2px solid orange;
   border-radius: 8px;
   padding: 4px;
+}
+
+.simpleButton{
+  background: none;
+  border: none;
 }
 
 .powerButton{

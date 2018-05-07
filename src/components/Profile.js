@@ -116,25 +116,26 @@ class Profile extends React.Component {
 
     keeperView(main, users){
         const keeper = users.find(user => user.id === main.keeper)
-        return !main.keeper ?
-        (
+        return (
             <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
-                <div>No Keeper</div>
-                <img
-                    src={hardCoding.keeperChairUrl}
-                    style={{ maxWidth: '45vw', maxHeight: '20vh' }}
-                />
-            </div>
-        ) :
-        (
-            <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
-                <div>Keeper : {keeper.username}</div>
-                <Link to={`/profile/users/${main.keeper}`}>
-                    <img
-                        src={userClass[this.userLevel(keeper.id)]}
-                        style={{ maxWidth: '45vw', maxHeight: '20vh' }}
-                    />
-                </Link>
+                <div>{!main.keeper ? "No Keeper" : `Keeper : ${keeper.username}`}</div>
+                {
+                    !main.keeper
+                        ? (
+                        <img
+                            src={hardCoding.keeperChairUrl}
+                            style={{ maxWidth: '45vw', maxHeight: '20vh' }}
+                        />
+                        )
+                        : (
+                        <Link to={`/profile/users/${main.keeper}`}>
+                            <img
+                                src={userClass[this.userLevel(keeper.id)]}
+                                style={{ maxWidth: '45vw', maxHeight: '20vh' }}
+                            />
+                        </Link>
+                        )
+                }
             </div>
         )
     }

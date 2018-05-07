@@ -36,7 +36,10 @@ class User extends Component {
         <h1>
           Welcome {!this.props.user ? null : this.props.user.email}
         </h1>
-        <img src={shepard} style={{maxWidth: '100vw', height: '35vh'}}/>
+        <img
+          src={shepard}
+          style={{maxWidth: '100vw', height: '35vh'}}
+        />
         <div>
           <h2>Enter your info to generate your profile</h2>
           <form onSubmit={this.handleSubmitForm}>
@@ -47,7 +50,7 @@ class User extends Component {
               required
               placeholder="username"
             />
-            <div style={{height: '1vh'}} />
+            <br/>
             <input
               name="address"
               onChange={this.handleChange}
@@ -55,7 +58,7 @@ class User extends Component {
               required
               placeholder="Street"
             />
-            <div style={{height: '1vh'}} />
+            <br/>
             <input
               name="city"
               onChange={this.handleChange}
@@ -63,7 +66,7 @@ class User extends Component {
               required
               placeholder="City"
             />
-            <div style={{height: '1vh'}} />
+            <br/>
             <input
               name="state"
               onChange={this.handleChange}
@@ -71,7 +74,7 @@ class User extends Component {
               required
               placeholder="State"
             />
-            <div style={{height: '1vh'}} />
+            <br/>
             <input
               name="zip"
               onChange={this.handleChange}
@@ -79,8 +82,8 @@ class User extends Component {
               required
               placeholder="Zip Code"
             />
-            <div style={{height: '2vh'}} />
-            <button style={{ background: 'none', border: 'none'}}>
+            <br/>
+            <button className='simpleButton'>
               <img src={bridgeShield}/>
             </button>
           </form>

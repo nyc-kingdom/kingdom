@@ -65,7 +65,7 @@ class ChangeShield extends Component {
           <span>this is for test, nothing will change any for now.</span>
           <form onSubmit={this.handleSubmitForm}>
             <div style={{height: '2vh'}} />
-            <button style={{ background: 'none', border: 'none'}}>
+            <button className='simpleButton'>
               <img src={bridgeShield}/>
             </button>
           </form>
