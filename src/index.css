@@ -25,6 +25,14 @@ input {
   text-align: center;
 }
 
+#about {
+  font-family: Apple Chancery, cursive;
+  margin: 0 auto 0 auto;
+  font-weight: bold;
+  max-width: 700px;
+  text-align: center;
+}
+
 #HomeDash {
   height: 80vh;
   position: static;
