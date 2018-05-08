@@ -19,7 +19,7 @@ class LeaderBoard extends React.Component {
 
     render() {
         return (
-            <div style={{ fontWeight: 'bold', textAlign: 'center', margin: '3vh auto 0 auto', maxWidth: '700px' }}>
+            <div className='fit'>
                 <h2>Leaderboards</h2>
                 <form onClick={this.handleSubmit} style={{ display: 'flex' }} >
                     <div style={{ flex: 1 }} name="users" >

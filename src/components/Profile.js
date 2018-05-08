@@ -30,7 +30,7 @@ class Profile extends React.Component {
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
         return (
-            <div style={{fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px'}}>
+            <div className='fit'>
                 <div style={{ display: 'flex', marginTop: '3vh' }}>
                     <div style={{ flex: 1 }}>
                         <div style={{ display: 'flex', flexDirection: 'column' }}>

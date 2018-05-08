@@ -32,14 +32,11 @@ class User extends Component {
 
   render() {
     return (
-      <div style={{textAlign: 'center'}}>
+      <div className='home'>
         <h1>
           Welcome {!this.props.user ? null : this.props.user.email}
         </h1>
-        <img
-          src={shepard}
-          style={{maxWidth: '100vw', height: '35vh'}}
-        />
+        <img src={shepard} id='home-img'/>
         <div>
           <h2>Enter your info to generate your profile</h2>
           <form onSubmit={this.handleSubmitForm}>

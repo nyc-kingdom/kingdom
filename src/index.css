@@ -26,6 +26,10 @@ input {
   text-align: center;
 }
 
+.space {
+  margin-top: 2vh;
+}
+
 .fit {
   margin: 0 auto 0 auto;
   font-weight: bold;
@@ -41,6 +45,11 @@ input {
 
 #about {
   font-family: Apple Chancery, cursive;
+}
+
+#home-img{
+  max-width: 100vw;
+  height: 35vh;
 }
 
 #HomeDash {
@@ -331,6 +340,10 @@ input {
   border: 2px solid orange;
   border-radius: 8px;
   padding: 4px;
+}
+
+.letterButton{
+  font-size: 20px;
 }
 
 .simpleButton{

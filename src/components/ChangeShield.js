@@ -23,8 +23,8 @@ class ChangeShield extends Component {
     if(!ownKingdom) return null
     const shields = Object.keys(kingdomShields)
     return (
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', margin: '3vh auto 0 auto', maxWidth: '700px' }}>
+      <div className='fit'>
+        <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '3vh' }}>
           <div>
             <img
                 src={!kingdomMark[ownKingdom.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[ownKingdom.name]}
@@ -40,7 +40,7 @@ class ChangeShield extends Component {
             <span>As a King, you have a power to change a Shield</span>
           </div>
         </div>
-        <div style={{ margin: '3vh auto 0 auto', maxWidth: '700px'}}>
+        <div>
           <Carousel
             renderCenterLeftControls={({ previousSlide }) =>
               <img src={arrowLeft} onClick={previousSlide} />
@@ -64,8 +64,7 @@ class ChangeShield extends Component {
         <div>
           <span>this is for test, nothing will change any for now.</span>
           <form onSubmit={this.handleSubmitForm}>
-            <div style={{height: '2vh'}} />
-            <button className='simpleButton'>
+            <button className='simpleButton space'>
               <img src={bridgeShield}/>
             </button>
           </form>

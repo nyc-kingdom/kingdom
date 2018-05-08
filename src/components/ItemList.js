@@ -26,10 +26,9 @@ class ItemList extends React.Component {
         const itemOf = this.eachItemFor(main)
         let navigateLength = Math.ceil(itemOf[type][item].result.length/10)
         return (
-            <div style={{ fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px' }}>
-                <div style={{ height: '3vh' }} />
+            <div className='fit'>
                 <h2>{itemOf[type][item].title}</h2>
-                <div style={{ display: 'flex', marginTop: '3vh' }}>
+                <div style={{ display: 'flex', marginTop: '5vh' }}>
                     <div style={{ flex: 1 }} >
                         Rank
                     </div>
@@ -43,7 +42,7 @@ class ItemList extends React.Component {
                         {`${itemOf[type][item].pointOf[0].toUpperCase()}${itemOf[type][item].pointOf.slice(1)}`}
                     </div>
                 </div>
-                <div style={{ height: '60vh', marginTop: '2vh' }}>
+                <div style={{ height: '60vh', marginTop: '4vh' }}>
                     {
                         itemOf[type][item].result
                             .sort((front, back) =>
@@ -73,16 +72,15 @@ class ItemList extends React.Component {
                             <button
                                 key={one}
                                 name={index}
-                                style={{ fontSize: '20px', background: 'none', border: 'none'}}
+                                className='simpleButton letterButton'
                             >
                                 {one}
                             </button>
                         )
                     }
                 </form>
-                <div style={{ height: '2vh' }}/>
                 <Link to='/dashboard'>
-                    <img src={swordSingleButton} />
+                    <img className='space' src={swordSingleButton} />
                 </Link>
             </div>
         )
