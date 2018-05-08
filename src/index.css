@@ -64,15 +64,53 @@ input {
   max-height: 9vh;
 }
 
+.header-img-king {
+  max-width: 17vw;
+  position: fixed;
+  margin: 4vh 0 0 10px;
+  max-height: 9vh;
+}
+
 .header-img-flag {
   max-width: 25vw;
   max-height: 18vh;
+}
+
+.item-img {
+  width: 10vw;
+  max-height: 5vh;
+}
+
+.change-one {
+  position: fixed;
+  bottom: 31vh;
+}
+
+.change-one-img {
+  max-width: 25vw;
+  max-height: 20vh;
+}
+
+.keeper-view {
+  position: fixed;
+  bottom: 31vh;
+  margin-left: 2vw;
+}
+
+.keeper-view-img {
+  max-width: 45vw;
+  max-height: 20vh;
 }
 
 .change-shield-img {
   max-width: 100vw;
   height: 40vh;
   margin-bottom: 15vh;
+}
+
+#item-list {
+  height: 65vh;
+  margin-top: 4vh;
 }
 
 #change-shield {

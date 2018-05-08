@@ -28,10 +28,8 @@ class ItemList extends React.Component {
         return (
             <div className='fit'>
                 <h2>{itemOf[type][item].title}</h2>
-                <div style={{ display: 'flex', marginTop: '5vh' }}>
-                    <div className='flex-one' >
-                        Rank
-                    </div>
+                <div className='d-flex'>
+                    <div className='flex-one' >Rank</div>
                     <div className='flex-one' >
                         {
                             itemOf[type][item].listFor === "establishment"
@@ -39,14 +37,12 @@ class ItemList extends React.Component {
                                 : `${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`
                         }
                     </div>
-                    <div className='flex-three' >
-                        Name
-                    </div>
+                    <div className='flex-three' >Name</div>
                     <div className='flex-one' >
                         {`${itemOf[type][item].pointOf[0].toUpperCase()}${itemOf[type][item].pointOf.slice(1)}`}
                     </div>
                 </div>
-                <div style={{ height: '60vh', marginTop: '4vh' }}>
+                <div id='item-list'>
                     {
                         itemOf[type][item].result
                             .sort((front, back) =>
@@ -58,10 +54,7 @@ class ItemList extends React.Component {
                                     <div className='flex-one'>{index+1+this.state.start}</div>
                                     <div className='flex-one'>
                                         <Link to={`/profile/${itemOf[type][item].listFor}s/${one.id}`}>
-                                            <img
-                                                style={{ maxWidth: '10vw', height: '5vh' }}
-                                                src={itemOf[type][item].image(one.id)}
-                                            />
+                                            <img className='item-img' src={itemOf[type][item].image(one.id)}/>
                                         </Link>
                                     </div>
                                     <div className='flex-three'>{one[itemOf[type][item].name]}</div>
@@ -73,11 +66,7 @@ class ItemList extends React.Component {
                 <form onClick={this.handleClick}>
                     {
                         this.navigate(navigateLength).map((one, index) =>
-                            <button
-                                key={one}
-                                name={index}
-                                className='simpleButton letterButton'
-                            >
+                            <button key={one} name={index} className='simpleButton letterButton'>
                                 {one}
                             </button>
                         )
@@ -125,7 +114,7 @@ class ItemList extends React.Component {
                 item1: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: `Castles Own by ${main.username}`,
+                    title: `Castles Conquered`,
                     pointOf: "popularity",
                     name: "name",
                     result: establishments
@@ -134,7 +123,7 @@ class ItemList extends React.Component {
                 item2: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: "Establishments Found",
+                    title: `Castles Visited`,
                     pointOf: "popularity",
                     name: "name",                    
                     result: main.checkins

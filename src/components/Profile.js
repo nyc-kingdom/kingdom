@@ -31,7 +31,7 @@ class Profile extends React.Component {
         const profileOf = this.eachTypeFor(main, type)
         return (
             <div className='fit'>
-                <div style={{ display: 'flex', marginTop: '3vh' }}>
+                <div className='d-flex space'>
                     <div className='flex-one'>
                         <div>
                             {
@@ -46,10 +46,7 @@ class Profile extends React.Component {
                                     </Link>                                        
                                 )
                             }
-                            <img
-                                src={hardCoding.flagBackgroundImgUrl}
-                                className='header-img-flag'
-                            />
+                            <img src={hardCoding.flagBackgroundImgUrl} className='header-img-flag'/>
                         </div>
                         <div>
                             {!ownKingdom ? null : ownKingdom.name}
@@ -63,10 +60,7 @@ class Profile extends React.Component {
                             {
                                 !kingdomKing ? null : (
                                     <Link to={`/profile/users/${kingdomKing.id}`}>
-                                        <img
-                                            src={userClass.King}
-                                            style={{maxWidth: '17vw', position: 'fixed', margin: '4vh 0 0 10px', maxHeight: '9vh'}}
-                                        />
+                                        <img src={userClass.King} className='header-img-king'/>
                                     </Link>
                                 )
                             }
@@ -89,7 +83,7 @@ class Profile extends React.Component {
                 <div>Level : {profileOf[type].level}</div>
                 <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
                 <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
-                <div style={{ display: 'flex', marginTop: '1vh' }}>
+                <div className='d-flex space'>
                     {this.renderWithItem(main, type)}
                 </div>
                 <Link to='/dashboard'>
@@ -102,9 +96,9 @@ class Profile extends React.Component {
     changeOne(one) {
         const source = one === "Shield" ? hardCoding.crown: changeKingdom
         return (
-            <div style={{ position: 'fixed', bottom: '31vh' }}>
+            <div className='change-one'>
                 <Link to={`/change${one}`} >
-                    <img style={{ maxWidth: '25vw', maxHeight: '20vh' }} src={source}/>
+                    <img className='change-one-img' src={source}/>
                 </Link>
             </div>
         )
@@ -113,22 +107,14 @@ class Profile extends React.Component {
     keeperView(main, users){
         const keeper = users.find(user => user.id === main.keeper)
         return (
-            <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
+            <div className='keeper-view'>
                 <div>{!main.keeper ? "No Keeper" : `Keeper : ${keeper.username}`}</div>
                 {
                     !main.keeper
-                        ? (
-                        <img
-                            src={hardCoding.keeperChairUrl}
-                            style={{ maxWidth: '45vw', maxHeight: '20vh' }}
-                        />
-                        )
+                        ? <img src={hardCoding.keeperChairUrl} className='keeper-view-img'/>
                         : (
                         <Link to={`/profile/users/${main.keeper}`}>
-                            <img
-                                src={userClass[this.userLevel(keeper.id)]}
-                                style={{ maxWidth: '45vw', maxHeight: '20vh' }}
-                            />
+                            <img src={userClass[this.userLevel(keeper.id)]} className='keeper-view-img'/>
                         </Link>
                         )
                 }
@@ -141,10 +127,7 @@ class Profile extends React.Component {
         return ["item1", "item2", "item3"].map(item => (
                 <div key={item} className='flex-one'>
                     <Link to={`/items/${type}s/${main.id}/${item}`}>
-                        <img
-                            src={itemOf[type][item].image}
-                            style={{ width: '10vw', maxHeight: '5vh' }}
-                        />
+                        <img src={itemOf[type][item].image} className='item-img'/>
                     </Link>
                     <div>{itemOf[type][item].title}</div>
                     <div>{itemOf[type][item].result}</div>
