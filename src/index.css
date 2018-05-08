@@ -113,6 +113,11 @@ input {
   margin-bottom: 15vh;
 }
 
+#profile-main-img {
+  max-width: 85vw;
+  height: 45vh;
+}
+
 #leader-board-body {
   height: 65vh;
 }

@@ -64,10 +64,7 @@ class Profile extends React.Component {
                                     </Link>
                                 )
                             }
-                            <img
-                                src={hardCoding.flagBackgroundImgUrl}
-                                style={{ maxWidth: '25vw', right: 0, maxHeight: '18vh' }}
-                            />
+                            <img src={hardCoding.flagBackgroundImgUrl} className='header-img-flag'/>
                         </div>
                         <div>
                             {!kingdomKing ? null : kingdomKing.username}
@@ -78,7 +75,7 @@ class Profile extends React.Component {
                     {type === "user" && main.id === this.props.user.id ? this.changeOne("Kingdom") : null}
                     {type === "establishment" ? this.keeperView(main, users) : null}
                     {type === "kingdom" &&  main.king === this.props.user.id ? this.changeOne("Shield") : null}
-                    <img src={profileOf[type].image} style={{ maxWidth: '85vw', height: '45vh' }}/>
+                    <img src={profileOf[type].image} id='profile-main-img'/>
                 </div>
                 <div>Level : {profileOf[type].level}</div>
                 <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
