@@ -23,15 +23,15 @@ class LeaderBoard extends React.Component {
                 <h2>Leaderboards</h2>
                 <form onClick={this.handleSubmit} className='d-flex' >
                     <button className='simpleButton flex-one' name="users" >
-                        <img name="users" src={knight} style={{ width: '15vw', maxHeight: '9vh' }}/>
+                        <img name="users" src={knight} id='user-img'/>
                         <div name="users" className='letterButton'>Users</div>
                     </button>
                     <button className='simpleButton flex-one' name="kingdoms" >
-                        <img name="kingdoms" src={bridgeShield} style={{ width: '12vw', maxHeight: '9vh' }}/>
+                        <img name="kingdoms" src={bridgeShield} id='kingdom-img'/>
                         <div name="kingdoms" className='letterButton'>Kingdoms</div>
                     </button>
                     <button className='simpleButton flex-one' name="establishments" >
-                        <img name="establishments" src={castle} style={{ width: '10vw', maxHeight: '9vh' }}/>
+                        <img name="establishments" src={castle} id='establishment-img'/>
                         <div name="establishments" className='letterButton'>Castles</div>
                     </button>
                 </form>
@@ -49,12 +49,12 @@ class LeaderBoard extends React.Component {
         const rankAbout = chosen === "kingdoms" ? "power" : chosen === "users" ? "experience" : "popularity"
         const top10 = !chosenGroup ? [] : chosenGroup.sort((a, b) => b[rankAbout] - a[rankAbout]).slice(0, 10)
         return (
-            <div style={{ height: '65vh' }}>
-                <div style={{ display: 'flex', margin: '2vh 0 2vh 0' }}>
+            <div id='leader-board-body'>
+                <div id='leader-board-top'>
                     <div className='flex-one' >Rank</div>
                     <div className='flex-one' >{chosen === "establishments" ? "Castles" : `${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
                     <div className='flex-four' >Name</div>
-                    <div className='flex-one' >{rankAbout}</div>
+                    <div className='flex-one' >{`${rankAbout[0].toUpperCase()}${rankAbout.slice(1)}`}</div>
                 </div>
                 {
                     top10.map((one, index) => (
@@ -63,7 +63,7 @@ class LeaderBoard extends React.Component {
                             <div className='flex-one'>
                                 <Link to={`/profile/${chosen}/${one.id}`}>
                                     <img
-                                        style={{ maxWidth: '10vw', height: '5vh' }}
+                                        className='top-img'
                                         src={chosen === "kingdoms"
                                             ? !kingdomMark[one.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[one.name]
                                             : chosen === "users"
