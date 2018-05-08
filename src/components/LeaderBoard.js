@@ -21,37 +21,19 @@ class LeaderBoard extends React.Component {
         return (
             <div className='fit'>
                 <h2>Leaderboards</h2>
-                <form onClick={this.handleSubmit} style={{ display: 'flex' }} >
-                    <div style={{ flex: 1 }} name="users" >
-                        <div name="users">
-                            <img
-                                name="users"
-                                src={knight}
-                                style={{ width: '15vw', maxHeight: '9vh' }}
-                            />
-                        </div>
-                        <span name="users">Users</span>
-                    </div>
-                    <div style={{ flex: 1 }} name="kingdoms">
-                        <div name="kingdoms">
-                            <img
-                                name="kingdoms"
-                                src={bridgeShield}
-                                style={{ width: '12vw', maxHeight: '9vh' }}
-                            />
-                        </div>
-                        <span name="kingdoms">Kingdoms</span>
-                    </div>
-                    <div style={{ flex: 1 }} name="establishments">
-                        <div name="establishments">
-                            <img
-                                name="establishments"
-                                src={castle}
-                                style={{ width: '10vw', maxHeight: '9vh' }}
-                            />
-                        </div>
-                        <span name="establishments">Castles</span>
-                    </div>
+                <form onClick={this.handleSubmit} className='d-flex' >
+                    <button className='simpleButton flex-one' name="users" >
+                        <img name="users" src={knight} style={{ width: '15vw', maxHeight: '9vh' }}/>
+                        <div name="users" className='letterButton'>Users</div>
+                    </button>
+                    <button className='simpleButton flex-one' name="kingdoms" >
+                        <img name="kingdoms" src={bridgeShield} style={{ width: '12vw', maxHeight: '9vh' }}/>
+                        <div name="kingdoms" className='letterButton'>Kingdoms</div>
+                    </button>
+                    <button className='simpleButton flex-one' name="establishments" >
+                        <img name="establishments" src={castle} style={{ width: '10vw', maxHeight: '9vh' }}/>
+                        <div name="establishments" className='letterButton'>Castles</div>
+                    </button>
                 </form>
                 {!this.props.users ? null : this.top10()}
                 <Link to='/dashboard'>
@@ -69,16 +51,16 @@ class LeaderBoard extends React.Component {
         return (
             <div style={{ height: '65vh' }}>
                 <div style={{ display: 'flex', margin: '2vh 0 2vh 0' }}>
-                    <div style={{ flex: 1 }} >Rank</div>
-                    <div style={{ flex: 1 }} >{chosen === "establishments" ? "Castles" : `${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
-                    <div style={{ flex: 4 }} >Name</div>
-                    <div style={{ flex: 1 }} >{rankAbout}</div>
+                    <div className='flex-one' >Rank</div>
+                    <div className='flex-one' >{chosen === "establishments" ? "Castles" : `${chosen[0].toUpperCase()}${chosen.slice(1)}`}</div>
+                    <div className='flex-four' >Name</div>
+                    <div className='flex-one' >{rankAbout}</div>
                 </div>
                 {
                     top10.map((one, index) => (
-                        <div key={one.id} style={{ display: 'flex' }} >
-                            <div style={{ flex: 1 }} >{` ${index + 1} `}</div>
-                            <div style={{ flex: 1 }}>
+                        <div key={one.id} className='d-flex' >
+                            <div className='flex-one' >{` ${index + 1} `}</div>
+                            <div className='flex-one'>
                                 <Link to={`/profile/${chosen}/${one.id}`}>
                                     <img
                                         style={{ maxWidth: '10vw', height: '5vh' }}
@@ -92,8 +74,8 @@ class LeaderBoard extends React.Component {
                                     />
                                 </Link>
                             </div>
-                            <div style={{ flex: 4 }}>{chosen === "users" ? one.username : one.name}</div>
-                            <div style={{ flex: 1 }}>{one[rankAbout]}</div>
+                            <div className='flex-four'>{chosen === "users" ? one.username : one.name}</div>
+                            <div className='flex-one'>{one[rankAbout]}</div>
                         </div>
                     ))
                 }

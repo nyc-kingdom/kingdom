@@ -24,18 +24,18 @@ class ChangeShield extends Component {
     const shields = Object.keys(kingdomShields)
     return (
       <div className='fit'>
-        <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '3vh' }}>
+        <div id='change-shield'>
           <div>
             <img
                 src={!kingdomMark[ownKingdom.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[ownKingdom.name]}
-                style={{ maxWidth: '13vw', position: 'fixed', margin: '4vh 0 0 15px', maxHeight: '9vh' }}
+                className='header-img-shield'
             />
             <img
                 src={hardCoding.flagBackgroundImgUrl}
-                style={{ maxWidth: '25vw', maxHeight: '18vh' }}
+                className='header-img-flag'
             />
           </div>
-          <div style={{ flex: 1 }}>
+          <div className='flex-one'>
             <h2>King of {ownKingdom.name}</h2>
             <span>As a King, you have a power to change a Shield</span>
           </div>
@@ -52,10 +52,7 @@ class ChangeShield extends Component {
             {
               shields.map(shield => (
                 <div>
-                  <img
-                    src={kingdomShields[shield]}
-                    style={{maxWidth: "100vw", height: '40vh', marginBottom: '15vh'}}
-                  />
+                  <img src={kingdomShields[shield]} className='change-shield-img'/>
                 </div>
               ))
             }

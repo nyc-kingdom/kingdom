@@ -29,16 +29,20 @@ class ItemList extends React.Component {
             <div className='fit'>
                 <h2>{itemOf[type][item].title}</h2>
                 <div style={{ display: 'flex', marginTop: '5vh' }}>
-                    <div style={{ flex: 1 }} >
+                    <div className='flex-one' >
                         Rank
                     </div>
-                    <div style={{ flex: 1 }} >
-                        {itemOf[type][item].listFor === "establishment" ? "Castles" : `${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`}
+                    <div className='flex-one' >
+                        {
+                            itemOf[type][item].listFor === "establishment"
+                                ? "Castles"
+                                : `${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`
+                        }
                     </div>
-                    <div style={{ flex: 3 }} >
+                    <div className='flex-three' >
                         Name
                     </div>
-                    <div style={{ flex: 1 }} >
+                    <div className='flex-one' >
                         {`${itemOf[type][item].pointOf[0].toUpperCase()}${itemOf[type][item].pointOf.slice(1)}`}
                     </div>
                 </div>
@@ -50,9 +54,9 @@ class ItemList extends React.Component {
                             )
                             .slice(this.state.start, this.state.end)
                             .map((one, index) => !one ? null : (
-                                <div key={one.id} style={{ display: 'flex' }}>
-                                    <div style={{ flex: 1 }}>{index+1+this.state.start}</div>
-                                    <div style={{ flex: 1 }}>
+                                <div key={one.id} className='d-flex'>
+                                    <div className='flex-one'>{index+1+this.state.start}</div>
+                                    <div className='flex-one'>
                                         <Link to={`/profile/${itemOf[type][item].listFor}s/${one.id}`}>
                                             <img
                                                 style={{ maxWidth: '10vw', height: '5vh' }}
@@ -60,8 +64,8 @@ class ItemList extends React.Component {
                                             />
                                         </Link>
                                     </div>
-                                    <div style={{ flex: 3 }}>{one[itemOf[type][item].name]}</div>
-                                    <div style={{ flex: 1 }}>{one[itemOf[type][item].pointOf]}</div>
+                                    <div className='flex-three'>{one[itemOf[type][item].name]}</div>
+                                    <div className='flex-one'>{one[itemOf[type][item].pointOf]}</div>
                                 </div>
                             ))
                     }

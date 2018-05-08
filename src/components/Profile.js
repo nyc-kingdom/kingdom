@@ -32,55 +32,51 @@ class Profile extends React.Component {
         return (
             <div className='fit'>
                 <div style={{ display: 'flex', marginTop: '3vh' }}>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ flex: '0 5' }}>
-                                {
-                                    !ownKingdom ? null : (
-                                        <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
-                                            <img
-                                                src={!kingdomMark[ownKingdom.name]
-                                                    ? kingdomMark.undefinedKingdom[2]
-                                                    : kingdomMark[ownKingdom.name]}
-                                                style={{ maxWidth: '13vw', position: 'fixed', margin: '4vh 0 0 15px', maxHeight: '9vh' }}
-                                            />
-                                        </Link>                                        
-                                    )
-                                }
-                                <img
-                                    src={hardCoding.flagBackgroundImgUrl}
-                                    style={{ maxWidth: '25vw', maxHeight: '18vh' }}
-                                />
-                            </div>
-                            <div style={{ flex: '0 1' }}>
-                                {!ownKingdom ? null : ownKingdom.name}
-                            </div>
+                    <div className='flex-one'>
+                        <div>
+                            {
+                                !ownKingdom ? null : (
+                                    <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
+                                        <img
+                                            src={!kingdomMark[ownKingdom.name]
+                                                ? kingdomMark.undefinedKingdom[2]
+                                                : kingdomMark[ownKingdom.name]}
+                                            className='header-img-shield'
+                                        />
+                                    </Link>                                        
+                                )
+                            }
+                            <img
+                                src={hardCoding.flagBackgroundImgUrl}
+                                className='header-img-flag'
+                            />
+                        </div>
+                        <div>
+                            {!ownKingdom ? null : ownKingdom.name}
                         </div>
                     </div>
-                    <div style={{ flex: 2 }}>
+                    <div className='flex-two'>
                         <h2>{profileOf[type].name}</h2>
                     </div>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ display: 'flex', flexDirection: 'column'}}>
-                            <div style={{ flex: '0 5' }}>
-                                {
-                                    !kingdomKing ? null : (
-                                        <Link to={`/profile/users/${kingdomKing.id}`}>
-                                            <img
-                                                src={userClass.King}
-                                                style={{maxWidth: '17vw', position: 'fixed', margin: '4vh 0 0 10px', maxHeight: '9vh'}}
-                                            />
-                                        </Link>
-                                    )
-                                }
-                                <img
-                                    src={hardCoding.flagBackgroundImgUrl}
-                                    style={{ maxWidth: '25vw', right: 0, maxHeight: '18vh' }}
-                                />
-                            </div>
-                            <div style={{ flex: '0 1' }}>
-                                {!kingdomKing ? null : kingdomKing.username}
-                            </div>
+                    <div className='flex-one'>
+                        <div>
+                            {
+                                !kingdomKing ? null : (
+                                    <Link to={`/profile/users/${kingdomKing.id}`}>
+                                        <img
+                                            src={userClass.King}
+                                            style={{maxWidth: '17vw', position: 'fixed', margin: '4vh 0 0 10px', maxHeight: '9vh'}}
+                                        />
+                                    </Link>
+                                )
+                            }
+                            <img
+                                src={hardCoding.flagBackgroundImgUrl}
+                                style={{ maxWidth: '25vw', right: 0, maxHeight: '18vh' }}
+                            />
+                        </div>
+                        <div>
+                            {!kingdomKing ? null : kingdomKing.username}
                         </div>
                     </div>
                 </div>
@@ -143,7 +139,7 @@ class Profile extends React.Component {
     renderWithItem(main, type) {
         const itemOf = this.eachTypeForItem(main, type)
         return ["item1", "item2", "item3"].map(item => (
-                <div key={item} style={{ flex: 1 }}>
+                <div key={item} className='flex-one'>
                     <Link to={`/items/${type}s/${main.id}/${item}`}>
                         <img
                             src={itemOf[type][item].image}

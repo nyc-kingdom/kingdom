@@ -30,11 +30,55 @@ input {
   margin-top: 2vh;
 }
 
+.d-flex {
+  display: flex;
+}
+
+.flex-one {
+  flex: 1;
+}
+
+.flex-two {
+  flex: 2;
+}
+
+.flex-three {
+  flex: 3;
+}
+
+.flex-four {
+  flex: 4;
+}
+
 .fit {
   margin: 0 auto 0 auto;
   font-weight: bold;
   max-width: 700px;
   text-align: center;
+}
+
+.header-img-shield {
+  max-width: 13vw;
+  position: fixed;
+  margin: 4vh 0 0 15px;
+  max-height: 9vh;
+}
+
+.header-img-flag {
+  max-width: 25vw;
+  max-height: 18vh;
+}
+
+.change-shield-img {
+  max-width: 100vw;
+  height: 40vh;
+  margin-bottom: 15vh;
+}
+
+#change-shield {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 3vh;
 }
 
 #change-kingdom-img {
