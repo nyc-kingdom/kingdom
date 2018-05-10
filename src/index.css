@@ -22,6 +22,11 @@ input {
   text-align: center;
 }
 
+meter {
+  width: 60%;
+  height: 25px;
+}
+
 .home {
   text-align: center;
 }
