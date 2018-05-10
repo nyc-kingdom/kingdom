@@ -78,7 +78,14 @@ class Profile extends React.Component {
                     <img src={profileOf[type].image} id='profile-main-img'/>
                 </div>
                 <div>Level : {profileOf[type].level}</div>
-                <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
+                <meter
+                    max={profileOf[type].levelUpPoints}
+                    value={profileOf[type].point}
+                    low={profileOf[type].levelUpPoints/4}
+                    optimum={(profileOf[type].levelUpPoints / 5) * 4}
+                    high={(profileOf[type].levelUpPoints / 4) * 3}
+                    
+                />
                 <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
                 <div className='d-flex space'>
                     {this.renderWithItem(main, type)}
