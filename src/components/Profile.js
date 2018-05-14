@@ -145,6 +145,8 @@ class Profile extends React.Component {
         const user = users.find(user => user.id === userId)
         if(!user) return null
         const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
+        if(!ownKingdom) return null
+        console.log(ownKingdom, user.kingdom.name)
         if (ownKingdom.king === user.id) return "King"
         if (user.experience < 100) {
             if (ownKingdom.localDomain < 20) return "Shepard"
