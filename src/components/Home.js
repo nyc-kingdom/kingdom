@@ -5,7 +5,7 @@ import { arrowRight, arrowLeft, userClass } from '../Assets'
 import { serverUrl } from '../sockets'
 
 const Home = () => {
-  const charactors = Object.keys(userClass)
+  const characters = Object.keys(userClass)
   return (
     <div className='home'>
       <br />
@@ -22,10 +22,10 @@ const Home = () => {
           }
         >
           {
-            charactors.map(charactor => (
+            characters.map(character => (
               <div>
                 <img
-                  src={userClass[charactor]}
+                  src={userClass[character]}
                   style={{maxWidth: "100vw", height: '45vh', marginBottom: '10vh'}}
                 />
               </div>

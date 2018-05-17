@@ -8,6 +8,7 @@ import {setPanning} from '../store/panCoords'
 
 
 const defaultCenter = { lat: 40.70, lng: -74.00 }
+const bootStrapKey = { key: "AIzaSyBqFElyKsNAtWKnM4pnj9CqCRc6u5ruxd4" }
 
 const style = {
   top: 0,
@@ -22,7 +23,7 @@ class Map extends Component {
     this.state = {
       center: null,
       zoom: 13,
-      bootstrapURLKeys: { key: "AIzaSyBqFElyKsNAtWKnM4pnj9CqCRc6u5ruxd4" },
+      bootstrapURLKeys: bootStrapKey,
       gestureHandling: 'cooperative',
       options: greenTheme,
       date: new Date(),
@@ -31,11 +32,14 @@ class Map extends Component {
       showEstablishmentView: false,
       coords: []
     }
-    this.changeView = (id) => {
-      if (this.state.select !== id) this.setState({ select: id })
-      else this.setState({select: '' })
-    }
+    
+    this.changeSelection = this.changeSelection.bind(this)
     this.updateMapTheme = this.updateMapTheme.bind(this)
+  }
+
+  changeSelection(id){
+    if (this.state.select !== id) this.setState({ select: id })
+    else this.setState({select: '' })
   }
 
   componentWillUpdate(nextProps, nextState){
@@ -65,11 +69,12 @@ class Map extends Component {
 
     //UPDATE MAP THEME
     const turn = Math.floor(this.props.establishments.length/10)%7
-    console.log('Today\'s map is ', turn)
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
+    console.log('Today\'s map is ', theme)
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
     
 
+    //THIS CHECK CAN BE MORE EFFICIENT
     if(this.map && this.map.map_){
         console.log('Hey the api has loaded? ', this.map.map_)
         console.log('How are pancoords doing ', this.state.panCoords)
@@ -105,7 +110,7 @@ class Map extends Component {
               fourSquareId={eachMarker.fourSquareId}
               type="establishment"
               select={this.state.select}
-              cb={this.changeView.bind(this)}
+              changeSelection={this.changeSelection}
             />
           ))
         }
