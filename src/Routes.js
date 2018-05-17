@@ -11,8 +11,8 @@ import socket from './sockets'
  */
 class Pipeline extends Component {
     componentDidMount () {
+        
         socket.on('new-checkIn', checkIn => {
-            console.log('Somebody checked-in!')
             this.props.createCheckin(checkIn)
         })
         socket.on('paint-new-establishment', establishment => {

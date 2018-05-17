@@ -37,9 +37,8 @@ h1, h2, h3 {
   flex: 10;
   background-color: gold;
   border-left: 4px solid white;
-  opacity: 0.7;
+  opacity: 0.90;
   position: absolute;
-  /* height: 80vh; */
   width: 72%;
   right: 0;
   z-index: 100;

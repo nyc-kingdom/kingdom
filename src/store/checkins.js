@@ -35,19 +35,18 @@ export const addCheckIn = (user, place) => dispatch => {
   return axios.put(`${serverUrl}/api/establishments`, checkInBundle)
     .then(res => res.data)
     .then(newCheckin => {
-      console.log(newCheckin)
+      
+      //EXPERIMENTAL - PG
+      if(newCheckin.establishment.name.indexOf('o')>-1) newCheckin.isTakeOver = true
+      
       dispatch(createCheckin(newCheckin))
       socket.emit('new-checkIn', newCheckin)
-      //dispatch(paintEstablishment(newCheckin.establishment))
       return axios.get(`${serverUrl}/api/establishments/${newCheckin.establishment.id}`)
         .then(establishment=>establishment.data)
         .then(establishment=>{
           dispatch(paintEstablishment(establishment))
           socket.emit('paint-new-establishment', establishment)
           dispatch(createMarker([]))
-          dispatch(fetchEstablishments())
-          dispatch(fetchKingdoms())
-          dispatch(fetchUsers())
           dispatch(verifyCheckIn({id:'1000', status:'OPEN'}))
         })
     })

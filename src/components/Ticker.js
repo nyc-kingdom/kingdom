@@ -34,7 +34,11 @@ class Ticker extends Component{
                                 .reverse()
                                 .map(check => 
                                     <div className="tickerTape" key={check.id} onClick={()=>{console.log(check.establishment);this.props.setPanning([Number(check.establishment.latitude), Number(check.establishment.longitude)])}}>
-                                        {`${check.user.username} just checked into ${check.establishment.name}!`}
+                                        {
+                                            //EXPERIMENTAL - PHILIP G
+                                            // check.isTakeOver ? `UNDER ATTACK`
+                                            // :
+                                            `${check.user.username} just checked into ${check.establishment.name}!`}
                                     </div>
                                 )
                         }

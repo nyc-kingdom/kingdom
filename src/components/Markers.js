@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { searchResult, markersImages, userClass } from '../Assets';
 import { addCheckIn } from '../store';
+import EstablishmentCard from './establishmentCard'
 
 class Markers extends Component {
     constructor(props) {
@@ -17,65 +18,26 @@ class Markers extends Component {
 
     render() {
         const { establishmentId, establishmentName, select, user } = this.props
-        let allegiance;
-        if (markersImages[this.props.allegiance] !== undefined) allegiance = this.props.allegiance
-        else if (this.props.allegiance !== null) allegiance = 'undefinedKingdom'
-        else allegiance = 'none'
+        const allegianceDisplay = markersImages[this.props.allegiance] ? this.props.allegiance : 'undefinedKingdom'
+
         return (
             <div style={{ position: 'static' }}>
                 {
-                    this.props.type === 'establishment'
-                        ?
+                    this.props.type === 'establishment' ?
                         <div>
                             {
-                                select === establishmentId &&
-                                <div className="establishmentCard">
-                                    <h3>{establishmentName}</h3>
-                                    <Link to={`/profile/establishments/${establishmentId}`}>
-                                        Details
-                                    </Link>
-                                    <br />
-                                    <div>
-                                        {
-                                            this.props.allegiance
-                                                ? this.props.allegiance + " Kingdom"
-                                                : this.props.origin 
-                                        }
-                                        <br />
-                                    </div>
-                                    <img
-                                        style={{ width: '5vw', height: 'auto', padding: '5px' }}
-                                        src={markersImages[allegiance]}
-                                    />
-                                    <br />
-                                    <button
-                                        className='powerButtonEst'
-                                        onClick={this.handleClick}
-                                    >
-                                        Check in here!
-                                    </button>
-                                    <br />
-                                    <button
-                                        className='escape'
-                                        onClick={() => { this.props.cb(establishmentId) }}
-                                    >
-                                        X
-                                    </button>
-                                </div>
+                                select === establishmentId && <EstablishmentCard {...this.props} allegianceDisplay={allegianceDisplay} handleClick={this.handleClick}/>
                             }
                             <img
-                                onClick={() => { this.props.cb(establishmentId) }}
-                                src={markersImages[allegiance]}
+                                onClick={() => { this.props.changeSelection(establishmentId) }}
+                                src={markersImages[allegianceDisplay]}
                                 className="checkIn"
                             />
                         </div>
                         : this.props.type === 'user'
                             ? 
                             <Link to={`/profile/users/${user.id}`}>
-                                <img
-                                    style={{ maxHeight : '25px' }}
-                                    src={userClass[this.userLevel(user)]}
-                                />
+                                <img style={{ maxHeight : '25px' }} src={userClass[this.userLevel(user)]}/>
                             </Link>
                             :
                             <Link to={`/dashboard/selectedView/${establishmentId}`}>
@@ -101,13 +63,11 @@ class Markers extends Component {
     handleClick(evt){
         evt.preventDefault()
         const { addCheckIn, fourSquareId, lat, lng, establishmentName, user } = this.props
-        addCheckIn(
-            user,
-            {
+        addCheckIn(user, {
                 id: fourSquareId,
                 location: { lat, lng },
                 name: establishmentName
-            }
+                }
         )
     }
 }
