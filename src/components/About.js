@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 
 const About = props => {
   return (
-    <div style={{ fontFamily: 'Apple Chancery, cursive', margin: '20px', fontWeight: 'bold'}}>
-      <h1>Welcome to Kingdom: <br />a game of neighborhood pride</h1>
+    <div id='about' className='fit'>
+      <h2>Welcome to Kingdom: <br />a game of neighborhood pride</h2>
       <p>
         Pledge your Allegiance:
         Sign up with your Foursquare account.

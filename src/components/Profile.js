@@ -30,57 +30,44 @@ class Profile extends React.Component {
         const kingdomKing = !ownKingdom ? null : users.find(user => user.id === ownKingdom.king)
         const profileOf = this.eachTypeFor(main, type)
         return (
-            <div style={{fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px'}}>
-                <div style={{ display: 'flex', marginTop: '3vh' }}>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <div style={{ flex: '0 5' }}>
-                                {
-                                    !ownKingdom ? null : (
-                                        <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
-                                            <img
-                                                src={!kingdomMark[ownKingdom.name]
-                                                    ? kingdomMark.undefinedKingdom[2]
-                                                    : kingdomMark[ownKingdom.name]}
-                                                style={{ maxWidth: '13vw', position: 'fixed', margin: '4vh 0 0 15px', maxHeight: '9vh' }}
-                                            />
-                                        </Link>                                        
-                                    )
-                                }
-                                <img
-                                    src={hardCoding.flagBackgroundImgUrl}
-                                    style={{ maxWidth: '25vw', maxHeight: '18vh' }}
-                                />
-                            </div>
-                            <div style={{ flex: '0 1' }}>
-                                {!ownKingdom ? null : ownKingdom.name}
-                            </div>
+            <div className='fit'>
+                <div className='d-flex space'>
+                    <div className='flex-one'>
+                        <div>
+                            {
+                                !ownKingdom ? null : (
+                                    <Link to={`/profile/kingdoms/${ownKingdom.id}`}>
+                                        <img
+                                            src={!kingdomMark[ownKingdom.name]
+                                                ? kingdomMark.undefinedKingdom[2]
+                                                : kingdomMark[ownKingdom.name]}
+                                            className='header-img-shield'
+                                        />
+                                    </Link>                                        
+                                )
+                            }
+                            <img src={hardCoding.flagBackgroundImgUrl} className='header-img-flag'/>
+                        </div>
+                        <div>
+                            {!ownKingdom ? null : ownKingdom.name}
                         </div>
                     </div>
-                    <div style={{ flex: 2 }}>
+                    <div className='flex-two'>
                         <h2>{profileOf[type].name}</h2>
                     </div>
-                    <div style={{ flex: 1 }}>
-                        <div style={{ display: 'flex', flexDirection: 'column'}}>
-                            <div style={{ flex: '0 5' }}>
-                                {
-                                    !kingdomKing ? null : (
-                                        <Link to={`/profile/users/${kingdomKing.id}`}>
-                                            <img
-                                                src={userClass.King}
-                                                style={{maxWidth: '17vw', position: 'fixed', margin: '4vh 0 0 10px', maxHeight: '9vh'}}
-                                            />
-                                        </Link>
-                                    )
-                                }
-                                <img
-                                    src={hardCoding.flagBackgroundImgUrl}
-                                    style={{ maxWidth: '25vw', right: 0, maxHeight: '18vh' }}
-                                />
-                            </div>
-                            <div style={{ flex: '0 1' }}>
-                                {!kingdomKing ? null : kingdomKing.username}
-                            </div>
+                    <div className='flex-one'>
+                        <div>
+                            {
+                                !kingdomKing ? null : (
+                                    <Link to={`/profile/users/${kingdomKing.id}`}>
+                                        <img src={userClass.King} className='header-img-king'/>
+                                    </Link>
+                                )
+                            }
+                            <img src={hardCoding.flagBackgroundImgUrl} className='header-img-flag'/>
+                        </div>
+                        <div>
+                            {!kingdomKing ? null : kingdomKing.username}
                         </div>
                     </div>
                 </div>
@@ -88,12 +75,19 @@ class Profile extends React.Component {
                     {type === "user" && main.id === this.props.user.id ? this.changeOne("Kingdom") : null}
                     {type === "establishment" ? this.keeperView(main, users) : null}
                     {type === "kingdom" &&  main.king === this.props.user.id ? this.changeOne("Shield") : null}
-                    <img src={profileOf[type].image} style={{ maxWidth: '85vw', height: '45vh' }}/>
+                    <img src={profileOf[type].image} id='profile-main-img'/>
                 </div>
                 <div>Level : {profileOf[type].level}</div>
+                <meter
+                    max={profileOf[type].levelUpPoints}
+                    value={profileOf[type].point}
+                    low={profileOf[type].levelUpPoints/4}
+                    optimum={(profileOf[type].levelUpPoints / 5) * 4}
+                    high={(profileOf[type].levelUpPoints / 4) * 3}
+                    
+                />
                 <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
-                <div>{profileOf[type].point} / {profileOf[type].levelUpPoints}</div>
-                <div style={{ display: 'flex', marginTop: '1vh' }}>
+                <div className='d-flex space'>
                     {this.renderWithItem(main, type)}
                 </div>
                 <Link to='/dashboard'>
@@ -106,9 +100,9 @@ class Profile extends React.Component {
     changeOne(one) {
         const source = one === "Shield" ? hardCoding.crown: changeKingdom
         return (
-            <div style={{ position: 'fixed', bottom: '31vh' }}>
+            <div className='change-one'>
                 <Link to={`/change${one}`} >
-                    <img style={{ maxWidth: '25vw', maxHeight: '20vh' }} src={source}/>
+                    <img className='change-one-img' src={source}/>
                 </Link>
             </div>
         )
@@ -116,25 +110,18 @@ class Profile extends React.Component {
 
     keeperView(main, users){
         const keeper = users.find(user => user.id === main.keeper)
-        return !main.keeper ?
-        (
-            <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
-                <div>No Keeper</div>
-                <img
-                    src={hardCoding.keeperChairUrl}
-                    style={{ maxWidth: '45vw', maxHeight: '20vh' }}
-                />
-            </div>
-        ) :
-        (
-            <div style={{ position: 'fixed', bottom: '31vh', marginLeft: '2vw' }}>
-                <div>Keeper : {keeper.username}</div>
-                <Link to={`/profile/users/${main.keeper}`}>
-                    <img
-                        src={userClass[this.userLevel(keeper.id)]}
-                        style={{ maxWidth: '45vw', maxHeight: '20vh' }}
-                    />
-                </Link>
+        return (
+            <div className='keeper-view'>
+                <div>{!main.keeper ? "No Keeper" : `Keeper : ${keeper.username}`}</div>
+                {
+                    !main.keeper
+                        ? <img src={hardCoding.keeperChairUrl} className='keeper-view-img'/>
+                        : (
+                        <Link to={`/profile/users/${main.keeper}`}>
+                            <img src={userClass[this.userLevel(keeper.id)]} className='keeper-view-img'/>
+                        </Link>
+                        )
+                }
             </div>
         )
     }
@@ -142,12 +129,9 @@ class Profile extends React.Component {
     renderWithItem(main, type) {
         const itemOf = this.eachTypeForItem(main, type)
         return ["item1", "item2", "item3"].map(item => (
-                <div key={item} style={{ flex: 1 }}>
+                <div key={item} className='flex-one'>
                     <Link to={`/items/${type}s/${main.id}/${item}`}>
-                        <img
-                            src={itemOf[type][item].image}
-                            style={{ width: '10vw', maxHeight: '5vh' }}
-                        />
+                        <img src={itemOf[type][item].image} className='item-img'/>
                     </Link>
                     <div>{itemOf[type][item].title}</div>
                     <div>{itemOf[type][item].result}</div>
@@ -161,6 +145,8 @@ class Profile extends React.Component {
         const user = users.find(user => user.id === userId)
         if(!user) return null
         const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdom.id)
+        if(!ownKingdom) return null
+        console.log(ownKingdom, user.kingdom.name)
         if (ownKingdom.king === user.id) return "King"
         if (user.experience < 100) {
             if (ownKingdom.localDomain < 20) return "Shepard"
@@ -216,14 +202,14 @@ class Profile extends React.Component {
             user: type !== "user" ? null : {
                 item1: {
                     image: castle,
-                    title: "Own Est.",
+                    title: "Own Castles",
                     result: this.props.establishments
                         .filter(establishment => establishment.keeper === main.id)
                         .length
                 },
                 item2: {
                     image: castle,
-                    title: "Est. Found",
+                    title: "Castles Visit",
                     result: main.discover
                 },
                 item3: {
@@ -235,7 +221,7 @@ class Profile extends React.Component {
             kingdom: type !== "kingdom" ? null : {
                 item1: {
                     image: castle,
-                    title: "Local Domains",
+                    title: "Local Castles",
                     result: main.localDomain
                 },
                 item2: {
@@ -274,21 +260,11 @@ const mapProps = (state, ownProps) => {
     const type = Object.keys(ownProps.match.params)[0]
     const paramId = +ownProps.match.params[type]
     const main = state[`${type}s`].find(each => each.id === paramId)
-    if (!main) return { type, kingdoms: state.kingdoms }
-    if (!state.kingdoms[0]) return { type, kingdoms: state.kingdoms }
-    let ownKingdom =
-        type === "kingdom"
-            ? main
-            : state.kingdoms.find(kingdom => {
-                const compare = !main.kingdom
-                    ? null
-                    : type === "user"
-                        ? main.kingdom.name
-                        : !main.allegiance
-                            ? null
-                            : main.allegiance
-                return kingdom.name === compare
-            })
+    if (!main || !state.kingdoms[0]) return { type, kingdoms: state.kingdoms }
+    let ownKingdom = type === "kingdom" ? main : state.kingdoms.find(kingdom => {
+        const compare = type === "user" ? main.kingdom.name : main.allegiance
+        return kingdom.name === compare
+    })
     return {
         type,
         main,

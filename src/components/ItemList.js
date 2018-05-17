@@ -26,26 +26,23 @@ class ItemList extends React.Component {
         const itemOf = this.eachItemFor(main)
         let navigateLength = Math.ceil(itemOf[type][item].result.length/10)
         return (
-            <div style={{ fontWeight: 'bold', textAlign: 'center', margin: '0 auto 0 auto', maxWidth: '700px' }}>
-                <div style={{ height: '3vh' }} />
+            <div className='fit'>
                 <h2>{itemOf[type][item].title}</h2>
-                <div style={{ height: '2vh' }} />
-                <div style={{ display: 'flex' }}>
-                    <div style={{ flex: 1 }} >
-                        Rank
+                <div className='d-flex'>
+                    <div className='flex-one' >Rank</div>
+                    <div className='flex-one' >
+                        {
+                            itemOf[type][item].listFor === "establishment"
+                                ? "Castles"
+                                : `${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`
+                        }
                     </div>
-                    <div style={{ flex: 1 }} >
-                        {`${itemOf[type][item].listFor[0].toUpperCase()}${itemOf[type][item].listFor.slice(1)}`}
-                    </div>
-                    <div style={{ flex: 3 }} >
-                        Name
-                    </div>
-                    <div style={{ flex: 1 }} >
+                    <div className='flex-three' >Name</div>
+                    <div className='flex-one' >
                         {`${itemOf[type][item].pointOf[0].toUpperCase()}${itemOf[type][item].pointOf.slice(1)}`}
                     </div>
                 </div>
-                <div style={{ height: '2vh' }} />
-                <div style={{ height: '60vh' }}>
+                <div id='item-list'>
                     {
                         itemOf[type][item].result
                             .sort((front, back) =>
@@ -53,18 +50,15 @@ class ItemList extends React.Component {
                             )
                             .slice(this.state.start, this.state.end)
                             .map((one, index) => !one ? null : (
-                                <div key={one.id} style={{ display: 'flex' }}>
-                                    <div style={{ flex: 1 }}>{index+1+this.state.start}</div>
-                                    <div style={{ flex: 1 }}>
+                                <div key={one.id} className='d-flex'>
+                                    <div className='flex-one'>{index+1+this.state.start}</div>
+                                    <div className='flex-one'>
                                         <Link to={`/profile/${itemOf[type][item].listFor}s/${one.id}`}>
-                                            <img
-                                                style={{ maxWidth: '10vw', height: '5vh' }}
-                                                src={itemOf[type][item].image(one.id)}
-                                            />
+                                            <img className='item-img' src={itemOf[type][item].image(one.id)}/>
                                         </Link>
                                     </div>
-                                    <div style={{ flex: 3 }}>{one[itemOf[type][item].name]}</div>
-                                    <div style={{ flex: 1 }}>{one[itemOf[type][item].pointOf]}</div>
+                                    <div className='flex-three'>{one[itemOf[type][item].name]}</div>
+                                    <div className='flex-one'>{one[itemOf[type][item].pointOf]}</div>
                                 </div>
                             ))
                     }
@@ -72,22 +66,15 @@ class ItemList extends React.Component {
                 <form onClick={this.handleClick}>
                     {
                         this.navigate(navigateLength).map((one, index) =>
-                            <button
-                                key={one}
-                                name={index}
-                                style={{ fontSize: '20px', background: 'none', border: 'none'}}
-                            >
+                            <button key={one} name={index} className='simpleButton letterButton'>
                                 {one}
                             </button>
                         )
                     }
                 </form>
-                <div style={{ height: '2vh' }}/>
-                <div>
-                    <Link to='/dashboard'>
-                        <img src={swordSingleButton} />
-                    </Link>
-                </div>
+                <Link to='/dashboard'>
+                    <img className='space' src={swordSingleButton} />
+                </Link>
             </div>
         )
     }
@@ -127,7 +114,7 @@ class ItemList extends React.Component {
                 item1: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: "Own Establishments",
+                    title: `Castles Conquered`,
                     pointOf: "popularity",
                     name: "name",
                     result: establishments
@@ -136,7 +123,7 @@ class ItemList extends React.Component {
                 item2: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: "Establishments Found",
+                    title: `Castles Visited`,
                     pointOf: "popularity",
                     name: "name",                    
                     result: main.checkins
@@ -156,7 +143,7 @@ class ItemList extends React.Component {
                 item1: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: "Local Domains",
+                    title: `Castles in ${main.name}`,
                     pointOf: "popularity",
                     name: "name",
                     result: establishments
@@ -165,7 +152,7 @@ class ItemList extends React.Component {
                 item2: {
                     listFor: "establishment",
                     image: () => castle,
-                    title: "Total Colonies",
+                    title: `Colonies by ${main.name}`,
                     pointOf: "popularity",
                     name: "name",
                     result: establishments
@@ -174,7 +161,7 @@ class ItemList extends React.Component {
                 item3: {
                     listFor: "user",
                     image: userId => userClass[this.userLevel(userId)],
-                    title: "All Citizen",
+                    title: `${main.name} Citizens`,
                     pointOf: "experience",
                     name: "username",
                     result: main.users

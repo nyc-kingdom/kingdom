@@ -23,24 +23,24 @@ class ChangeShield extends Component {
     if(!ownKingdom) return null
     const shields = Object.keys(kingdomShields)
     return (
-      <div style={{ textAlign: 'center' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', margin: '3vh auto 0 auto', maxWidth: '700px' }}>
+      <div className='fit'>
+        <div id='change-shield'>
           <div>
             <img
                 src={!kingdomMark[ownKingdom.name] ? kingdomMark.undefinedKingdom[2] : kingdomMark[ownKingdom.name]}
-                style={{ maxWidth: '13vw', position: 'fixed', margin: '4vh 0 0 15px', maxHeight: '9vh' }}
+                className='header-img-shield'
             />
             <img
                 src={hardCoding.flagBackgroundImgUrl}
-                style={{ maxWidth: '25vw', maxHeight: '18vh' }}
+                className='header-img-flag'
             />
           </div>
-          <div style={{ flex: 1 }}>
+          <div className='flex-one'>
             <h2>King of {ownKingdom.name}</h2>
             <span>As a King, you have a power to change a Shield</span>
           </div>
         </div>
-        <div style={{ margin: '3vh auto 0 auto', maxWidth: '700px'}}>
+        <div>
           <Carousel
             renderCenterLeftControls={({ previousSlide }) =>
               <img src={arrowLeft} onClick={previousSlide} />
@@ -52,10 +52,7 @@ class ChangeShield extends Component {
             {
               shields.map(shield => (
                 <div>
-                  <img
-                    src={kingdomShields[shield]}
-                    style={{maxWidth: "100vw", height: '40vh', marginBottom: '15vh'}}
-                  />
+                  <img src={kingdomShields[shield]} className='change-shield-img'/>
                 </div>
               ))
             }
@@ -64,10 +61,9 @@ class ChangeShield extends Component {
         <div>
           <span>this is for test, nothing will change any for now.</span>
           <form onSubmit={this.handleSubmitForm}>
-            <div style={{height: '2vh'}} />
-              <button style={{ background: 'none', border: 'none'}}>
-                <img src={bridgeShield}/>
-              </button>
+            <button className='simpleButton space'>
+              <img src={bridgeShield}/>
+            </button>
           </form>
         </div>
       </div>
