@@ -5,20 +5,16 @@ import { gem, bridgeShield, castle, sword } from '../Assets'
 import { User, Map, Dash, Spotlight, Ticker } from './'
 import { logout } from '../store';
 
-class Home extends Component {
+class HomeDash extends Component {
   constructor(props) {
     super(props)
     this.state = { dashMode: 'closed' }
-    this.renderWithKingdom = this.renderWithKingdom.bind(this)
-    this.handleClick = this.handleClick.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   render() {
-    return !this.props.user.kingdomId ? <User/> : this.renderWithKingdom()
-  }
+    return !this.props.user.kingdomId ? <User/> : 
 
-  renderWithKingdom() {
-    return (
       <div id="HomeDash">
         <h1 id="logo" >
           Kingdom
@@ -51,7 +47,7 @@ class Home extends Component {
         <div
           id="logout"
           style={{fontFamily: 'Apple Chancery, cursive'}}
-          onClick={this.handleClick}
+          onClick={this.handleLogout}
         >
           <h2>Logout</h2>
         </div>
@@ -60,10 +56,9 @@ class Home extends Component {
         <Route path="/dashboard/selectedView/:id" component={Spotlight} />
         <Ticker />
       </div>
-    )
   }
 
-  handleClick(evt) {
+  handleLogout(evt) {
     evt.preventDefault()
     this.props.logout()
   }
@@ -73,4 +68,4 @@ const mapProps = ({ user, trackLocation }) => ({ user, trackLocation })
 
 const mapDispatch = dispatch => ({ logout: () => dispatch(logout()) })
 
-export default connect(mapProps, mapDispatch)(Home)
+export default connect(mapProps, mapDispatch)(HomeDash)
