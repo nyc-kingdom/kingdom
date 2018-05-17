@@ -70,7 +70,7 @@ class Map extends Component {
     //UPDATE MAP THEME
     const turn = Math.floor(this.props.establishments.length/10)%7
     const theme = [ blueWater, greenTheme, greenTheme, autumnWorld, unsaturatedBrowns, dark, midnight][turn]
-    console.log('Today\'s map is ', theme)
+  
     if(this.props.mapStatus!==theme) this.props.setMapStatus(theme)
     
 

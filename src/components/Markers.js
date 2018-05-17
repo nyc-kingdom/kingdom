@@ -52,7 +52,7 @@ class Markers extends Component {
         const { kingdoms } = this.props
         if(!user) return null
         const ownKingdom = kingdoms.find(kingdom => kingdom.id === user.kingdomId)
-        if (ownKingdom.king === user.id) return "King"
+        if (ownKingdom && ownKingdom.king === user.id) return "King"
         if (user.experience < 100) {
             if (ownKingdom.localDomain < 20) return "Shepard"
             return "Stone Mason"
