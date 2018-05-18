@@ -191,7 +191,7 @@ meter {
   flex: 10;
   background-color: gold;
   border-left: 4px solid white;
-  opacity: 0.90;
+  opacity: 0.84;
   position: absolute;
   width: 72%;
   right: 0;
@@ -209,7 +209,7 @@ meter {
 }
 
 #Dash:hover {
-  opacity: 0.8;
+  opacity: 0.91;
 }
 
 
@@ -290,7 +290,17 @@ meter {
   font-size: 20px;
 }
 
+#gamePad {
+  display: flex;
+  position: fixed;
+  top: 6vh;
+  left: 2.75vw;
+  z-index: 100;
+  flex-direction: column;
+}
+
 .circle {
+  margin-top: 0.75vh;
   display: flex;
   align-content: center;
   height: 70px;
@@ -298,13 +308,10 @@ meter {
   border: 1px solid white;
   border-radius: 70px;
   opacity: 0.4;
-  position: fixed;
-  z-index: 100;
-  left: 2.5vw;
 }
 
 .circle:hover{
-  opacity: 0.8;
+  opacity: 0.85;
   border: 2px solid rgb(255, 255, 255);
 }
 
@@ -316,25 +323,20 @@ meter {
 }
 
 #sword{
-  /* background-color: gold; */
-  top: 6vh;
-  flex: 1 1;
-  display: flex;
-  align-content: center;
-  height: 70px;
-  width: 70px;
-  border: 1px solid white;
-  border-radius: 70px;
-  opacity: 0.4;
-  position: fixed;
-  z-index: 100;
-  left: 3vw;
+  border: 1px solid orangered;
+  position: relative;
+  left: 0.5vw;
+}
+
+#sword.on{
+  background-color: gold;
+  opacity: 0.8;
+  transition: background-color 5s;
 }
 
 #sword.off{
   background-color: whitesmoke;
 }
-
 
 .establishmentCard{
   border: 2px solid gold;
@@ -359,13 +361,8 @@ meter {
   border: 2px solid orange;
   border-radius: 6px;
   font-size: 10px;
-}
-
-#sword.on{
-  background-color: gold;
-  border: 1px solid orangered;
-  opacity: 0.8;
-  transition: background-color 5s;
+  cursor: pointer; 
+  /* Very necessary for mobile clicking! */
 }
 
 #gem{
