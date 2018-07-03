@@ -8,7 +8,7 @@ Become the King: Own the most establishments within your kingdom, and become the
 
 Play Kingdom at http://www.kingdom.netlify.com
 
-![alt text](src/assets/homeScreen.png)![alt text](src/assets/dashboard.png)
+![alt text](homeScreen.png)![alt text](dashboard.png)
 
 ##Technologies
 -React
