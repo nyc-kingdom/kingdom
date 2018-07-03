@@ -1,4 +1,4 @@
-Welcome to Kingdom: a game of neighborhood pride
+## Welcome to Kingdom: a game of neighborhood pride
 
 Pledge your Allegiance: Sign up with your Foursquare account. Your neighborhood is your kingdom.
 Gain Experience: Begin checking in at local establishments to boost your personal experience, and the strength of you kingdom.
