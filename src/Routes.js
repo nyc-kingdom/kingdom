@@ -30,6 +30,8 @@ class Pipeline extends Component {
                 {/* Routes placed here are available to all visitors */}
                 <Route exact path="/" component={Home} />
                 <Route path="/about" component={About} />
+                <Route path="/dashboard" component={HomeDash} />
+
                 {
                     isLoggedIn &&
                     <Switch>
@@ -82,10 +84,10 @@ const mapDispatch = dispatch => {
         },
         paintEstablishment(establishment){
             dispatch(paintEstablishment(establishment))
-        }      
+        }
     }
 }
-  
+
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
 export default withRouter(connect(mapProps, mapDispatch)(Pipeline))
