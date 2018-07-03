@@ -12,10 +12,7 @@ Play Kingdom at http://www.kingdom.netlify.com
 
 ## Technologies
 **React**
-
-
 **Redux**
-
 Node
 Express
 Sequelize
