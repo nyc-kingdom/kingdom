@@ -11,7 +11,7 @@ Play Kingdom at http://www.kingdom.netlify.com
 ![alt text](homeScreen.png)![alt text](dashboard.png)
 
 ## Technologies
-React
+**React**
 Redux
 Node
 Express
