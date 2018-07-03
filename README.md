@@ -14,25 +14,17 @@ Play Kingdom at http://www.kingdom.netlify.com
 
 
 React
-
 Redux
-
 Node
-
 Express
-
 Sequelize
-
 PostGres
 
 ##Developers
 
 
 Bruce Leong - https://github.com/bruceleong
-
 Connor Kirkwood - https://github.com/cdkirkwood
-
 Dongwoo Kang - https://github.com/schach0415
-
 Philip Gingerich - https://github.com/horseeyephil
 
