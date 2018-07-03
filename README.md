@@ -19,6 +19,8 @@ Sequelize
 PostGres
 
 ##Developers
+
+
 Bruce Leong - https://github.com/bruceleong
 Connor Kirkwood - https://github.com/cdkirkwood
 Dongwoo Kang - https://github.com/schach0415
