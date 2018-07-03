@@ -11,18 +11,18 @@ Play Kingdom at http://www.kingdom.netlify.com
 ![alt text](homeScreen.png)![alt text](dashboard.png)
 
 ## Technologies
-**React**
-**Redux**
-Node
-Express
-Sequelize
-PostGres
+React<br/>
+Redux<br/>
+Node<br/>
+Express<br/>
+Sequelize<br/>
+PostGres<br/>
 
 ## Developers
 
 
-Bruce Leong - https://github.com/bruceleong
-Connor Kirkwood - https://github.com/cdkirkwood
-Dongwoo Kang - https://github.com/schach0415
+Bruce Leong - https://github.com/bruceleong<br/>
+Connor Kirkwood - https://github.com/cdkirkwood<br/>
+Dongwoo Kang - https://github.com/schach0415<br/>
 Philip Gingerich - https://github.com/horseeyephil
 
